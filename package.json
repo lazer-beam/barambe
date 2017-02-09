@@ -1,11 +1,15 @@
 {
   "name": "bar-lord",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Making drinking accessible",
+  "author": "@EJMason,",
   "license": "ISC",
   "main": "index.js",
   "scripts": {
+    "webpack": "./node_modules/.bin/webpack -d --watch",
+    "start": "nodemon ./server/server.js",
+    "dev": "webpack-dev-server --progress --colors",
+    "devDash": "webpack-dashboard webpack-dev-server --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

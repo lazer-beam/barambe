@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-var DashboardPlugin = require('webpack-dashboard/plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const SRC_DIR = path.resolve(__dirname, 'app/src');
 const PUBLIC_DIR = path.resolve(__dirname, 'app/public');
@@ -19,16 +19,17 @@ module.exports = {
   module: {
     rules: [
       {
-        loader: 'react-hot',
+        loader: 'react-hot-loader',
         test: SRC_DIR,  //.js work?
       },
       {
-        test: /\.js$/,
-        use: [{
-          loader: 'babel-loader',
-          options: { presets: ['es2015', 'react', 'stage-0'] },
-          exclude: /node_modules/,
-        }],
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        test: SRC_DIR,
+        query: {
+          presets: ['es2015', 'react', 'stage-0'],
+          plugins: ['transform-class-properties'],
+        },
       },
       {
         test: /\.css$/,
@@ -55,6 +56,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin(),
   ],
+  watch: true,
   stats: { colors: true },
   devtool: 'inline-source-map',
 };
