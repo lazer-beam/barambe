@@ -37,6 +37,3 @@ Making drinking accessible
 * **Adding upstream:** git remote add [upstream] https://github.com/lazer-beam/bar-lord.git
 * **Rebasing:** git pull --rebase [upstream] master
 * **Delete local branch:** git branch -d [branchName]
-
-
-
