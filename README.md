@@ -34,10 +34,10 @@ Making drinking accessible
   * [refactor] - code does the same thing but it is better code
 
 #### Useful commands
-**Adding upstream:** git remote add [upstream] https://github.com/lazer-beam/bar-lord.git
-**Rebasing:** git pull --rebase [upstream] master
-**Delete local branch:** git branch -d the_local_branch
+* **Adding upstream:** git remote add [upstream] https://github.com/lazer-beam/bar-lord.git
+* **Rebasing:** git pull --rebase [upstream] master
+* **Delete local branch:** git branch -d the_local_branch
 
-**REBASING WORKFLOW??????**
+* **REBASING WORKFLOW??????**
 
 
