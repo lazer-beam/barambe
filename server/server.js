@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 1337;
+const port = 1337; 
 
 app.use(express.static('/Users/ejm/Desktop/bar-lord/app/build'));
 
