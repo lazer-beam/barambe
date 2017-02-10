@@ -28,7 +28,7 @@ module.exports = {
         test: SRC_DIR,
         query: {
           presets: ['es2015', 'react', 'stage-0'],
-          plugins: ['transform-class-properties'],
+          plugins: ['transform-decorators-legacy', 'transform-class-properties'],
         },
       },
       {

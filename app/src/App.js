@@ -10,9 +10,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        START HERE !!!!
-      </div>
-      
+        Hello man!!!!!
+      </div>    
     );
   }
 }
