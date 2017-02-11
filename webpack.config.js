@@ -2,7 +2,11 @@ const webpack = require('webpack');
 const path = require('path');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+<<<<<<< HEAD
 const DashboardPlugin = require('webpack-dashboard/plugin');
+=======
+var DashboardPlugin = require('webpack-dashboard/plugin');
+>>>>>>> 9a8d82f0a0a98ff364e1157f1b98c8d34509e6c3
 
 const SRC_DIR = path.resolve(__dirname, 'app/src');
 const PUBLIC_DIR = path.resolve(__dirname, 'app/public');

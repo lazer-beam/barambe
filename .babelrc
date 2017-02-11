@@ -1,6 +1,6 @@
 {
   "presets": [["es2015", { "modules": false }],  "stage-0", "react"],
-  "plugins": ["transform-decorators-legacy", "transform-class-properties"],
+  "plugins": ["transform-decorators-legacy", "transform-class-properties", "react-hot-loader/babel"],
   "env": {
     "test": {
       "presets": ["react-optimize"]
