@@ -10,7 +10,7 @@
     "start": "nodemon ./server/server.js",
     "dev": "webpack-dev-server --progress --colors",
     "devDash": "webpack-dashboard webpack-dev-server --progress --colors",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha specs/index.js"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -25,7 +25,9 @@
     "react-loading": "0.0.9",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "redux-logger": "^2.8.0"
+    "redux-logger": "^2.8.0",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -38,6 +40,7 @@
     "babel-preset-react-optimize": "^1.0.1",
     "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.3.13",
+    "chai": "^3.5.0",
     "copy-webpack-plugin": "^0.2.0",
     "css-loader": "^0.26.1",
     "eslint": "^3.14.1",
@@ -47,9 +50,12 @@
     "eslint-plugin-react": "^6.9.0",
     "file-loader": "^0.9.0",
     "lodash": "^4.17.4",
+    "mocha": "^3.2.0",
     "morgan": "^1.7.0",
     "react-hot-loader": "^1.3.0",
+    "sinon": "^1.17.7",
     "style-loader": "^0.13.1",
+    "supertest": "^3.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.0",
     "webpack-dashboard": "^0.3.0"

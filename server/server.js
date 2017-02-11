@@ -2,14 +2,16 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const app = express();
-const port = 1337; 
+const router = require('./routes');
 
-app.use(express.static('/Users/ejm/Desktop/bar-lord/app/build'));
+const app = express();
+const port = 1337;
+
+app.use(express.static(__dirname + '/../app/build'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use('/bar', router);
 
 app.get('/', (req, res) => {
   res.status(200).send('Hello World!');
@@ -19,4 +21,4 @@ app.listen(port, () => {
   console.log('listening on port ', port);
 });
 
-module.exports = app;
+module.exports = app
