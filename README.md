@@ -1,10 +1,8 @@
 # bar-lord
 Making drinking accessible
-
 #####[Trello Board](https://trello.com/b/qWNrrwoB/bar-lord)
 
 ---
-
 ## List of Resources
 
 ### Awesome Lists
@@ -37,6 +35,3 @@ Making drinking accessible
 * **Adding upstream:** git remote add [upstream] https://github.com/lazer-beam/bar-lord.git
 * **Rebasing:** git pull --rebase [upstream] master
 * **Delete local branch:** git branch -d [branchName]
-
-
-
