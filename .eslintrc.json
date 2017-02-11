@@ -31,8 +31,7 @@
     },
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "react/prop-types": 0,
-        "eslint semi": [2, "never"]
+        "react/prop-types": 0
     },
     "extends": "airbnb",
     "plugins": [
