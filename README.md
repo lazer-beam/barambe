@@ -2,6 +2,9 @@
 Making drinking accessible
 #####[Trello Board](https://trello.com/b/qWNrrwoB/bar-lord)
 
+### wireframes
+[Login Screen](https://wireframe.cc/Wntux6)
+
 ---
 ## List of Resources
 
@@ -14,6 +17,7 @@ Making drinking accessible
 
 ### Official Docs
 * [Redux](http://redux.js.org/)
+* [Redux Saga](https://redux-saga.github.io/redux-saga/index.html)
 * [react](https://facebook.github.io/react/)
 * [Sequelize](http://docs.sequelizejs.com/en/v3/)
 * [Express 4](http://expressjs.com/en/4x/api.html)
