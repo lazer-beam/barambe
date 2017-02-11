@@ -28,4 +28,11 @@ describe('Bar App Server', function () {
     expect(bar.orders.length).to.equal(0)
     done()
   })
+
+  it('Should return undefined when passing in an invalid bar name', function () {
+    let barName = 'invalidname'
+    let bar = barsHelper.getBar(barName)
+    expect(bar).to.be.not.ok
+    expect(bar).to.be.an('undefined')
+  })
 })
