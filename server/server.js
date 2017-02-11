@@ -11,7 +11,6 @@ app.use(express.static(__dirname + '/../app/build'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/bar', router);
 
 app.get('/', (req, res) => {
   res.status(200).send('Hello World!');
@@ -21,4 +20,5 @@ app.listen(port, () => {
   console.log('listening on port ', port);
 });
 
+require('./routes')(app);
 module.exports = app

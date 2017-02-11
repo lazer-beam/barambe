@@ -4,8 +4,7 @@ const barsHelper = require('../server/utilities/barUtil')
 
 var port = 1337
 var url = 'http://127.0.0.1:' + port
-let request = require('supertest')
-request = request(url);
+const request = require('supertest')(url)
 
 describe('Bar App Server', function () {
   it('Should get a valid bar when hitting /bar/getbar/:name', function (done) {
@@ -16,7 +15,7 @@ describe('Bar App Server', function () {
       .expect(res => {
         expect(res.body.orders.length).to.equal(2)
       })
-      .end(done)
+      .end(done) //use done to tell mocha that async test is done
   })
 
   it('Should get a valid bar when passing in a valid bar name', function (done) {
