@@ -8,9 +8,7 @@ var bars = [{
   orders: []
 }]
 
-var getBar = name => {
-  return bars.filter(bar => bar.name === name)[0];
-}
+var getBar = name => bars.filter(bar => bar.name === name)[0]
 
 module.exports = {
   getBar: getBar
