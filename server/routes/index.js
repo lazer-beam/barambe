@@ -1,5 +1,5 @@
 const barRoutes = require('./barRoutes')
 
-module.exports = (app) => {
+module.exports = app => {
   app.use('/bar', barRoutes)
 }

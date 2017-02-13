@@ -33,7 +33,8 @@
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/prop-types": 0,
         "semi": ["error", "never"],
-        "no-console": "off"
+        "no-console": "off",
+        "arrow-parens": [2, "as-needed", { "requireForBlockBody": false }]
     },
     "extends": "airbnb",
     "plugins": [
