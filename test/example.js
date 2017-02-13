@@ -6,16 +6,16 @@ var port = 1337
 var url = 'http://127.0.0.1:' + port
 const request = require('supertest')(url)
 
-describe('Bar App Server', function () {
-  it('Should get a valid bar when hitting /bar/getbar/:name', function (done) {
-    request
+describe('Bar App Server API', function () {
+  it('Should get a valid bar when hitting /bar/getbar/:name', function () {
+    return request
       .get('/bar/getbar/yuriysbar')
       .expect(200)
       .expect('Content-Type', /json/)
       .expect(res => {
         expect(res.body.orders.length).to.equal(2)
       })
-      .end(done) //use done to tell mocha that async test is done
+      // .end(done) //use done to tell mocha that async test is done
   })
 
   it('Should get a valid bar when passing in a valid bar name', function (done) {
