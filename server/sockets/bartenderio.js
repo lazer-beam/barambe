@@ -1,4 +1,4 @@
-module.exports = (socket) => {
+module.exports = socket => {
   socket.on('anything', () => {
     // do something!
   })
