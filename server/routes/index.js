@@ -1,3 +1,5 @@
-module.exports = app => {
-  app.use('/bar', require('./barRoutes'))
-};
+const barRoutes = require('./barRoutes')
+
+module.exports = (app) => {
+  app.use('/bar', barRoutes)
+}
