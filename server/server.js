@@ -3,7 +3,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 
-const socketHub = require('./sockets/')
+const socketHub = require('./sockets')
 
 const app = express()
 const http = require('http').Server(app)
