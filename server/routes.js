@@ -1,6 +1,6 @@
-const router = require('express').Router();
-const barCtrl = require('./controllers/barCtrl');
+const router = require('express').Router()
+const barCtrl = require('./controllers/barCtrl')
 
-router.get('/getbar/:name', barCtrl.bars.get);
+router.get('/getbar/:name', barCtrl.bars.get)
 
-module.exports = router;
+module.exports = router

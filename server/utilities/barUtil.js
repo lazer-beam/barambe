@@ -1,15 +1,13 @@
-var bars = [{
+const bars = [{
   name: 'yuriysbar',
-  orders: [
-    'order1', 'order2'
-  ]
+  orders: ['order1', 'order2'],
 }, {
   name: 'andrewsbar',
-  orders: []
+  orders: [],
 }]
 
-var getBar = name => bars.filter(bar => bar.name === name)[0]
+const getBar = name => bars.filter(bar => bar.name === name)[0]
 
 module.exports = {
-  getBar: getBar
+  getBar,
 }
