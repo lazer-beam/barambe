@@ -7,7 +7,7 @@ const assert = chai.assert
 
 const request = require('supertest')
 
-describe('Bar App Server API', function () {
+xdescribe('Bar App Server API', function () {
 
   afterEach(function () {
     app.close()
