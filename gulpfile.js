@@ -2,19 +2,29 @@ const gulp = require('gulp')
 const gutil = require('gulp-util')
 const mocha = require('gulp-mocha')
 const open = require('gulp-open')
-const argv = require('yargs').argv
+const inquirer = require('inquirer')
+
+const testNames = ['example.js', 'test2.js', 'test3.js']
 
 gulp.task('default', () => gutil.log(gutil.colors.magenta('LETS GET GULPING!!!!')))
 
-gulp.task('open', ['default', 'test'], () => {
+gulp.task('open', ['test'], () => {
   gulp.src('./mochawesome-reports/mochawesome.html')
   .pipe(open({ app: 'google chrome' }))
 })
 
-// gulp test -name [filename]
-gulp.task('test', ['default'], () => {
-  gutil.log(gutil.colors.cyan('TEST BITCH!!!'))
-  gulp.src(`./test/${argv.x}.js`, { read: false })
-  .pipe(mocha({ reporter: 'mochawesome' }))
-  .once('end', () => { process.exit() })
+gulp.task('test', done => {
+  gutil.log(gutil.colors.cyan('IT IS TIME TO TEST !'))
+  inquirer.prompt({
+    type: 'list',
+    name: 'name',
+    message: 'Which test do you want to run?',
+    choices: testNames,
+  }).then(answers => {
+    gutil.log('LETS DO THIS!!!!!')
+    gulp.src(`./test/${answers.name}`, { read: false })
+    .pipe(mocha({ reporter: 'mochawesome' }))
+    .once('end', () => { process.exit() })
+    done()
+  })
 })
