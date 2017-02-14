@@ -69,7 +69,6 @@
     "supertest": "^3.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.0",
-    "webpack-dashboard": "^0.3.0",
-    "yargs": "^6.6.0"
+    "webpack-dashboard": "^0.3.0" 
   }
 }
