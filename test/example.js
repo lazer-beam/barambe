@@ -4,15 +4,14 @@ const barsHelper = require('../server/utilities/barUtil')
 
 const expect = chai.expect
 const assert = chai.assert
-//var port = 1337
-//var url = 'http://127.0.0.1:' + port
+
 const request = require('supertest')
 
 describe('Bar App Server API', function () {
 
   afterEach(function () {
-    app.close();
-  });
+    app.close()
+  })
 
   it('Should get a valid bar when hitting /bar/getbar/:name', function () {
     return request(app)
