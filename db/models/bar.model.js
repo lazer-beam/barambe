@@ -8,8 +8,4 @@ const schema = {
   lastCall: Sequelize.TIME,
 }
 
-const configs = { timestamps: false }
-
-const Bar = sequelize.define('bar', schema, configs)
-
-module.exports = Bar
+module.exports = sequelize.define('bar', schema, { timestamps: false })
