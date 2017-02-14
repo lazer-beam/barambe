@@ -37,7 +37,7 @@ xdescribe('Bar App Server API', function () {
     done()
   })
 
-  it('Should return undefined when passing in an invalid bar name', function () {
+  it('Should return undefined when passing in an invalid bar name', () => {
     let barName = 'invalidname'
     let bar = barsHelper.getBar(barName)
     expect(bar).to.be.not.ok
