@@ -42,3 +42,6 @@ Making drinking accessible
 * **SuperTest:** https://github.com/visionmedia/supertest
 * **SuperAgent:** https://github.com/visionmedia/superagent
 * **Sinon:** http://sinonjs.org/
+
+## Database
+![Database](http://i.imgur.com/5HQ4YQv.png "DB")
