@@ -1,12 +1,12 @@
-const webpack = require('webpack');
-const path = require('path');
+const webpack = require('webpack')
+const path = require('path')
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const DashboardPlugin = require('webpack-dashboard/plugin')
 
-const SRC_DIR = path.resolve(__dirname, 'app/src');
-const PUBLIC_DIR = path.resolve(__dirname, 'app/public');
-const BUILD_DIR = path.resolve(__dirname, 'app/build');
+const SRC_DIR = path.resolve(__dirname, 'app/src')
+const PUBLIC_DIR = path.resolve(__dirname, 'app/public')
+const BUILD_DIR = path.resolve(__dirname, 'app/build')
 
 module.exports = {
   entry: {
@@ -59,5 +59,5 @@ module.exports = {
   watch: true,
   stats: { colors: true },
   devtool: 'inline-source-map',
-};
+}
 
