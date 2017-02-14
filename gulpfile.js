@@ -18,7 +18,7 @@ gulp.task('test', done => {
   inquirer.prompt({
     type: 'list',
     name: 'name',
-    message: 'Which test do you want to run?',
+    message: '\nWhich test do you want to run?',
     choices: testNames,
   }).then(answers => {
     gutil.log('LETS DO THIS!!!!!')
