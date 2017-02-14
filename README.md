@@ -44,4 +44,4 @@ Making drinking accessible
 * **Sinon:** http://sinonjs.org/
 
 ## Database
-![Database](http://i.imgur.com/X23HOA8.png "DB")
+![Database](http://i.imgur.com/5HQ4YQv.png "DB")
