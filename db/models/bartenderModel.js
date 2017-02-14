@@ -6,4 +6,4 @@ const schema = {
   isAdmin: Sequelize.BOOLEAN,
 }
 
-module.exports = sequelize.define('user', schema, { timestamps: false })
+module.export = sequelize.define('bartender', schema, { timestamps: false })
