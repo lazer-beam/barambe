@@ -11,7 +11,7 @@
     "start": "nodemon ./server/server.js",
     "dev": "webpack-dev-server --progress --colors",
     "devDash": "webpack-dashboard webpack-dev-server --progress --colors",
-    "test": "mocha specs/index.js"
+    "test": "mocha --reporter nyan"
   },
   "dependencies": {
     "axios": "^0.15.3",
