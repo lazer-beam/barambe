@@ -25,7 +25,7 @@ app.get('/test', (req, res) => {
 io.on('connection', socket => socketHub(socket))
 
 const port = 1337
-initDb().then(() => {
+initDb(false).then(() => {
   http.listen(port, () => {
     console.log(chalk.bgGreen.black(`listening on port ${port}`))
   })
