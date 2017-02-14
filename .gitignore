@@ -10,3 +10,6 @@ app/dist
 
 ** misc **
 .vscode
+
+** testing **
+mochawesome-reports/*

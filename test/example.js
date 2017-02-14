@@ -1,24 +1,33 @@
-const expect = require('chai').expect
-const app = require('../server/server.js')
+const chai = require('chai')
+const app = require('../server/server')
 const barsHelper = require('../server/utilities/barUtil')
 
-var port = 1337
-var url = 'http://127.0.0.1:' + port
-const request = require('supertest')(url)
+const expect = chai.expect
+const assert = chai.assert
+
+const request = require('supertest')
 
 describe('Bar App Server API', function () {
+
+  afterEach(function () {
+    app.close()
+  })
+
   it('Should get a valid bar when hitting /bar/getbar/:name', function () {
-    return request
+    return request(app)
       .get('/bar/getbar/yuriysbar')
-      .expect(200)
       .expect('Content-Type', /json/)
-      .expect(res => {
-        expect(res.body.orders.length).to.equal(2)
+      .expect(200)
+      .then(res => {
+        assert(res.body.orders.length, 2)
       })
+      // .expect(res => {
+      //   res.body.orders.length = 2
+      // })
       // .end(done) //use done to tell mocha that async test is done
   })
 
-  it('Should get a valid bar when passing in a valid bar name', function (done) {
+  xit('Should get a valid bar when passing in a valid bar name', function (done) {
     let barName = 'andrewsbar'
     let bar = barsHelper.getBar(barName)
     expect(bar).to.be.ok

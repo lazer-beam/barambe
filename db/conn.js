@@ -7,7 +7,9 @@ const opts = {
   dialectOptions: { ssl: { require: true } },
   logging: false,
 }
-const sequelize = new Sequelize(process.env.DB_CONNECTION, opts)
+
+const mode = process.env.DB_TESTING ? process.env.DB_CONN_TEST : process.env.DB_CONNECTION
+const sequelize = new Sequelize(mode, opts)
 
 sequelize.authenticate().then(() => {
   console.log(chalk.bgCyan.black('Connection to DB has been established successfully'))

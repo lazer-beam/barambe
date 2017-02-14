@@ -25,8 +25,13 @@ app.get('/test', (req, res) => {
 io.on('connection', socket => socketHub(socket))
 
 const port = 1337
-initDb().then(() => {
+initDb(false).then(() => {
   http.listen(port, () => {
+    if (process.env.DB_TESTING) {
+      console.log(chalk.bgGreen.black('USING TESTING DATABASE'))
+    } else {
+      console.log(chalk.bgGreen.black('USING DEVELOPMENT DATABASE'))
+    }
     console.log(chalk.bgGreen.black(`listening on port ${port}`))
   })
 }).catch(err => {

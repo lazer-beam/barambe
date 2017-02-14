@@ -9,7 +9,7 @@ const Tab = require('./models/tabModel')
 require('./models/bartenderModel')
 require('./models/barModel')
 
-module.exports = () => new Promise((resolve, reject) => {
+module.exports = toForce => new Promise((resolve, reject) => {
   Tab.hasMany(Order)
   Order.belongsTo(Tab)
 
@@ -22,7 +22,7 @@ module.exports = () => new Promise((resolve, reject) => {
   Drink.belongsToMany(Liquor, { through: 'drink_liquor' })
   Liquor.belongsToMany(Drink, { through: 'drink_liquor' })
 
-  sequelize.sync(/*{ force: true }*/).then(err => {
+  sequelize.sync(toForce ? { force: true } : null).then(err => {
     resolve()
     reject(err)
   })
