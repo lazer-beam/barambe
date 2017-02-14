@@ -7,7 +7,6 @@
   "main": "index.js",
   "scripts": {
     "webpack": "./node_modules/.bin/webpack -d --watch",
-    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
     "start": "nodemon ./server/server.js",
     "dev": "webpack-dev-server --progress --colors",
     "devDash": "webpack-dashboard webpack-dev-server --progress --colors",
