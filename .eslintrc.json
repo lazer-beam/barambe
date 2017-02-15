@@ -37,7 +37,8 @@
         "semi": ["error", "never"],
         "no-console": "off",
         "arrow-parens": [2, "as-needed", { "requireForBlockBody": false }],
-        "max-len": ["error", 500]
+        "max-len": ["error", 500],
+        "linebreak-style": "off"
     },
     "extends": "airbnb",
     "plugins": [
