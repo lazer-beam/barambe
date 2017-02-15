@@ -9,8 +9,8 @@ const customer = {
     stripe.customers.create({
       email: null,
       source: token,
-    }).then(customer => {
-      // save customerID in database, corresponding to authID
+    }).then(() => {
+      // the previous returned a customer obj, save customerID in database, corresponding to authID
       res.send({ result: 'User created' })
     }).catch(err => {
       res.send(err)
