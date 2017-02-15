@@ -36,7 +36,32 @@ Making drinking accessible
 * **Rebasing:** git pull --rebase [upstream] master
 * **Delete local branch:** git branch -d [branchName]
 
-#### Testing Links
+## Postgres Notes
+
+##### How to connect to postgres in terminal
+```sql
+psql "DB_CONNECTION_URL"
+```
+
+##### show all tables in database
+```sql
+\dt
+```
+
+##### list table schema
+```sql
+\d <table_name>
+\d+ <table_name>
+```
+
+* **Cheatsheet:** https://gist.github.com/apolloclark/ea5466d5929e63043dcf
+
+* **CamelCased Tables:** Have to be in quotes
+```sql
+SELECT * FROM "tableName"
+```
+
+## Testing Links
 * **Mocha:** https://mochajs.org/
 * **Chai:** http://chaijs.com/api/
 * **SuperTest:** https://github.com/visionmedia/supertest

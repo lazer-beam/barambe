@@ -7,7 +7,7 @@ const assert = chai.assert
 
 const request = require('supertest')
 
-describe('Bar App Server API', function () {
+xdescribe('Bar App Server API', function () {
 
   afterEach(function () {
     app.close()
@@ -27,7 +27,7 @@ describe('Bar App Server API', function () {
       // .end(done) //use done to tell mocha that async test is done
   })
 
-  xit('Should get a valid bar when passing in a valid bar name', function (done) {
+  it('Should get a valid bar when passing in a valid bar name', function (done) {
     let barName = 'andrewsbar'
     let bar = barsHelper.getBar(barName)
     expect(bar).to.be.ok
@@ -37,7 +37,7 @@ describe('Bar App Server API', function () {
     done()
   })
 
-  it('Should return undefined when passing in an invalid bar name', function () {
+  xit('Should return undefined when passing in an invalid bar name', () => {
     let barName = 'invalidname'
     let bar = barsHelper.getBar(barName)
     expect(bar).to.be.not.ok

@@ -11,12 +11,12 @@ const initDb = require('../db/config')
 const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
-require('./routes')(app)
 
 app.use(express.static(path.join(__dirname, '/../app/build')))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(morgan('dev'))
+require('./routes')(app)
 
 app.get('/test', (req, res) => {
   res.status(200).send('Hello World!')
