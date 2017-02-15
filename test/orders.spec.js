@@ -1,20 +1,16 @@
 const Promise = require('bluebird')
-
+const request = require('supertest')
 const expect = require('chai').expect
-const app = require('../server/server.js')
-const barsHelper = require('../server/utilities/barUtil')
 
+const app = require('../server/server.js')
 const AddIn = require('../db/models/addInModel')
 const Drink = require('../db/models/drinkModel')
 const Liquor = require('../db/models/liquorModel')
 const Order = require('../db/models/orderModel')
 const Tab = require('../db/models/tabModel')
+const ordersUtil = require('../server/utilities/ordersUtil')
 
-var port = 1337
-var url = 'http://127.0.0.1:' + port
-const request = require('supertest')(url)
-
-xdescribe('Orders Server Functionality', () => {
+describe('Orders Server Functionality', () => {
   var createdLines = []
 
   beforeEach(() => {
@@ -50,14 +46,40 @@ xdescribe('Orders Server Functionality', () => {
 
   afterEach(() => {
     return Promise.reduce(createdLines, function(_, line) {
-      console.log('line', line.dataValues)
-      // return line.destroy()
+      return line.destroy()
     }, null);
   })
 
+  xit('Should get all orders', () => {
+    ordersUtil.getOrders()
+      .then(orders => {
+        console.log('orders in spec', orders)
+      })
+  })
+
+  it('should get only the orders with status equal to open', () => {
+    let orders = ordersUtil.getAllOrdersWithStatusOpen([
+      { id: 1,
+      status: 'open',
+      time: '2017-02-15T09:02:35.703Z',
+      tabId: 1,
+      drinkId: 1
+    },
+      { id: 2,
+      status: 'closed',
+      time: '2017-02-15T09:02:35.703Z',
+      tabId: 2,
+      drinkId: 2
+    }])
+
+    expect(orders.length).to.equal(1)
+    expect(orders[0]).to.be.an('object')
+    expect(orders[0]).to.have.all.keys('id', 'time', 'tabId', 'drinkId', 'status')
+    expect(orders[0].id).to.equal(1)
+  })
+
   xit('Should get all the orders when hitting the endpoint /orders/getallpending', () => {
-    setTimeout(() => {
-      request
+      return request(app)
         .get('/orders/getallpending')
         .expect(200)
         .expect('Content-Type', /json/)
@@ -65,6 +87,5 @@ xdescribe('Orders Server Functionality', () => {
           // expect(res.body.orders.length).to.equal(2)
         })
         .end(done) //use done to tell mocha that async test is done
-    }, 0)
   })
 })
