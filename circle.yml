@@ -4,5 +4,4 @@ machine:
 general:
   branches:
     only:
-     - dev
-     - master
+     - dev, master

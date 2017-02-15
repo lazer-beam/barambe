@@ -50,32 +50,74 @@ describe('Orders Server Functionality', () => {
     }, null);
   })
 
-  xit('Should get all orders', () => {
-    ordersUtil.getOrders()
-      .then(orders => {
-        console.log('orders in spec', orders)
-      })
-  })
-
   it('should get only the orders with status equal to open', () => {
     let orders = ordersUtil.getAllOrdersWithStatusOpen([
       { id: 1,
-      status: 'open',
-      time: '2017-02-15T09:02:35.703Z',
-      tabId: 1,
-      drinkId: 1
-    },
-      { id: 2,
-      status: 'closed',
-      time: '2017-02-15T09:02:35.703Z',
-      tabId: 2,
-      drinkId: 2
+        status: 'open',
+        time: '2017-02-15T09:02:35.703Z',
+        tabId: 1,
+        drinkId: 1
+    }, { id: 2,
+        status: 'closed',
+        time: '2017-02-15T09:02:35.703Z',
+        tabId: 2,
+        drinkId: 2
     }])
 
     expect(orders.length).to.equal(1)
     expect(orders[0]).to.be.an('object')
     expect(orders[0]).to.have.all.keys('id', 'time', 'tabId', 'drinkId', 'status')
     expect(orders[0].id).to.equal(1)
+  })
+
+  it('should determine a tabs delivery type', () => {
+    return Tab.create({
+      customerNum: 15,
+      isOpen: true,
+    }).bind({}).then(tab => {
+      this.tab = tab
+      return ordersUtil.isTableOrPickup(tab.dataValues.id)
+    }).then(tableNum => {
+      expect(tableNum).to.be.a('null')
+      expect(this.tab).to.be.ok
+      return this.tab.destroy()
+    }).then(() => {
+      return Tab.create({
+        customerNum: 15,
+        isOpen: true,
+        tableNumber: 4,
+      })
+    }).then(tab => {
+      this.tab = tab
+      return ordersUtil.isTableOrPickup(tab.dataValues.id)
+    }).then(tableNum => {
+      expect(tableNum).to.be.a('number')
+      expect(tableNum).to.be.equal(4)
+      expect(this.tab).to.be.ok
+      return this.tab.destroy()
+    })
+  })
+
+  xit('should add delivery type to orders', () => {
+    let mockOrders = [
+      { id: 1,
+        status: 'open',
+        time: '2017-02-15T09:02:35.703Z',
+        tabId: 1,
+        drinkId: 1
+    }, { id: 2,
+        status: 'closed',
+        time: '2017-02-15T09:02:35.703Z',
+        tabId: 2,
+        drinkId: 2
+    }]
+  })
+
+  xit('Should get all orders', () => {
+    ordersUtil.getOrders()
+      .then(orders => {
+        console.log('orders in spec', orders)
+      })
   })
 
   xit('Should get all the orders when hitting the endpoint /orders/getallpending', () => {
