@@ -79,13 +79,13 @@ describe('Orders Server Functionality', () => {
   })
 
   xit('Should get all the orders when hitting the endpoint /orders/getallpending', () => {
-      return request(app)
-        .get('/orders/getallpending')
-        .expect(200)
-        .expect('Content-Type', /json/)
-        .expect(res => {
-          // expect(res.body.orders.length).to.equal(2)
-        })
-        .end(done) //use done to tell mocha that async test is done
+    return request(app)
+      .get('/orders/getallpending')
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .expect(res => {
+        // expect(res.body.orders.length).to.equal(2)
+      })
+      .end(done) //use done to tell mocha that async test is done
   })
 })
