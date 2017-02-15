@@ -5,7 +5,7 @@ const stripe = require('stripe')(process.env.testKey);
 
 var port = 1337
 var url = 'http://127.0.0.1:' + port
-const request = require('supertest')(url)
+const request = require('supertest')
 
 describe('Customer Server API', function () {
   var testReqBody = {}
@@ -26,7 +26,7 @@ describe('Customer Server API', function () {
   })
 
   it('Should create a new user in db when posting authID and token to /customer/newuser', function () {
-    return request
+    return request(app)
     .post('/customer/newuser')
     .send(testReqBody)
     .expect(200)
@@ -45,7 +45,7 @@ describe('Customer Server API', function () {
     payObj.authID = authID
     payObj.amount = 1000
     payObj.currency = 'usd'
-    request
+    request(app)
     .post('/customer/pay')
     .send(payObj)
     .expect(200)
