@@ -4,7 +4,6 @@ const sequelize = require('../conn')
 const schema = {
   customerNum: Sequelize.INTEGER,
   isOpen: Sequelize.BOOLEAN,
-  isTable: Sequelize.BOOLEAN,
   tableNumber: Sequelize.INTEGER,
   subtotal: Sequelize.INTEGER,
   tax: Sequelize.INTEGER,
