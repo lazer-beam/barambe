@@ -2,7 +2,6 @@ const Sequelize = require('sequelize')
 const sequelize = require('../conn')
 
 const schema = {
-  type: Sequelize.STRING,
   status: Sequelize.STRING,
 }
 
