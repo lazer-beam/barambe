@@ -4,13 +4,13 @@ const stripe = require('stripe')(process.env.testKey)
 const customer = {
   create: (req, res) => {
     console.log(`Serving request for ${req.method} where url is ${req.url}`)
-    const authID = req.body.authID
+    // const authID = req.body.authID
     const token = req.body.token
     stripe.customers.create({
       email: null,
       source: token,
-    }).then(customer => {
-      // save customerID in database, corresponding to authID
+    }).then(() => {
+      // the previous returned a customer obj, save customerID in database, corresponding to authID
       res.send({ result: 'User created' })
     }).catch(err => {
       res.send(err)

@@ -41,7 +41,8 @@
         "no-param-reassign": ["error", { "props": false }],
         "no-undef": "off",
         "arrow-body-style": "off",
-        "no-unused-expressions": ["error", { "allowTernary": true }]
+        "no-unused-expressions": ["error", { "allowTernary": true }],
+        "linebreak-style": "off"
     },
     "extends": "airbnb",
     "plugins": [
