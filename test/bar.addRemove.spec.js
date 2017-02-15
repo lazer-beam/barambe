@@ -6,7 +6,7 @@ const initDb = require('../db/config')
 const expect = chai.expect
 const assert = chai.assert
 
-describe('Bartender Adding Drinks', function() {
+xdescribe('Bartender Adding Drinks', function() {
   beforeEach(function(done) {
     initDb(true).then(function() { done()})
   })

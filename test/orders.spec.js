@@ -14,7 +14,7 @@ var port = 1337
 var url = 'http://127.0.0.1:' + port
 const request = require('supertest')(url)
 
-describe('Orders Server Functionality', () => {
+xdescribe('Orders Server Functionality', () => {
   var createdLines = []
 
   beforeEach(() => {
