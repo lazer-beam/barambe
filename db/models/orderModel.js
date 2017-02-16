@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const sequelize = require('../conn')
 
 const schema = {
-  status: Sequelize.STRING,
+  status: { type: Sequelize.STRING, defaultValue: 'pending' },
 }
 
 const config = {

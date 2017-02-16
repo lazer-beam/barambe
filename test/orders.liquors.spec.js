@@ -37,7 +37,7 @@ describe('Drinks Helpers Functionality', () => {
   })
 
   it('gets a liquor row given it\'s associated drink', () => {
-    liquorsUtil.getLiquors(cocktail)
+    return liquorsUtil.getLiquors(cocktail)
       .then(liquor => {
         expect(liquor).to.be.an.instanceof(Array)
         expect(liquor[0].dataValues).to.be.ok

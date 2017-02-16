@@ -47,7 +47,7 @@ describe('Drinks Helpers Functionality', () => {
       return { status: 'pending', drinkId: drinkId }
     })
 
-    drinksUtil.getAllDrinks(mockOrders).then(drinks => {
+    return drinksUtil.getAllDrinks(mockOrders).then(drinks => {
       drinks.forEach(drink => {
         expect(drink.dataValues).to.be.ok
         expect(drink.dataValues).to.have.all.keys('id', 'type', 'name', 'price')
