@@ -22,8 +22,7 @@ module.exports = toForce => new Promise((resolve, reject) => {
   Drink.belongsToMany(Liquor, { through: 'drink_liquor' })
   Liquor.belongsToMany(Drink, { through: 'drink_liquor' })
 
-  sequelize.sync(toForce ? { force: true } : null).then(err => {
-    resolve()
-    reject(err)
+  sequelize.sync(toForce ? { force: true } : null).then(seq => {
+    seq ? resolve() : reject()
   })
 })

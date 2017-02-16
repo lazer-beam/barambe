@@ -20,11 +20,7 @@ xdescribe('Bar App Server API', function () {
       .expect(200)
       .then(res => {
         assert(res.body.orders.length, 2)
-      })
-      // .expect(res => {
-      //   res.body.orders.length = 2
-      // })
-      // .end(done) //use done to tell mocha that async test is done
+      }) 
   })
 
   it('Should get a valid bar when passing in a valid bar name', function (done) {
