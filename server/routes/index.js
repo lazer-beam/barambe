@@ -1,7 +1,7 @@
-const barRoutes = require('./barRoutes')
 const ordersRoutes = require('./ordersRoutes')
+const drinksRoutes = require('./drinksRoutes')
 
 module.exports = app => {
-  app.use('/bar', barRoutes)
   app.use('/orders', ordersRoutes)
+  app.use('/drinks', drinksRoutes)
 }
