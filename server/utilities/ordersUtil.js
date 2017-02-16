@@ -1,6 +1,8 @@
 const Order = require('../../db/models/orderModel')
 const Tab = require('../../db/models/tabModel')
 const drinksUtil = require('./drinksUtil')
+const liquorsUtil = require('./liquorsUtil')
+const addInsUtil = require('./addInsUtil')
 
 const mapOrdersToDataValues = orders => orders.map(order => order.dataValues)
 
@@ -20,13 +22,37 @@ const addDeliveryType = orders => {
   }))
 }
 
-const getOrders = () => Order.findAll()
+const formatDrinksWithLiquorsAndAddIns = drinks => {
+  return Promise.all(drinks.map(drink => {
+    if (drink.type === 'shot') {
+      return liquorsUtil.getLiquors(drink)
+        .then(liquors => {
+          return Object.assign(drink.dataValues, { liquors: liquorsUtil.mapLiquors(liquors) })
+        })
+    } else if (drink.type === 'cocktail') {
+      return liquorsUtil.getLiquors(drink)
+        .then(liquors => {
+          this.drinkObj = Object.assign(drink.dataValues, { liquors: liquorsUtil.mapLiquors(liquors) })
+          return addInsUtil.getAddIns(drink)
+        }).then(addIns => {
+          return Object.assign(this.drinkObj, { addIns: addInsUtil.mapAddIns(addIns) })
+        })
+    }
+    return drink.dataValues
+  }))
+}
+
+const getOrders = () => Order.findAll().bind({})
+  .then(orders => addDeliveryType(mapOrdersToDataValues(orders)))
+  .then(orders => getAllOrdersWithStatusOpen(orders))
   .then(orders => {
-    return addDeliveryType(mapOrdersToDataValues(orders))
-  }).then(orders => {
-    return getAllOrdersWithStatusOpen(orders)
-  }).then(orders => {
+    this.orders = orders
     return drinksUtil.getAllDrinks(orders)
+  }).then(drinks => {
+    this.drinkModels = drinks
+    return formatDrinksWithLiquorsAndAddIns(drinks)
+  }).then(drinks => {
+    console.log('drinks', drinks)
   })
 
 module.exports = {
@@ -34,4 +60,5 @@ module.exports = {
   getAllOrdersWithStatusOpen,
   addDeliveryType,
   isTableOrPickup,
+  formatDrinksWithLiquorsAndAddIns,
 }

@@ -10,33 +10,30 @@ const Order = require('../db/models/orderModel')
 const Tab = require('../db/models/tabModel')
 
 const drinksUtil = require('../server/utilities/drinksUtil')
+const orderUtil = require('../server/utilities/ordersUtil')
 
-describe('Drinks Helpers Functionality', () => {
+xdescribe('Drinks Helpers Functionality', () => {
   var createdLines = []
+  var drinkIds = [];
 
   before(() => {
+    //Create one beer & one shot
     return Drink.create({
-      type: 'shot',
-      name: 'Greygoose',
-      price: 800
+      type: 'beer',
+      name: 'Miller Lite',
+      price: 500
     }).bind({}).then(drink => {
       createdLines.push(drink)
-      this.cocktailDrink = drink
-      return Tab.create({
-        customerNum: 15,
-        isOpen: true,
+      drinkIds.push(drink.dataValues.id)
+      return Drink.create({
+        type: 'shot',
+        name: 'Greygoose',
+        price: 800
       })
-    }).then(tab => {
-      createdLines.push(tab)
-      this.tab = tab;
-      return Order.create({ status: 'pending'})
-    }).then(order => {
-      createdLines.push(order)
-      this.order = order
-      return this.cocktailDrink.addOrder(order)
-    }).then(() => {
-      return this.tab.addOrder(this.order)
-    }).then(() => {
+    }).then(drink => {
+      createdLines.push(drink)
+      drinkIds.push(drink.dataValues.id)
+      this.cocktailDrink = drink
       return Liquor.create({ name: 'Greygoose' })
     }).then(liquor => {
       createdLines.push(liquor)
@@ -44,13 +41,105 @@ describe('Drinks Helpers Functionality', () => {
     })
   })
 
-  after(() => {
-    return Promise.each(createdLines, line => {
-      return line.destroy()
+  after(() => Promise.each(createdLines, line => line.destroy()))
+
+  it('should get all drinks associated with all orders', () => {
+    let mockOrders = drinkIds.map(drinkId => {
+      return { status: 'pending', drinkId: drinkId }
+    })
+
+    drinksUtil.getAllDrinks(mockOrders).then(drinks => {
+      drinks.forEach(drink => {
+        expect(drink.dataValues).to.be.ok
+        expect(drink.dataValues).to.have.all.keys('id', 'type', 'name', 'price')
+        expect(drink.dataValues.id).to.be.a('number')
+        expect(drink.dataValues.price).to.be.a('number')
+      })
+    })
+  })
+})
+
+describe('Drinks Formatting Helper Functions', () => {
+  var createdLines = []
+  var drinks = []
+
+  before(() => {
+    //create one beer, one shot, one cocktail
+    return Drink.create({
+      type: 'beer',
+      name: 'Natural Lite',
+      price: 550
+    }).then(drink => {
+      createdLines.push(drink)
+      drinks.push(drink)
+      return Drink.create({
+        type: 'shot',
+        name: 'Absolut Vodka',
+        price: 800
+      })
+    }).then(drink => {
+      createdLines.push(drink)
+      drinks.push(drink)
+      this.shot = drink
+      return Liquor.create({ name: 'Absolut Vodka' })
+    }).then(liquor => {
+      createdLines.push(liquor)
+      this.absolut = liquor
+      return this.shot.addLiquor(liquor)
+    }).then(() => {
+      return Drink.create({
+        type: 'cocktail',
+        name: 'Yuriy\'s Special',
+        price: 1300
+      })
+    }).then(drink => {
+      createdLines.push(drink)
+      drinks.push(drink)
+      this.cocktail = drink
+      return drink.addLiquor(this.absolut)
+    }).then(() => Liquor.create({ name: 'Smirnoff' }))
+    .then(liquor => {
+      createdLines.push(liquor)
+      return this.cocktail.addLiquor(liquor)
+    }).then(() => AddIn.create({ name: 'Salt' }))
+    .then(addIn => {
+      createdLines.push(addIn)
+      return this.cocktail.addAddIn(addIn)
+    }).then(() => AddIn.create({ name: 'Olives' }))
+    .then(addIn => {
+      createdLines.push(addIn)
+      this.cocktail.addAddIn(addIn)
     })
   })
 
-  it('should get one cocktail drink associated with one order', () => {
+  after(() => Promise.each(createdLines, line => line.destroy()))
 
+  it('should get a drinks object with the related liqours and addIns', () => {
+    return orderUtil.formatDrinksWithLiquorsAndAddIns(drinks)
+      .then(drinks => {
+        drinks.forEach(drink => {
+          if(drink.type === 'beer') {
+            expect(drink.name).to.be.equal('Natural Lite')
+            expect(drink.price).to.be.equal(550)
+            expect(drink.liquors).to.be.an('undefined')
+            expect(drink.addIns).to.be.an('undefined')
+          } else if(drink.type === 'shot') {
+            expect(drink.name).to.be.equal('Absolut Vodka')
+            expect(drink.price).to.be.equal(800)
+            expect(drink.liquors).to.be.an.instanceOf(Array)
+            expect(drink.liquors[0].name).to.be.equal('Absolut Vodka')
+            expect(drink.addIns).to.be.an('undefined')
+          } else if(drink.type === 'cocktail') {
+            expect(drink.name).to.be.equal('Yuriy\'s Special')
+            expect(drink.price).to.be.equal(1300)
+            expect(drink.liquors).to.be.an.instanceOf(Array)
+            expect(drink.liquors[0].name).to.be.equal('Absolut Vodka')
+            expect(drink.liquors[1].name).to.be.equal('Smirnoff')
+            expect(drink.addIns).to.be.an.instanceOf(Array)
+            expect(drink.addIns[0].name).to.be.equal('Salt')
+            expect(drink.addIns[1].name).to.be.equal('Olives')
+          }
+        })
+      })
   })
 })
