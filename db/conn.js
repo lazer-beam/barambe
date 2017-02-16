@@ -7,7 +7,7 @@ const opts = {
   dialectOptions: { ssl: { require: true } },
   logging: false,
 }
-console.log(process.env.DB_TESTING)
+
 const mode = (process.env.DB_TESTING === 'true') ? process.env.DB_CONN_TEST : process.env.DB_CONNECTION
 const sequelize = new Sequelize(mode, opts)
 
