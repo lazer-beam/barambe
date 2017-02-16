@@ -42,6 +42,17 @@ const formatDrinksWithLiquorsAndAddIns = drinks => {
   }))
 }
 
+const mapDrinksWithinOrderObj = (orders, drinks) => {
+  return orders.map(order => {
+    const foundDrink = drinks.find(drink => drink.id === order.drinkId)
+    return {
+      drink: foundDrink,
+      id: order.id,
+      time: order.time,
+    }
+  })
+}
+
 const getOrders = () => Order.findAll().bind({})
   .then(orders => addDeliveryType(mapOrdersToDataValues(orders)))
   .then(orders => getAllOrdersWithStatusOpen(orders))
@@ -52,6 +63,7 @@ const getOrders = () => Order.findAll().bind({})
     this.drinkModels = drinks
     return formatDrinksWithLiquorsAndAddIns(drinks)
   }).then(drinks => {
+    mapDrinksToOrders(orders, drinks)
     console.log('drinks', drinks)
   })
 
@@ -61,4 +73,5 @@ module.exports = {
   addDeliveryType,
   isTableOrPickup,
   formatDrinksWithLiquorsAndAddIns,
+  mapDrinksWithinOrderObj,
 }

@@ -8,7 +8,6 @@ const Drink = require('../db/models/drinkModel')
 const Liquor = require('../db/models/liquorModel')
 const Order = require('../db/models/orderModel')
 const Tab = require('../db/models/tabModel')
-
 const drinksUtil = require('../server/utilities/drinksUtil')
 const orderUtil = require('../server/utilities/ordersUtil')
 
@@ -127,19 +126,78 @@ describe('Drinks Formatting Helper Functions', () => {
             expect(drink.name).to.be.equal('Absolut Vodka')
             expect(drink.price).to.be.equal(800)
             expect(drink.liquors).to.be.an.instanceOf(Array)
-            expect(drink.liquors[0].name).to.be.equal('Absolut Vodka')
+            expect(drink.liquors).to.include('Absolut Vodka');
             expect(drink.addIns).to.be.an('undefined')
           } else if(drink.type === 'cocktail') {
             expect(drink.name).to.be.equal('Yuriy\'s Special')
             expect(drink.price).to.be.equal(1300)
             expect(drink.liquors).to.be.an.instanceOf(Array)
-            expect(drink.liquors[0].name).to.be.equal('Absolut Vodka')
-            expect(drink.liquors[1].name).to.be.equal('Smirnoff')
+            expect(drink.liquors).to.include('Absolut Vodka')
+            expect(drink.liquors).to.include('Smirnoff')
             expect(drink.addIns).to.be.an.instanceOf(Array)
-            expect(drink.addIns[0].name).to.be.equal('Salt')
-            expect(drink.addIns[1].name).to.be.equal('Olives')
+            expect(drink.addIns).to.include('Salt')
+            expect(drink.addIns).to.include('Olives')
           }
         })
       })
+  })
+
+  it('should format array of drinks in presentable format for client', () => {
+    const mockDrinks = [{
+      id: 117,
+      type: 'beer',
+      name: 'Natural Lite',
+      price: 550,
+    }, {
+      id: 118,
+      type: 'shot',
+      name: 'Absolut Vodka',
+      price: 800,
+      liquors: [{
+        name: 'AbsolutVodka ',
+        'price ': null,
+      }],
+    },
+    {
+      id: 119,
+      type: 'cocktail ',
+      name: 'Yuriy \'s Special',
+      price: 1300,
+      liquors: [{
+        name: 'Absolut Vodka',
+      },
+      {
+        name: 'Smirnoff ',
+      },
+      ],
+      addIns: [
+        {
+          name: 'Salt ',
+        },
+        {
+          'name ': 'Olives ',
+        },
+      ],
+    }]
+
+    const mockOrders = [{ id: 1, status: 'pending', time: '2017-02-15T09:02:35.703Z', tabId: 1, drinkId: 117},
+                   { id: 2, status: 'closed', time: '2017-02-15T11:02:35.703Z', tabId: 2, drinkId: 118},
+                   { id: 3, status: 'pending', time: '2017-02-15T13:02:35.703Z', tabId: 2, drinkId: 119}]
+
+    const ordersResult = orderUtil.mapDrinksWithinOrderObj(mockOrders, mockDrinks)
+    expect(ordersResult).to.have.length(3)
+    ordersResult.forEach(order => {
+      expect(order.id).to.be.a('number')
+      if(order.type === 'beer') {
+        expect(order.drink.name).to.be.equal('Natural Light')
+      } else if(order.type === 'shot') {
+        expect(order.drink.name).to.be.equal('Absolut Vodka')
+        expect(order.drink.liqours).to.have.length(1)
+      } else if(order.type === 'cocktail') {
+        expect(order.drink.name).to.be.equal('Yuriy\'s Special')
+        expect(order.drink.liqours).to.have.length(2)
+        expect(order.drink.addIns).to.have.length(2)
+      }
+    })
   })
 })
