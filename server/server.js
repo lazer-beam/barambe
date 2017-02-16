@@ -27,16 +27,13 @@ io.on('connection', socket => socketHub(socket))
 const port = 1337
 initDb(false).then(() => {
   http.listen(port, () => {
-    if (process.env.DB_TESTING) {
+    if (process.env.DB_TESTING === 'true') {
       console.log(chalk.bgGreen.black('USING TESTING DATABASE'))
     } else {
       console.log(chalk.bgGreen.black('USING DEVELOPMENT DATABASE'))
     }
     console.log(chalk.bgGreen.black(`listening on port ${port}`))
   })
-}).catch(err => {
-  console.log(chalk.red('Database Error'))
-  console.error(err)
 })
 
 module.exports = http
