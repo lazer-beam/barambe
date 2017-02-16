@@ -199,14 +199,28 @@ describe('Orders Server Functionality', () => {
       })
   })
 
-  xit('Should get all the orders when hitting the endpoint /orders/getallpending', () => {
+  it('Should get all the orders when hitting the endpoint /orders/getallpending', () => {
     return request(app)
       .get('/orders/getallpending')
       .expect(200)
       .expect('Content-Type', /json/)
       .expect(res => {
-        // expect(res.body.orders.length).to.equal(2)
+        const orders = res.body
+        orders.forEach(order => {
+          expect(order.drink).to.be.ok
+          expect(order.id).to.be.ok
+          expect(order.time).to.be.ok
+          expect(order.tableNum).to.be.equal(7)
+          if (order.drink.type === 'shot' || order.drink.type === 'cocktail') {
+            expect(order.drink.liquors).to.be.ok
+            expect(order.drink.liquors).to.be.an.instanceOf(Array)
+            expect(order.drink.liquors).to.have.length.greaterThan(0)
+          } else if(order.drink.type === 'cocktail') {
+            expect(order.drink.addIns).to.be.ok
+            expect(order.drink.addIns).to.be.an.instanceOf(Array)
+            expect(order.drink.addIns).to.have.length.greaterThan(0)
+          }
+        })
       })
-      .end(done) //use done to tell mocha that async test is done
   })
 })
