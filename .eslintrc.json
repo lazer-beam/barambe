@@ -1,5 +1,7 @@
 {   "globals": {
-        "document": true
+        "document": true,
+        "window": true,
+        "localStorage": true
     },
     "parser": "babel-eslint",
     "ecmaFeatures": {
@@ -39,7 +41,8 @@
         "arrow-parens": [2, "as-needed", { "requireForBlockBody": false }],
         "max-len": ["error", 500],
         "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
-        "prefer-stateless-function": [0, { "ignorePureComponents": true }]
+        "prefer-stateless-function": [0, { "ignorePureComponents": true }],
+        "no-underscore-dangle": ["error", { "allowAfterThis": true }]
     },
     "extends": "airbnb",
     "plugins": [

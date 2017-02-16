@@ -4,3 +4,14 @@
 .splashButton {
   padding-top: 5px;
 }
+
+/*
+============ Dashboard ================
+*/
+.allBody {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-style: solid;
+  /*border-color: black;*/
+}

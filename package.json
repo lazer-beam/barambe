@@ -13,12 +13,14 @@
     "test": "DB_TESTING=false mocha --reporter nyan"
   },
   "dependencies": {
+    "auth0-lock": "^10.11.0",
     "axios": "^0.15.3",
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.0",
     "chalk": "^1.1.3",
     "dotenv": "^4.0.0",
     "express": "^4.14.0",
+    "jwt-decode": "^2.1.0",
     "lodash": "^4.17.4",
     "morgan": "^1.7.0",
     "nodemon": "^1.11.0",
