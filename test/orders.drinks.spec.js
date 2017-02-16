@@ -12,7 +12,7 @@ const Tab = require('../db/models/tabModel')
 const drinksUtil = require('../server/utilities/drinksUtil')
 const orderUtil = require('../server/utilities/ordersUtil')
 
-xdescribe('Drinks Helpers Functionality', () => {
+describe('Drinks Helpers Functionality', () => {
   var createdLines = []
   var drinkIds = [];
 
