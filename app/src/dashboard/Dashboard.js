@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Sidebar, Segment, Menu, Image, Icon, Header } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu, Image, Header } from 'semantic-ui-react'
 import '../App.css'
 
 import { actions } from './duck.Dashboard'
+import MenuItem from './DashboardComponents'
 
 @connect(store => ({
   visible: store.dash.visible,
@@ -26,24 +27,13 @@ class Dashboard extends Component {
   }
 
   render() {
-    // const visible = this.state.visible
-
     return (
       <div className="allBody">
         <Sidebar.Pushable as={Segment}>
           <Sidebar as={Menu} animation="push" width="thin" visible={this.props.visible} icon="labeled" vertical inverted>
-            <Menu.Item name="home">
-              <Icon name="home" />
-              Home
-            </Menu.Item>
-            <Menu.Item name="gamepad">
-              <Icon name="gamepad" />
-              Bartender
-            </Menu.Item>
-            <Menu.Item name="camera">
-              <Icon name="camera" />
-              Edit Menu
-            </Menu.Item>
+            <MenuItem icon="home" label="Home" />
+            <MenuItem icon="gamepad" label="Bartender" />
+            <MenuItem icon="camera" label="Bartender" />
           </Sidebar>
           <Sidebar.Pusher>
             <div className="allBody">
