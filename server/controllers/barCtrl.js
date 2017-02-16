@@ -27,7 +27,7 @@ const bars = {
       },
     }, (err, resp, body) => {
       res.send('Bar created')
-      // store the response obj in database
+      // store the response bar obj in database
     })
   },
 }
