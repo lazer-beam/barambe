@@ -1,9 +1,10 @@
 const Order = require('../../db/models/orderModel')
 const Tab = require('../../db/models/tabModel')
+const drinksUtil = require('./drinksUtil')
 
-const mapOrders = orders => orders.map(order => order.dataValues)
+const mapOrdersToDataValues = orders => orders.map(order => order.dataValues)
 
-const getAllOrdersWithStatusOpen = orders => orders.filter(order => order.status === 'open')
+const getAllOrdersWithStatusOpen = orders => orders.filter(order => order.status === 'pending')
 
 const isTableOrPickup = tabId => {
   return Tab.findOne({ where: { id: tabId } }).then(tab => tab.dataValues.tableNum)
@@ -21,14 +22,15 @@ const addDeliveryType = orders => {
 
 const getOrders = () => Order.findAll()
   .then(orders => {
-    return addDeliveryType(mapOrders(orders))
+    return addDeliveryType(mapOrdersToDataValues(orders))
   }).then(orders => {
     return getAllOrdersWithStatusOpen(orders)
+  }).then(orders => {
+    return drinksUtil.getAllDrinks(orders)
   })
 
 module.exports = {
   getOrders,
-  mapOrders,
   getAllOrdersWithStatusOpen,
   addDeliveryType,
   isTableOrPickup,

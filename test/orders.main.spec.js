@@ -10,10 +10,11 @@ const Order = require('../db/models/orderModel')
 const Tab = require('../db/models/tabModel')
 const ordersUtil = require('../server/utilities/ordersUtil')
 
+
 describe('Orders With Tabs Functionality', () => {
    var mockOrders = []
    beforeEach(() => {
-     mockOrders = [{ id: 1, status: 'open', time: '2017-02-15T09:02:35.703Z', tabId: 1, drinkId: 1},
+     mockOrders = [{ id: 1, status: 'pending', time: '2017-02-15T09:02:35.703Z', tabId: 1, drinkId: 1},
                    { id: 2, status: 'closed', time: '2017-02-15T09:02:35.703Z', tabId: 2, drinkId: 2}]
    })
 
@@ -127,12 +128,11 @@ describe('Orders Server Functionality', () => {
 //       return Tab.create({
 //         customerNum: 15,
 //         isOpen: true,
-//         isTable: false
 //       })
 //     }).then(tab => {
 //       createdLines.push(tab)
 //       this.tab = tab;
-//       return Order.create({ status: 'open'})
+//       return Order.create({ status: 'pending'})
 //     }).then(order => {
 //       createdLines.push(order)
 //       this.order = order
