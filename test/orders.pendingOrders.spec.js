@@ -93,29 +93,30 @@ describe('Orders Server Functionality', () => {
     })
   })
 
-  afterEach(() => Promise.each(createdLines, line => line.destroy()))
+  after(() => Promise.each(createdLines, line => line.destroy()))
 
   it('Should get all orders', function(done) {
-    this.retries(2);
-      ordersUtil.getAllPendingOrders()
-        .then(orders => {
-          orders.forEach(order => {
-            expect(order.drink).to.be.ok
-            expect(order.id).to.be.ok
-            expect(order.time).to.be.ok
-            expect(order.tableNum).to.be.equal(7)
-            if (order.drink.type === 'shot' || order.drink.type === 'cocktail') {
-              expect(order.drink.liquors).to.be.ok
-              expect(order.drink.liquors).to.be.an.instanceOf(Array)
-              expect(order.drink.liquors).to.have.length.greaterThan(0)
-            } else if(order.drink.type === 'cocktail') {
-              expect(order.drink.addIns).to.be.ok
-              expect(order.drink.addIns).to.be.an.instanceOf(Array)
-              expect(order.drink.addIns).to.have.length.greaterThan(0)
-            }
-          })
-          done()
+    this.retries(2)
+    ordersUtil.getAllPendingOrders()
+      .then(orders => {
+        orders.forEach(order => {
+          expect(order.drink).to.be.ok
+          expect(order.id).to.be.ok
+          expect(order.time).to.be.ok
+          expect(order.tabId).to.be.ok
+          expect(order.tableNum).to.be.equal(7)
+          if (order.drink.type === 'shot' || order.drink.type === 'cocktail') {
+            expect(order.drink.liquors).to.be.ok
+            expect(order.drink.liquors).to.be.an.instanceOf(Array)
+            expect(order.drink.liquors).to.have.length.greaterThan(0)
+          } else if(order.drink.type === 'cocktail') {
+            expect(order.drink.addIns).to.be.ok
+            expect(order.drink.addIns).to.be.an.instanceOf(Array)
+            expect(order.drink.addIns).to.have.length.greaterThan(0)
+          }
         })
+        done()
+      })
   })
 
   it('Should get all the orders when hitting the endpoint /orders/getallpending', () => {
@@ -129,6 +130,7 @@ describe('Orders Server Functionality', () => {
           expect(order.drink).to.be.ok
           expect(order.id).to.be.ok
           expect(order.time).to.be.ok
+          expect(order.tabId).to.be.ok
           expect(order.tableNum).to.be.equal(7)
           if (order.drink.type === 'shot' || order.drink.type === 'cocktail') {
             expect(order.drink.liquors).to.be.ok

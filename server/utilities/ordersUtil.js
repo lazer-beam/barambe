@@ -50,6 +50,7 @@ const mapDrinksWithinOrderObj = (orders, drinks) => {
       drink: foundDrink,
       id: order.id,
       time: order.time,
+      tabId: order.tabId,
     })
   })
 }
