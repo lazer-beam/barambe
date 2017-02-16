@@ -37,7 +37,11 @@
         "semi": ["error", "never"],
         "no-console": "off",
         "arrow-parens": [2, "as-needed", { "requireForBlockBody": false }],
-        "max-len": ["error", 500]
+        "max-len": ["error", 500],
+        "no-param-reassign": ["error", { "props": false }],
+        "no-undef": "off",
+        "arrow-body-style": "off",
+        "no-unused-expressions": ["error", { "allowTernary": true }]
     },
     "extends": "airbnb",
     "plugins": [
