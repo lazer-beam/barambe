@@ -1,27 +1,25 @@
 // ========================================
 //            ACTIONS
 // ========================================
-
 export const types = {
-  APP_MOUNTED: 'LOGIN/LOGIN_MOUNTED',
-  LOG_IN: 'LOGIN/LOGIN_SUCCESS',
+  TOGGLE_SIDEBAR_OUT: 'DASH/TOGGLE_SIDEBAR_OUT',
+  TOGGLE_SIDEBAR_IN: 'DASH/TOGGLE_SIDEBAR_IN',
 }
 
 // ========================================
 //            REDUCERS
 // ========================================
-
 const defaultProps = {
-  mounted: false,
-  loggedIn: false,
+  visible: false,
+  currentNav: 'root',
 }
 
 export default (state = defaultProps, action) => {
   switch (action.type) {
-    case types.APP_MOUNTED:
-      return { ...state, mounted: true }
-    case types.LOG_IN:
-      return { ...state, loggedIn: true }
+    case types.TOGGLE_SIDEBAR_OUT:
+      return { ...state, visible: true }
+    case types.TOGGLE_SIDEBAR_IN:
+      return { ...state, visible: false }
 
     default:
       return state
@@ -31,8 +29,7 @@ export default (state = defaultProps, action) => {
 // ========================================
 //           ACTION CREATORS
 // ========================================
-
 export const actions = {
-  mount: () => ({ type: types.APP_MOUNTED }),
-  logIn: () => ({ type: types.LOG_IN }),
+  toggleSidebarOut: () => ({ type: types.TOGGLE_SIDEBAR_OUT }),
+  toggleSidebarIn: () => ({ type: types.TOGGLE_SIDEBAR_IN }),
 }
