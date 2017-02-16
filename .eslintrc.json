@@ -38,10 +38,14 @@
         "no-console": "off",
         "arrow-parens": [2, "as-needed", { "requireForBlockBody": false }],
         "max-len": ["error", 500],
+<<<<<<< HEAD
         "no-param-reassign": ["error", { "props": false }],
         "no-undef": "off",
         "arrow-body-style": "off",
-        "no-unused-expressions": ["error", { "allowTernary": true }]
+        "no-unused-expressions": ["error", { "allowTernary": true }],
+=======
+>>>>>>> 060e72a5da80db13c1d8c4c43c02e45596c0267f
+        "linebreak-style": "off"
     },
     "extends": "airbnb",
     "plugins": [
