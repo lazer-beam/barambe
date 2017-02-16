@@ -25,7 +25,7 @@ describe('Customer Server API', function () {
     })
   })
 
-  it('Should create a new user in db when posting authID and token to /customer/newuser', function () {
+  xit('Should create a new user in db when posting authID and token to /customer/newuser', function () {
     return request(app)
     .post('/customer/newuser')
     .send(testReqBody)
@@ -40,7 +40,7 @@ describe('Customer Server API', function () {
     })
   })
 
-  it('Should create a charge when posting authID to /customer/pay', function () {
+  xit('Should create a charge when posting authID to /customer/pay', function () {
     let payObj = {}
     payObj.authID = authID
     payObj.amount = 1000
