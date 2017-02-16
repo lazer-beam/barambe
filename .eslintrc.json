@@ -40,7 +40,8 @@
         "max-len": ["error", 500],
         "no-param-reassign": ["error", { "props": false }],
         "no-undef": "off",
-        "arrow-body-style": "off"
+        "arrow-body-style": "off",
+        "no-unused-expressions": ["error", { "allowTernary": true }]
     },
     "extends": "airbnb",
     "plugins": [
