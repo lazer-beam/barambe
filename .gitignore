@@ -10,6 +10,7 @@ app/dist
 
 ** misc **
 .vscode
+.DS_Store
 
 ** testing **
 mochawesome-reports/*

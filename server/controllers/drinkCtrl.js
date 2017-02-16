@@ -1,4 +1,4 @@
-const util = require('../utilities/drinkUtil')
+const util = require('../utilities/drinksUtil')
 
 const drinks = {
   getInitdrinks: (req, res) => {
