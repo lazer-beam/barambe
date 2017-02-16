@@ -5,4 +5,3 @@ general:
   branches:
     only:
      - dev
-     - master
