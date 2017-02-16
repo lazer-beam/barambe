@@ -10,7 +10,7 @@
     "start": "DB_TESTING=false nodemon ./server/server.js",
     "dev": "webpack-dev-server --progress --colors",
     "devDash": "webpack-dashboard webpack-dev-server --progress --colors",
-    "test": "DB_TESTING=false mocha --reporter nyan"
+    "test": "DB_TESTING=true mocha --reporter nyan"
   },
   "dependencies": {
     "axios": "^0.15.3",

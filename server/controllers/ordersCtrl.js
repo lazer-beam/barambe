@@ -1,6 +1,13 @@
+const ordersUtil = require('../utilities/ordersUtil')
+
 const orders = {
   get: (req, res) => {
-    res.send()
+    ordersUtil.getAllPendingOrders()
+      .then(pendingOrders => {
+        res.send(pendingOrders)
+      }).catch(err => {
+        res.status(500).send(err)
+      })
   },
 }
 
