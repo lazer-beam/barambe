@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 const app = require('../server/server.js')
-const cusHelper = require('../server/utilities/cusUtil')
+// const cusHelper = require('../server/utilities/cusUtil')
 const stripe = require('stripe')(process.env.testKey);
 
 var port = 1337
@@ -19,7 +19,7 @@ describe('Customer Server API', function () {
         "cvc": '123'
       }
     }, (err, token) => {
-      if(err) console.log('Token creation error: ', err)
+      // if(err) console.log('Token creation error: ', err)
       testReqBody.token = token;
       done()
     })

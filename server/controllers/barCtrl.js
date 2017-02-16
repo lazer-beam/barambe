@@ -1,4 +1,3 @@
-const barsHelper = require('../utilities/barUtil')
 const qs = require('querystring')
 const request = require('request')
 
@@ -9,11 +8,12 @@ const bars = {
     res.send(bar)
   },
   connect: (req, res) => {
-    res.redirect('https://connect.stripe.com/oauth/authorize?' + qs.stringify({
+    const authParams = qs.stringify({
       response_type: 'code',
       scope: 'read_write',
       client_id: process.env.devClientId,
-    }))
+    })
+    res.redirect(`https://connect.stripe.com/oauth/authorize?${authParams}`)
   },
   getBarStripeData: (req, res) => {
     const queryCode = req.query.code
@@ -27,6 +27,9 @@ const bars = {
       },
     }, (err, resp, body) => {
       res.send('Bar created')
+      if (false) {
+        console.log('body', body)
+      }
       // store the response bar obj in database
     })
   },
