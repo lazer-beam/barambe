@@ -1,0 +1,947 @@
+[
+  {
+    "Name": "Highball Type",
+    "Alcohol": "1oz",
+    "Alcohol2": "No",
+    "AddIn": "Fill from the Speedgun",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Highball",
+    "Alcohol": "Bourbon",
+    "Alcohol2": "",
+    "AddIn": "Gingerale",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Scotch and Soda",
+    "Alcohol": "Scotch",
+    "Alcohol2": "",
+    "AddIn": "Soda",
+    "AddIn2": ""
+  },
+  {
+    "Name": "7 & 7",
+    "Alcohol": "Seagram 7",
+    "Alcohol2": "",
+    "AddIn": "7up",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Whiskey and Water",
+    "Alcohol": "Whiskey",
+    "Alcohol2": "",
+    "AddIn": "Water",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Rum and Coke",
+    "Alcohol": "Light Rum",
+    "Alcohol2": "",
+    "AddIn": "Coke",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Cuba Libre",
+    "Alcohol": "Light Rum",
+    "Alcohol2": "",
+    "AddIn": "Coke",
+    "AddIn2": "Squeeze and garnish with lime"
+  },
+  {
+    "Name": "Gin and Tonic",
+    "Alcohol": "Gin",
+    "Alcohol2": "",
+    "AddIn": "Tonic",
+    "AddIn2": "Lime"
+  },
+  {
+    "Name": "Presbyterian",
+    "Alcohol": "Bourbon",
+    "Alcohol2": "",
+    "AddIn": "1/2 Soda 1/2 Gingerale",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Gin Rickey",
+    "Alcohol": "Gin",
+    "Alcohol2": "",
+    "AddIn": "Soda",
+    "AddIn2": "Lime"
+  },
+  {
+    "Name": "Old Fashioned",
+    "Alcohol": "Bourbon",
+    "Alcohol2": "",
+    "AddIn": "Soda",
+    "AddIn2": "1/2oz simple syrup or sugar, 2 dashes bitters, 1 orangle slice, 1 cherry all mashed. Flag"
+  },
+  {
+    "Name": "Juice Type",
+    "Alcohol": "1oz",
+    "Alcohol2": "",
+    "AddIn": "Fill with juices mainly",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Bloody Mary",
+    "Alcohol": "Vodka",
+    "Alcohol2": "",
+    "AddIn": "Tomato Juice",
+    "AddIn2": "2 dashes salt, 2 dashes pepper, 2 dashes celery salt, 4 drops Worscestershire sauce, 1 drop Tabasco, celery stick or lime garnish"
+  },
+  {
+    "Name": "Bloody Maria",
+    "Alcohol": "Tequila",
+    "Alcohol2": "",
+    "AddIn": "Tomato Juice",
+    "AddIn2": "2 dashes salt, 2 dashes pepper, 2 dashes celery salt, 4 drops Worscestershire sauce, 1 drop Tabasco, celery stick or lime garnish"
+  },
+  {
+    "Name": "Greyhound",
+    "Alcohol": "Vodka",
+    "Alcohol2": "",
+    "AddIn": "Grapefruit Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Salty Dog",
+    "Alcohol": "Vodka",
+    "Alcohol2": "",
+    "AddIn": "Grapefruit Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Screwdriver",
+    "Alcohol": "Vodka",
+    "Alcohol2": "",
+    "AddIn": "Orange Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Harvey Wallbanger",
+    "Alcohol": "Vodka",
+    "Alcohol2": "1/2oz Galliano",
+    "AddIn": "Orange Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Tequila Sunrise",
+    "Alcohol": "Tequila",
+    "Alcohol2": "",
+    "AddIn": "Orange Juice, 1/2oz Grenadine",
+    "AddIn2": "Cherry"
+  },
+  {
+    "Name": "Cape Cod",
+    "Alcohol": "Vodka",
+    "Alcohol2": "",
+    "AddIn": "Cranberry Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Sea Breeze",
+    "Alcohol": "Vodka",
+    "Alcohol2": "",
+    "AddIn": "1/2 Cranberry 1/2 Grapefruit",
+    "AddIn2": "Cherry"
+  },
+  {
+    "Name": "Bay Breeze",
+    "Alcohol": "Vodka",
+    "Alcohol2": "",
+    "AddIn": "1/2 Cranberry 1/2 Pineapple",
+    "AddIn2": "Cherry"
+  },
+  {
+    "Name": "Madras",
+    "Alcohol": "Vodka",
+    "Alcohol2": "",
+    "AddIn": "1/2 Cranberry 1/2 Orange",
+    "AddIn2": "Cherry"
+  },
+  {
+    "Name": "Sex On The Beach",
+    "Alcohol": "Vodka",
+    "Alcohol2": "1/2oz Peach Schnapps",
+    "AddIn": "1/2 Cranberry 1/2 Orange",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Slow Screw",
+    "Alcohol": "Sloe Gin",
+    "Alcohol2": "",
+    "AddIn": "Orange Juice",
+    "AddIn2": "Cherry"
+  },
+  {
+    "Name": "Slow Comfortable Screw",
+    "Alcohol": "Sloe Gin",
+    "Alcohol2": "1/2oz Southern Comfort",
+    "AddIn": "Orange Juice",
+    "AddIn2": "Cherry"
+  },
+  {
+    "Name": "Bocci Ball",
+    "Alcohol": "Amaretto",
+    "Alcohol2": "",
+    "AddIn": "2oz Orange Juice, Soda",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Melon Ball",
+    "Alcohol": "Vodka",
+    "Alcohol2": "1/2oz Midori on top",
+    "AddIn": "Orange Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Fuzzy Navel",
+    "Alcohol": "Peach Schnapps",
+    "Alcohol2": "",
+    "AddIn": "Orange Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Screaming Fuzzy Navel/Hairy Navel",
+    "Alcohol": "Peach Schnapps",
+    "Alcohol2": "1/2oz Vodka on top",
+    "AddIn": "Orange Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Cream Drinks",
+    "Alcohol": "Usually 1/2oz",
+    "Alcohol2": "Usually 1/2oz",
+    "AddIn": "Cream and Juices",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Brandy Alexander",
+    "Alcohol": "1/2oz Brandy",
+    "Alcohol2": "1/2oz Brown Creme de Cacao",
+    "AddIn": "2oz Cream",
+    "AddIn2": "Nutmeg"
+  },
+  {
+    "Name": "Golden Cadillac",
+    "Alcohol": "1/2oz Galliano",
+    "Alcohol2": "1/2oz White Creme de Cacao",
+    "AddIn": "2oz Cream",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Banshee",
+    "Alcohol": "1/2oz Creme de Banana",
+    "Alcohol2": "1/2oz White Creme de Cacao",
+    "AddIn": "2oz Cream",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Golden Dream",
+    "Alcohol": "1/2oz Galliano",
+    "Alcohol2": "1/2oz Triple-Sec",
+    "AddIn": "1/2oz Orange Juice, 1-1/2oz Cream",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Pink Squirrel",
+    "Alcohol": "1/2oz Creme de Almond",
+    "Alcohol2": "1/2oz White Creme de Cacao",
+    "AddIn": "2oz Cream",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Grasshopper",
+    "Alcohol": "1/2oz Green Creme de Menthe",
+    "Alcohol2": "1/2oz White Creme de Cacao",
+    "AddIn": "2oz Cream",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Pink Lady",
+    "Alcohol": "1oz Gin",
+    "Alcohol2": "",
+    "AddIn": "1/2oz Grenadine, 1-1/2oz Cream",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Dreamsickle",
+    "Alcohol": "1oz Amaretto",
+    "Alcohol2": "",
+    "AddIn": "1oz Orange Juice, 1oz Cream",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Toasted Almond",
+    "Alcohol": "1/2oz Amaretto",
+    "Alcohol2": "1/2oz Kahlua",
+    "AddIn": "2oz Cream",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Smith & Kerns",
+    "Alcohol": "1oz Kahlua",
+    "Alcohol2": "",
+    "AddIn": "2oz Cream, Soda",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Martinis",
+    "Alcohol": "2oz",
+    "Alcohol2": "Vermouths",
+    "AddIn": "Olive, Onion, Lemon Twist and Cherry",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Martini",
+    "Alcohol": "Gin/Vodka",
+    "Alcohol2": "6 drops Dry Vermouth",
+    "AddIn": "Olive",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Dry Martini",
+    "Alcohol": "Gin/Vodka",
+    "Alcohol2": "3 drops Dry Vermouth",
+    "AddIn": "Olive",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Extra Dry Martini",
+    "Alcohol": "Gin/Vodka",
+    "Alcohol2": "0-1 drops Dry Vermouth",
+    "AddIn": "Olive",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Gibson",
+    "Alcohol": "Gin/Vodka",
+    "Alcohol2": "6 drops Dry Vermouth",
+    "AddIn": "Onion",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Manhattan",
+    "Alcohol": "Bourbon",
+    "Alcohol2": "1/4oz Sweet Vermouth",
+    "AddIn": "Cherry",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Dry Manhattan",
+    "Alcohol": "Bourbon",
+    "Alcohol2": "1/4oz Dry Vermouth",
+    "AddIn": "Olive",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Perfect Manhattan",
+    "Alcohol": "Bourbon",
+    "Alcohol2": "1/8oz Dry Vermouth, 1/8oz Sweet Vermouth",
+    "AddIn": "Lemon Twist",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Rob Roy",
+    "Alcohol": "Scotch",
+    "Alcohol2": "1/4oz Sweet Vermouth",
+    "AddIn": "Cherry",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Dry Rob Roy",
+    "Alcohol": "Scotch",
+    "Alcohol2": "1/4oz Dry Vermouth",
+    "AddIn": "Olive",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Perfect Rob Roy",
+    "Alcohol": "Scotch",
+    "Alcohol2": "1/8oz Dry Vermouth, 1/8oz Sweet Vermouth",
+    "AddIn": "Lemon Twist",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Southern Comfort Manhattan",
+    "Alcohol": "Southern Comfort",
+    "Alcohol2": "1/4oz Dry Vermouth",
+    "AddIn": "Cherry",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Two Liquor Drinks",
+    "Alcohol": "1-1/2oz",
+    "Alcohol2": "1/2oz",
+    "AddIn": "Cream, Coke",
+    "AddIn2": ""
+  },
+  {
+    "Name": "B&B",
+    "Alcohol": "3/4oz Brandy",
+    "Alcohol2": "3/4oz Benedictine",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "French Connection/ Beautiful",
+    "Alcohol": "3/4oz Cognac",
+    "Alcohol2": "3/4oz Grand Marnier",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Black Russian",
+    "Alcohol": "Vodka",
+    "Alcohol2": "Kahlua",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Dirty Mother",
+    "Alcohol": "Brandy",
+    "Alcohol2": "Kahlua",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Brave Bull",
+    "Alcohol": "Tequila",
+    "Alcohol2": "Kahlua",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "White Russian",
+    "Alcohol": "Vodka",
+    "Alcohol2": "Kahlua",
+    "AddIn": "Fill with Cream",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Dirty White Mother",
+    "Alcohol": "Brandy",
+    "Alcohol2": "Kahlua",
+    "AddIn": "Fill with Cream",
+    "AddIn2": ""
+  },
+  {
+    "Name": "White Bull",
+    "Alcohol": "Tequila",
+    "Alcohol2": "Kahlua",
+    "AddIn": "Fill with Cream",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Godfather",
+    "Alcohol": "Scotch",
+    "Alcohol2": "Amaretto",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Godmother",
+    "Alcohol": "Vodka",
+    "Alcohol2": "Amaretto",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Godchild",
+    "Alcohol": "Brandy",
+    "Alcohol2": "Amaretto",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Gimlet",
+    "Alcohol": "Gin",
+    "Alcohol2": "",
+    "AddIn": "1/2oz Lime Juice",
+    "AddIn2": "Lime"
+  },
+  {
+    "Name": "Vodka Gimlet",
+    "Alcohol": "Vodka",
+    "Alcohol2": "",
+    "AddIn": "1/2oz Lime Juice",
+    "AddIn2": "Lime"
+  },
+  {
+    "Name": "Black Jamaican",
+    "Alcohol": "Myers' Rum",
+    "Alcohol2": "Tia Maria",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Rusty Nail",
+    "Alcohol": "Scotch",
+    "Alcohol2": "Drambuie",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Stinger",
+    "Alcohol": "Brandy",
+    "Alcohol2": "White Creme de Menthe",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Colorado Bulldog",
+    "Alcohol": "Vodka",
+    "Alcohol2": "Kahlua",
+    "AddIn": "1-1/2oz Cream, Coke",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Rootbeer Float",
+    "Alcohol": "Vodka",
+    "Alcohol2": "Kahlua, 1/2oz Galliano on top",
+    "AddIn": "1-1/2oz Cream, Coke",
+    "AddIn2": "Whipped Cream, Cherry"
+  },
+  {
+    "Name": "Short Sours",
+    "Alcohol": "1oz",
+    "Alcohol2": "1/2oz when applicable",
+    "AddIn": "Sweet and Sour, Lime Juice",
+    "AddIn2": "Lime, Cherry"
+  },
+  {
+    "Name": "Whiskey Sour",
+    "Alcohol": "Whiskey",
+    "Alcohol2": "",
+    "AddIn": "2oz Sweet and Sour",
+    "AddIn2": "Cherry"
+  },
+  {
+    "Name": "Daiquiri",
+    "Alcohol": "Light Rum",
+    "Alcohol2": "",
+    "AddIn": "2oz Sweet and Sour",
+    "AddIn2": "Lime"
+  },
+  {
+    "Name": "Bacardi Cocktail",
+    "Alcohol": "Light Rum",
+    "Alcohol2": "",
+    "AddIn": "2oz Sweet and Sour, 1/4oz Grenadine",
+    "AddIn2": "Cherry"
+  },
+  {
+    "Name": "Margarita",
+    "Alcohol": "Tequila",
+    "Alcohol2": "1/2oz Triple-Sec",
+    "AddIn": "1/8oz Lime Juice, 2oz Sweet and Sour",
+    "AddIn2": "Lime"
+  },
+  {
+    "Name": "Blue Margarita",
+    "Alcohol": "Tequila",
+    "Alcohol2": "1/2oz Blue Curacao",
+    "AddIn": "1/8oz Lime Juice, 2oz Sweet and Sour",
+    "AddIn2": "Lime"
+  },
+  {
+    "Name": "Iced Teas/Lemonades",
+    "Alcohol": "Several",
+    "Alcohol2": "Several",
+    "AddIn": "Sweet and Sour mainly",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Long Island Iced Tea",
+    "Alcohol": "1/2oz Vodka, 1/2oz Gin, 1/2oz Rum, 1/2oz Triple-Sec",
+    "Alcohol2": "",
+    "AddIn": "2oz Sweet and Sour, Coke",
+    "AddIn2": "Lemon wedge"
+  },
+  {
+    "Name": "Electric Iced Tea/Texas Tea",
+    "Alcohol": "1/2oz Vodka, 1/2oz Gin, 1/2oz Rum, 1/2oz Triple-Sec",
+    "Alcohol2": "1/2oz Tequila",
+    "AddIn": "2oz Sweet and Sour, Coke",
+    "AddIn2": "Lemon wedge"
+  },
+  {
+    "Name": "Long Beach Iced Tea",
+    "Alcohol": "1/2oz Vodka, 1/2oz Gin, 1/2oz Rum, 1/2oz Triple-Sec",
+    "Alcohol2": "",
+    "AddIn": "2oz Sweet and Sour, Cranberry Juice, Soda",
+    "AddIn2": "Lemon wedge"
+  },
+  {
+    "Name": "Tokyo Tea",
+    "Alcohol": "1/2oz Vodka, 1/2oz Gin, 1/2oz Rum, 1/2oz Triple-Sec",
+    "Alcohol2": "1/2oz Midori",
+    "AddIn": "2oz Sweet and Sour, 7up",
+    "AddIn2": "Lemon wedge"
+  },
+  {
+    "Name": "Lemonade",
+    "Alcohol": "1/2oz Vodka, 1/2oz Gin, 1/2oz Rum, 1/2oz Triple-Sec",
+    "Alcohol2": "",
+    "AddIn": "2oz Sweet and Sour, 7up",
+    "AddIn2": "Lemon wedge"
+  },
+  {
+    "Name": "Electric Lemonade",
+    "Alcohol": "1/2oz Vodka, 1/2oz Gin, 1/2oz Rum, 1/2oz Triple-Sec",
+    "Alcohol2": "1/2oz Tequila",
+    "AddIn": "2oz Sweet and Sour, 7up",
+    "AddIn2": "Lemon wedge"
+  },
+  {
+    "Name": "Electric Blue Lemonade/AMF",
+    "Alcohol": "1/2oz Vodka, 1/2oz Gin, 1/2oz Rum, 1/2oz Blue Curacao",
+    "Alcohol2": "1/2oz Tequila",
+    "AddIn": "2oz Sweet and Sour, 7up",
+    "AddIn2": "Lemon wedge"
+  },
+  {
+    "Name": "Adios",
+    "Alcohol": "1/2oz Vodka, 1/2oz Gin, 1/2oz Rum, 1/2oz Blue Curacao",
+    "Alcohol2": "1/2oz Tequila, 1/2oz Bacardi 151",
+    "AddIn": "2oz Sweet and Sour, 7up",
+    "AddIn2": "Lemon wedge"
+  },
+  {
+    "Name": "Lynchburg Lemonade",
+    "Alcohol": "1oz Jack Daniels",
+    "Alcohol2": "1/2oz Triple-Sec",
+    "AddIn": "1oz Sweet and Sour, 7up",
+    "AddIn2": "Lemon, Cherry"
+  },
+  {
+    "Name": "Collins/Fizzes",
+    "Alcohol": "1oz",
+    "Alcohol2": "",
+    "AddIn": "2oz Sweet and Sour, Soda",
+    "AddIn2": "Cherry"
+  },
+  {
+    "Name": "Vodka Collins",
+    "Alcohol": "Vodka",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Tom Collins",
+    "Alcohol": "Gin",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Joe Collins",
+    "Alcohol": "Scotch",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "John Collins",
+    "Alcohol": "Bourbon",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Joan Collins",
+    "Alcohol": "Brandy",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Sloe Gin Fizz",
+    "Alcohol": "Sloe Gin",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Party Drinks",
+    "Alcohol": "",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Frozen Daiquiri Slush",
+    "Alcohol": "2 cans Rum",
+    "Alcohol2": "",
+    "AddIn": "6oz Lemonade, 1 can water, 1 can 7up",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Bourbolicious Slush",
+    "Alcohol": "1-1/2 cups Bourbon",
+    "Alcohol2": "",
+    "AddIn": "6oz Lemonade, 1 can Oranje Juice, 1 cup sugar, 2-1/4 cups brewd tea, 6 cups water",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Exotic Drinks",
+    "Alcohol": "1oz",
+    "Alcohol2": "Varies",
+    "AddIn": "Juices",
+    "AddIn2": "Flag, Pineapple Wedge/Cherry"
+  },
+  {
+    "Name": "Mai Tai",
+    "Alcohol": "Light Rum",
+    "Alcohol2": "1/2oz Creme de Almond, 1/2oz Triple-Sec, 1/2oz Myers' Rum on top",
+    "AddIn": "1/2 Sweet and Sour, 1/2 Pineapple Juice",
+    "AddIn2": "Flag"
+  },
+  {
+    "Name": "Zombie",
+    "Alcohol": "Light Rum",
+    "Alcohol2": "1/2oz Creme de Almond, 1/2oz Triple-Sec, 1/2oz Bacardi 151 on top",
+    "AddIn": "1/2 Sweet and Sour, 1/2 Orange Juice",
+    "AddIn2": "Flag"
+  },
+  {
+    "Name": "Green Zombie",
+    "Alcohol": "Light Rum",
+    "Alcohol2": "1/2oz Blue Curacao, 1/2oz Amaretto, 1/2oz Bacardi 151 on top",
+    "AddIn": "1/2 Sweet and Sour, 1/2 Orange Juice",
+    "AddIn2": "Flag"
+  },
+  {
+    "Name": "Singapore Sling",
+    "Alcohol": "Gin",
+    "Alcohol2": "1/2oz Blackberry Brandy/Cherry Brandy on top",
+    "AddIn": "1/2oz Grenadine, 2oz Sweet and Sour, Soda",
+    "AddIn2": "Flag"
+  },
+  {
+    "Name": "Fog Cutter",
+    "Alcohol": "Light Rum",
+    "Alcohol2": "1/2oz Brandy, 1/2oz Gin",
+    "AddIn": "1/2 Sweet and Sour, 1/2 Orange Juice",
+    "AddIn2": "Flag"
+  },
+  {
+    "Name": "Blue Hawaiian",
+    "Alcohol": "Light Rum",
+    "Alcohol2": "1/2oz Blue Curacao",
+    "AddIn": "2oz Pineapple Juice, 2oz Sweet and Sour",
+    "AddIn2": "Flag"
+  },
+  {
+    "Name": "Hurricane",
+    "Alcohol": "1oz Light Rum, 1oz Myers' Rum",
+    "Alcohol2": "",
+    "AddIn": "1/4oz Lime Juice, 1/2 Sweet and Sour, 1/2 Orange Juice, 1/2oz Grenadine on top",
+    "AddIn2": "Flag"
+  },
+  {
+    "Name": "Planter's Punch",
+    "Alcohol": "1oz Myers' Rum",
+    "Alcohol2": "",
+    "AddIn": "1/2 Sweet and Sour, 1/2 Orange Juice, 1/2oz Grenadine on top",
+    "AddIn2": "2 dashes bitters, Flag"
+  },
+  {
+    "Name": "Rum Runner",
+    "Alcohol": "1/2oz Light Rum, 1/2oz Dark Rum",
+    "Alcohol2": "1/2oz Blackberry Rum, 1/2oz Creme de Banana",
+    "AddIn": "1-1/2oz Sweet and Sour, Orange Juice, Grenadine on top",
+    "AddIn2": "Flag"
+  },
+  {
+    "Name": "Bahama Mama",
+    "Alcohol": "Malibu Rum",
+    "Alcohol2": "",
+    "AddIn": "1/2oz Grenadine, 1/2 Pineapple Juice, 1/2 Oranje Juice",
+    "AddIn2": "Flag"
+  },
+  {
+    "Name": "Pina Colada",
+    "Alcohol": "Light Rum",
+    "Alcohol2": "",
+    "AddIn": "1oz Cream of Coconut Syrup, 2oz Pineapple Juice",
+    "AddIn2": "Pineapple wedge/cherry"
+  },
+  {
+    "Name": "Chi Chi",
+    "Alcohol": "Vodka",
+    "Alcohol2": "",
+    "AddIn": "1oz Cream of Coconut Syrup, 2oz Pineapple Juice",
+    "AddIn2": "Pineapple wedge/cherry"
+  },
+  {
+    "Name": "Shots",
+    "Alcohol": "1oz total alcohol",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "B-52",
+    "Alcohol": "Kahlua, Bailey's, Grand Marnier",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Mudslide",
+    "Alcohol": "Kahlua, Bailey's, Vodka",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Depth Charge",
+    "Alcohol": "Any liquor",
+    "Alcohol2": "2/3 pint of beer",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Lemon Drop",
+    "Alcohol": "1oz Vodka, 1/2oz Tripe-Sec",
+    "Alcohol2": "",
+    "AddIn": "Splash Lemon Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Kamakazi Shot",
+    "Alcohol": "1oz Vodka, 1/2oz Triple-Sec",
+    "Alcohol2": "",
+    "AddIn": "1/4oz Lime Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Poppers/Slammers",
+    "Alcohol": "Any liquor",
+    "Alcohol2": "",
+    "AddIn": "Splash 7up for dark alcohol, Coke for white alcohol",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Purple Hooter",
+    "Alcohol": "1oz Vodka",
+    "Alcohol2": "1/2oz Chambord",
+    "AddIn": "Splash Sour Mix",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Orgasm",
+    "Alcohol": "Kahlua, Bailey's, Amaretto",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": "Layered"
+  },
+  {
+    "Name": "Screaming Orgasm",
+    "Alcohol": "Kahlua, Bailey's, Amaretto, Vodka",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": "Layered"
+  },
+  {
+    "Name": "Snakebite",
+    "Alcohol": "Yukon Jack",
+    "Alcohol2": "",
+    "AddIn": "1/4oz Lime Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Slippery Nipple",
+    "Alcohol": "3/4oz Sambuca, 1/4oz Bailey's",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Butter Baby/Buttery Nipple/Butterfinger/Stiff Dick",
+    "Alcohol": "Bailey's, Butterscotch Schnapps",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Liquid Cocaine",
+    "Alcohol": "Jagermeister, Rumplemintz/Goldschlager, Bacardi 151",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Oatmeal Cookie",
+    "Alcohol": "Butterscotch Schnapps, Bailey's, Jagermeister, Goldschlager",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Blowjob",
+    "Alcohol": "Bailey's, Amaretto, Frangelico",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": "Layered"
+  },
+  {
+    "Name": "Cement Mixer",
+    "Alcohol": "Bailey's",
+    "Alcohol2": "",
+    "AddIn": "Drop Lime Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Hot Shots",
+    "Alcohol": "Cinnamon Schnapps",
+    "Alcohol2": "",
+    "AddIn": "Drop Tabasco",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Mind Eraser",
+    "Alcohol": "Kahlua, Vodka",
+    "Alcohol2": "",
+    "AddIn": "Top with Soda",
+    "AddIn2": "Layered"
+  },
+  {
+    "Name": "Silk Panties",
+    "Alcohol": "Peach Schnapps, Vodka",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Pretty Pink Silk Panties",
+    "Alcohol": "Peach Schnapps, Vodka",
+    "Alcohol2": "",
+    "AddIn": "Splash Cranberrie Juice",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Russian Rocketfuel",
+    "Alcohol": "2oz Vodka",
+    "Alcohol2": "1/2oz Blue Curacao",
+    "AddIn": "Splash Energy Drink",
+    "AddIn2": ""
+  },
+  {
+    "Name": "Chocolate Cake",
+    "Alcohol": "1-1/2oz Lemon flavoured Vodka, 1/2oz Frangelico",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": "Lemon wedge with sugar"
+  },
+  {
+    "Name": "Birthday Cake",
+    "Alcohol": "1-1/zoz Vanilla flavoured Vodka, 1/2oz Frangelico",
+    "Alcohol2": "",
+    "AddIn": "",
+    "AddIn2": "Lemon wedge with sugar"
+  }
+]
