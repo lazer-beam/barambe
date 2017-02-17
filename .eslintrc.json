@@ -47,7 +47,8 @@
         "linebreak-style": "off",
         "newline-per-chained-call": "off",
         "prefer-stateless-function": [0, { "ignorePureComponents": true }],
-        "no-underscore-dangle": ["error", { "allowAfterThis": true }]
+        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "no-unneeded-ternary": "off"
     },
     "extends": "airbnb",
     "plugins": [

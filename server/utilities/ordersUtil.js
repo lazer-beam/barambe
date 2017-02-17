@@ -9,13 +9,15 @@ const mapOrdersToDataValues = orders => orders.map(order => order.dataValues)
 const getAllOrdersWithStatusOpen = orders => orders.filter(order => order.status === 'pending')
 
 const isTableOrPickup = tabId => Tab.findOne({ where: { id: tabId } })
-  .then(tab => tab.dataValues.tableNum)
+  .then(tab => {
+    return tab.dataValues.tableNum ? tab.dataValues.tableNum : 0
+  })
 
 const addDeliveryType = orders => {
   return Promise.all(orders.map(order => {
     return isTableOrPickup(order.tabId)
       .then(tableNum => {
-        tableNum ? order.tableNum = tableNum : order.pickup = true
+        order.tableNum = tableNum ? tableNum : 0
         return order
       })
   }))
@@ -44,14 +46,14 @@ const formatDrinksWithLiquorsAndAddIns = drinks => {
 const mapDrinksWithinOrderObj = (orders, drinks) => {
   return orders.map(order => {
     const foundDrink = drinks.find(drink => drink.id === order.drinkId)
-    const pickupTypeObj = order.tableNum ? { tableNum: order.tableNum } : { isPickup: true }
 
-    return Object.assign(pickupTypeObj, {
+    return {
       drink: foundDrink,
       id: order.id,
       time: order.time,
       tabId: order.tabId,
-    })
+      tableNum: order.tableNum,
+    }
   })
 }
 

@@ -32,9 +32,7 @@ describe('Orders With Tabs Functionality', () => {
       return ordersUtil.addDeliveryType(mockOrders)
     }).then(orders => {
       orders.forEach(order => {
-        expect(order.tableNum).to.be.not.ok
-        expect(order.pickup).to.be.ok
-        expect(order.pickup).to.be.equal(true)
+        expect(order.tableNum).to.be.equal(0)
       })
       this.tab.destroy()
     })
@@ -51,8 +49,6 @@ describe('Orders With Tabs Functionality', () => {
       return ordersUtil.addDeliveryType(mockOrders)
     }).then(orders => {
       orders.forEach(order => {
-        expect(order.pickup).to.be.not.ok
-        expect(order.tableNum).to.be.ok
         expect(order.tableNum).to.be.equal(8)
       })
       this.tab.destroy()
@@ -67,7 +63,7 @@ describe('Orders With Tabs Functionality', () => {
       this.tab = tab
       return ordersUtil.isTableOrPickup(tab.dataValues.id)
     }).then(tableNum => {
-      expect(tableNum).to.be.a('null')
+      expect(tableNum).to.be.equal(0)
       expect(this.tab).to.be.ok
       return this.tab.destroy()
     }).then(() => {
