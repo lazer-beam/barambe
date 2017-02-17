@@ -57,8 +57,8 @@ class AddLiquorAddIns extends Component {
               <Segment inverted color="grey">
               Liquors
             </Segment>
-              {this.props.liquors.map((liquor, i) =>
-                <Segment key={i}>
+              {this.props.liquors.map(liquor =>
+                <Segment key={Math.random() * 100}>
                   {liquor.name}: {liquor.price}
                 </Segment>,
             )}
@@ -75,8 +75,8 @@ class AddLiquorAddIns extends Component {
               <Segment inverted color="grey">
               Add-Ins
             </Segment>
-              {this.props.addIns.map((addIn, i) =>
-                <Segment key={i}>
+              {this.props.addIns.map(addIn =>
+                <Segment key={Math.random() * 100}>
                   {addIn.name}: {addIn.price}
                 </Segment>,
             )}

@@ -40,8 +40,8 @@ class AddBeers extends Component {
           </Table.Header>
 
           <Table.Body>
-            {this.props.beers.map((beer, i) =>
-              <Table.Row key={i}>
+            {this.props.beers.map(beer =>
+              <Table.Row key={Math.random() * 100}>
                 <Table.Cell>
                   {beer.name}
                 </Table.Cell>
