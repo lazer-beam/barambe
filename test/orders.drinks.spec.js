@@ -200,3 +200,22 @@ describe('Drinks Formatting Helper Functions', () => {
     })
   })
 })
+
+describe('Creating a Drink Functionality', () => {
+  it('should add a drink to the drinks table', () => {
+    const mockBeerDrink = {
+      type: 'beer',
+      name: 'Blue Moon',
+      price: 750
+    }
+
+    return drinksUtil.createDrink(mockBeerDrink)
+      .then(drink => {
+        expect(drink).to.be.ok
+        expect(drink.dataValues.type).to.be.equal(mockBeerDrink.type)
+        expect(drink.dataValues.name).to.be.equal(mockBeerDrink.name)
+        expect(drink.dataValues.price).to.be.equal(mockBeerDrink.price)
+        return drink.destroy()
+      })
+  })
+})

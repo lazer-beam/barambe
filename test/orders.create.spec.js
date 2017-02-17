@@ -20,7 +20,35 @@ describe('Adding an Order functionality', () => {
   afterEach(() => Promise.each(createdLines, line => line.destroy()))
 
 
-  it.only('should add an order to a tab', () => {
+  it('should add a beer order to a tab', () => {
+    const mockBeerDrink = {
+      type: 'beer',
+      name: 'Blue Moon',
+      price: 750
+    }
+
+    ordersUtil.createOrder(mockBeerDrink)
+      .then(createdOrder => {
+        expect(createdOrder).to.be.ok
+      })
+  })
+
+  it('should add a shot order to a tab', () => {
+    const mockShotDrink = {
+      type: 'shot'
+    }
+
+    ordersUtil.createOrder()
+      .then(createdOrder => {
+        expect(createdOrder).to.be.ok
+      })
+  })
+
+  it('should add a cocktail order to a tab', () => {
+    const mockBeerDrink = {
+      type: 'cocktail'
+    }
+
     ordersUtil.createOrder()
       .then(createdOrder => {
         expect(createdOrder).to.be.ok

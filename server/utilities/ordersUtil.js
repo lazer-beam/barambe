@@ -70,8 +70,11 @@ const closeOrder = orderId => Order.findOne({ where: { id: orderId } })
   .then(order => order.update({ status: 'closed' }))
   .then(order => order.dataValues.id)
 
-const createOrder = () => {
-
+const createOrder = drink => {
+  return drinksUtil.createDrink(drink)
+    .then(createdDrink => {
+      console.log('drink', createdDrink)
+    })
 }
 
 module.exports = {
