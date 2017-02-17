@@ -5,13 +5,14 @@ export const types = {
   TOGGLE_BEER_ADDER: 'TOGGLE_BEER_ADDER',
   TOGGLE_LIQUORADDIN_ADDER: 'TOGGLE_LIQUORADDIN_ADDER',
   TOGGLE_COCKTAIL_ADDER: 'TOGGLE_COCKTAIL_ADDER',
+  TOGGLE_MENU: 'TOGGLE_MENU',
 }
 
 // ========================================
 //            REDUCERS
 // ========================================
 const defaultProps = {
-  currentAddView: null,
+  currentAddView: 'liquorAddIns',
   menuLiquorAddIns: [],
   menuBeers: [],
   menuCocktails: [],
@@ -19,12 +20,8 @@ const defaultProps = {
 
 export default (state = defaultProps, action) => {
   switch (action.type) {
-    case types.TOGGLE_BEER_ADDER:
-      return { ...state, currentAddView: 'beers' }
-    case types.TOGGLE_LIQUORADDIN_ADDER:
-      return { ...state, currentAddView: 'liquorAddIns' }
-    case types.TOGGLE_COCKTAIL_ADDER:
-      return { ...state, currentAddView: 'cocktails' }
+    case types.TOGGLE_MENU:
+      return { ...state, currentAddView: action.payload }
 
     default:
       return state
@@ -35,7 +32,5 @@ export default (state = defaultProps, action) => {
 //           ACTION CREATORS
 // ========================================
 export const actions = {
-  toggleBeerAdder: () => ({ type: types.TOGGLE_BEER_ADDER }),
-  toggleLiquorAddinAdder: () => ({ type: types.TOGGLE_LIQUORADDIN_ADDER }),
-  toggleCocktailAdder: () => ({ type: types.TOGGLE_COCKTAIL_ADDER }),
+  toggleMenu: menuName => ({ type: types.TOGGLE_MENU, payload: menuName }),
 }
