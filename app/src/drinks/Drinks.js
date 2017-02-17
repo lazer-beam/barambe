@@ -11,8 +11,13 @@ import { actions } from './duck.Drinks'
   currentAddView: store.drinks.currentAddView,
   beers: store.drinks.menuBeers,
   cocktails: store.drinks.menuCocktails,
+  liquors: store.drinks.menuLiquors,
+  addIns: store.drinks.menuAddIns,
 }))
 class Drinks extends Component {
+  componentWillMount() {
+
+  }
 
   toggleMenu(menuName) {
     this.props.dispatch(actions.toggleMenu(menuName))
@@ -23,7 +28,7 @@ class Drinks extends Component {
     let renderedView = <AddLiquorAddIns />
 
     if (addView === 'liquorAddIns') {
-      renderedView = <AddLiquorAddIns />
+      renderedView = <AddLiquorAddIns liquors={this.props.liquors} addIns={this.props.addIns} />
     } else if (addView === 'beers') {
       renderedView = <AddBeers beers={this.props.beers} />
     } else if (addView === 'cocktails') {

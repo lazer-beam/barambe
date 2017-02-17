@@ -13,7 +13,8 @@ export const types = {
 // ========================================
 const defaultProps = {
   currentAddView: 'liquorAddIns',
-  menuLiquorAddIns: [],
+  menuLiquors: [{ name: 'Black Swan', price: 40.00 }, { name: 'Vodcka', price: 30.00 }, { name: 'Rum', price: 50.00 }],
+  menuAddIns: [{ name: 'Olives', price: 0.00 }, { name: 'Cherries', price: 0.00 }, { name: 'Gold Flakes', price: 5.00 }],
   menuBeers: [{ name: 'Corona', price: 4.00 }, { name: 'Pabst Blue Ribbon', price: 3.00 }, { name: 'Budweiser', price: 5.00 }],
   menuCocktails: [{ name: 'Drewscriver', price: 8.00 }, { name: 'Michelada', price: 6.00 }, { name: 'Muay Thai Mai Tai', price: 10.00 }],
 }

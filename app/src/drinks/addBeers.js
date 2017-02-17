@@ -1,42 +1,63 @@
 import React from 'react'
-import { Table, Form, Button, Divider } from 'semantic-ui-react'
+import { Table, Button, Input, Divider } from 'semantic-ui-react'
 
-const AddBeers = ({ beers }) => (
-  <div>
-    <Table>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell width={3}>Beer</Table.HeaderCell>
-          <Table.HeaderCell width={2}>Price</Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
+class AddBeers extends Component {
+  constructor(props) {
+    super(props)
 
-      <Table.Body>
-        {beers.map(beer =>
-          <Table.Row>
-            <Table.Cell>
-              {beer.name}
-            </Table.Cell>
-            <Table.Cell>
-              {beer.price}
-            </Table.Cell>
-          </Table.Row>,
-        )}
-      </Table.Body>
-      <Divider hidden />
-    </Table>
-    <Form>
-      <Form size="large" key="large">
-        <Form.Group widths="equal">
-          <Form.Field name="beerName" label="Add a beer" control="input" placeholder="Beer Name" />
-          <Form.Field label="Add price" control="input" placeholder="e.g. '3.95'" />
-        </Form.Group>
-        <Button type="submit">Submit</Button>
+    this.state = {
+      beerName: '',
+      beerPrice: '',
+    }
+    this.handleSubmit = ::this.handleSubmit
+    this.handleBeerChange = ::this.handleBeerChange
+    this.handlePriceChange = ::this.handlePriceChange
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    console.log('Beer ', this.state.beerName, ' costs ', this.state.beerPrice)
+  }
+  handleBeerChange(event, data) {
+    this.setState({ beerName: data.value })
+  }
+  handlePriceChange(event, data) {
+    this.setState({ beerPrice: data.value })
+  }
+  render() {
+    return (
+      <div>
+        <Table>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell width={3}>Beer</Table.HeaderCell>
+              <Table.HeaderCell width={2}>Price</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+
+          <Table.Body>
+            {beers.map((beer, i) =>
+              <Table.Row key={i}>
+                <Table.Cell>
+                  {beer.name}
+                </Table.Cell>
+                <Table.Cell>
+                  {beer.price}
+                </Table.Cell>
+              </Table.Row>,
+            )}
+          </Table.Body>
+          <Divider hidden />
+        </Table>
+
+        <Input onChange={this.handleBeerChange} label="Add a Beer" placeholder="Beer Name" />
+        <Input onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
+        <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
         <Divider hidden />
-      </Form>
-    </Form>
-  </div>
-)
+      </div>
+    )
+  }
+}
 
 
 export default AddBeers

@@ -1,99 +1,53 @@
 import React, { Component } from 'react'
-import { Header, Table } from 'semantic-ui-react'
+import { Button, Segment, Grid, Input } from 'semantic-ui-react'
 
 class AddLiquorAddIns extends Component {
+  constructor(props) {
+    super(props)
 
-  componentDidMount() {}
+    this.state = {}
+  }
+
   render() {
     return (
-    <div>
-      <Table basic="very" celled collapsing>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell width={1}>Liquor Name</Table.HeaderCell>
-              <Table.HeaderCell width={1}>Price</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
+      <div>
+        <Grid columns="equal">
+          <Grid.Column>
+            <Segment.Group>
+              <Segment inverted color="grey">
+              Liquors
+            </Segment>
+              {this.props.liquors.map(liquor =>
+                <Segment>
+                  {liquor.name}: {liquor.price}
+                </Segment>,
+            )}
+              <Segment>
+                <Input placeholder="Add a liquor" />
+                <Input placeholder='Price (e.g. "3.95")' />
+                <Button>Submit</Button>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
 
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell>
-                Rum
-              </Table.Cell>
-              <Table.Cell>
-                $22
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                Vodka
-              </Table.Cell>
-              <Table.Cell>
-                $15
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                Tequila
-              </Table.Cell>
-              <Table.Cell>
-                $12
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                Sake
-              </Table.Cell>
-              <Table.Cell>
-                $11
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
-
-        <Table basic="very" celled collapsing>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell width={1}>Add-In Name</Table.HeaderCell>
-              <Table.HeaderCell width={1}>Price</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell>
-                Olives
-              </Table.Cell>
-              <Table.Cell>
-                $0
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                Cherries
-              </Table.Cell>
-              <Table.Cell>
-                $0
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                Gummy Bears
-              </Table.Cell>
-              <Table.Cell>
-                $0
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                Gold Bullion
-              </Table.Cell>
-              <Table.Cell>
-                $1100
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
+          <Grid.Column>
+            <Segment.Group>
+              <Segment inverted color="grey">
+              Add-Ins
+            </Segment>
+              {this.props.addIns.map(addIn =>
+                <Segment>
+                  {addIn.name}: {addIn.price}
+                </Segment>,
+            )}
+              <Segment>
+                <Input placeholder="Add an Add-In" />
+                <Input placeholder='Price (e.g. "3.95")' />
+                <Button>Submit</Button>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
+        </Grid>
       </div>
     )
   }
