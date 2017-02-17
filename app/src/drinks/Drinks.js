@@ -8,6 +8,7 @@ import { actions } from './duck.Drinks'
 
 @connect(store => ({
   currentAddView: store.drinks.currentAddView,
+  beers: store.drinks.menuBeers,
 }))
 class Drinks extends Component {
 
@@ -22,7 +23,7 @@ class Drinks extends Component {
     if (addView === 'liquorAddIns') {
       renderedView = <AddLiquorAddIns />
     } else if (addView === 'beers') {
-      renderedView = <AddBeers />
+      renderedView = <AddBeers beers={this.props.beers} />
     }
 
     return (

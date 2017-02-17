@@ -14,7 +14,7 @@ export const types = {
 const defaultProps = {
   currentAddView: 'liquorAddIns',
   menuLiquorAddIns: [],
-  menuBeers: [],
+  menuBeers: [{ name: 'Corona', price: 4.00 }, { name: 'Pabst Blue Ribbon', price: 3.00 }, { name: 'Budweiser', price: 5.00 }],
   menuCocktails: [],
 }
 
