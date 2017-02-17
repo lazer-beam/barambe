@@ -17,6 +17,14 @@ const orders = {
         res.status(500).send(err)
       })
   },
+  post: (req, res) => {
+    ordersUtil.createOrder()
+      .then(() => {
+        res.send({})
+      }).catch(err => {
+        res.status(500).send(err)
+      })
+  },
 }
 
 module.exports = {

@@ -70,6 +70,10 @@ const closeOrder = orderId => Order.findOne({ where: { id: orderId } })
   .then(order => order.update({ status: 'closed' }))
   .then(order => order.dataValues.id)
 
+const createOrder = () => {
+
+}
+
 module.exports = {
   getAllPendingOrders,
   getAllOrdersWithStatusOpen,
@@ -78,4 +82,5 @@ module.exports = {
   formatDrinksWithLiquorsAndAddIns,
   mapDrinksWithinOrderObj,
   closeOrder,
+  createOrder,
 }
