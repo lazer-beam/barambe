@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import { Grid, Menu, Segment } from 'semantic-ui-react'
 import AddLiquorAddIns from './addLiquorAddIns'
 import AddBeers from './addBeers'
+import AddCocktails from './addCocktails'
 
 import { actions } from './duck.Drinks'
 
 @connect(store => ({
   currentAddView: store.drinks.currentAddView,
   beers: store.drinks.menuBeers,
+  cocktails: store.drinks.menuCocktails,
 }))
 class Drinks extends Component {
 
@@ -24,6 +26,8 @@ class Drinks extends Component {
       renderedView = <AddLiquorAddIns />
     } else if (addView === 'beers') {
       renderedView = <AddBeers beers={this.props.beers} />
+    } else if (addView === 'cocktails') {
+      renderedView = <AddCocktails cocktails={this.props.cocktails} />
     }
 
     return (

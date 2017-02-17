@@ -7,11 +7,11 @@ class AddLiquorAddIns extends Component {
   render() {
     return (
     <div>
-      <Table basic="very" collapsing>
+      <Table basic="very" celled collapsing>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell width={3}>Liquor Name</Table.HeaderCell>
-              <Table.HeaderCell width={2}>Price</Table.HeaderCell>
+              <Table.HeaderCell width={1}>Liquor Name</Table.HeaderCell>
+              <Table.HeaderCell width={1}>Price</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
@@ -51,11 +51,11 @@ class AddLiquorAddIns extends Component {
           </Table.Body>
         </Table>
 
-        <Table basic="very" collapsing>
+        <Table basic="very" celled collapsing>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell width={3}>Add-In Name</Table.HeaderCell>
-              <Table.HeaderCell width={2}>Price</Table.HeaderCell>
+              <Table.HeaderCell width={1}>Add-In Name</Table.HeaderCell>
+              <Table.HeaderCell width={1}>Price</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 

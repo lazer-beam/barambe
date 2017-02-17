@@ -15,7 +15,7 @@ const defaultProps = {
   currentAddView: 'liquorAddIns',
   menuLiquorAddIns: [],
   menuBeers: [{ name: 'Corona', price: 4.00 }, { name: 'Pabst Blue Ribbon', price: 3.00 }, { name: 'Budweiser', price: 5.00 }],
-  menuCocktails: [],
+  menuCocktails: [{ name: 'Drewscriver', price: 8.00 }, { name: 'Michelada', price: 6.00 }, { name: 'Muay Thai Mai Tai', price: 10.00 }],
 }
 
 export default (state = defaultProps, action) => {
