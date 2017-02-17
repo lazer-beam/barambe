@@ -13,7 +13,6 @@ import DrinkGroup from './BartenderDrinkGroup'
 }))
 class Bartender extends Component {
   componentDidMount() {
-    console.log('HERE BITCH: ', this.props.unfufilledOrders)
   }
 
   findAndRemove(tabId, id) {
