@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Menu, Segment } from 'semantic-ui-react'
+import AddLiquorAddIns from './addLiquorAddIns'
+import AddBeers from './addBeers'
 
 import { actions } from './duck.Drinks'
 
@@ -15,6 +17,13 @@ class Drinks extends Component {
 
   render() {
     const addView = this.props.currentAddView
+    let renderedView = <AddLiquorAddIns />
+
+    if (addView === 'liquorAddIns') {
+      renderedView = <AddLiquorAddIns />
+    } else if (addView === 'beers') {
+      renderedView = <AddBeers />
+    }
 
     return (
       <Grid>
@@ -28,7 +37,7 @@ class Drinks extends Component {
 
         <Grid.Column stretched width={12}>
           <Segment>
-            {addView}
+            {renderedView}
           </Segment>
         </Grid.Column>
       </Grid>
