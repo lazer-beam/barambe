@@ -63,7 +63,7 @@ describe('Orders Functionality: ', () => {
       createdLines.push(addIn)
       this.cocktail.addAddIn(addIn)
     }).then(() => {
-      return Tab.create({ tableNum: 7 })
+      return Tab.create({ tableNum: 7, customerNum: 424 })
     })
     .then(tab => {
       this.tab = tab;
@@ -106,6 +106,7 @@ describe('Orders Functionality: ', () => {
           expect(order.time).to.be.ok
           expect(order.tabId).to.be.ok
           expect(order.tableNum).to.be.equal(7)
+          expect(order.customerNum).to.be.ok
           if (order.drink.type === 'shot' || order.drink.type === 'cocktail') {
             expect(order.drink.liquors).to.be.ok
             expect(order.drink.liquors).to.be.an.instanceOf(Array)
@@ -132,6 +133,7 @@ describe('Orders Functionality: ', () => {
           expect(order.time).to.be.ok
           expect(order.tabId).to.be.ok
           expect(order.tableNum).to.be.equal(7)
+          expect(order.customerNum).to.be.ok
           if (order.drink.type === 'shot' || order.drink.type === 'cocktail') {
             expect(order.drink.liquors).to.be.ok
             expect(order.drink.liquors).to.be.an.instanceOf(Array)

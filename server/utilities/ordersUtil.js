@@ -57,6 +57,13 @@ const mapDrinksWithinOrderObj = (orders, drinks) => {
   })
 }
 
+const addCustomerNumToOrders = orders => {
+  return Promise.all(orders.map(order => {
+    return Tab.findOne({ where: { id: order.tabId } })
+      .then(tab => Object.assign({ customerNum: tab.dataValues.customerNum }, order))
+  }))
+}
+
 const getAllPendingOrders = () => {
   return Order.findAll().bind({})
     .then(orders => addDeliveryType(mapOrdersToDataValues(orders)))
@@ -66,6 +73,7 @@ const getAllPendingOrders = () => {
       return drinksUtil.getAllDrinks(orders)
     }).then(drinks => formatDrinksWithLiquorsAndAddIns(drinks))
     .then(drinks => mapDrinksWithinOrderObj(this.orders, drinks))
+    .then(orders => addCustomerNumToOrders(orders))
 }
 
 const closeOrder = orderId => Order.findOne({ where: { id: orderId } })
@@ -92,4 +100,5 @@ module.exports = {
   mapDrinksWithinOrderObj,
   closeOrder,
   createOrder,
+  addCustomerNumToOrders,
 }
