@@ -1,25 +1,22 @@
+import testDrinks from '../util/testOrders'
 // ========================================
 //            ACTIONS
 // ========================================
 export const types = {
-  TOGGLE_SIDEBAR_OUT: 'DASH/TOGGLE_SIDEBAR_OUT',
-  TOGGLE_SIDEBAR_IN: 'DASH/TOGGLE_SIDEBAR_IN',
+  REMOVE_ORDER: 'BAR/REMOVE_ORDER',
 }
 
 // ========================================
 //            REDUCERS
 // ========================================
 const defaultProps = {
-  visible: false,
-  currentNav: 'root',
+  unfufilledOrders: testDrinks(),
 }
 
 export default (state = defaultProps, action) => {
   switch (action.type) {
-    case types.TOGGLE_SIDEBAR_OUT:
-      return { ...state, visible: true }
-    case types.TOGGLE_SIDEBAR_IN:
-      return { ...state, visible: false }
+    case types.REMOVE_ORDER:
+      return { ...state, unfufilledOrders: action.payload }
 
     default:
       return state
@@ -30,6 +27,5 @@ export default (state = defaultProps, action) => {
 //           ACTION CREATORS
 // ========================================
 export const actions = {
-  toggleSidebarOut: () => ({ type: types.TOGGLE_SIDEBAR_OUT }),
-  toggleSidebarIn: () => ({ type: types.TOGGLE_SIDEBAR_IN }),
+  removeOrder: orders => ({ type: types.REMOVE_ORDER, payload: orders }),
 }
