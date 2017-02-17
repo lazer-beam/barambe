@@ -29,7 +29,7 @@ describe('Closing Orders Functionality', () => {
         expect(closedId).to.be.equal(mockOrder.id)
         return Order.findOne({ where: { id: mockOrder.id}})
       }).then(order => {
-        expect(order.dataValues.status).to.be.equal('closed')
+        expect(order.dataValues.status).to.be.equal('complete')
       })
   })
 
@@ -40,7 +40,7 @@ describe('Closing Orders Functionality', () => {
         expect(res.text).to.be.equal(`Successfully closed order ${mockOrder.id}`)
         Order.findOne({ where: { id: mockOrder.id}})
           .then(order => {
-            expect(order.dataValues.status).to.be.equal('closed')
+            expect(order.dataValues.status).to.be.equal('complete')
           })
       })
   })

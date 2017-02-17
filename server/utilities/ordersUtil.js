@@ -77,7 +77,7 @@ const getAllPendingOrders = () => {
 }
 
 const closeOrder = orderId => Order.findOne({ where: { id: orderId } })
-  .then(order => order.update({ status: 'closed' }))
+  .then(order => order.update({ status: 'complete' }))
   .then(order => order.dataValues.id)
 
 const createOrder = (drinkName, tabId) => {
