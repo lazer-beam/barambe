@@ -1,17 +1,24 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import Dashboard from './dashboard/Dashboard'
+// import LoginSplash from './login/LoginSplash'
+// import { actions } from './login/duck.Login'
 
 import './App.css'
 
+@connect(store => ({
+  loggedIn: store.login.loggedIn,
+}))
 class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = { test: 'test' }
+  componentDidMount() {
   }
 
   render() {
     return (
-      <div>Hello man!!!!!</div>
+      <div className="allBody">
+        <Dashboard />
+      </div>
     )
   }
 }
