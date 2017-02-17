@@ -9,6 +9,14 @@ const tabs = {
         res.status(500).send(err)
       })
   },
+  close: (req, res) => {
+    tabsUtil.closeTab(req.params.id)
+      .then(closedTabId => {
+        res.send(`Successfully closed tab with id ${closedTabId}`)
+      }).catch(err => {
+        res.status(500).send(err)
+      })
+  },
 }
 
 module.exports = {
