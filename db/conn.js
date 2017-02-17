@@ -9,6 +9,7 @@ const opts = {
 }
 
 const mode = (process.env.DB_TESTING === 'true') ? process.env.DB_CONN_TEST : process.env.DB_CONNECTION
+
 const sequelize = new Sequelize(mode, opts)
 
 sequelize.authenticate().then(() => {

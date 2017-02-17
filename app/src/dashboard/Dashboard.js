@@ -5,19 +5,14 @@ import '../App.css'
 
 import { actions } from './duck.Dashboard'
 import MenuItem from './DashboardComponents'
-import Bartender from '../bartender/Bartender'
+// import Bartender from '../bartender/Bartender'
+import Drinks from '../drinks/Drinks'
 
 @connect(store => ({
   visible: store.dash.visible,
   currentNav: store.dash.currentNav,
 }))
 class Dashboard extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      visible: false,
-    }
-  }
 
   componentDidMount() {
     if (this.props.currentNav === 'root' && !this.props.visible) {
@@ -39,7 +34,7 @@ class Dashboard extends Component {
           <Sidebar.Pusher>
             <div className="allBody">
 
-              <Bartender />
+              <Drinks />
 
             </div>
           </Sidebar.Pusher>
