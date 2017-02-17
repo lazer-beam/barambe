@@ -201,7 +201,7 @@ describe('Drinks Formatting Helper Functions', () => {
   })
 })
 
-describe('Creating a Drink Functionality', () => {
+describe('Finding a Drink: ', () => {
   it('should add a drink to the drinks table', () => {
     const mockBeerDrink = {
       type: 'beer',
@@ -209,7 +209,8 @@ describe('Creating a Drink Functionality', () => {
       price: 750
     }
 
-    return drinksUtil.createDrink(mockBeerDrink)
+    return Drink.create(mockBeerDrink)
+      .then(() => drinksUtil.findDrinkByName(mockBeerDrink.name))
       .then(drink => {
         expect(drink).to.be.ok
         expect(drink.dataValues.type).to.be.equal(mockBeerDrink.type)

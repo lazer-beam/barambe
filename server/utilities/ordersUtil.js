@@ -70,12 +70,17 @@ const closeOrder = orderId => Order.findOne({ where: { id: orderId } })
   .then(order => order.update({ status: 'closed' }))
   .then(order => order.dataValues.id)
 
-const createOrder = (drink, tabId) => {
+const createOrder = (drinkName, tabId) => {
   return Order.create({})
     .then(order => {
       this.order = order
-      return drinksUtil.createDrink(drink)
-    }).then(createdDrink => this.order.setDrink(createdDrink))
+      return drinksUtil.findDrinkByName(drinkName)
+    }).then(foundDrink => {
+      // if (drink.type === 'shot' || drink.type === 'cocktail') {
+
+      // }
+      return this.order.setDrink(foundDrink)
+    })
     .then(() => Tab.findOne({ where: { id: tabId } }))
     .then(tab => this.order.setTab(tab))
     .then(() => this.order)

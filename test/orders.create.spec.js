@@ -55,7 +55,8 @@ describe('Adding an Order functionality', () => {
       price: 750
     }
 
-    return ordersUtil.createOrder(mockBeerDrink, mockTabId)
+    return Drink.create(mockBeerDrink)
+      .then(() => ordersUtil.createOrder(mockBeerDrink.name, mockTabId))
       .then(createdOrder => {
         expect(createdOrder).to.be.ok
         expect(createdOrder.dataValues.id).to.be.a('number')
@@ -66,17 +67,34 @@ describe('Adding an Order functionality', () => {
       }).then(({ dataValues }) => {
         expect(dataValues.type).to.be.equal(mockBeerDrink.type)
         expect(dataValues.name).to.be.equal(mockBeerDrink.name)
+        expect(dataValues.price).to.be.equal(mockBeerDrink.price)
       })
   })
 
   xit('should add a shot order to a tab', () => {
     const mockShotDrink = {
-      type: 'shot'
+      type: 'shot',
+      name: 'Jameson',
+      price: 900
     }
 
-    return ordersUtil.createOrder()
+    return ordersUtil.createOrder(mockShotDrink, mockTabId)
       .then(createdOrder => {
         expect(createdOrder).to.be.ok
+        expect(createdOrder.dataValues.id).to.be.a('number')
+        expect(createdOrder.dataValues.drinkId).to.be.a('number')
+        expect(createdOrder.dataValues.tabId).to.be.a('number')
+        expect(createdOrder.dataValues.tabId).to.be.equal(mockTabId)
+        return Drink.findOne({ where: { id: createdOrder.dataValues.drinkId } })
+      }).then(({ dataValues }) => {
+        expect(dataValues.type).to.be.equal(mockShotDrink.type)
+        expect(dataValues.name).to.be.equal(mockShotDrink.name)
+        expect(dataValues.price).to.be.equal(mockShotDrink.price)
+        return Liquor.findAll()
+      }).then(liquors => {
+        liquors.forEach(liquor => {
+          console.log('liquor.dataValues', liquor.dataValues)
+        })
       })
   })
 

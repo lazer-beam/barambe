@@ -2,15 +2,9 @@ const Drink = require('../../db/models/drinkModel')
 
 const getAllDrinks = orders => Promise.all(orders.map(order => Drink.findOne({ where: { id: order.drinkId } })))
 
-const createDrink = drink => {
-  return Drink.create({
-    name: drink.name,
-    price: drink.price,
-    type: drink.type,
-  })
-}
+const findDrinkByName = drinkName => Drink.findOne({ where: { name: drinkName } })
 
 module.exports = {
   getAllDrinks,
-  createDrink,
+  findDrinkByName,
 }
