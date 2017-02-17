@@ -3,22 +3,43 @@ const Promise = require('bluebird')
 
 require('../server/server')
 const Tab = require('../db/models/tabModel')
+const Drink = require('../db/models/drinkModel')
+const Liquor = require('../db/models/liquorModel')
+const AddIn = require('../db/models/addInModel')
 const ordersUtil = require('../server/utilities/ordersUtil')
 
 describe('Adding an Order functionality', () => {
   let createdLines = []
-  let mockTab;
+  let mockTabId;
 
   beforeEach(() => {
     return Tab.create({ customerNum: 3 })
       .then(tab => {
         createdLines.push(tab)
-        mockTab = tab.dataValues.id
+        mockTabId = tab.dataValues.id
       })
   })
 
-  afterEach(() => Promise.each(createdLines, line => line.destroy()))
-
+  afterEach(() => Promise.each(createdLines, line => line.destroy())
+    .then(() => {
+      return Drink.findAll()
+    }).then(drinks => {
+      return Promise.all(drinks.map(drink => {
+        return drink.destroy()
+      }))
+    }).then(() => {
+      return Liquor.findAll()
+    }).then(liquors => {
+      return Promise.all(liquors.map(liquor => {
+        return liquor.destroy()
+      }))
+    }).then(() => {
+      return AddIn.findAll()
+    }).then(addIns => {
+      return Promise.all(addIns.map(addIn => {
+        return addIn.destroy()
+      }))
+    }))
 
   it('should add a beer order to a tab', () => {
     const mockBeerDrink = {
@@ -27,29 +48,37 @@ describe('Adding an Order functionality', () => {
       price: 750
     }
 
-    ordersUtil.createOrder(mockBeerDrink)
+    return ordersUtil.createOrder(mockBeerDrink, mockTabId)
       .then(createdOrder => {
         expect(createdOrder).to.be.ok
+        expect(createdOrder.dataValues.id).to.be.a('number')
+        expect(createdOrder.dataValues.drinkId).to.be.a('number')
+        expect(createdOrder.dataValues.tabId).to.be.a('number')
+        expect(createdOrder.dataValues.tabId).to.be.equal(mockTabId)
+        return Drink.findOne({ where: { id: createdOrder.dataValues.drinkId } })
+      }).then(({ dataValues }) => {
+        expect(dataValues.type).to.be.equal(mockBeerDrink.type)
+        expect(dataValues.name).to.be.equal(mockBeerDrink.name)
       })
   })
 
-  it('should add a shot order to a tab', () => {
+  xit('should add a shot order to a tab', () => {
     const mockShotDrink = {
       type: 'shot'
     }
 
-    ordersUtil.createOrder()
+    return ordersUtil.createOrder()
       .then(createdOrder => {
         expect(createdOrder).to.be.ok
       })
   })
 
-  it('should add a cocktail order to a tab', () => {
+  xit('should add a cocktail order to a tab', () => {
     const mockBeerDrink = {
       type: 'cocktail'
     }
 
-    ordersUtil.createOrder()
+    return ordersUtil.createOrder()
       .then(createdOrder => {
         expect(createdOrder).to.be.ok
       })
