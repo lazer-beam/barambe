@@ -11,7 +11,7 @@ const Order = require('../db/models/orderModel')
 const Tab = require('../db/models/tabModel')
 const ordersUtil = require('../server/utilities/ordersUtil')
 
-describe('Orders Server Functionality', () => {
+describe('Orders Functionality: ', () => {
   var createdLines = []
   var drinks = []
 
