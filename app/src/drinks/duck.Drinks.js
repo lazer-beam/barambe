@@ -2,9 +2,10 @@
 //            ACTIONS
 // ========================================
 export const types = {
-  TOGGLE_BEER_ADDER: 'TOGGLE_BEER_ADDER',
-  TOGGLE_LIQUORADDIN_ADDER: 'TOGGLE_LIQUORADDIN_ADDER',
-  TOGGLE_COCKTAIL_ADDER: 'TOGGLE_COCKTAIL_ADDER',
+  // GET_BEERS: 'GET_BEERS',
+  // GET_COCKTAILS: 'GET_COCKTAILS',
+  // GET_LIQUORS: 'GET_LIQUORS',
+  GET_DRINKS: 'GET_DRINKS',
   TOGGLE_MENU: 'TOGGLE_MENU',
 }
 
@@ -23,7 +24,14 @@ export default (state = defaultProps, action) => {
   switch (action.type) {
     case types.TOGGLE_MENU:
       return { ...state, currentAddView: action.payload }
-
+    case types.GET_DRINKS:
+      return {
+        ...state,
+        menuLiquors: action.payload.liquors,
+        menuAddIns: action.payload.addIns,
+        menuBeers: action.payload.beers,
+        menuCocktails: action.payload.cocktails,
+      }
     default:
       return state
   }
@@ -34,4 +42,8 @@ export default (state = defaultProps, action) => {
 // ========================================
 export const actions = {
   toggleMenu: menuName => ({ type: types.TOGGLE_MENU, payload: menuName }),
+  getDrinks: drinksObj => ({ type: types.GET_DRINKS, payload: drinksObj }),
+  // getBeers: beerArr => ({type: types.GET_BEERS, payload: beerArr}),
+  // getCocktails: cocktailArr => ({type: types.GET_COCKTAILS, payload: cocktailArr}),
+  // getLiquors: liquorArr => ({type: types.GET_LIQUORS, payload: liquorArr}),
 }

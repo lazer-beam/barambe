@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import { Grid, Menu, Segment } from 'semantic-ui-react'
 import AddLiquorAddIns from './addLiquorAddIns'
 import AddBeers from './addBeers'
@@ -16,7 +17,33 @@ import { actions } from './duck.Drinks'
 }))
 class Drinks extends Component {
   componentWillMount() {
+    // axios
+    //   .get(drinksEndpoint)
+    //   .then(response => {
+    //     const beers = []
+    //     const cocktails = []
+    //     const liquors = []
 
+    //     const drinksObj = { beers, cocktails, liquors }
+
+    //     response.forEach(drinkObj => {
+    //       const temp = {
+    //         name: drinkObj.name,
+    //         price: (drinkObj.price / 100).toFixed(2),
+    //       }
+    //       if (drinkObj.type === 'cocktail') {
+    //         cocktails.push(temp)
+    //       } else if (drinkObj.type === 'shot') {
+    //         liquors.push(temp)
+    //       } else if (drinkObj.type === 'beer') {
+    //         beers.push(temp)
+    //       }
+    //     })
+    //     this.props.dispatch(actions.getDrinks(drinksObj))
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
   }
 
   toggleMenu(menuName) {
