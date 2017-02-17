@@ -1,9 +1,12 @@
 const Promise = require('bluebird')
 const expect = require('chai').expect
 
+require('../server/server.js')
 const Drink = require('../db/models/drinkModel')
 const Liquor = require('../db/models/liquorModel')
 const liquorsUtil = require('../server/utilities/liquorsUtil')
+
+require('../server/server.js')
 
 describe('Drinks Helpers Functionality', () => {
   var createdLines = []

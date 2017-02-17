@@ -1,6 +1,7 @@
 const Promise = require('bluebird')
 const expect = require('chai').expect
 
+require('../server/server.js')
 const AddIn = require('../db/models/addInModel')
 const Drink = require('../db/models/drinkModel')
 const Liquor = require('../db/models/liquorModel')

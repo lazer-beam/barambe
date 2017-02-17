@@ -1,5 +1,6 @@
 const expect = require('chai').expect
 
+require('../server/server.js')
 const Drink = require('../db/models/drinkModel')
 const Order = require('../db/models/orderModel')
 const Tab = require('../db/models/tabModel')

@@ -65,6 +65,10 @@ const getAllPendingOrders = () => {
     .then(drinks => mapDrinksWithinOrderObj(this.orders, drinks))
 }
 
+const closeOrder = orderId => {
+  console.log('orderId', orderId)
+}
+
 module.exports = {
   getAllPendingOrders,
   getAllOrdersWithStatusOpen,
@@ -72,4 +76,5 @@ module.exports = {
   isTableOrPickup,
   formatDrinksWithLiquorsAndAddIns,
   mapDrinksWithinOrderObj,
+  closeOrder,
 }
