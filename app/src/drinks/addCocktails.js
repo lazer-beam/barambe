@@ -2,27 +2,28 @@ import React from 'react'
 import { Table, Form, Button, Divider } from 'semantic-ui-react'
 
 const AddCocktails = ({ cocktails }) => (
-  <Table>
-    <Table.Header>
-      <Table.Row>
-        <Table.HeaderCell width={3}>Cocktail</Table.HeaderCell>
-        <Table.HeaderCell width={2}>Price</Table.HeaderCell>
-      </Table.Row>
-    </Table.Header>
-
-    <Table.Body>
-      {cocktails.map(cocktail =>
+  <div>
+    <Table>
+      <Table.Header>
         <Table.Row>
-          <Table.Cell>
-            {cocktail.name}
-          </Table.Cell>
-          <Table.Cell>
-            {cocktail.price}
-          </Table.Cell>
-        </Table.Row>,
-      )}
-    </Table.Body>
-    <Divider hidden />
+          <Table.HeaderCell width={3}>Cocktail</Table.HeaderCell>
+          <Table.HeaderCell width={2}>Price</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+
+      <Table.Body>
+        {cocktails.map(cocktail =>
+          <Table.Row>
+            <Table.Cell>
+              {cocktail.name}
+            </Table.Cell>
+            <Table.Cell>
+              {cocktail.price}
+            </Table.Cell>
+          </Table.Row>,
+        )}
+      </Table.Body>
+    </Table>
     <Form>
       <Form size="large" key="large">
         <Form.Group widths="equal">
@@ -33,8 +34,7 @@ const AddCocktails = ({ cocktails }) => (
         <Divider hidden />
       </Form>
     </Form>
-
-  </Table>
+  </div>
 )
 
 
