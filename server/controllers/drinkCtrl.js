@@ -2,8 +2,14 @@ const util = require('../utilities/drinksUtil')
 
 const drinks = {
   getInitdrinks: (req, res) => {
-    const temporary = util.getAllDrinks()
-    res.status(200).send(temporary)
+    const beerArr = util.getDrinkType('beer')
+    const liquorArr = util.getDrinkType('shot')
+    const cocktailArr = util.getDrinkType('cocktail')
+    res.send({
+      beerArr,
+      liquorArr,
+      cocktailArr,
+    })
   },
 }
 
