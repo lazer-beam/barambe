@@ -8,7 +8,8 @@ const mapOrdersToDataValues = orders => orders.map(order => order.dataValues)
 
 const getAllOrdersWithStatusOpen = orders => orders.filter(order => order.status === 'pending')
 
-const isTableOrPickup = tabId => Tab.findOne({ where: { id: tabId } }).then(tab => tab.dataValues.tableNum)
+const isTableOrPickup = tabId => Tab.findOne({ where: { id: tabId } })
+  .then(tab => tab.dataValues.tableNum)
 
 const addDeliveryType = orders => {
   return Promise.all(orders.map(order => {
@@ -65,9 +66,8 @@ const getAllPendingOrders = () => {
     .then(drinks => mapDrinksWithinOrderObj(this.orders, drinks))
 }
 
-const closeOrder = orderId => {
-  console.log('orderId', orderId)
-}
+const closeOrder = orderId => Order.findOne({ where: { id: orderId } })
+  .then(order => order.update({ status: 'closed' }))
 
 module.exports = {
   getAllPendingOrders,

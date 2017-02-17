@@ -13,18 +13,20 @@ describe('Closing Orders Functionality', () => {
     return Order.create({})
       .then(order => {
         createdLines.push(order)
-        mockOrder = order
+        mockOrder = order.dataValues
       })
   })
 
   after(() => Promise.each(createdLines, line => line.destroy()))
 
   it('should set an order to status closed', () => {
-    return ordersUtil.closeOrder(mockOrder.dataValues.id)
-      .then(() => {
-        return Order.findAll()
-      }).then(orders => {
-         expect(orders).to.have.length(0)
+    return Order.findOne({ where: { id: mockOrder.id}})
+      .then(order => {
+        expect(order.dataValues.status).to.be.equal('pending')
+        return ordersUtil.closeOrder(mockOrder.id)
+      }).then(() => Order.findOne({ where: { id: mockOrder.id}}))
+      .then(order => {
+        expect(order.dataValues.status).to.be.equal('closed')
       })
   })
 })
