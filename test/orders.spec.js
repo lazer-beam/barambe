@@ -1,15 +1,10 @@
-const Promise = require('bluebird')
-const request = require('supertest')
 const expect = require('chai').expect
 
-const app = require('../server/server.js')
-const AddIn = require('../db/models/addInModel')
+require('../server/server.js')
 const Drink = require('../db/models/drinkModel')
-const Liquor = require('../db/models/liquorModel')
 const Order = require('../db/models/orderModel')
 const Tab = require('../db/models/tabModel')
 const ordersUtil = require('../server/utilities/ordersUtil')
-
 
 describe('Orders With Tabs Functionality', () => {
    var mockOrders = []

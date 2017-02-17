@@ -1,8 +1,9 @@
 const Promise = require('bluebird')
-const request = require('supertest')
 const expect = require('chai').expect
 
 const app = require('../server/server.js')
+const request = require('supertest')(app)
+
 const AddIn = require('../db/models/addInModel')
 const Drink = require('../db/models/drinkModel')
 const Liquor = require('../db/models/liquorModel')
@@ -95,9 +96,9 @@ describe('Orders Server Functionality', () => {
 
   after(() => Promise.each(createdLines, line => line.destroy()))
 
-  it('Should get all orders', function(done) {
-    this.retries(2)
-    ordersUtil.getAllPendingOrders()
+  it('Should get all orders', function() {
+    this.retries(3)
+    return ordersUtil.getAllPendingOrders()
       .then(orders => {
         orders.forEach(order => {
           expect(order.drink).to.be.ok
@@ -115,12 +116,11 @@ describe('Orders Server Functionality', () => {
             expect(order.drink.addIns).to.have.length.greaterThan(0)
           }
         })
-        done()
       })
   })
 
   it('Should get all the orders when hitting the endpoint /orders/getallpending', () => {
-    return request(app)
+    return request
       .get('/orders/getallpending')
       .expect(200)
       .expect('Content-Type', /json/)

@@ -2,11 +2,6 @@ const qs = require('querystring')
 const request = require('request')
 
 const bars = {
-  get: (req, res) => {
-    const name = req.params.name
-    const bar = barsHelper.getBar(name)
-    res.send(bar)
-  },
   connect: (req, res) => {
     const authParams = qs.stringify({
       response_type: 'code',
