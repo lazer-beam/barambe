@@ -32,7 +32,7 @@ class Dashboard extends Component {
     return (
       <div className="allBody">
         <Sidebar.Pushable as={Segment}>
-          <Sidebar as={Menu} animation="push" width="thin" visible={this.props.visible} icon="labeled" vertical inverted>
+          <Sidebar as={Menu} animation="overlay" width="thin" visible={this.props.visible} icon="labeled" vertical inverted>
             {menuItems.map(mnuItm => <MenuItem icon={mnuItm[0]} label={mnuItm[1]} key={mnuItm[2]} nav={this.handleMenuClick} />)}
           </Sidebar>
           <Sidebar.Pusher>
