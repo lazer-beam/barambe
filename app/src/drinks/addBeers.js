@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from 'semantic-ui-react'
+import { Table, Form, Button, Divider } from 'semantic-ui-react'
 
 const AddBeers = ({ beers }) => (
   <Table>
@@ -22,6 +22,19 @@ const AddBeers = ({ beers }) => (
         </Table.Row>,
       )}
     </Table.Body>
+
+    <Table.Footer>
+      <Form>
+        <Form size="small" key="small">
+          <Form.Group widths="equal">
+            <Form.Field label="Add a beer" control="input" placeholder="Beer Name" />
+            <Form.Field label="Add price" control="input" placeholder="e.g. '3.95'" />
+          </Form.Group>
+          <Button type="submit">Submit</Button>
+          <Divider hidden />
+        </Form>
+      </Form>
+    </Table.Footer>
 
   </Table>
 )
