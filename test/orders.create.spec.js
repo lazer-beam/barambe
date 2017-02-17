@@ -6,6 +6,7 @@ const Tab = require('../db/models/tabModel')
 const Drink = require('../db/models/drinkModel')
 const Liquor = require('../db/models/liquorModel')
 const AddIn = require('../db/models/addInModel')
+const Order = require('../db/models/orderModel')
 const ordersUtil = require('../server/utilities/ordersUtil')
 
 describe('Adding an Order functionality', () => {
@@ -38,6 +39,12 @@ describe('Adding an Order functionality', () => {
     }).then(addIns => {
       return Promise.all(addIns.map(addIn => {
         return addIn.destroy()
+      }))
+    }).then(() => {
+      return Order.findAll()
+    }).then(orders => {
+      return Promise.all(orders.map(order => {
+        return order.destroy()
       }))
     }))
 
