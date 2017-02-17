@@ -9,7 +9,7 @@ const AddIn = require('../db/models/addInModel')
 const Order = require('../db/models/orderModel')
 const ordersUtil = require('../server/utilities/ordersUtil')
 
-describe('Adding an Order functionality', () => {
+describe('Adding an Order: ', () => {
   let createdLines = []
   let mockTabId;
 
@@ -56,7 +56,7 @@ describe('Adding an Order functionality', () => {
     }
 
     return Drink.create(mockBeerDrink)
-      .then(() => ordersUtil.createOrder(mockBeerDrink.name, mockTabId))
+      .then(() => ordersUtil.createOrder(mockBeerDrink, mockTabId))
       .then(createdOrder => {
         expect(createdOrder).to.be.ok
         expect(createdOrder.dataValues.id).to.be.a('number')
@@ -71,14 +71,15 @@ describe('Adding an Order functionality', () => {
       })
   })
 
-  xit('should add a shot order to a tab', () => {
+  it('should add a shot order to a tab', () => {
     const mockShotDrink = {
       type: 'shot',
       name: 'Jameson',
       price: 900
     }
 
-    return ordersUtil.createOrder(mockShotDrink, mockTabId)
+    return Drink.create(mockShotDrink)
+      .then(() => ordersUtil.createOrder(mockShotDrink, mockTabId))
       .then(createdOrder => {
         expect(createdOrder).to.be.ok
         expect(createdOrder.dataValues.id).to.be.a('number')
@@ -90,22 +91,29 @@ describe('Adding an Order functionality', () => {
         expect(dataValues.type).to.be.equal(mockShotDrink.type)
         expect(dataValues.name).to.be.equal(mockShotDrink.name)
         expect(dataValues.price).to.be.equal(mockShotDrink.price)
-        return Liquor.findAll()
-      }).then(liquors => {
-        liquors.forEach(liquor => {
-          console.log('liquor.dataValues', liquor.dataValues)
-        })
       })
   })
 
-  xit('should add a cocktail order to a tab', () => {
-    const mockBeerDrink = {
-      type: 'cocktail'
+  it('should add a cocktail order to a tab', () => {
+    const mockCocktailDrink = {
+      type: 'cocktail',
+      name: 'Screwdriver',
+      price: 1000
     }
 
-    return ordersUtil.createOrder()
+    return Drink.create(mockCocktailDrink)
+      .then(() => ordersUtil.createOrder(mockCocktailDrink, mockTabId))
       .then(createdOrder => {
         expect(createdOrder).to.be.ok
+        expect(createdOrder.dataValues.id).to.be.a('number')
+        expect(createdOrder.dataValues.drinkId).to.be.a('number')
+        expect(createdOrder.dataValues.tabId).to.be.a('number')
+        expect(createdOrder.dataValues.tabId).to.be.equal(mockTabId)
+        return Drink.findOne({ where: { id: createdOrder.dataValues.drinkId } })
+      }).then(({ dataValues }) => {
+        expect(dataValues.type).to.be.equal(mockCocktailDrink.type)
+        expect(dataValues.name).to.be.equal(mockCocktailDrink.name)
+        expect(dataValues.price).to.be.equal(mockCocktailDrink.price)
       })
   })
 })
