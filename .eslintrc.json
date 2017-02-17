@@ -1,5 +1,7 @@
 {   "globals": {
-        "document": true
+        "document": true,
+        "window": true,
+        "localStorage": true
     },
     "parser": "babel-eslint",
     "ecmaFeatures": {
@@ -41,9 +43,11 @@
         "no-param-reassign": ["error", { "props": false }],
         "no-undef": "off",
         "arrow-body-style": "off",
-        "no-unused-expressions": ["error", { "allowTernary": true }],
+        "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
         "linebreak-style": "off",
-        "newline-per-chained-call": "off"
+        "newline-per-chained-call": "off",
+        "prefer-stateless-function": [0, { "ignorePureComponents": true }],
+        "no-underscore-dangle": ["error", { "allowAfterThis": true }]
     },
     "extends": "airbnb",
     "plugins": [
