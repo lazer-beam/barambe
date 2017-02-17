@@ -17,6 +17,10 @@ class AddCocktails extends Component {
   handleSubmit(e) {
     e.preventDefault()
     console.log('Cocktail ', this.state.cocktailName, ' costs ', this.state.cocktailPrice)
+    this.setState({
+      cocktailName: '',
+      cocktailPrice: '',
+    })
   }
   handleCocktailChange(event, data) {
     this.setState({ cocktailName: data.value })
@@ -49,8 +53,8 @@ class AddCocktails extends Component {
           </Table.Body>
         </Table>
 
-        <Input onChange={this.handleCocktailChange} label="Add a cocktail" placeholder="Cocktail Name" />
-        <Input onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
+        <Input value={this.state.cocktailName} onChange={this.handleCocktailChange} label="Add a cocktail" placeholder="Cocktail Name" />
+        <Input value={this.state.cocktailPrice} onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
         <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
         <Divider hidden />
       </div>
