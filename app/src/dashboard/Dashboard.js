@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Sidebar, Segment, Menu, Image, Header } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu } from 'semantic-ui-react'
 import '../App.css'
 
 import { actions } from './duck.Dashboard'
 import MenuItem from './DashboardComponents'
+import Bartender from '../bartender/Bartender'
 
 @connect(store => ({
   visible: store.dash.visible,
@@ -21,8 +22,8 @@ class Dashboard extends Component {
   componentDidMount() {
     if (this.props.currentNav === 'root' && !this.props.visible) {
       setTimeout(() => {
-        this.props.dispatch(actions.toggleSidebarOut())
-      }, 800)
+        this.props.dispatch(actions.toggleSidebarIn())
+      }, 0)
     }
   }
 
@@ -33,13 +34,12 @@ class Dashboard extends Component {
           <Sidebar as={Menu} animation="push" width="thin" visible={this.props.visible} icon="labeled" vertical inverted>
             <MenuItem icon="home" label="Home" />
             <MenuItem icon="gamepad" label="Bartender" />
-            <MenuItem icon="camera" label="Bartender" />
+            <MenuItem icon="camera" label="Edit Drinks" />
           </Sidebar>
           <Sidebar.Pusher>
             <div className="allBody">
 
-              <Header as="h3">Application Content</Header>
-              <Image src="http://semantic-ui.com/images/wireframe/paragraph.png" />
+              <Bartender />
 
             </div>
           </Sidebar.Pusher>

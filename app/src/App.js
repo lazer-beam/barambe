@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { Grid } from 'semantic-ui-react'
 
 import Dashboard from './dashboard/Dashboard'
 // import LoginSplash from './login/LoginSplash'
