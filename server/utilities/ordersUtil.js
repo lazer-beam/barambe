@@ -8,9 +8,8 @@ const mapOrdersToDataValues = orders => orders.map(order => order.dataValues)
 
 const getAllOrdersWithStatusOpen = orders => orders.filter(order => order.status === 'pending')
 
-const isTableOrPickup = tabId => {
-  return Tab.findOne({ where: { id: tabId } }).then(tab => tab.dataValues.tableNum)
-}
+const isTableOrPickup = tabId => Tab.findOne({ where: { id: tabId } })
+  .then(tab => tab.dataValues.tableNum)
 
 const addDeliveryType = orders => {
   return Promise.all(orders.map(order => {
@@ -46,6 +45,7 @@ const mapDrinksWithinOrderObj = (orders, drinks) => {
   return orders.map(order => {
     const foundDrink = drinks.find(drink => drink.id === order.drinkId)
     const pickupTypeObj = order.tableNum ? { tableNum: order.tableNum } : { isPickup: true }
+
     return Object.assign(pickupTypeObj, {
       drink: foundDrink,
       id: order.id,
@@ -58,18 +58,17 @@ const mapDrinksWithinOrderObj = (orders, drinks) => {
 const getAllPendingOrders = () => {
   return Order.findAll().bind({})
     .then(orders => addDeliveryType(mapOrdersToDataValues(orders)))
+    .then(orders => getAllOrdersWithStatusOpen(orders))
     .then(orders => {
-      return getAllOrdersWithStatusOpen(orders)
-    }).then(orders => {
       this.orders = orders
       return drinksUtil.getAllDrinks(orders)
-    }).then(drinks => {
-      this.drinkModels = drinks
-      return formatDrinksWithLiquorsAndAddIns(drinks)
-    }).then(drinks => {
-      return mapDrinksWithinOrderObj(this.orders, drinks)
-    })
+    }).then(drinks => formatDrinksWithLiquorsAndAddIns(drinks))
+    .then(drinks => mapDrinksWithinOrderObj(this.orders, drinks))
 }
+
+const closeOrder = orderId => Order.findOne({ where: { id: orderId } })
+  .then(order => order.update({ status: 'closed' }))
+  .then(order => order.dataValues.id)
 
 module.exports = {
   getAllPendingOrders,
@@ -78,4 +77,5 @@ module.exports = {
   isTableOrPickup,
   formatDrinksWithLiquorsAndAddIns,
   mapDrinksWithinOrderObj,
+  closeOrder,
 }
