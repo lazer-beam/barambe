@@ -68,6 +68,7 @@ const getAllPendingOrders = () => {
 
 const closeOrder = orderId => Order.findOne({ where: { id: orderId } })
   .then(order => order.update({ status: 'closed' }))
+  .then(order => order.dataValues.id)
 
 module.exports = {
   getAllPendingOrders,

@@ -1,7 +1,8 @@
 const expect = require('chai').expect
 const Promise = require('bluebird')
 
-require('../server/server.js')
+const app = require('../server/server.js')
+const request = require('supertest')(app)
 const Order = require('../db/models/orderModel')
 const ordersUtil = require('../server/utilities/ordersUtil')
 
@@ -9,7 +10,7 @@ describe('Closing Orders Functionality', () => {
   let createdLines = []
   let mockOrder;
   
-  before(() => {
+  beforeEach(() => {
     return Order.create({})
       .then(order => {
         createdLines.push(order)
@@ -17,16 +18,30 @@ describe('Closing Orders Functionality', () => {
       })
   })
 
-  after(() => Promise.each(createdLines, line => line.destroy()))
+  afterEach(() => Promise.each(createdLines, line => line.destroy()))
 
   it('should set an order to status closed', () => {
     return Order.findOne({ where: { id: mockOrder.id}})
       .then(order => {
         expect(order.dataValues.status).to.be.equal('pending')
         return ordersUtil.closeOrder(mockOrder.id)
-      }).then(() => Order.findOne({ where: { id: mockOrder.id}}))
-      .then(order => {
+      }).then(closedId => {
+        expect(closedId).to.be.equal(mockOrder.id)
+        return Order.findOne({ where: { id: mockOrder.id}})
+      }).then(order => {
         expect(order.dataValues.status).to.be.equal('closed')
+      })
+  })
+
+  it('should set an order to status closed when PUT /orders/closeorder/:id', () => {
+    return request
+      .put('/orders/closeorder/' + mockOrder.id)
+      .expect(res => {
+        expect(res.text).to.be.equal(`Successfully closed order ${mockOrder.id}`)
+        Order.findOne({ where: { id: mockOrder.id}})
+          .then(order => {
+            expect(order.dataValues.status).to.be.equal('closed')
+          })
       })
   })
 })
