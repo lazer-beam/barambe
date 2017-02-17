@@ -70,11 +70,11 @@ const closeOrder = orderId => Order.findOne({ where: { id: orderId } })
   .then(order => order.update({ status: 'closed' }))
   .then(order => order.dataValues.id)
 
-const createOrder = (drink, tabId) => {
+const createOrder = (drinkName, tabId) => {
   return Order.create({})
     .then(order => {
       this.order = order
-      return drinksUtil.findDrinkByName(drink.name)
+      return drinksUtil.findDrinkByName(drinkName)
     }).then(foundDrink => this.order.setDrink(foundDrink))
     .then(() => Tab.findOne({ where: { id: tabId } }))
     .then(tab => this.order.setTab(tab))

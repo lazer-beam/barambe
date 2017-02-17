@@ -1,7 +1,8 @@
 const expect = require('chai').expect
 const Promise = require('bluebird')
 
-require('../server/server')
+const app = require('../server/server.js')
+const request = require('supertest')(app)
 const Tab = require('../db/models/tabModel')
 const Drink = require('../db/models/drinkModel')
 const Liquor = require('../db/models/liquorModel')
@@ -56,7 +57,7 @@ describe('Adding an Order: ', () => {
     }
 
     return Drink.create(mockBeerDrink)
-      .then(() => ordersUtil.createOrder(mockBeerDrink, mockTabId))
+      .then(() => ordersUtil.createOrder(mockBeerDrink.name, mockTabId))
       .then(createdOrder => {
         expect(createdOrder).to.be.ok
         expect(createdOrder.dataValues.id).to.be.a('number')
@@ -79,7 +80,7 @@ describe('Adding an Order: ', () => {
     }
 
     return Drink.create(mockShotDrink)
-      .then(() => ordersUtil.createOrder(mockShotDrink, mockTabId))
+      .then(() => ordersUtil.createOrder(mockShotDrink.name, mockTabId))
       .then(createdOrder => {
         expect(createdOrder).to.be.ok
         expect(createdOrder.dataValues.id).to.be.a('number')
@@ -102,7 +103,7 @@ describe('Adding an Order: ', () => {
     }
 
     return Drink.create(mockCocktailDrink)
-      .then(() => ordersUtil.createOrder(mockCocktailDrink, mockTabId))
+      .then(() => ordersUtil.createOrder(mockCocktailDrink.name, mockTabId))
       .then(createdOrder => {
         expect(createdOrder).to.be.ok
         expect(createdOrder.dataValues.id).to.be.a('number')
@@ -115,5 +116,33 @@ describe('Adding an Order: ', () => {
         expect(dataValues.name).to.be.equal(mockCocktailDrink.name)
         expect(dataValues.price).to.be.equal(mockCocktailDrink.price)
       })
+  })
+
+  it('should add an order by a POST to /orders/addorder', () => {
+    const mockBeerDrink = 'Blue Moon'
+
+    return Drink.create({
+      name: 'Blue Moon',
+      type: 'beer',
+      price: 750
+    }).then(createdDrink => {
+      return request
+        .post('/orders/addorder')
+        .send({
+          drinkName: mockBeerDrink,
+          tabId: mockTabId
+        })
+        .expect(200)
+        .expect(res => {
+          expect(res.text).to.include('Successfully created order')
+          return Order.findAll()
+            .then(orders => {
+              orders.forEach(order => {
+                expect(order.dataValues.tabId).to.be.equal(mockTabId)
+                expect(order.dataValues.drinkId).to.be.equal(createdDrink.dataValues.id)
+              })
+            })
+        })
+    })
   })
 })

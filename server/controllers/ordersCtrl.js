@@ -18,9 +18,9 @@ const orders = {
       })
   },
   post: (req, res) => {
-    ordersUtil.createOrder()
-      .then(() => {
-        res.send({})
+    ordersUtil.createOrder(req.body.drinkName, req.body.tabId)
+      .then(order => {
+        res.send(`Successfully created order ${order.dataValues.id}`)
       }).catch(err => {
         res.status(500).send(err)
       })
