@@ -40,8 +40,8 @@ class AddCocktails extends Component {
           </Table.Header>
 
           <Table.Body>
-            {this.props.cocktails.map((cocktail, i) =>
-              <Table.Row key={i}>
+            {this.props.cocktails.map(cocktail =>
+              <Table.Row key={Math.random() * 100}>
                 <Table.Cell>
                   {cocktail.name}
                 </Table.Cell>

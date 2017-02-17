@@ -5,7 +5,7 @@ import '../App.css'
 
 import { actions } from './duck.Dashboard'
 import MenuItem from './DashboardComponents'
-// import Bartender from '../bartender/Bartender'
+import Bartender from '../bartender/Bartender'
 import Drinks from '../drinks/Drinks'
 
 @connect(store => ({
@@ -15,26 +15,31 @@ import Drinks from '../drinks/Drinks'
 class Dashboard extends Component {
 
   componentDidMount() {
-    if (this.props.currentNav === 'root' && !this.props.visible) {
+    if (this.props.currentNav === 'home' && !this.props.visible) {
       setTimeout(() => {
-        this.props.dispatch(actions.toggleSidebarIn())
-      }, 0)
+        this.props.dispatch(actions.toggleSidebarOut())
+      }, 1000)
     }
   }
 
+  handleMenuClick(e, data, load) {
+    this.props.dispatch(actions.navSelection(load))
+  }
+
   render() {
+    this.handleMenuClick = ::this.handleMenuClick
+    const menuItems = [['home', 'Home', 22], ['beer', 'Bartender', 18], ['edit', 'Edit Drinks', 4]]
     return (
       <div className="allBody">
         <Sidebar.Pushable as={Segment}>
           <Sidebar as={Menu} animation="push" width="thin" visible={this.props.visible} icon="labeled" vertical inverted>
-            <MenuItem icon="home" label="Home" />
-            <MenuItem icon="gamepad" label="Bartender" />
-            <MenuItem icon="camera" label="Edit Drinks" />
+            {menuItems.map(mnuItm => <MenuItem icon={mnuItm[0]} label={mnuItm[1]} key={mnuItm[2]} nav={this.handleMenuClick} />)}
           </Sidebar>
           <Sidebar.Pusher>
             <div className="allBody">
 
-              <Drinks />
+              {this.props.currentNav === 'beer' ? <Bartender /> : null}
+              {this.props.currentNav === 'edit' ? <Drinks /> : null}
 
             </div>
           </Sidebar.Pusher>
@@ -45,4 +50,3 @@ class Dashboard extends Component {
 }
 
 export default Dashboard
-
