@@ -4,6 +4,7 @@ const initDb = require('../config')
 const Drink = require('../models/drinkModel')
 const Liquor = require('../models/liquorModel')
 const AddIn = require('../models/addInModel')
+const chalk = require('chalk')
 
 const beers = ['Miller Lite', 'Bud Light', 'Blue Moon', 'Arrogant Basterd Ale', 'Sierra Nevada',
   'Lagunitas', 'Heineken', 'Pabst Blue Ribbon', 'Sapporo', 'Hite']
@@ -19,7 +20,7 @@ const prices = [650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200,
 module.exports = cocktails => {
   return initDb(true)
     .then(() => {
-      console.log('Creating cocktail models')
+      console.log(chalk.bgYellow.black('Creating cocktail models'))
       return Promise.each(cocktails, cocktail => {
         return Drink.create({
           type: 'cocktail',
@@ -43,7 +44,7 @@ module.exports = cocktails => {
         .then(() => Promise.all(cocktail.addIns.map(addIn => addIn.trim() !== '' && AddIn.create({ name: addIn }))))
         .then(addIns => Promise.all(addIns.map(addIn => addIn !== true && this.drink.addAddIn(addIn))))
       }).then(() => {
-        console.log('Creating beer models')
+        console.log(chalk.bgYellow.black('Creating beer models'))
         return Promise.all(beers.map(beer => {
           return Drink.create({
             type: 'beer',
@@ -52,7 +53,7 @@ module.exports = cocktails => {
           })
         }))
       }).then(() => {
-        console.log('Creating shot models')
+        console.log(chalk.bgYellow.black('Creating shot models'))
         return Promise.all(shots.map(shot => Drink.create({
           type: 'shot',
           name: shot,
