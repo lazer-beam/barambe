@@ -22,6 +22,12 @@ class AddLiquorAddIns extends Component {
   handleLiquorSubmit(e) {
     e.preventDefault()
     console.log('This liquor, ', this.state.liquorName, ', costs ', this.state.liquorPrice)
+    const temp = {
+      name: this.state.liquorName,
+      price: this.state.liquorPrice,
+      type: 'liquor',
+    }
+    this.props.submitAction(temp, 'liquor')
     this.setState({
       liquorName: '',
       liquorPrice: '',
@@ -30,6 +36,12 @@ class AddLiquorAddIns extends Component {
   handleAddInSubmit(e) {
     e.preventDefault()
     console.log('This add-in, ', this.state.addInName, ', costs ', this.state.addInPrice)
+    const temp = {
+      name: this.state.addInName,
+      price: this.state.addInPrice,
+      type: 'addIn',
+    }
+    this.props.submitAction(temp, 'addIn')
     this.setState({
       addInName: '',
       addInPrice: '',

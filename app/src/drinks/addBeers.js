@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Table, Button, Input, Divider } from 'semantic-ui-react'
-import axios from 'axios'
 
 class AddBeers extends Component {
   constructor(props) {
@@ -18,17 +17,12 @@ class AddBeers extends Component {
   handleSubmit(e) {
     e.preventDefault()
     console.log('Beer ', this.state.beerName, ' costs ', this.state.beerPrice)
-
     const temp = {
       name: this.state.beerName,
       price: this.state.beerPrice,
       type: 'beer',
     }
-
-    axios.post(drinkPostingEndpoint, temp)
-      .then(res => { console.log(res) })
-      .catch(err => { console.log(err) })
-
+    this.props.submitAction(temp, 'beer')
     this.setState({
       beerName: '',
       beerPrice: '',

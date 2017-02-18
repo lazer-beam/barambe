@@ -17,6 +17,12 @@ class AddCocktails extends Component {
   handleSubmit(e) {
     e.preventDefault()
     console.log('Cocktail ', this.state.cocktailName, ' costs ', this.state.cocktailPrice)
+    const temp = {
+      name: this.state.cocktailsName,
+      price: this.state.cocktailsPrice,
+      type: 'cocktail',
+    }
+    this.props.submitAction(temp, 'cocktail')
     this.setState({
       cocktailName: '',
       cocktailPrice: '',
