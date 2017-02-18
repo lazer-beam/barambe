@@ -17,33 +17,25 @@ import { actions } from './duck.Drinks'
 }))
 class Drinks extends Component {
   componentWillMount() {
-    // axios
-    //   .get(drinksEndpoint)
-    //   .then(response => {
-    //     const beers = []
-    //     const cocktails = []
-    //     const liquors = []
+    axios
+      .get('/drinks/getAll')
+      .then(response => {
+        response.forEach(drinkArr => {
+          drinkArr.forEach(drinkObj => {
+            drinkObj.price = (drinkObj.price / 100).toFixed(2)
+          })
+        })
+        const beers = response.beerArr
+        const cocktails = response.cocktailArr
+        const liquors = response.liquorArr
 
-    //     const drinksObj = { beers, cocktails, liquors }
+        const drinksObj = { beers, cocktails, liquors }
 
-    //     response.forEach(drinkObj => {
-    //       const temp = {
-    //         name: drinkObj.name,
-    //         price: (drinkObj.price / 100).toFixed(2),
-    //       }
-    //       if (drinkObj.type === 'cocktail') {
-    //         cocktails.push(temp)
-    //       } else if (drinkObj.type === 'shot') {
-    //         liquors.push(temp)
-    //       } else if (drinkObj.type === 'beer') {
-    //         beers.push(temp)
-    //       }
-    //     })
-    //     this.props.dispatch(actions.getDrinks(drinksObj))
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
+        this.props.dispatch(actions.getDrinks(drinksObj))
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   toggleMenu(menuName) {
