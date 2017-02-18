@@ -338,7 +338,7 @@
   {
     "Name": "Perfect Manhattan",
     "Alcohol": "Bourbon",
-    "Alcohol2": "1/8oz Dry Vermouth, 1/8oz Sweet Vermouth",
+    "Alcohol2": "1/8oz Dry Vermouth",
     "AddIn": "Lemon Twist",
     "AddIn2": ""
   },
@@ -492,7 +492,7 @@
   {
     "Name": "Rootbeer Float",
     "Alcohol": "Vodka",
-    "Alcohol2": "Kahlua, 1/2oz Galliano on top",
+    "Alcohol2": "Kahlua",
     "AddIn": "1-1/2oz Cream, Coke",
     "AddIn2": "Whipped Cream, Cherry"
   },
@@ -702,7 +702,7 @@
   {
     "Name": "Singapore Sling",
     "Alcohol": "Gin",
-    "Alcohol2": "1/2oz Blackberry Brandy/Cherry Brandy on top",
+    "Alcohol2": "1/2oz Blackberry Brandy/Cherry Brandy",
     "AddIn": "1/2oz Grenadine, 2oz Sweet and Sour, Soda",
     "AddIn2": "Flag"
   },
