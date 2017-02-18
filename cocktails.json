@@ -59,7 +59,7 @@
     "Name": "Presbyterian",
     "Alcohol": "Bourbon",
     "Alcohol2": "",
-    "AddIn": "1/2 Soda 1/2 Gingerale",
+    "AddIn": "1/2 Soda, 1/2 Gingerale",
     "AddIn2": ""
   },
   {
@@ -74,7 +74,7 @@
     "Alcohol": "Bourbon",
     "Alcohol2": "",
     "AddIn": "Soda",
-    "AddIn2": "1/2oz simple syrup or sugar, 2 dashes bitters, 1 orangle slice, 1 cherry all mashed. Flag"
+    "AddIn2": "1/2oz simple syrup or sugar, 2 dashes bitters, 1 orangle slice, 1 cherry all mashed"
   },
   {
     "Name": "Juice Type",
@@ -143,21 +143,21 @@
     "Name": "Sea Breeze",
     "Alcohol": "Vodka",
     "Alcohol2": "",
-    "AddIn": "1/2 Cranberry 1/2 Grapefruit",
+    "AddIn": "1/2 Cranberry, 1/2 Grapefruit",
     "AddIn2": "Cherry"
   },
   {
     "Name": "Bay Breeze",
     "Alcohol": "Vodka",
     "Alcohol2": "",
-    "AddIn": "1/2 Cranberry 1/2 Pineapple",
+    "AddIn": "1/2 Cranberry, 1/2 Pineapple",
     "AddIn2": "Cherry"
   },
   {
     "Name": "Madras",
     "Alcohol": "Vodka",
     "Alcohol2": "",
-    "AddIn": "1/2 Cranberry 1/2 Orange",
+    "AddIn": "1/2 Cranberry, 1/2 Orange",
     "AddIn2": "Cherry"
   },
   {
@@ -385,13 +385,6 @@
     "AddIn2": ""
   },
   {
-    "Name": "French Connection/ Beautiful",
-    "Alcohol": "3/4oz Cognac",
-    "Alcohol2": "3/4oz Grand Marnier",
-    "AddIn": "",
-    "AddIn2": ""
-  },
-  {
     "Name": "Black Russian",
     "Alcohol": "Vodka",
     "Alcohol2": "Kahlua",
@@ -544,13 +537,6 @@
     "Alcohol2": "1/2oz Blue Curacao",
     "AddIn": "1/8oz Lime Juice, 2oz Sweet and Sour",
     "AddIn2": "Lime"
-  },
-  {
-    "Name": "Iced Teas/Lemonades",
-    "Alcohol": "Several",
-    "Alcohol2": "Several",
-    "AddIn": "Sweet and Sour mainly",
-    "AddIn2": ""
   },
   {
     "Name": "Long Island Iced Tea",
