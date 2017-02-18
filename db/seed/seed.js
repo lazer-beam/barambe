@@ -2,6 +2,8 @@ const fs = require('fs')
 const Promise = require('bluebird')
 const path = require('path')
 
+const createMockModels = require('./createMockModels')
+
 const vodkas = ['Greygoose', 'Absolut Vodka', 'Ciroc', 'Svedka', 'Stolichnaya']
 const rums = ['Bacardi', 'Captain Morgan', 'Havana Club', 'Cacique']
 const gins = ['Bombay Sapphire', 'Beefeater Gin', 'Plymouth', 'Citadelle']
@@ -95,19 +97,19 @@ const mapAddIns = cocktails => {
 
 const mapAlcoholsToArray = cocktails => {
   return cocktails.map(cocktail => {
-    const alcohols = []
+    const liquors = []
 
     if (cocktail.Alcohol.length > 0) {
-      alcohols.push(cocktail.Alcohol)
+      liquors.push(cocktail.Alcohol)
     }
 
     if (cocktail.Alcohol2.length > 0) {
-      alcohols.push(cocktail.Alcohol)
+      liquors.push(cocktail.Alcohol2)
     }
 
     delete cocktail.Alcohol
     delete cocktail.Alcohol2
-    cocktail.alcohols = alcohols
+    cocktail.liquors = liquors
     return cocktail
   })
 }
@@ -119,7 +121,7 @@ const addPrices = cocktails => {
   })
 }
 
-fs.readFileAsync(path.join(__dirname, '../cocktails.json'), 'utf8')
+fs.readFileAsync(path.join(__dirname, '../../cocktails.json'), 'utf8')
   .then(cocktails => {
     return JSON.parse(cocktails).filter(cocktail => {
       return !cocktail.Alcohol.includes(' ') && !cocktail.Alcohol.includes(' ') ? mapCocktail(cocktail) : false
@@ -128,6 +130,7 @@ fs.readFileAsync(path.join(__dirname, '../cocktails.json'), 'utf8')
   .then(cocktails => mapAddIns(cocktails))
   .then(cocktails => mapAlcoholsToArray(cocktails))
   .then(cocktails => addPrices(cocktails))
-  .then(cocktails => {
-    console.log('cocktails', cocktails)
+  .then(cocktails => createMockModels(cocktails))
+  .catch(err => {
+    console.log('err in catch', err)
   })
