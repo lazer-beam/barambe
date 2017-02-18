@@ -7,6 +7,7 @@ export const types = {
   // GET_LIQUORS: 'GET_LIQUORS',
   GET_DRINKS: 'GET_DRINKS',
   TOGGLE_MENU: 'TOGGLE_MENU',
+  POST_DRINKS: 'POST_DRINKS',
 }
 
 // ========================================
@@ -32,6 +33,21 @@ export default (state = defaultProps, action) => {
         menuBeers: action.payload.beers,
         menuCocktails: action.payload.cocktails,
       }
+    case types.POST_DRINKS:
+      if (action.payload.type === 'beer') {
+        const temp = state.menuBeers.slice()
+        temp.push(action.payload)
+        return { ...state, menuBeers: temp }
+      } else if (action.payload.type === 'cocktail') {
+        const temp = state.menuCocktails.slice()
+        temp.push(action.payload)
+        return { ...state, menuCocktails: temp }
+      } else if (action.payload.type === 'liquor') {
+        const temp = state.menuLiquors.slice()
+        temp.push(action.payload)
+        return { ...state, menuLiquors: temp }
+      }
+      return state
     default:
       return state
   }
@@ -43,6 +59,7 @@ export default (state = defaultProps, action) => {
 export const actions = {
   toggleMenu: menuName => ({ type: types.TOGGLE_MENU, payload: menuName }),
   getDrinks: drinksObj => ({ type: types.GET_DRINKS, payload: drinksObj }),
+  postDrink: newDrinkObj => ({ type: types.POST_DRINKS, payload: newDrinkObj }),
   // getBeers: beerArr => ({type: types.GET_BEERS, payload: beerArr}),
   // getCocktails: cocktailArr => ({type: types.GET_COCKTAILS, payload: cocktailArr}),
   // getLiquors: liquorArr => ({type: types.GET_LIQUORS, payload: liquorArr}),
