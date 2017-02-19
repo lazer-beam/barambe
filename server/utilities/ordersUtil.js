@@ -32,12 +32,7 @@ const formatDrinksWithLiquorsAndAddIns = drinks => {
         })
     } else if (drink.type === 'cocktail') {
       return liquorsUtil.getLiquors(drink)
-        .then(liquors => {
-          this.drinkObj = Object.assign(drink.dataValues, { liquors: liquorsUtil.mapLiquors(liquors) })
-          return addInsUtil.getAddIns(drink)
-        }).then(addIns => {
-          return Object.assign(this.drinkObj, { addIns: addInsUtil.mapAddIns(addIns) })
-        })
+        .then(liquors => addInsUtil.getAddIns(drink).then(addIns => Object.assign(drink.dataValues, { liquors: liquorsUtil.mapLiquors(liquors) }, { addIns: addInsUtil.mapAddIns(addIns) })))
     }
     return drink.dataValues
   }))
@@ -46,7 +41,6 @@ const formatDrinksWithLiquorsAndAddIns = drinks => {
 const mapDrinksWithinOrderObj = (orders, drinks) => {
   return orders.map(order => {
     const foundDrink = drinks.find(drink => drink.id === order.drinkId)
-
     return {
       drink: foundDrink,
       id: order.id,

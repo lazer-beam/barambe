@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Label, Divider, Header } from 'semantic-ui-react'
+import axios from 'axios'
 import '../App.css'
-
 
 import { actions } from './duck.Bartender'
 import DrinkGroup from './BartenderDrinkGroup'
@@ -11,9 +11,14 @@ import DrinkGroup from './BartenderDrinkGroup'
   visible: store.dash.visible,
   unfufilledOrders: store.bar.unfufilledOrders,
 }))
+
 class Bartender extends Component {
   componentDidMount() {
     console.log('HERE BITCH: ', this.props.unfufilledOrders)
+    axios.get('/orders/getallpending')
+      .then(orders => {
+        console.log('orders.data', orders.data)
+      })
   }
 
   findAndRemove(tabId, id) {
