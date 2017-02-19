@@ -11,7 +11,8 @@
     "dev": "webpack-dev-server --progress --colors",
     "devDash": "webpack-dashboard webpack-dev-server --progress --colors",
     "test": "DB_TESTING=true mocha --reporter nyan",
-    "specialStart": "nodemon ./server/server.js"
+    "specialStart": "nodemon ./server/server.js",
+    "seed": "node db/seed/seed.js"
   },
   "dependencies": {
     "auth0-lock": "^10.11.0",
