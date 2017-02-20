@@ -26,7 +26,7 @@ class AddCocktails extends Component {
       cocktailName: '',
       cocktailPrice: '',
     })
-    this.props.submitAction(temp, 'cocktail')
+    this.props.submitAction(temp)
   }
   handleCocktailChange(event, data) {
     this.setState({ cocktailName: data.value })

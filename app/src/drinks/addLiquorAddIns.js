@@ -34,6 +34,8 @@ class AddLiquorAddIns extends Component {
     if (this.state.shotPrice) {
       temp.type = 'shot'
       temp.shotPrice = parseFloat(this.state.shotPrice) * 100
+    } else {
+      temp.type = 'liquor'
     }
 
     this.setState({
@@ -42,7 +44,7 @@ class AddLiquorAddIns extends Component {
       shotPrice: '',
       shotDisable: true,
     })
-    this.props.submitAction(temp, 'liquor')
+    this.props.submitAction(temp, temp)
   }
   handleAddInSubmit(e) {
     e.preventDefault()
@@ -75,7 +77,7 @@ class AddLiquorAddIns extends Component {
     this.setState({ addInName: data.value })
   }
   handleAddInPriceChange(event, data) {
-    this.setState({ AddInPrice: data.value })
+    this.setState({ addInPrice: data.value })
   }
 
   render() {
@@ -109,7 +111,7 @@ class AddLiquorAddIns extends Component {
             </Segment>
               <Segment>
                 <Input value={this.state.addInName} onChange={this.handleAddInChange} label="Add an add-in" placeholder="Add-In Name" />
-                <Input value={this.state.addInPrice} onChange={this.AddInPriceChange} label="Add price" placeholder='e.g. "3.95"' />
+                <Input value={this.state.addInPrice} onChange={this.handleAddInPriceChange} label="Add price" placeholder='e.g. "3.95"' />
                 <Button type="submit" onClick={this.handleAddInSubmit}>Submit</Button>
               </Segment>
               {this.props.addIns.map(addIn =>

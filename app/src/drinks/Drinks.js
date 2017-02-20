@@ -48,14 +48,12 @@ class Drinks extends Component {
     this.props.dispatch(actions.toggleMenu(menuName))
   }
 
-  handleDrinkSubmit(drinkObj, type) {
-    console.log('handling drink submit')
-    const temp = drinkObj
-    temp.type = type
-    axios.post(drinkPostingEndpoint, temp)
+  handleDrinkSubmit(drinkObj) {
+    console.log('submit ', drinkObj, ' which is type ', drinkObj.type)
+    axios.post(drinkPostingEndpoint, drinkObj)
       .then(res => { console.log(res) })
       .catch(err => { console.log(err) })
-    this.props.dispatch(actions.postDrink(temp))
+    this.props.dispatch(actions.postDrink(drinkObj))
   }
 
   render() {
