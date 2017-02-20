@@ -18,7 +18,6 @@ const defaultProps = {
 }
 
 export default (state = defaultProps, action) => {
-  console.log('action', action)
   switch (action.type) {
     case types.REMOVE_ORDER:
       return { ...state, unfufilledOrders: action.payload }
@@ -37,13 +36,11 @@ export default (state = defaultProps, action) => {
 
 const formatOrders = orders => {
   const formattedOrders = []
-  console.log('orders tab ids', orders.map(order => order.tabId))
   while (orders.length) {
     formattedOrders.push([orders.shift()])
     let i = 0
     while (i < orders.length) {
       if (formattedOrders[formattedOrders.length - 1][0].tabId === orders[i].tabId) {
-        console.log('TRUEEEEEEEEE')
         formattedOrders[formattedOrders.length - 1].push(orders[i])
       }
       i++

@@ -6,8 +6,6 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  border-style: solid;
-  border-color: red;
 }
 
 #root { 
@@ -20,4 +18,15 @@ body {
 
 .bar_queue_container {
   top: 10px;
+}
+
+/*Bartenders Nav*/
+
+.ui.inverted.menu .selectedNav {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid white;
+}
+
+.ui.inverted.menu .unselectedNav {
+  background: transparent;
 }

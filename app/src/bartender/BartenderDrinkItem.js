@@ -25,7 +25,6 @@ class DrinkItem extends Component {
   render() {
     const tabId = this.props.order.tabId
     const id = this.props.order.id
-    console.log('this.props.order', this.props.order)
     const iconType = (this.props.order.drink.type === 'shot') ? 'lab' : this.props.order.drink.type
     return (
       <Button onClick={() => this.props.removeDrink(tabId, id)}>

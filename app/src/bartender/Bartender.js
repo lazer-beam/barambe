@@ -38,13 +38,13 @@ class Bartender extends Component {
     const props = {
       removeDrink: ::this.findAndRemove,
     }
-    console.log('this.props.unfufilledOrders in render', this.props.unfufilledOrders)
+
     return (
       <Grid columns="equal" relaxed className="revealer">
         <Grid.Column />
         <Grid.Column className="revealer bar_queue_container" width={5}>
           <Header as="h2">
-            <Label className="testing" circular size="large" color="red">6</Label>
+            <Label className="testing" circular size="large" color="red">{this.props.unfufilledOrders.length}</Label>
             <Header.Content>
               Bar Queue
             </Header.Content>
