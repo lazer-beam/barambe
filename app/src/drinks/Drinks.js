@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import axios from 'axios'
+import axios from 'axios'
 import { Grid, Menu, Segment } from 'semantic-ui-react'
 import AddLiquorAddIns from './addLiquorAddIns'
 import AddBeers from './addBeers'
@@ -17,49 +17,58 @@ import { actions } from './duck.Drinks'
 }))
 class Drinks extends Component {
   componentWillMount() {
-    // axios
-    //   .get(drinksEndpoint)
-    //   .then(response => {
-    //     const beers = []
-    //     const cocktails = []
-    //     const liquors = []
+    axios
+      .get('/drinks/getAll')
+      .then(response => {
+        const arrOfDrinkTypes = Object.values(response.data)
+        arrOfDrinkTypes.forEach(drinkArr => {
+          drinkArr.sort((current, next) => {
+            return current.name.charCodeAt(0) - next.name.charCodeAt(0)
+          })
+          drinkArr.forEach(drinkObj => {
+            drinkObj.price = (drinkObj.price / 100).toFixed(2)
+          })
+        })
+        const beers = response.data.beerArr
+        const cocktails = response.data.cocktailArr
+        const liquors = response.data.liquorArr
+        const addIns = response.data.addInArr
 
-    //     const drinksObj = { beers, cocktails, liquors }
+        const drinksObj = { beers, cocktails, liquors, addIns }
+        console.log('drinksObj: ', drinksObj)
 
-    //     response.forEach(drinkObj => {
-    //       const temp = {
-    //         name: drinkObj.name,
-    //         price: (drinkObj.price / 100).toFixed(2),
-    //       }
-    //       if (drinkObj.type === 'cocktail') {
-    //         cocktails.push(temp)
-    //       } else if (drinkObj.type === 'shot') {
-    //         liquors.push(temp)
-    //       } else if (drinkObj.type === 'beer') {
-    //         beers.push(temp)
-    //       }
-    //     })
-    //     this.props.dispatch(actions.getDrinks(drinksObj))
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
+        this.props.dispatch(actions.getDrinks(drinksObj))
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   toggleMenu(menuName) {
     this.props.dispatch(actions.toggleMenu(menuName))
   }
 
+  handleDrinkSubmit(drinkObj, type) {
+    console.log('handling drink submit')
+    const temp = drinkObj
+    temp.type = type
+    axios.post(drinkPostingEndpoint, temp)
+      .then(res => { console.log(res) })
+      .catch(err => { console.log(err) })
+    this.props.dispatch(actions.postDrink(temp))
+  }
+
   render() {
+    this.handleDrinkSubmit = ::this.handleDrinkSubmit
     const addView = this.props.currentAddView
     let renderedView = <AddLiquorAddIns />
 
     if (addView === 'liquorAddIns') {
-      renderedView = <AddLiquorAddIns liquors={this.props.liquors} addIns={this.props.addIns} />
+      renderedView = <AddLiquorAddIns submitAction={this.handleDrinkSubmit} liquors={this.props.liquors} addIns={this.props.addIns} />
     } else if (addView === 'beers') {
-      renderedView = <AddBeers beers={this.props.beers} />
+      renderedView = <AddBeers submitAction={this.handleDrinkSubmit} beers={this.props.beers} />
     } else if (addView === 'cocktails') {
-      renderedView = <AddCocktails cocktails={this.props.cocktails} />
+      renderedView = <AddCocktails submitAction={this.handleDrinkSubmit} cocktails={this.props.cocktails} />
     }
 
     return (

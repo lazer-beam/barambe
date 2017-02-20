@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Input, Button, Divider } from 'semantic-ui-react'
+import { Table, Input, Button } from 'semantic-ui-react'
 
 class AddCocktails extends Component {
   constructor(props) {
@@ -17,10 +17,16 @@ class AddCocktails extends Component {
   handleSubmit(e) {
     e.preventDefault()
     console.log('Cocktail ', this.state.cocktailName, ' costs ', this.state.cocktailPrice)
+    const temp = {
+      name: this.state.cocktailsName,
+      price: parseFloat(this.state.cocktailsPrice) * 100,
+      type: 'cocktail',
+    }
     this.setState({
       cocktailName: '',
       cocktailPrice: '',
     })
+    this.props.submitAction(temp, 'cocktail')
   }
   handleCocktailChange(event, data) {
     this.setState({ cocktailName: data.value })
@@ -31,10 +37,15 @@ class AddCocktails extends Component {
   render() {
     return (
       <div>
+        <Input value={this.state.cocktailName} onChange={this.handleCocktailChange} label="Add a cocktail" placeholder="Cocktail Name" />
+        <Input value={this.state.cocktailPrice} onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
+        <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
         <Table>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell width={3}>Cocktail</Table.HeaderCell>
+              <Table.HeaderCell width={2}>Cocktail</Table.HeaderCell>
+              <Table.HeaderCell width={3}>Liquors</Table.HeaderCell>
+              <Table.HeaderCell width={3}>Add-Ins</Table.HeaderCell>
               <Table.HeaderCell width={2}>Price</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -46,17 +57,18 @@ class AddCocktails extends Component {
                   {cocktail.name}
                 </Table.Cell>
                 <Table.Cell>
+                  {cocktail.liquors === 1 ? cocktail.liquors : cocktail.liquors.join(', ')}
+                </Table.Cell>
+                <Table.Cell>
+                  {cocktail.addIns.length === 1 ? cocktail.addIns : cocktail.addIns.join(', ')}
+                </Table.Cell>
+                <Table.Cell>
                   {cocktail.price}
                 </Table.Cell>
               </Table.Row>,
             )}
           </Table.Body>
         </Table>
-
-        <Input value={this.state.cocktailName} onChange={this.handleCocktailChange} label="Add a cocktail" placeholder="Cocktail Name" />
-        <Input value={this.state.cocktailPrice} onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
-        <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
-        <Divider hidden />
       </div>
     )
   }
