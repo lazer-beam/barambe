@@ -43,7 +43,9 @@ class AddCocktails extends Component {
         <Table>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell width={3}>Cocktail</Table.HeaderCell>
+              <Table.HeaderCell width={2}>Cocktail</Table.HeaderCell>
+              <Table.HeaderCell width={3}>Liquors</Table.HeaderCell>
+              <Table.HeaderCell width={3}>Add-Ins</Table.HeaderCell>
               <Table.HeaderCell width={2}>Price</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -53,6 +55,12 @@ class AddCocktails extends Component {
               <Table.Row key={Math.random() * 100}>
                 <Table.Cell>
                   {cocktail.name}
+                </Table.Cell>
+                <Table.Cell>
+                  {cocktail.liquors === 1 ? cocktail.liquors : cocktail.liquors.join(', ')}
+                </Table.Cell>
+                <Table.Cell>
+                  {cocktail.addIns.length === 1 ? cocktail.addIns : cocktail.addIns.join(', ')}
                 </Table.Cell>
                 <Table.Cell>
                   {cocktail.price}

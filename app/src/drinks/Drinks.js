@@ -22,6 +22,9 @@ class Drinks extends Component {
       .then(response => {
         const arrOfDrinkTypes = Object.values(response.data)
         arrOfDrinkTypes.forEach(drinkArr => {
+          drinkArr.sort((current, next) => {
+            return current.name.charCodeAt(0) - next.name.charCodeAt(0)
+          })
           drinkArr.forEach(drinkObj => {
             drinkObj.price = (drinkObj.price / 100).toFixed(2)
           })
