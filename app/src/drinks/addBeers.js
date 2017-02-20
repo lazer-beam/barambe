@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Button, Input, Divider } from 'semantic-ui-react'
+import { Table, Button, Input } from 'semantic-ui-react'
 
 class AddBeers extends Component {
   constructor(props) {
@@ -17,10 +17,17 @@ class AddBeers extends Component {
   handleSubmit(e) {
     e.preventDefault()
     console.log('Beer ', this.state.beerName, ' costs ', this.state.beerPrice)
+    const temp = {
+      name: this.state.beerName,
+      price: parseFloat(this.state.beerPrice) * 100,
+      type: 'beer',
+    }
+    console.log('Submitting this beer: ', temp)
     this.setState({
       beerName: '',
       beerPrice: '',
     })
+    this.props.submitAction(temp, 'beer')
   }
   handleBeerChange(event, data) {
     this.setState({ beerName: data.value })
@@ -31,6 +38,9 @@ class AddBeers extends Component {
   render() {
     return (
       <div>
+        <Input value={this.state.beerName} onChange={this.handleBeerChange} label="Add a Beer" placeholder="Beer Name" />
+        <Input value={this.state.beerPrice} onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
+        <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
         <Table>
           <Table.Header>
             <Table.Row>
@@ -52,11 +62,6 @@ class AddBeers extends Component {
             )}
           </Table.Body>
         </Table>
-
-        <Input value={this.state.beerName} onChange={this.handleBeerChange} label="Add a Beer" placeholder="Beer Name" />
-        <Input value={this.state.beerPrice} onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
-        <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
-        <Divider hidden />
       </div>
     )
   }
