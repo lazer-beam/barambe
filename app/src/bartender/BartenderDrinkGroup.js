@@ -16,7 +16,7 @@ class DrinkGroup extends Component {
   render() {
     const order = this.props.orders[0]
     const color = order.tableNum ? 'teal' : 'blue'
-    const labelTxt = order.tableNum ? `Table ${order.tableNum}` : order.customerName
+    const labelTxt = order.tableNum ? `Table ${order.tableNum}` : `Pickup #${order.customerNum}`
 
     return (
       <div className="revealer">

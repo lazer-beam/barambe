@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import moment from 'moment'
 // ========================================
 //            ACTIONS
 // ========================================
@@ -34,20 +35,32 @@ export default (state = defaultProps, action) => {
 //            SELECTORS
 // ========================================
 
-const formatOrders = orders => {
-  const formattedOrders = []
+// const sortTabsByTime = tabs => {
+//   tabs = tabs.sort((tabA, tabB) => tabA[0].time <= tabB[0].time)
+//   tabs.forEach(tab => {
+//     console.log('tab[0].time', tab[0].time)
+//     console.log('moment(tab[0].time)', moment(tab[0].time))
+//     console.log('moment(tab[0].time).format()', moment(tab[0].time).format())
+//     console.log(' ')
+//   })
+//   return tabs
+// }
+
+const groupOrdersWithTab = orders => {
+  const formattedTabs = []
   while (orders.length) {
-    formattedOrders.push([orders.shift()])
+    formattedTabs.push([orders.shift()])
     let i = 0
     while (i < orders.length) {
-      if (formattedOrders[formattedOrders.length - 1][0].tabId === orders[i].tabId) {
-        formattedOrders[formattedOrders.length - 1].push(orders[i])
+      if (formattedTabs[formattedTabs.length - 1][0].tabId === orders[i].tabId) {
+        formattedTabs[formattedTabs.length - 1].push(orders[i])
       }
       i++
     }
   }
 
-  return formattedOrders
+  // return sortTabsByTime(formattedTabs)
+  return formattedTabs
 }
 
 // ========================================
@@ -60,7 +73,7 @@ export const actions = {
       dispatch({ type: types.FETCH_ORDERS_START })
       return axios.get('/orders/getallpending')
         .then(orders => {
-          return dispatch({ type: types.FETCH_ORDERS_COMPLETE, payload: formatOrders(orders.data) })
+          return dispatch({ type: types.FETCH_ORDERS_COMPLETE, payload: groupOrdersWithTab(orders.data) })
         })
     }
   },

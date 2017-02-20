@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Sidebar, Segment, Menu } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu, Table, Grid } from 'semantic-ui-react'
 import '../App.css'
 
 import { actions } from './duck.Dashboard'
@@ -13,7 +13,6 @@ import Drinks from '../drinks/Drinks'
   currentNav: store.dash.currentNav,
 }))
 class Dashboard extends Component {
-
   componentDidMount() {
     if (this.props.currentNav === 'home' && !this.props.visible) {
       setTimeout(() => {
@@ -32,23 +31,75 @@ class Dashboard extends Component {
     return (
       <div className="allBody">
         <Sidebar.Pushable as={Segment}>
-          <Sidebar as={Menu} animation="overlay" width="thin" visible={this.props.visible} icon="labeled" vertical inverted>
-            {menuItems.map(mnuItm => <MenuItem
-              navClass={this.props.currentNav === mnuItm[0] ? 'selectedNav' : 'unselectedNav'}
-              icon={mnuItm[0]}
-              label={mnuItm[1]}
-              key={mnuItm[2]}
-              nav={this.handleMenuClick}
-            />)}
-          </Sidebar>
-          <Sidebar.Pusher>
-            <div className="allBody">
-
-              {this.props.currentNav === 'beer' ? <Bartender /> : null}
-              {this.props.currentNav === 'edit' ? <Drinks /> : null}
-
-            </div>
-          </Sidebar.Pusher>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={2}>
+                <Sidebar as={Menu} animation="overlay" width="thin" visible={this.props.visible} icon="labeled" vertical inverted>
+                  {menuItems.map(mnuItm => <MenuItem
+                    navClass={this.props.currentNav === mnuItm[0] ? 'selectedNav' : 'unselectedNav'}
+                    icon={mnuItm[0]}
+                    label={mnuItm[1]}
+                    key={mnuItm[2]}
+                    nav={this.handleMenuClick}
+                  />)}
+                </Sidebar>
+              </Grid.Column>
+              <Grid.Column width={10}>
+                <Grid verticalAlign="middle" columns={2} centered>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Table inverted>
+                        <Table.Header>
+                          <Table.Row>
+                            <Table.HeaderCell>Pickup</Table.HeaderCell>
+                          </Table.Row>
+                        </Table.Header>
+                        <Table.Body>
+                          <Table.Row>
+                            <Table.Cell>Pickup #5</Table.Cell>
+                          </Table.Row>
+                          <Table.Row>
+                            <Table.Cell>Pickup #9</Table.Cell>
+                          </Table.Row>
+                          <Table.Row>
+                            <Table.Cell>Pickup #1</Table.Cell>
+                          </Table.Row>
+                        </Table.Body>
+                      </Table>
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Table inverted>
+                        <Table.Header>
+                          <Table.Row>
+                            <Table.HeaderCell>Table</Table.HeaderCell>
+                          </Table.Row>
+                        </Table.Header>
+                        <Table.Body>
+                          <Table.Row>
+                            <Table.Cell>Table 3</Table.Cell>
+                          </Table.Row>
+                          <Table.Row>
+                            <Table.Cell>Table 13</Table.Cell>
+                          </Table.Row>
+                          <Table.Row>
+                            <Table.Cell>Table 8</Table.Cell>
+                          </Table.Row>
+                        </Table.Body>
+                      </Table>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+              </Grid.Column>
+              <Grid.Column width={4}>
+                <Sidebar.Pusher>
+                  <div>
+                    {this.props.currentNav === 'beer' ? <Bartender /> : null}
+                    {this.props.currentNav === 'edit' ? <Drinks /> : null}
+                  </div>
+                </Sidebar.Pusher>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Sidebar.Pushable>
       </div>
     )

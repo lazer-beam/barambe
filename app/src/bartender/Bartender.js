@@ -41,8 +41,7 @@ class Bartender extends Component {
 
     return (
       <Grid columns="equal" relaxed className="revealer">
-        <Grid.Column />
-        <Grid.Column className="revealer bar_queue_container" width={5}>
+        <Grid.Column className="revealer bar_queue_container">
           <Header as="h2">
             <Label className="testing" circular size="large" color="red">{this.props.unfufilledOrders.length}</Label>
             <Header.Content>
