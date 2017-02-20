@@ -16,9 +16,14 @@ body {
 
 /*Bartender*/
 
-.bar_queue_container {
-  top: 10px;
-  margin-bottom: 35px;
+#bar_queue_container {
+  margin: 35px 0px 35px 125px;
+}
+
+/*Done Orders*/
+
+#done-orders {
+  margin: 75px 0px 0px 50px;
 }
 
 /*Bartenders Nav*/
@@ -30,12 +35,4 @@ body {
 
 .ui.inverted.menu .unselectedNav {
   background: transparent;
-}
-
-/*Done Orders*/
-
-.done-orders {
-  left: -12%;
-  position: relative;
-  margin-top: 35px;
 }

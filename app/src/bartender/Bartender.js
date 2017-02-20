@@ -5,6 +5,7 @@ import '../App.css'
 
 import { actions } from './duck.Bartender'
 import DrinkGroup from './BartenderDrinkGroup'
+import CompletedDrinks from './BartenderCompletedDrinks'
 
 @connect(store => ({
   visible: store.dash.visible,
@@ -40,17 +41,20 @@ class Bartender extends Component {
     }
 
     return (
-      <Grid columns="equal" relaxed className="revealer">
-        <Grid.Column className="revealer bar_queue_container">
-          <Header as="h2">
-            <Label className="testing" circular size="large" color="red">{this.props.unfufilledOrders.length}</Label>
-            <Header.Content>
-              Bar Queue
-            </Header.Content>
-          </Header>
-          <Divider />
-          {this.props.unfufilledOrders.map(orders => <DrinkGroup {...props} key={orders[0].id} orders={orders} />)}
-        </Grid.Column>
+      <Grid>
+        <Grid.Row>
+          <CompletedDrinks />
+          <Grid.Column width={4} id="bar_queue_container" className="revealer">
+            <Header as="h2">
+              <Label className="testing" circular size="large" color="red">{this.props.unfufilledOrders.length}</Label>
+              <Header.Content>
+                Bar Queue
+              </Header.Content>
+            </Header>
+            <Divider />
+            {this.props.unfufilledOrders.map(orders => <DrinkGroup {...props} key={orders[0].id} orders={orders} />)}
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     )
   }

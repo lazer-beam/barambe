@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Sidebar, Segment, Menu, Table, Grid } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu, Grid } from 'semantic-ui-react'
 import '../App.css'
 
 import { actions } from './duck.Dashboard'
@@ -44,53 +44,7 @@ class Dashboard extends Component {
                   />)}
                 </Sidebar>
               </Grid.Column>
-              <Grid.Column width={10}>
-                <Grid verticalAlign="middle" columns={2} centered>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Table inverted>
-                        <Table.Header>
-                          <Table.Row>
-                            <Table.HeaderCell>Pickup</Table.HeaderCell>
-                          </Table.Row>
-                        </Table.Header>
-                        <Table.Body>
-                          <Table.Row>
-                            <Table.Cell>Pickup #5</Table.Cell>
-                          </Table.Row>
-                          <Table.Row>
-                            <Table.Cell>Pickup #9</Table.Cell>
-                          </Table.Row>
-                          <Table.Row>
-                            <Table.Cell>Pickup #1</Table.Cell>
-                          </Table.Row>
-                        </Table.Body>
-                      </Table>
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Table inverted>
-                        <Table.Header>
-                          <Table.Row>
-                            <Table.HeaderCell>Table</Table.HeaderCell>
-                          </Table.Row>
-                        </Table.Header>
-                        <Table.Body>
-                          <Table.Row>
-                            <Table.Cell>Table 3</Table.Cell>
-                          </Table.Row>
-                          <Table.Row>
-                            <Table.Cell>Table 13</Table.Cell>
-                          </Table.Row>
-                          <Table.Row>
-                            <Table.Cell>Table 8</Table.Cell>
-                          </Table.Row>
-                        </Table.Body>
-                      </Table>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-              </Grid.Column>
-              <Grid.Column width={4}>
+              <Grid.Column width={14}>
                 <Sidebar.Pusher>
                   <div>
                     {this.props.currentNav === 'beer' ? <Bartender /> : null}
