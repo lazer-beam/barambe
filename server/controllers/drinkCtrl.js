@@ -6,6 +6,7 @@ const drinks = {
     let beerArr = []
     let liquorArr = []
     let cocktailArr = []
+    let addInArr = []
 
     util.getDrinkType('beer')
     .then(beerResult => {
@@ -15,9 +16,12 @@ const drinks = {
     .then(shotResult => {
       liquorArr = shotResult
       return util.getDrinkType('cocktail')
-    })
-    .then(cocktailResult => {
+    }).then(cocktailResult => {
       cocktailArr = cocktailResult
+      return util.getAddIns()
+    })
+    .then(addInResult => {
+      addInArr = addInResult
       console.log('beerArr: ', beerArr)
       console.log('liquorArr: ', liquorArr)
       console.log('cocktailArr: ', cocktailArr)
@@ -26,6 +30,7 @@ const drinks = {
         beerArr,
         liquorArr,
         cocktailArr,
+        addInArr,
       }
       res.send(allDrinksObj)
     })

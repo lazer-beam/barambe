@@ -1,4 +1,5 @@
 const Drink = require('../../db/models/drinkModel')
+const AddIn = require('../../db/models/addInModel')
 const Promise = require('bluebird')
 
 const getAllDrinks = orders => Promise.all(orders.map(order => Drink.findOne({ where: { id: order.drinkId } })))
@@ -26,6 +27,19 @@ const getAllCocktails = drinkResults => {
   }))
 }
 
+const getAddIns = () => {
+  return AddIn.findAll()
+  .then(addInResults => {
+    return addInResults.map(addIn => {
+      const addInObj = {
+        name: addIn.dataValues.name,
+        price: addIn.dataValues.price,
+      }
+      return addInObj
+    })
+  })
+}
+
 const getDrinkType = drinkType => {
   return Drink.findAll({ where: { type: drinkType } })
   .then(drinkResults => {
@@ -47,4 +61,5 @@ module.exports = {
   getAllDrinks,
   findDrinkByName,
   getDrinkType,
+  getAddIns,
 }

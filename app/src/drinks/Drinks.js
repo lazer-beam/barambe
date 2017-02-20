@@ -29,8 +29,9 @@ class Drinks extends Component {
         const beers = response.data.beerArr
         const cocktails = response.data.cocktailArr
         const liquors = response.data.liquorArr
+        const addIns = response.data.addInArr
 
-        const drinksObj = { beers, cocktails, liquors }
+        const drinksObj = { beers, cocktails, liquors, addIns }
         console.log('drinksObj: ', drinksObj)
 
         this.props.dispatch(actions.getDrinks(drinksObj))
