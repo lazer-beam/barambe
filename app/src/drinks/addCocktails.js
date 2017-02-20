@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Input, Button, Divider } from 'semantic-ui-react'
+import { Table, Input, Button } from 'semantic-ui-react'
 
 class AddCocktails extends Component {
   constructor(props) {
@@ -37,6 +37,9 @@ class AddCocktails extends Component {
   render() {
     return (
       <div>
+        <Input value={this.state.cocktailName} onChange={this.handleCocktailChange} label="Add a cocktail" placeholder="Cocktail Name" />
+        <Input value={this.state.cocktailPrice} onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
+        <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
         <Table>
           <Table.Header>
             <Table.Row>
@@ -58,11 +61,6 @@ class AddCocktails extends Component {
             )}
           </Table.Body>
         </Table>
-
-        <Input value={this.state.cocktailName} onChange={this.handleCocktailChange} label="Add a cocktail" placeholder="Cocktail Name" />
-        <Input value={this.state.cocktailPrice} onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
-        <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
-        <Divider hidden />
       </div>
     )
   }

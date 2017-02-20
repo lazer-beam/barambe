@@ -21,19 +21,17 @@ class Drinks extends Component {
       .get('/drinks/getAll')
       .then(response => {
         const arrOfDrinkTypes = Object.values(response.data)
-        console.log('drinkTypes: ', arrOfDrinkTypes)
         arrOfDrinkTypes.forEach(drinkArr => {
-          console.log('drinkArr before: ', drinkArr)
           drinkArr.forEach(drinkObj => {
             drinkObj.price = (drinkObj.price / 100).toFixed(2)
           })
-          console.log('drinkArr after: ', drinkArr)
         })
         const beers = response.data.beerArr
         const cocktails = response.data.cocktailArr
         const liquors = response.data.liquorArr
 
         const drinksObj = { beers, cocktails, liquors }
+        console.log('drinksObj: ', drinksObj)
 
         this.props.dispatch(actions.getDrinks(drinksObj))
       })

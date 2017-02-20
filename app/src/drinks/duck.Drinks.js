@@ -28,10 +28,10 @@ export default (state = defaultProps, action) => {
     case types.GET_DRINKS:
       return {
         ...state,
-        menuLiquors: action.payload.liquors,
-        menuAddIns: action.payload.addIns,
-        menuBeers: action.payload.beers,
-        menuCocktails: action.payload.cocktails,
+        menuLiquors: action.payload.liquors || state.menuLiquors,
+        menuAddIns: action.payload.addIns || state.menuAddIns,
+        menuBeers: action.payload.beers || state.menuBeers,
+        menuCocktails: action.payload.cocktails || state.menuCocktails,
       }
     case types.POST_DRINKS:
       if (action.payload.type === 'beer') {

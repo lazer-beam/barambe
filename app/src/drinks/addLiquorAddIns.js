@@ -86,12 +86,7 @@ class AddLiquorAddIns extends Component {
             <Segment.Group>
               <Segment inverted color="grey">
               Liquors
-            </Segment>
-              {this.props.liquors.map(liquor =>
-                <Segment key={Math.random() * 100}>
-                  {liquor.name}: {liquor.price}
-                </Segment>,
-            )}
+              </Segment>
               <Segment>
                 <Input value={this.state.liquorName} onChange={this.handleLiquorChange} label="Add a liquor" placeholder="Liquor Name" />
                 <Input value={this.state.liquorPrice} onChange={this.handleLiquorPriceChange} label="Price (as add-in)" placeholder='e.g. "3.95"' />
@@ -99,6 +94,11 @@ class AddLiquorAddIns extends Component {
                 <Button type="submit" onClick={this.handleLiquorSubmit}>Submit</Button>
                 <Checkbox label="Will this be a shot?" onChange={this.handleCheckBox} />
               </Segment>
+              {this.props.liquors.map(liquor =>
+                <Segment key={Math.random() * 100}>
+                  {liquor.name}: {liquor.price}
+                </Segment>,
+            )}
             </Segment.Group>
           </Grid.Column>
 
@@ -107,16 +107,16 @@ class AddLiquorAddIns extends Component {
               <Segment inverted color="grey">
               Add-Ins
             </Segment>
-              {this.props.addIns.map(addIn =>
-                <Segment key={Math.random() * 100}>
-                  {addIn.name}: {addIn.price}
-                </Segment>,
-            )}
               <Segment>
                 <Input value={this.state.addInName} onChange={this.handleAddInChange} label="Add an add-in" placeholder="Add-In Name" />
                 <Input value={this.state.addInPrice} onChange={this.AddInPriceChange} label="Add price" placeholder='e.g. "3.95"' />
                 <Button type="submit" onClick={this.handleAddInSubmit}>Submit</Button>
               </Segment>
+              {this.props.addIns.map(addIn =>
+                <Segment key={Math.random() * 100}>
+                  {addIn.name}: {addIn.price}
+                </Segment>,
+            )}
             </Segment.Group>
           </Grid.Column>
         </Grid>
