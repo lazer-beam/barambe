@@ -3,17 +3,20 @@ import { connect } from 'react-redux'
 import { Grid, Label, Divider, Header } from 'semantic-ui-react'
 import '../App.css'
 
-
 import { actions } from './duck.Bartender'
 import DrinkGroup from './BartenderDrinkGroup'
 
 @connect(store => ({
   visible: store.dash.visible,
   unfufilledOrders: store.bar.unfufilledOrders,
+  fetchedOrders: store.bar.fetchedOrders,
 }))
+
 class Bartender extends Component {
   componentDidMount() {
-    console.log('HERE BITCH: ', this.props.unfufilledOrders)
+    if (!this.props.fetchedOrders) {
+      this.props.dispatch(actions.fetchOrders())
+    }
   }
 
   findAndRemove(tabId, id) {
@@ -35,6 +38,7 @@ class Bartender extends Component {
     const props = {
       removeDrink: ::this.findAndRemove,
     }
+    console.log('this.props.unfufilledOrders in render', this.props.unfufilledOrders)
     return (
       <Grid columns="equal" relaxed className="revealer">
         <Grid.Column />

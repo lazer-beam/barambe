@@ -13,10 +13,6 @@ class DrinkGroup extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log('PARENT HAS MOUNTED: ', this.state.testColor)
-  }
-
   render() {
     const order = this.props.orders[0]
     const color = order.tableNum ? 'teal' : 'blue'
