@@ -20,14 +20,18 @@ class Drinks extends Component {
     axios
       .get('/drinks/getAll')
       .then(response => {
-        response.forEach(drinkArr => {
+        const arrOfDrinkTypes = Object.values(response.data)
+        console.log('drinkTypes: ', arrOfDrinkTypes)
+        arrOfDrinkTypes.forEach(drinkArr => {
+          console.log('drinkArr before: ', drinkArr)
           drinkArr.forEach(drinkObj => {
             drinkObj.price = (drinkObj.price / 100).toFixed(2)
           })
+          console.log('drinkArr after: ', drinkArr)
         })
-        const beers = response.beerArr
-        const cocktails = response.cocktailArr
-        const liquors = response.liquorArr
+        const beers = response.data.beerArr
+        const cocktails = response.data.cocktailArr
+        const liquors = response.data.liquorArr
 
         const drinksObj = { beers, cocktails, liquors }
 
@@ -43,6 +47,7 @@ class Drinks extends Component {
   }
 
   handleDrinkSubmit(drinkObj, type) {
+    console.log('handling drink submit')
     const temp = drinkObj
     temp.type = type
     axios.post(drinkPostingEndpoint, temp)

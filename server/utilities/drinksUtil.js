@@ -27,17 +27,18 @@ const getAllCocktails = drinkResults => {
 }
 
 const getDrinkType = drinkType => {
-  Drink.findAll({ where: { type: drinkType } })
+  return Drink.findAll({ where: { type: drinkType } })
   .then(drinkResults => {
     if (drinkType === 'cocktail') {
       return getAllCocktails(drinkResults)
     }
     return drinkResults.map(drink => {
-      return {
+      const drinkObj = {
         name: drink.dataValues.name,
         price: drink.dataValues.price,
         type: drinkType,
       }
+      return drinkObj
     })
   })
 }

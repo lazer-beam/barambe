@@ -19,14 +19,14 @@ class AddCocktails extends Component {
     console.log('Cocktail ', this.state.cocktailName, ' costs ', this.state.cocktailPrice)
     const temp = {
       name: this.state.cocktailsName,
-      price: this.state.cocktailsPrice,
+      price: parseFloat(this.state.cocktailsPrice) * 100,
       type: 'cocktail',
     }
-    this.props.submitAction(temp, 'cocktail')
     this.setState({
       cocktailName: '',
       cocktailPrice: '',
     })
+    this.props.submitAction(temp, 'cocktail')
   }
   handleCocktailChange(event, data) {
     this.setState({ cocktailName: data.value })
