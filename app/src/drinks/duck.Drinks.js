@@ -34,17 +34,22 @@ export default (state = defaultProps, action) => {
         menuCocktails: action.payload.cocktails || state.menuCocktails,
       }
     case types.POST_DRINKS:
+      action.payload.price = action.payload.textPrice
       if (action.payload.type === 'beer') {
         const temp = state.menuBeers.slice()
-        temp.push(action.payload)
+        temp.unshift(action.payload)
+        console.log('temp: ', temp)
         return { ...state, menuBeers: temp }
       } else if (action.payload.type === 'cocktail') {
         const temp = state.menuCocktails.slice()
-        temp.push(action.payload)
+        temp.unshift(action.payload)
+        console.log('temp: ', temp)
         return { ...state, menuCocktails: temp }
       } else if (action.payload.type === 'liquor') {
         const temp = state.menuLiquors.slice()
-        temp.push(action.payload)
+        action.payload.price = action.payload.liquorTextPrice
+        console.log('temp: ', temp)
+        temp.unshift(action.payload)
         return { ...state, menuLiquors: temp }
       }
       return state

@@ -1,6 +1,11 @@
 const util = require('../utilities/drinksUtil')
 
 const drinks = {
+  addToMenu: (req, res) => {
+    console.log(req.body)
+    res.send()
+  },
+
   getAllDrinks: (req, res) => {
     console.log(`Serving request for ${req.method} where url is ${req.url}`)
     let beerArr = []
@@ -34,11 +39,6 @@ const drinks = {
       }
       res.send(allDrinksObj)
     })
-    // res.send({
-    //   beerArr,
-    //   liquorArr,
-    //   cocktailArr,
-    // })
   },
 }
 

@@ -29,11 +29,13 @@ class AddLiquorAddIns extends Component {
 
     const temp = {
       name: this.state.liquorName,
+      liquorTextPrice: this.state.liquorPrice,
       liquorPrice: parseFloat(this.state.liquorPrice) * 100,
     }
 
     if (this.state.shotPrice) {
       temp.type = 'shot'
+      temp.shotTextPrice = this.state.shotPrice
       temp.shotPrice = parseFloat(this.state.shotPrice) * 100
     } else {
       temp.type = 'liquor'
@@ -53,7 +55,8 @@ class AddLiquorAddIns extends Component {
 
     const temp = {
       name: this.state.addInName,
-      price: this.state.addInPrice,
+      textPrice: this.state.addInPrice,
+      price: parseFloat(this.state.addInPrice) * 100,
       type: 'addIn',
     }
     this.props.submitAction(temp, 'addIn')

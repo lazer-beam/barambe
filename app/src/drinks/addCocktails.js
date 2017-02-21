@@ -19,6 +19,7 @@ class AddCocktails extends Component {
     console.log('Cocktail ', this.state.cocktailName, ' costs ', this.state.cocktailPrice)
     const temp = {
       name: this.state.cocktailsName,
+      textPrice: this.state.cocktailsPrice,
       price: parseFloat(this.state.cocktailsPrice) * 100,
       type: 'cocktail',
     }
