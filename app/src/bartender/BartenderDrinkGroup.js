@@ -14,15 +14,14 @@ class DrinkGroup extends Component {
   }
 
   render() {
-    const order = this.props.orders[0]
-    const color = order.tableNum ? 'teal' : 'blue'
-    const labelTxt = order.tableNum ? `Table ${order.tableNum}` : `Pickup #${order.customerNum}`
-
+    const firstOrder = this.props.tab[0]
+    const color = firstOrder.tableNum ? 'teal' : 'blue'
+    const labelTxt = firstOrder.tableNum ? `Table ${firstOrder.tableNum}` : `Pickup #${firstOrder.customerNum}`
     return (
       <div className="revealer">
         <Button.Group className="revealer" fluid attached="top" vertical>
           <Button color={color}>{labelTxt}</Button>
-          {this.props.orders.map(item => <DrinkItem removeDrink={this.props.removeDrink} key={item.id} color={color} order={item} />)}
+          {this.props.tab.map(order => <DrinkItem removeDrink={this.props.removeDrink} key={order.id} color={color} order={order} />)}
         </Button.Group>
       </div>
     )

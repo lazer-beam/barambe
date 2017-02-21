@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, List } from 'semantic-ui-react'
 import '../App.css'
 
 
@@ -30,6 +30,12 @@ class DrinkItem extends Component {
       <Button onClick={() => this.props.removeDrink(tabId, id)}>
         <Button.Content visible>
           <Icon name={iconType} /> {this.props.order.drink.name}
+          {this.props.order.drink.liquors && this.props.order.drink.liquors.length ? <br /> : null}
+          {this.props.order.drink.liquors && this.props.order.drink.liquors.length ? 'Liquors' : null}
+          <List bulleted items={this.props.order.drink.liquors} />
+          {this.props.order.drink.addIns && this.props.order.drink.addIns.length ? <br /> : null}
+          {this.props.order.drink.addIns && this.props.order.drink.addIns.length ? 'AddIns' : null}
+          <List bulleted items={this.props.order.drink.addIns} />
         </Button.Content>
       </Button>
     )

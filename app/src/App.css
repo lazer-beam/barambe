@@ -35,3 +35,28 @@
   margin-top: 10px;
   float: right;
 }
+
+#bar_queue_container {
+  margin: 35px 0px 35px 7%;
+}
+
+/*
+============ Done Orders ================
+*/
+
+#done-orders {
+  margin: 75px 0px 0px 2%;
+}
+
+/*
+============ Bartenders Nav ================
+*/
+
+.ui.inverted.menu .selectedNav {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid white;
+}
+
+.ui.inverted.menu .unselectedNav {
+  background: transparent;
+}

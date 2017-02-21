@@ -54,6 +54,7 @@ const groupOrdersWithTab = orders => {
     while (i < orders.length) {
       if (formattedTabs[formattedTabs.length - 1][0].tabId === orders[i].tabId) {
         formattedTabs[formattedTabs.length - 1].push(orders[i])
+        orders = orders.slice(0, i).concat(orders.slice(i + 1))
       }
       i++
     }

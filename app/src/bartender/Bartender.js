@@ -35,24 +35,27 @@ class Bartender extends Component {
     this.props.dispatch(actions.removeOrder(newOrders))
   }
 
+  numOfOrders() {
+    return this.props.unfufilledOrders.reduce((numOfOrders, currTab) => numOfOrders + currTab.length, 0)
+  }
+
   render() {
     const props = {
       removeDrink: ::this.findAndRemove,
     }
-
     return (
       <Grid>
         <Grid.Row>
           <CompletedDrinks />
           <Grid.Column width={4} id="bar_queue_container" className="revealer">
             <Header as="h2">
-              <Label className="testing" circular size="large" color="red">{this.props.unfufilledOrders.length}</Label>
+              <Label className="testing" circular size="large" color="red">{this.numOfOrders()}</Label>
               <Header.Content>
                 Bar Queue
               </Header.Content>
             </Header>
             <Divider />
-            {this.props.unfufilledOrders.map(orders => <DrinkGroup {...props} key={orders[0].id} orders={orders} />)}
+            {this.props.unfufilledOrders.map(tab => <DrinkGroup {...props} key={tab[0].id} tab={tab} />)}
           </Grid.Column>
         </Grid.Row>
       </Grid>
