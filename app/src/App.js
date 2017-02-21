@@ -1,23 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-import Dashboard from './dashboard/Dashboard'
-// import LoginSplash from './login/LoginSplash'
-// import { actions } from './login/duck.Login'
-
 import './App.css'
 
 @connect(store => ({
-  loggedIn: store.login.loggedIn,
+  visible: store.dash.visible,
+  currentNav: store.dash.currentNav,
 }))
 class App extends Component {
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
+    const auth = this.props.route.auth
+    const child = this.props.children
+    const children = child ? React.cloneElement(child, { auth }) : null
     return (
       <div className="allBody">
-        <Dashboard />
+        {children}
       </div>
     )
   }

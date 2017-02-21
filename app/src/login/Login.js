@@ -1,12 +1,20 @@
-// import React, { Component } from 'react'
+import React, { Component } from 'react'
 
-// class Login extends Component {
-//   render() {
-//     return (
-//       <div>
-//       </div>
-//     )
-//   }
-// }
+class Login extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      temp: 'Login Success!',
+    }
+  }
 
-// export default Login
+  render() {
+    return (
+      <div>
+        {this.state.temp}
+      </div>
+    )
+  }
+}
+
+export default Login

@@ -22,6 +22,10 @@ app.get('/test', (req, res) => {
   res.status(200).send('Hello World!')
 })
 
+app.get('*', (request, response) => {
+  response.sendFile(path.join(__dirname, '/../app/public/index.html'))
+})
+
 io.on('connection', socket => socketHub(socket))
 
 const port = 1337

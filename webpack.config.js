@@ -3,6 +3,7 @@ const path = require('path')
 
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
+const DotenvPlugin = require('webpack-dotenv-plugin')
 
 const SRC_DIR = path.resolve(__dirname, 'app/src')
 const PUBLIC_DIR = path.resolve(__dirname, 'app/public')
@@ -59,9 +60,12 @@ module.exports = {
     new CopyWebpackPlugin([{ from: PUBLIC_DIR }]),
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin(),
+    new DotenvPlugin({
+      sample: './.env.example',
+      path: './.env',
+    }),
   ],
   watch: true,
   stats: { colors: true },
   devtool: 'inline-source-map',
 }
-
