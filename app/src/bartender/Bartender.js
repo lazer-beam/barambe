@@ -19,6 +19,21 @@ class Bartender extends Component {
     }
   }
 
+  findAndRemove(tabId, id) {
+    const newOrders = []
+    this.props.unfufilledOrders.forEach(item => {
+      if (item[0].tabId === tabId) {
+        if (item.length > 1) {
+          const toChange = item.slice().filter(val => val.id !== id)
+          newOrders.push(toChange)
+        }
+      } else {
+        newOrders.push(item.slice())
+      }
+    })
+    this.props.dispatch(actions.removeOrder(newOrders))
+  }
+
   render() {
     const props = {
       removeDrink: ::this.findAndRemove,
