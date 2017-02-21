@@ -2,11 +2,13 @@ import Auth0Lock from 'auth0-lock'
 import { browserHistory } from 'react-router'
 import Promise from 'bluebird'
 
+import { isTokenExpired } from './jwtHelper'
+
 export default class AuthService {
   constructor(clientId, domain) {
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: 'http://localhost:1337/login',
+        redirectUrl: 'http://localhost:1337/dashboard',
         responseType: 'token',
       },
     })
@@ -19,11 +21,15 @@ export default class AuthService {
   _doAuthentication(authResult) {
     this.setToken(authResult.idToken)
     // navigate to the home route
-    browserHistory.replace('/home')
+    browserHistory.replace('/dashboard')
     // Async loads the user profile data
     this.getProfileBlu(authResult.idToken).then(profile => {
       this.setProfile(profile)
     }).catch(err => console.log('Error loading the Profile: ', err))
+  }
+
+  _authorizationError(error) {
+    console.log('Authentication Error', error)
   }
 
   login() {

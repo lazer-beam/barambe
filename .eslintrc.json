@@ -48,7 +48,8 @@
         "newline-per-chained-call": "off",
         "prefer-stateless-function": [0, { "ignorePureComponents": true }],
         "no-underscore-dangle": ["error", { "allowAfterThis": true }],
-        "no-unneeded-ternary": "off"
+        "no-unneeded-ternary": "off",
+        "react/jsx-no-bind": [0, {"allowBind": true}]
     },
     "extends": "airbnb",
     "plugins": [
