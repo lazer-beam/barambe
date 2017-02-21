@@ -66,7 +66,12 @@ class Drinks extends Component {
     } else if (addView === 'beers') {
       renderedView = <AddBeers submitAction={this.handleDrinkSubmit} beers={this.props.beers} />
     } else if (addView === 'cocktails') {
-      renderedView = <AddCocktails submitAction={this.handleDrinkSubmit} cocktails={this.props.cocktails} />
+      renderedView = (<AddCocktails
+        submitAction={this.handleDrinkSubmit}
+        liquors={this.props.liquors}
+        addIns={this.props.addIns}
+        cocktails={this.props.cocktails}
+      />)
     }
 
     return (
