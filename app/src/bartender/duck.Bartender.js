@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import moment from 'moment'
 // ========================================
 //            ACTIONS
 // ========================================
@@ -16,6 +15,7 @@ const defaultProps = {
   unfufilledOrders: [],
   fetchingOrders: false,
   fetchedOrders: false,
+  completingOrders: ['test'],
 }
 
 export default (state = defaultProps, action) => {
@@ -35,17 +35,6 @@ export default (state = defaultProps, action) => {
 //            SELECTORS
 // ========================================
 
-// const sortTabsByTime = tabs => {
-//   tabs = tabs.sort((tabA, tabB) => tabA[0].time <= tabB[0].time)
-//   tabs.forEach(tab => {
-//     console.log('tab[0].time', tab[0].time)
-//     console.log('moment(tab[0].time)', moment(tab[0].time))
-//     console.log('moment(tab[0].time).format()', moment(tab[0].time).format())
-//     console.log(' ')
-//   })
-//   return tabs
-// }
-
 const groupOrdersWithTab = orders => {
   const formattedTabs = []
   while (orders.length) {
@@ -60,7 +49,6 @@ const groupOrdersWithTab = orders => {
     }
   }
 
-  // return sortTabsByTime(formattedTabs)
   return formattedTabs
 }
 

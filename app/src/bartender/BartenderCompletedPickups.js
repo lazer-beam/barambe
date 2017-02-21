@@ -6,19 +6,19 @@ export default () => (
     <Table inverted>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell textAlign="center">Pickup Completed</Table.HeaderCell>
+          <Table.HeaderCell textAlign="center">Pickup‘s Completed</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        <Table.Row>
-          <Table.Cell>Pickup #5</Table.Cell>
+        {/* <Table.Row>
+          <Table.Cell textAlign="center">Pickup #5</Table.Cell>
         </Table.Row>
         <Table.Row>
-          <Table.Cell>Pickup #9</Table.Cell>
+          <Table.Cell textAlign="center">Pickup #9</Table.Cell>
         </Table.Row>
         <Table.Row>
-          <Table.Cell>Pickup #1</Table.Cell>
-        </Table.Row>
+          <Table.Cell textAlign="center">Pickup #1</Table.Cell>
+        </Table.Row>*/}
       </Table.Body>
     </Table>
   </Grid.Column>

@@ -12,6 +12,7 @@ import Drinks from '../drinks/Drinks'
   visible: store.dash.visible,
   currentNav: store.dash.currentNav,
 }))
+
 class Dashboard extends Component {
   componentDidMount() {
     if (this.props.currentNav === 'home' && !this.props.visible) {

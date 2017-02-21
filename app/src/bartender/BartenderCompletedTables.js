@@ -6,19 +6,19 @@ export default () => (
     <Table inverted>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell textAlign="center">Table Completed</Table.HeaderCell>
+          <Table.HeaderCell textAlign="center">Table‘s Completed</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        <Table.Row>
-          <Table.Cell>Table 3</Table.Cell>
+        {/* <Table.Row>
+          <Table.Cell textAlign="center">Table 3</Table.Cell>
         </Table.Row>
         <Table.Row>
-          <Table.Cell>Table 13</Table.Cell>
+          <Table.Cell textAlign="center">Table 13</Table.Cell>
         </Table.Row>
         <Table.Row>
-          <Table.Cell>Table 8</Table.Cell>
-        </Table.Row>
+          <Table.Cell textAlign="center">Table 8</Table.Cell>
+        </Table.Row>*/}
       </Table.Body>
     </Table>
   </Grid.Column>

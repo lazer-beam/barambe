@@ -40,6 +40,17 @@
   margin: 35px 0px 35px 7%;
 }
 
+#teal {
+  background-color: #00B5AD
+}
+
+#blue {
+  background-color: #2185D0
+}
+
+#orders-curr-completing {
+  margin-bottom: 50px;
+}
 /*
 ============ Done Orders ================
 */
