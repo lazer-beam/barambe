@@ -49,7 +49,8 @@
         "prefer-stateless-function": [0, { "ignorePureComponents": true }],
         "no-underscore-dangle": ["error", { "allowAfterThis": true }],
         "no-unneeded-ternary": "off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "react/jsx-no-bind": [0, {"allowBind": true}]
     },
     "extends": "airbnb",
     "plugins": [
