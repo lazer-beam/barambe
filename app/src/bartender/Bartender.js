@@ -21,6 +21,7 @@ class Bartender extends Component {
     super(props)
     this.checkIfAllOrdersDone = ::this.checkIfAllOrdersDone
     this.completeTab = ::this.completeTab
+    this.getNonCompletedOrders = ::this.getNonCompletedOrders
   }
 
   componentDidMount() {
@@ -33,12 +34,18 @@ class Bartender extends Component {
     this.checkIfAllOrdersDone()
   }
 
+  getNonCompletedOrders(ordersToComplete) {
+    return this.props.unfufilledOrders.filter(currTab => currTab[0].id !== ordersToComplete[0].id)
+  }
+
   completeTab(ordersToComplete) {
     const tab = [ordersToComplete]
 
-    ordersToComplete[0].tableNum === 0 ? this.props.dispatch(actions.setDonePickupOrders(tab)) : this.props.dispatch(actions.setDoneTableOrders(tab))
+    ordersToComplete[0].tableNum === 0
+    ? this.props.dispatch(actions.setDonePickupOrders(tab))
+    : this.props.dispatch(actions.setDoneTableOrders(tab))
 
-    this.props.dispatch(actions.resetRemainingTabs(this.props.unfufilledOrders.filter(currTab => currTab[0].id !== ordersToComplete[0].id)))
+    this.props.dispatch(actions.resetRemainingTabs(this.getNonCompletedOrders(ordersToComplete)))
   }
 
   findAndRemove(tabId, id) {
