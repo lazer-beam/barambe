@@ -19,6 +19,7 @@ class AddBeers extends Component {
     console.log('Beer ', this.state.beerName, ' costs ', this.state.beerPrice)
     const temp = {
       name: this.state.beerName,
+      textPrice: this.state.beerPrice,
       price: parseFloat(this.state.beerPrice) * 100,
       type: 'beer',
     }
@@ -27,7 +28,7 @@ class AddBeers extends Component {
       beerName: '',
       beerPrice: '',
     })
-    this.props.submitAction(temp, 'beer')
+    this.props.submitAction(temp)
   }
   handleBeerChange(event, data) {
     this.setState({ beerName: data.value })

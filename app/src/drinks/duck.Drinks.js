@@ -22,6 +22,7 @@ const defaultProps = {
 }
 
 export default (state = defaultProps, action) => {
+  console.log('action in reducer: ', JSON.stringify(action))
   switch (action.type) {
     case types.TOGGLE_MENU:
       return { ...state, currentAddView: action.payload }
@@ -34,18 +35,27 @@ export default (state = defaultProps, action) => {
         menuCocktails: action.payload.cocktails || state.menuCocktails,
       }
     case types.POST_DRINKS:
+      action.payload.price = action.payload.textPrice
       if (action.payload.type === 'beer') {
         const temp = state.menuBeers.slice()
-        temp.push(action.payload)
+        temp.unshift(action.payload)
+        console.log('temp: ', temp)
         return { ...state, menuBeers: temp }
       } else if (action.payload.type === 'cocktail') {
         const temp = state.menuCocktails.slice()
-        temp.push(action.payload)
+        temp.unshift(action.payload)
+        console.log('temp: ', temp)
         return { ...state, menuCocktails: temp }
       } else if (action.payload.type === 'liquor') {
         const temp = state.menuLiquors.slice()
-        temp.push(action.payload)
+        console.log('temp: ', temp)
+        temp.unshift(action.payload)
         return { ...state, menuLiquors: temp }
+      } else if (action.payload.type === 'addIn') {
+        const temp = state.menuAddIns.slice()
+        console.log('temp: ', temp)
+        temp.unshift(action.payload)
+        return { ...state, menuAddIns: temp }
       }
       return state
     default:
@@ -59,7 +69,10 @@ export default (state = defaultProps, action) => {
 export const actions = {
   toggleMenu: menuName => ({ type: types.TOGGLE_MENU, payload: menuName }),
   getDrinks: drinksObj => ({ type: types.GET_DRINKS, payload: drinksObj }),
-  postDrink: newDrinkObj => ({ type: types.POST_DRINKS, payload: newDrinkObj }),
+  postDrink: newDrinkObj => {
+    console.log('newDrinkObj: ', JSON.stringify(newDrinkObj))
+    return { type: types.POST_DRINKS, payload: newDrinkObj }
+  },
   // getBeers: beerArr => ({type: types.GET_BEERS, payload: beerArr}),
   // getCocktails: cocktailArr => ({type: types.GET_COCKTAILS, payload: cocktailArr}),
   // getLiquors: liquorArr => ({type: types.GET_LIQUORS, payload: liquorArr}),
