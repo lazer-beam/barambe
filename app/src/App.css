@@ -30,8 +30,48 @@
   margin-right: 10px;
 }
 
-.testing {
-  margin-right: 20px;
-  margin-top: 10px;
-  float: right;
+#order-cnt {
+  margin: 0 10px 0 0;
+  float: left;
+}
+
+#bar_queue_container {
+  margin: 35px 0px 35px 7%;
+}
+
+#teal {
+  background-color: #00B5AD
+}
+
+#blue {
+  background-color: #2185D0
+}
+
+#complete {
+  background-color: #BABBBC
+}
+
+/*
+============ Done Orders ================
+*/
+
+#done-orders {
+  margin: 75px 0px 0px 2%;
+}
+
+#completed-table {
+  height: 0px;
+}
+
+/*
+============ Bartenders Nav ================
+*/
+
+.ui.inverted.menu .selectedNav {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid white;
+}
+
+.ui.inverted.menu .unselectedNav {
+  background: transparent;
 }

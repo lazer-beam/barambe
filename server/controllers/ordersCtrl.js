@@ -1,3 +1,5 @@
+const Promise = require('bluebird')
+
 const ordersUtil = require('../utilities/ordersUtil')
 
 const orders = {
@@ -21,6 +23,16 @@ const orders = {
     ordersUtil.createOrder(req.body.drinkName, req.body.tabId)
       .then(order => {
         res.send(`Successfully created order ${order.dataValues.id}`)
+      }).catch(err => {
+        res.status(500).send(err)
+      })
+  },
+  closeMultiple: (req, res) => {
+    const ordersToClose = req.body
+
+    Promise.all(ordersToClose.map(order => ordersUtil.closeOrder(order.id)))
+      .then(() => {
+        res.send(`Successfully closed ${ordersToClose.length} orders`)
       }).catch(err => {
         res.status(500).send(err)
       })

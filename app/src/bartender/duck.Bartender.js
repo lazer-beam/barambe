@@ -6,6 +6,9 @@ export const types = {
   REMOVE_ORDER: 'BAR/REMOVE_ORDER',
   FETCH_ORDERS_START: 'BAR/FETCH_ORDERS_START',
   FETCH_ORDERS_COMPLETE: 'BAR/FETCH_ORDERS_COMPLETE',
+  COMPLETE_TABLE_ORDERS: 'BAR/COMPLETE_TABLE_ORDERS',
+  COMPLETE_PICKUP_ORDERS: 'BAR/COMPLETE_PICKUP_ORDERS',
+  REMOVE_TAB_FROM_PENDING: 'BAR/REMOVE_TAB_FROM_PENDING',
 }
 
 // ========================================
@@ -15,10 +18,11 @@ const defaultProps = {
   unfufilledOrders: [],
   fetchingOrders: false,
   fetchedOrders: false,
+  donePickupOrders: [],
+  doneTableOrders: [],
 }
 
 export default (state = defaultProps, action) => {
-  console.log('action', action)
   switch (action.type) {
     case types.REMOVE_ORDER:
       return { ...state, unfufilledOrders: action.payload }
@@ -26,6 +30,14 @@ export default (state = defaultProps, action) => {
       return { ...state, fetchingOrders: true }
     case types.FETCH_ORDERS_COMPLETE:
       return { ...state, fetchingOrders: false, fetchedOrders: true, unfufilledOrders: action.payload }
+    case types.ORDER_TO_COMPLETE:
+      return { ...state, completingOrders: state.completingOrders.concat(action.payload) }
+    case types.COMPLETE_PICKUP_ORDERS:
+      return { ...state, donePickupOrders: state.donePickupOrders.concat(action.payload) }
+    case types.COMPLETE_TABLE_ORDERS:
+      return { ...state, doneTableOrders: state.doneTableOrders.concat(action.payload) }
+    case types.REMOVE_TAB_FROM_PENDING:
+      return { ...state, unfufilledOrders: action.payload }
     default:
       return state
   }
@@ -35,36 +47,38 @@ export default (state = defaultProps, action) => {
 //            SELECTORS
 // ========================================
 
-const formatOrders = orders => {
-  const formattedOrders = []
-  console.log('orders tab ids', orders.map(order => order.tabId))
+const groupOrdersWithTab = orders => {
+  const formattedTabs = []
   while (orders.length) {
-    formattedOrders.push([orders.shift()])
+    formattedTabs.push([orders.shift()])
     let i = 0
     while (i < orders.length) {
-      if (formattedOrders[formattedOrders.length - 1][0].tabId === orders[i].tabId) {
-        console.log('TRUEEEEEEEEE')
-        formattedOrders[formattedOrders.length - 1].push(orders[i])
+      if (formattedTabs[formattedTabs.length - 1][0].tabId === orders[i].tabId) {
+        formattedTabs[formattedTabs.length - 1].push(orders[i])
+        orders = orders.slice(0, i).concat(orders.slice(i + 1))
       }
       i++
     }
   }
 
-  return formattedOrders
+  return formattedTabs
 }
 
 // ========================================
 //           ACTION CREATORS
 // ========================================
 export const actions = {
-  removeOrder: orders => ({ type: types.REMOVE_ORDER, payload: orders }),
+  resetOrders: tab => ({ type: types.REMOVE_ORDER, payload: tab }),
   fetchOrders: () => {
     return dispatch => {
       dispatch({ type: types.FETCH_ORDERS_START })
       return axios.get('/orders/getallpending')
         .then(orders => {
-          return dispatch({ type: types.FETCH_ORDERS_COMPLETE, payload: formatOrders(orders.data) })
+          return dispatch({ type: types.FETCH_ORDERS_COMPLETE, payload: groupOrdersWithTab(orders.data) })
         })
     }
   },
+  setDonePickupOrders: tab => ({ type: types.COMPLETE_PICKUP_ORDERS, payload: tab }),
+  setDoneTableOrders: tab => ({ type: types.COMPLETE_TABLE_ORDERS, payload: tab }),
+  resetRemainingTabs: remainingTabs => ({ type: types.REMOVE_TAB_FROM_PENDING, payload: remainingTabs }),
 }
