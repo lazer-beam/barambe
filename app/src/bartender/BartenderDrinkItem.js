@@ -30,7 +30,7 @@ class DrinkItem extends Component {
         {this.props.order.complete ? <strike> <Button.Content visible>
           <Icon name={iconType} /> {this.props.order.drink.name}
         </Button.Content>
-        </strike> : <Button.Content visible>
+        </strike> : <Button.Content>
           <Icon name={iconType} /> {this.props.order.drink.name}
         </Button.Content>}
       </Button>

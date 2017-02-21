@@ -9,7 +9,7 @@ export default props => {
   }))
 
   return (
-    <Grid.Column>
+    <Grid.Column id="completed-table">
       <Table inverted>
         <Table.Header>
           <Table.Row>
