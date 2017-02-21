@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Label, Divider, Header } from 'semantic-ui-react'
-import '../App.css'
+import axios from 'axios'
 
+import '../App.css'
 import { actions } from './duck.Bartender'
 import DrinkGroup from './BartenderDrinkGroup'
 import CompletedDrinks from './BartenderCompletedDrinks'
@@ -17,6 +18,10 @@ import CompletedDrinks from './BartenderCompletedDrinks'
 }))
 
 class Bartender extends Component {
+  static sendServerClosedTab(tab) {
+    axios.put('/orders/closeorders/', tab)
+  }
+
   constructor(props) {
     super(props)
     this.checkIfAllOrdersDone = ::this.checkIfAllOrdersDone
@@ -61,6 +66,7 @@ class Bartender extends Component {
     this.props.unfufilledOrders.forEach(tab => {
       if (tab.filter(order => order.complete).length === tab.length) {
         context.completeTab(tab)
+        context.constructor.sendServerClosedTab(tab)
       }
     })
   }
