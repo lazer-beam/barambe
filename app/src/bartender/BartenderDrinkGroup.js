@@ -25,12 +25,13 @@ class DrinkGroup extends Component {
     const labelTxt = firstOrder.tableNum ? `Table ${firstOrder.tableNum}` : `Pickup #${firstOrder.customerNum}`
 
     return (
-      <div className="revealer">
-        <Button.Group className="revealer" fluid attached="top" vertical>
-          <Button color={color}>{labelTxt}</Button>
-          {this.formatCompletedDrinksLast().map(order => <DrinkItem removeDrink={this.props.removeDrink} key={order.id} color={color} order={order} />)}
-        </Button.Group>
-      </div>
+      <Button.Group className="revealer" fluid attached="top" vertical>
+        <Button color={color}>{labelTxt}</Button>
+        {this.formatCompletedDrinksLast().map(order => {
+          return this.props.removeDrink ? <DrinkItem removeDrink={this.props.removeDrink} key={order.id} color={color} order={order} />
+          : <DrinkItem key={order.id} color={color} order={order} />
+        })}
+      </Button.Group>
     )
   }
 }

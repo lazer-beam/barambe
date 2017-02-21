@@ -74,10 +74,10 @@ class Bartender extends Component {
           <CompletedDrinks completedTables={this.props.doneTableOrders} completedPickups={this.props.donePickupOrders} />
           <Grid.Column width={4} id="bar_queue_container" className="revealer">
             <Header as="h2">
-              <Label className="testing" circular size="large" color="red">{props.numOfOrders()}</Label>
               <Header.Content>
                 Bar Queue
               </Header.Content>
+              <Label id="order-cnt" circular size="large" color="red">{props.numOfOrders()}</Label>
             </Header>
             <Divider />
             {this.props.unfufilledOrders.map(tab => <DrinkGroup {...props} key={tab[0].id} tab={tab} />)}
