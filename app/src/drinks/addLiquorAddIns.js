@@ -11,6 +11,7 @@ class AddLiquorAddIns extends Component {
       shotPrice: '',
       addInName: '',
       addInPrice: '',
+      shotDisabled: true,
     }
     this.handleLiquorSubmit = ::this.handleLiquorSubmit
     this.handleLiquorChange = ::this.handleLiquorChange
@@ -42,7 +43,7 @@ class AddLiquorAddIns extends Component {
       liquorName: '',
       liquorPrice: '',
       shotPrice: '',
-      shotDisable: true,
+      shotDisabled: true,
     })
     this.props.submitAction(temp, temp)
   }
@@ -70,8 +71,10 @@ class AddLiquorAddIns extends Component {
   handleShotPriceChange(event, data) {
     this.setState({ shotPrice: data.value })
   }
-  handleCheckShot() {
-    this.setState({ shotDisable: !this.shotDisable })
+  handleCheckShot(event, data) {
+    console.log('event: ', event)
+    console.log('data: ', data)
+    this.setState({ shotDisabled: data.checked })
   }
   handleAddInChange(event, data) {
     this.setState({ addInName: data.value })
@@ -92,9 +95,9 @@ class AddLiquorAddIns extends Component {
               <Segment>
                 <Input value={this.state.liquorName} onChange={this.handleLiquorChange} label="Add a liquor" placeholder="Liquor Name" />
                 <Input value={this.state.liquorPrice} onChange={this.handleLiquorPriceChange} label="Price (as add-in)" placeholder='e.g. "3.95"' />
-                <Input value={this.state.shotPrice} onChange={this.handleShotPriceChange} label="Price (as shot)" placeholder="blank for non-shot" disabled={this.shotDisabled} />
+                <Input value={this.state.shotPrice} onChange={this.handleShotPriceChange} label="Price (as shot)" placeholder="blank for non-shot" disabled={this.state.shotDisabled} />
                 <Button type="submit" onClick={this.handleLiquorSubmit}>Submit</Button>
-                <Checkbox label="Will this be a shot?" onChange={this.handleCheckBox} />
+                <Checkbox label="Will this be a shot?" onClick={this.handleCheckShot} />
               </Segment>
               {this.props.liquors.map(liquor =>
                 <Segment key={Math.random() * 100}>
