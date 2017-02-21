@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Input, Button } from 'semantic-ui-react'
+import { Table, Input, Button, Dropdown } from 'semantic-ui-react'
 
 class AddCocktails extends Component {
   constructor(props) {
@@ -8,25 +8,34 @@ class AddCocktails extends Component {
     this.state = {
       cocktailName: '',
       cocktailPrice: '',
+      cocktailLiquors: [],
+      cocktailAddIns: [],
     }
     this.handleSubmit = ::this.handleSubmit
     this.handleCocktailChange = ::this.handleCocktailChange
     this.handlePriceChange = ::this.handlePriceChange
+    this.handleLiquorChange = ::this.handleLiquorChange
+    this.handleAddInsChange = ::this.handleAddInsChange
   }
 
   handleSubmit(e) {
     e.preventDefault()
     console.log('Cocktail ', this.state.cocktailName, ' costs ', this.state.cocktailPrice)
     const temp = {
-      name: this.state.cocktailsName,
-      price: parseFloat(this.state.cocktailsPrice) * 100,
+      name: this.state.cocktailName,
+      textPrice: this.state.cocktailPrice,
+      price: parseFloat(this.state.cocktailPrice) * 100,
+      liquors: this.state.cocktailLiquors,
+      addIns: this.state.cocktailAddIns,
       type: 'cocktail',
     }
     this.setState({
       cocktailName: '',
       cocktailPrice: '',
+      cocktailLiquors: [],
+      cocktailAddIns: [],
     })
-    this.props.submitAction(temp, 'cocktail')
+    this.props.submitAction(temp)
   }
   handleCocktailChange(event, data) {
     this.setState({ cocktailName: data.value })
@@ -34,11 +43,34 @@ class AddCocktails extends Component {
   handlePriceChange(event, data) {
     this.setState({ cocktailPrice: data.value })
   }
+  handleLiquorChange(event, data) {
+    this.setState({ cocktailLiquors: data.value })
+  }
+  handleAddInsChange(event, data) {
+    this.setState({ cocktailAddIns: data.value })
+  }
   render() {
+    const liquorOptions = this.props.liquors.map(liquor => {
+      return {
+        key: liquor.name,
+        text: liquor.name,
+        value: liquor.name,
+      }
+    })
+
+    const addInOptions = this.props.addIns.map(addIn => {
+      return {
+        key: addIn.name,
+        text: addIn.name,
+        value: addIn.name,
+      }
+    })
     return (
       <div>
         <Input value={this.state.cocktailName} onChange={this.handleCocktailChange} label="Add a cocktail" placeholder="Cocktail Name" />
         <Input value={this.state.cocktailPrice} onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
+        <Dropdown placeholder="Select Liquors" onChange={this.handleLiquorChange} fluid multiple search selection options={liquorOptions} />
+        <Dropdown placeholder="Select Add-Ins" onChange={this.handleAddInsChange} fluid multiple search selection options={addInOptions} />
         <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
         <Table>
           <Table.Header>

@@ -49,14 +49,12 @@ class Drinks extends Component {
     this.props.dispatch(actions.toggleMenu(menuName))
   }
 
-  handleDrinkSubmit(drinkObj, type) {
-    console.log('handling drink submit')
-    const temp = drinkObj
-    temp.type = type
-    axios.post(drinkPostingEndpoint, temp)
+  handleDrinkSubmit(drinkObj) {
+    console.log('submit ', drinkObj, ' which is type ', drinkObj.type)
+    axios.post('/drinks/addToMenu', drinkObj)
       .then(res => { console.log(res) })
       .catch(err => { console.log(err) })
-    this.props.dispatch(actions.postDrink(temp))
+    this.props.dispatch(actions.postDrink(drinkObj))
   }
 
   render() {
@@ -69,7 +67,12 @@ class Drinks extends Component {
     } else if (addView === 'beers') {
       renderedView = <AddBeers submitAction={this.handleDrinkSubmit} beers={this.props.beers} />
     } else if (addView === 'cocktails') {
-      renderedView = <AddCocktails submitAction={this.handleDrinkSubmit} cocktails={this.props.cocktails} />
+      renderedView = (<AddCocktails
+        submitAction={this.handleDrinkSubmit}
+        liquors={this.props.liquors}
+        addIns={this.props.addIns}
+        cocktails={this.props.cocktails}
+      />)
     }
 
     return (
