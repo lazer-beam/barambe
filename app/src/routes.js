@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, IndexRedirect, IndexRoute } from 'react-router'
+import { Route, IndexRedirect } from 'react-router'
 import AuthService from './util/AuthService'
 
 import App from './App'
@@ -21,7 +21,7 @@ const requireAuth = (nextState, replace) => {
 export default (
   <Route path="/" component={App} auth={auth}>
     <IndexRedirect to="/dashboard" />
-    <Route path="dashboard" component={Dashboard} />
+    <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
     <Route path="home" component={LoginSplash} />
     <Route path="login" component={Login} />
 

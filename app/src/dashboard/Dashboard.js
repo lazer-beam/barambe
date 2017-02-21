@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Sidebar, Segment, Menu } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu, Icon } from 'semantic-ui-react'
 import '../App.css'
 
 import { actions } from './duck.Dashboard'
@@ -15,6 +15,8 @@ import Drinks from '../drinks/Drinks'
 class Dashboard extends Component {
 
   componentDidMount() {
+    console.log('HERE ARE THE PROPS!')
+    console.log(this.props)
     if (this.props.currentNav === 'home' && !this.props.visible) {
       setTimeout(() => {
         this.props.dispatch(actions.toggleSidebarOut())
@@ -26,6 +28,11 @@ class Dashboard extends Component {
     this.props.dispatch(actions.navSelection(load))
   }
 
+  handleLogout() {
+    console.log('LOGGING OUT!!!')
+    this.props.auth.logout()
+  }
+
   render() {
     this.handleMenuClick = ::this.handleMenuClick
     const menuItems = [['home', 'Home', 22], ['beer', 'Bartender', 18], ['edit', 'Edit Drinks', 4]]
@@ -34,6 +41,10 @@ class Dashboard extends Component {
         <Sidebar.Pushable as={Segment}>
           <Sidebar as={Menu} animation="push" width="thin" visible={this.props.visible} icon="labeled" vertical inverted>
             {menuItems.map(mnuItm => <MenuItem icon={mnuItm[0]} label={mnuItm[1]} key={mnuItm[2]} nav={this.handleMenuClick} />)}
+            <Menu.Item onClick={() => ::this.handleLogout()}>
+              <Icon name="sign out" />
+              Sign Out
+            </Menu.Item>
           </Sidebar>
           <Sidebar.Pusher>
             <div className="allBody">

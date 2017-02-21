@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 
 class Login extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      temp: 'Login Success!',
+    }
+  }
+
   render() {
     return (
       <div>
-      YAAAAAAAAAA
+        {this.state.temp}
       </div>
     )
   }
