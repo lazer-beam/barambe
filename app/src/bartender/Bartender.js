@@ -6,37 +6,56 @@ import '../App.css'
 import { actions } from './duck.Bartender'
 import DrinkGroup from './BartenderDrinkGroup'
 import CompletedDrinks from './BartenderCompletedDrinks'
-import CompletingOrders from './BartenderCompletingOrders'
 
 @connect(store => ({
   visible: store.dash.visible,
   unfufilledOrders: store.bar.unfufilledOrders,
   fetchedOrders: store.bar.fetchedOrders,
   completingOrders: store.bar.completingOrders,
+  donePickupOrders: store.bar.donePickupOrders,
+  doneTableOrders: store.bar.doneTableOrders,
 }))
 
 class Bartender extends Component {
+  constructor(props) {
+    super(props)
+    this.checkIfAllOrdersDone = ::this.checkIfAllOrdersDone
+    this.completeTab = ::this.completeTab
+  }
+
   componentDidMount() {
     if (!this.props.fetchedOrders) {
       this.props.dispatch(actions.fetchOrders())
     }
   }
 
+  componentDidUpdate() {
+    this.checkIfAllOrdersDone()
+  }
+
+  completeTab(ordersToComplete) {
+    const tab = [ordersToComplete]
+
+    ordersToComplete[0].tableNum === 0 ? this.props.dispatch(actions.setDonePickupOrders(tab)) : this.props.dispatch(actions.setDoneTableOrders(tab))
+
+    this.props.dispatch(actions.resetRemainingTabs(this.props.unfufilledOrders.filter(currTab => currTab[0].id !== ordersToComplete[0].id)))
+  }
+
   findAndRemove(tabId, id) {
-    const newOrders = []
-    let orderToComplete
-    this.props.unfufilledOrders.forEach(item => {
-      if (item[0].tabId === tabId) {
-        orderToComplete = item.slice().filter(val => val.id === id)
-        if (item.length > 1) {
-          const toChange = item.slice().filter(val => val.id !== id)
-          newOrders.push(toChange)
-        }
-      } else {
-        newOrders.push(item.slice())
+    const newOrders = this.props.unfufilledOrders.map(tab => tab.map(order => {
+      return order.id === id ? Object.assign(order, { complete: true }) : order
+    }))
+
+    this.props.dispatch(actions.resetOrders(newOrders))
+  }
+
+  checkIfAllOrdersDone() {
+    const context = this
+    this.props.unfufilledOrders.forEach(tab => {
+      if (tab.filter(order => order.complete).length === tab.length) {
+        context.completeTab(tab)
       }
     })
-    this.props.dispatch(actions.removeOrder(newOrders, orderToComplete))
   }
 
   numOfOrders() {
@@ -48,10 +67,11 @@ class Bartender extends Component {
       removeDrink: ::this.findAndRemove,
       numOfOrders: ::this.numOfOrders,
     }
+
     return (
       <Grid>
         <Grid.Row>
-          <CompletedDrinks />
+          <CompletedDrinks completedTables={this.props.doneTableOrders} completedPickups={this.props.donePickupOrders} />
           <Grid.Column width={4} id="bar_queue_container" className="revealer">
             <Header as="h2">
               <Label className="testing" circular size="large" color="red">{props.numOfOrders()}</Label>
@@ -60,7 +80,6 @@ class Bartender extends Component {
               </Header.Content>
             </Header>
             <Divider />
-            <CompletingOrders doneOrders={this.props.completingOrders} />
             {this.props.unfufilledOrders.map(tab => <DrinkGroup {...props} key={tab[0].id} tab={tab} />)}
           </Grid.Column>
         </Grid.Row>

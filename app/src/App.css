@@ -48,9 +48,10 @@
   background-color: #2185D0
 }
 
-#orders-curr-completing {
-  margin-bottom: 50px;
+#complete {
+  background-color: #BABBBC
 }
+
 /*
 ============ Done Orders ================
 */

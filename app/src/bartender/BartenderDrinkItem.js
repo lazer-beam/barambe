@@ -11,9 +11,6 @@ class DrinkItem extends Component {
     }
   }
 
-  componentDidMount() {
-  }
-
   toggleButton() {
     if (!this.state.buttonActive) {
       this.setState({ buttonActive: !this.state.buttonActive })
@@ -26,12 +23,16 @@ class DrinkItem extends Component {
     const tabId = this.props.order.tabId
     const id = this.props.order.id
     const iconType = (this.props.order.drink.type === 'shot') ? 'lab' : this.props.order.drink.type
+    const completeDrink = this.props.order.complete ? 'complete' : 'uncomplete'
 
     return (
-      <Button onClick={() => this.props.removeDrink(tabId, id)}>
-        <Button.Content visible>
+      <Button onClick={() => this.props.removeDrink(tabId, id)} id={completeDrink} >
+        {this.props.order.complete ? <strike> <Button.Content visible>
           <Icon name={iconType} /> {this.props.order.drink.name}
         </Button.Content>
+        </strike> : <Button.Content visible>
+          <Icon name={iconType} /> {this.props.order.drink.name}
+        </Button.Content>}
       </Button>
     )
   }

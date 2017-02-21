@@ -6,6 +6,9 @@ export const types = {
   REMOVE_ORDER: 'BAR/REMOVE_ORDER',
   FETCH_ORDERS_START: 'BAR/FETCH_ORDERS_START',
   FETCH_ORDERS_COMPLETE: 'BAR/FETCH_ORDERS_COMPLETE',
+  COMPLETE_TABLE_ORDERS: 'BAR/COMPLETE_TABLE_ORDERS',
+  COMPLETE_PICKUP_ORDERS: 'BAR/COMPLETE_PICKUP_ORDERS',
+  REMOVE_TAB_FROM_PENDING: 'BAR/REMOVE_TAB_FROM_PENDING',
 }
 
 // ========================================
@@ -15,7 +18,8 @@ const defaultProps = {
   unfufilledOrders: [],
   fetchingOrders: false,
   fetchedOrders: false,
-  completingOrders: ['test'],
+  donePickupOrders: [],
+  doneTableOrders: [],
 }
 
 export default (state = defaultProps, action) => {
@@ -26,6 +30,14 @@ export default (state = defaultProps, action) => {
       return { ...state, fetchingOrders: true }
     case types.FETCH_ORDERS_COMPLETE:
       return { ...state, fetchingOrders: false, fetchedOrders: true, unfufilledOrders: action.payload }
+    case types.ORDER_TO_COMPLETE:
+      return { ...state, completingOrders: state.completingOrders.concat(action.payload) }
+    case types.COMPLETE_PICKUP_ORDERS:
+      return { ...state, donePickupOrders: state.donePickupOrders.concat(action.payload) }
+    case types.COMPLETE_TABLE_ORDERS:
+      return { ...state, doneTableOrders: state.doneTableOrders.concat(action.payload) }
+    case types.REMOVE_TAB_FROM_PENDING:
+      return { ...state, unfufilledOrders: action.payload }
     default:
       return state
   }
@@ -56,7 +68,7 @@ const groupOrdersWithTab = orders => {
 //           ACTION CREATORS
 // ========================================
 export const actions = {
-  removeOrder: orders => ({ type: types.REMOVE_ORDER, payload: orders }),
+  resetOrders: tab => ({ type: types.REMOVE_ORDER, payload: tab }),
   fetchOrders: () => {
     return dispatch => {
       dispatch({ type: types.FETCH_ORDERS_START })
@@ -66,4 +78,7 @@ export const actions = {
         })
     }
   },
+  setDonePickupOrders: tab => ({ type: types.COMPLETE_PICKUP_ORDERS, payload: tab }),
+  setDoneTableOrders: tab => ({ type: types.COMPLETE_TABLE_ORDERS, payload: tab }),
+  resetRemainingTabs: remainingTabs => ({ type: types.REMOVE_TAB_FROM_PENDING, payload: remainingTabs }),
 }

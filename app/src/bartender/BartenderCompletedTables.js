@@ -1,7 +1,8 @@
 import React from 'react'
 import { Grid, Table } from 'semantic-ui-react'
+import DrinkGroup from './BartenderDrinkGroup'
 
-export default () => (
+export default props => (
   <Grid.Column>
     <Table inverted>
       <Table.Header>
@@ -10,15 +11,7 @@ export default () => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {/* <Table.Row>
-          <Table.Cell textAlign="center">Table 3</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell textAlign="center">Table 13</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell textAlign="center">Table 8</Table.Cell>
-        </Table.Row>*/}
+        {props.completedTables.length ? props.completedTables.map(tab => <DrinkGroup {...props} key={tab[0].id} tab={tab} />) : null}
       </Table.Body>
     </Table>
   </Grid.Column>
