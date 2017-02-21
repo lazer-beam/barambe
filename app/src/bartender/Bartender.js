@@ -59,7 +59,7 @@ class Bartender extends Component {
   }
 
   numOfOrders() {
-    return this.props.unfufilledOrders.reduce((numOfOrders, currTab) => numOfOrders + currTab.length, 0)
+    return this.props.unfufilledOrders.reduce((numOfOrders, currTab) => numOfOrders + currTab.filter(order => !order.complete).length, 0)
   }
 
   render() {
