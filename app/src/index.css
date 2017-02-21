@@ -1,4 +1,4 @@
-html{
+html {
     height: 100%;
 }
 
@@ -6,18 +6,10 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  border-style: solid;
-  border-color: red;
 }
 
 #root { 
   margin: 0px;
   height: 100%;
   width: 100%;
-}
-
-/*Bartender*/
-
-.bar_queue_container {
-  top: 10px;
 }

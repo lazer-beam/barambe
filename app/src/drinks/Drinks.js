@@ -15,6 +15,7 @@ import { actions } from './duck.Drinks'
   liquors: store.drinks.menuLiquors,
   addIns: store.drinks.menuAddIns,
 }))
+
 class Drinks extends Component {
   componentWillMount() {
     axios
