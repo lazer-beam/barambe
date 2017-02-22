@@ -1,10 +1,69 @@
 const Drink = require('../../db/models/drinkModel')
 const AddIn = require('../../db/models/addInModel')
+const Liquor = require('../../db/models/liquorModel')
 const Promise = require('bluebird')
 
 const getAllDrinks = orders => Promise.all(orders.map(order => Drink.findOne({ where: { id: order.drinkId } })))
 
 const findDrinkByName = drinkName => Drink.findOne({ where: { name: drinkName } })
+
+const addToMenu = drinkObj => {
+  console.log('addToMenu drinkObj: ', JSON.stringify(drinkObj))
+  if (drinkObj.type === 'beer') {
+    console.log('trying to add a beer')
+    return Drink.create({
+      name: drinkObj.name,
+      type: 'beer',
+      price: drinkObj.price,
+    })
+    .then(newDrink => newDrink)
+  } else if (drinkObj.type === 'addIn') {
+    return AddIn.create({
+      name: drinkObj.name,
+      price: drinkObj.price,
+    })
+    .then(newDrink => newDrink)
+  } else if (drinkObj.type === 'liquor') {
+    console.log('addToMenu drinkObj: ', JSON.stringify(drinkObj))
+    return Liquor.create({
+      name: drinkObj.name,
+      price: drinkObj.price,
+    }).then(newLiquor => {
+      return Drink.create({
+        name: drinkObj.name,
+        price: drinkObj.price,
+        type: 'shot',
+      }).then(newDrink => {
+        newDrink.addLiquor(newLiquor)
+        return newDrink
+      })
+    })
+  } else if (drinkObj.type === 'cocktail') {
+    return Drink.create({
+      name: drinkObj.name,
+      type: 'cocktail',
+      price: drinkObj.price,
+    })
+    .then(newDrink => {
+      return Promise.all(drinkObj.liquors.map(liquorName => {
+        return Liquor.findOne({ where: { name: liquorName } })
+          .then(foundLiquor => foundLiquor.addDrink(newDrink))
+      }))
+      .then(() => {
+        return Promise.all(drinkObj.addIns.map(addInName => {
+          return AddIn.findOne({ where: { name: addInName } })
+            .then(foundAddIn => foundAddIn.addDrink(newDrink))
+        }))
+      })
+      .then(() => newDrink)
+    })
+  }
+  return 'error'
+}
+
+// const deleteItem = itemObj => {
+
+// }
 
 const getAllCocktails = drinkResults => {
   return Promise.all(drinkResults.map(drink => {
@@ -62,4 +121,6 @@ module.exports = {
   findDrinkByName,
   getDrinkType,
   getAddIns,
+  addToMenu,
+  deleteItem,
 }

@@ -2,8 +2,18 @@ const util = require('../utilities/drinksUtil')
 
 const drinks = {
   addToMenu: (req, res) => {
-    console.log(req.body)
-    res.send()
+    console.log('ctrlr body: ', req.body)
+    console.log(`Serving request for ${req.method} where url is ${req.url}`)
+    util.addToMenu(req.body)
+    .then(newItem => res.send(newItem))
+    .catch(err => res.status(500).send(err))
+  },
+
+  deleteItem: (req, res) => {
+    console.log('drinkCtrl delete received: ', req.body)
+    util.deleteItem(req.body)
+    .then(() => res.send('Deleted: ', name))
+    .catch(err => res.status(500).send(err))
   },
 
   getAllDrinks: (req, res) => {
