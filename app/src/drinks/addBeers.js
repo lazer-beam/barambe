@@ -23,12 +23,12 @@ class AddBeers extends Component {
       price: parseFloat(this.state.beerPrice) * 100,
       type: 'beer',
     }
-    console.log('Submitting this beer: ', temp)
+    console.log('Submitting this beer: ', JSON.stringify(temp))
+    this.props.submitAction(temp)
     this.setState({
       beerName: '',
       beerPrice: '',
     })
-    this.props.submitAction(temp)
   }
   handleBeerChange(event, data) {
     this.setState({ beerName: data.value })

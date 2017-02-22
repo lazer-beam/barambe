@@ -34,7 +34,7 @@ class AddLiquorAddIns extends Component {
       liquorName: '',
       liquorPrice: '',
     })
-    this.props.submitAction(temp, temp)
+    this.props.submitAction(temp)
   }
   handleAddInSubmit(e) {
     e.preventDefault()
