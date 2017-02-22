@@ -12,6 +12,7 @@ class AddLiquorAddIns extends Component {
       addInPrice: '',
     }
     this.handleLiquorSubmit = ::this.handleLiquorSubmit
+    this.handleDelete = ::this.handleDelete
     this.handleLiquorChange = ::this.handleLiquorChange
     this.handleLiquorPriceChange = ::this.handleLiquorPriceChange
     this.handleAddInSubmit = ::this.handleAddInSubmit
@@ -35,6 +36,10 @@ class AddLiquorAddIns extends Component {
       liquorPrice: '',
     })
     this.props.submitAction(temp)
+  }
+  handleDelete(item) {
+    console.log('item to delete: ', item)
+    this.props.deleteAction(item)
   }
   handleAddInSubmit(e) {
     e.preventDefault()
@@ -87,6 +92,7 @@ class AddLiquorAddIns extends Component {
               {this.props.liquors.map(liquor =>
                 <Segment key={Math.random() * 100}>
                   {liquor.name}: {liquor.price}
+                  <Button onClick={this.handleDelete.bind(this, liquor)}>Remove</Button>
                 </Segment>,
             )}
             </Segment.Group>
@@ -105,6 +111,7 @@ class AddLiquorAddIns extends Component {
               {this.props.addIns.map(addIn =>
                 <Segment key={Math.random() * 100}>
                   {addIn.name}: {addIn.price}
+                  <Button onClick={this.handleDelete.bind(this, addIn)}>Remove</Button>
                 </Segment>,
             )}
             </Segment.Group>

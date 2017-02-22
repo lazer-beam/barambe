@@ -59,18 +59,39 @@ class Drinks extends Component {
       .catch(err => { console.log(err) })
   }
 
+  handleDrinkDelete(drinkObj) {
+    console.log('delete ', JSON.stringify(drinkObj))
+    axios.post('/drinks/deleteItem', drinkObj)
+      .then(res => {
+        console.log(res)
+        this.props.dispatch(actions.deleteDrink(drinkObj))
+      })
+      .catch(err => { console.log(err) })
+  }
+
   render() {
     this.handleDrinkSubmit = ::this.handleDrinkSubmit
+    this.handleDrinkDelete = ::this.handleDrinkDelete
     const addView = this.props.currentAddView
     let renderedView = <AddLiquorAddIns />
 
     if (addView === 'liquorAddIns') {
-      renderedView = <AddLiquorAddIns submitAction={this.handleDrinkSubmit} liquors={this.props.liquors} addIns={this.props.addIns} />
+      renderedView = (<AddLiquorAddIns
+        submitAction={this.handleDrinkSubmit}
+        deleteAction={this.handleDrinkDelete}
+        liquors={this.props.liquors}
+        addIns={this.props.addIns}
+      />)
     } else if (addView === 'beers') {
-      renderedView = <AddBeers submitAction={this.handleDrinkSubmit} beers={this.props.beers} />
+      renderedView = (<AddBeers
+        submitAction={this.handleDrinkSubmit}
+        deleteAction={this.handleDrinkDelete}
+        beers={this.props.beers}
+      />)
     } else if (addView === 'cocktails') {
       renderedView = (<AddCocktails
         submitAction={this.handleDrinkSubmit}
+        deleteAction={this.handleDrinkDelete}
         liquors={this.props.liquors}
         addIns={this.props.addIns}
         cocktails={this.props.cocktails}

@@ -10,6 +10,7 @@ class AddBeers extends Component {
       beerPrice: '',
     }
     this.handleSubmit = ::this.handleSubmit
+    this.handleDelete = ::this.handleDelete
     this.handleBeerChange = ::this.handleBeerChange
     this.handlePriceChange = ::this.handlePriceChange
   }
@@ -30,6 +31,10 @@ class AddBeers extends Component {
       beerPrice: '',
     })
   }
+  handleDelete(beer) {
+    console.log('Beer to delete: ', beer)
+    this.props.deleteAction(beer)
+  }
   handleBeerChange(event, data) {
     this.setState({ beerName: data.value })
   }
@@ -47,6 +52,7 @@ class AddBeers extends Component {
             <Table.Row>
               <Table.HeaderCell width={3}>Beer</Table.HeaderCell>
               <Table.HeaderCell width={2}>Price</Table.HeaderCell>
+              <Table.HeaderCell width={2}>Click to delete</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
@@ -58,6 +64,9 @@ class AddBeers extends Component {
                 </Table.Cell>
                 <Table.Cell>
                   {beer.price}
+                </Table.Cell>
+                <Table.Cell>
+                  <Button onClick={this.handleDelete.bind(this, beer)}>Remove</Button>
                 </Table.Cell>
               </Table.Row>,
             )}

@@ -61,9 +61,33 @@ const addToMenu = drinkObj => {
   return 'error'
 }
 
-// const deleteItem = itemObj => {
-
-// }
+const deleteItem = itemObj => {
+  if (itemObj.type === 'beer' || itemObj.type === 'cocktail') {
+    console.log('Beer in Util: ', itemObj)
+    return Drink.findOne({ where: { name: itemObj.name } })
+    .then(foundItem => {
+      console.log('found a beer')
+      return foundItem.destroy().then(() => 'Item deleted')
+    })
+  } else if (!itemObj.type) {
+    return AddIn.findOne({ where: { name: itemObj.name } })
+    .then(foundItem => {
+      return foundItem.destroy()
+    })
+  } else if (itemObj.type === 'shot') {
+    return Drink.findOne({ where: { name: itemObj.name } })
+    .then(foundItem => {
+      return foundItem.destroy()
+    })
+    .then(() => {
+      return Liquor.findOne({ where: { name: itemObj.name } })
+    })
+    .then(foundItem => {
+      return foundItem.destroy()
+    })
+  }
+  return 'error'
+}
 
 const getAllCocktails = drinkResults => {
   return Promise.all(drinkResults.map(drink => {
