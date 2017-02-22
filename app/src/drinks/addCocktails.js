@@ -12,6 +12,7 @@ class AddCocktails extends Component {
       cocktailAddIns: [],
     }
     this.handleSubmit = ::this.handleSubmit
+    this.handleDelete = ::this.handleDelete
     this.handleCocktailChange = ::this.handleCocktailChange
     this.handlePriceChange = ::this.handlePriceChange
     this.handleLiquorChange = ::this.handleLiquorChange
@@ -36,6 +37,10 @@ class AddCocktails extends Component {
       cocktailAddIns: [],
     })
     this.props.submitAction(temp)
+  }
+  handleDelete(cocktail) {
+    console.log('cocktail to delete: ', cocktail)
+    this.props.deleteAction(cocktail)
   }
   handleCocktailChange(event, data) {
     this.setState({ cocktailName: data.value })
@@ -79,6 +84,7 @@ class AddCocktails extends Component {
               <Table.HeaderCell width={3}>Liquors</Table.HeaderCell>
               <Table.HeaderCell width={3}>Add-Ins</Table.HeaderCell>
               <Table.HeaderCell width={2}>Price</Table.HeaderCell>
+              <Table.HeaderCell width={2}>Click to delete</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
@@ -96,6 +102,9 @@ class AddCocktails extends Component {
                 </Table.Cell>
                 <Table.Cell>
                   {cocktail.price}
+                </Table.Cell>
+                <Table.Cell>
+                  <Button onClick={this.handleDelete.bind(this, cocktail)}>Remove</Button>
                 </Table.Cell>
               </Table.Row>,
             )}

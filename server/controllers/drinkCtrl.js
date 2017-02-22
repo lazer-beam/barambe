@@ -12,7 +12,7 @@ const drinks = {
   deleteItem: (req, res) => {
     console.log('drinkCtrl delete received: ', req.body)
     util.deleteItem(req.body)
-    .then(() => res.send('Deleted: ', name))
+    .then(result => res.send(result))
     .catch(err => res.status(500).send(err))
   },
 

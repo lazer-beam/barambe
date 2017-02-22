@@ -2,12 +2,10 @@
 //            ACTIONS
 // ========================================
 export const types = {
-  // GET_BEERS: 'GET_BEERS',
-  // GET_COCKTAILS: 'GET_COCKTAILS',
-  // GET_LIQUORS: 'GET_LIQUORS',
   GET_DRINKS: 'GET_DRINKS',
   TOGGLE_MENU: 'TOGGLE_MENU',
   POST_DRINKS: 'POST_DRINKS',
+  DEL_DRINKS: 'DEL_DRINKS',
 }
 
 // ========================================
@@ -34,26 +32,39 @@ export default (state = defaultProps, action) => {
         menuBeers: action.payload.beers || state.menuBeers,
         menuCocktails: action.payload.cocktails || state.menuCocktails,
       }
+    case types.DEL_DRINKS:
+      if (action.payload.type === 'shot') {
+        return { ...state,
+          menuLiquors: state.menuLiquors.filter(item => item.name !== action.payload.name),
+        }
+      } else if (action.payload.type === 'beer') {
+        return { ...state,
+          menuBeers: state.menuBeers.filter(item => item.name !== action.payload.name),
+        }
+      } else if (action.payload.type === 'cocktail') {
+        return { ...state,
+          menuCocktails: state.menuCocktails.filter(item => item.name !== action.payload.name),
+        }
+      }
+      return { ...state,
+        menuAddIns: state.menuAddIns.filter(item => item.name !== action.payload.name),
+      }
     case types.POST_DRINKS:
       action.payload.price = action.payload.textPrice
       if (action.payload.type === 'beer') {
         const temp = state.menuBeers.slice()
         temp.unshift(action.payload)
-        console.log('temp: ', temp)
         return { ...state, menuBeers: temp }
       } else if (action.payload.type === 'cocktail') {
         const temp = state.menuCocktails.slice()
         temp.unshift(action.payload)
-        console.log('temp: ', temp)
         return { ...state, menuCocktails: temp }
       } else if (action.payload.type === 'liquor') {
         const temp = state.menuLiquors.slice()
-        console.log('temp: ', temp)
         temp.unshift(action.payload)
         return { ...state, menuLiquors: temp }
       } else if (action.payload.type === 'addIn') {
         const temp = state.menuAddIns.slice()
-        console.log('temp: ', temp)
         temp.unshift(action.payload)
         return { ...state, menuAddIns: temp }
       }
@@ -69,11 +80,6 @@ export default (state = defaultProps, action) => {
 export const actions = {
   toggleMenu: menuName => ({ type: types.TOGGLE_MENU, payload: menuName }),
   getDrinks: drinksObj => ({ type: types.GET_DRINKS, payload: drinksObj }),
-  postDrink: newDrinkObj => {
-    console.log('newDrinkObj: ', JSON.stringify(newDrinkObj))
-    return { type: types.POST_DRINKS, payload: newDrinkObj }
-  },
-  // getBeers: beerArr => ({type: types.GET_BEERS, payload: beerArr}),
-  // getCocktails: cocktailArr => ({type: types.GET_COCKTAILS, payload: cocktailArr}),
-  // getLiquors: liquorArr => ({type: types.GET_LIQUORS, payload: liquorArr}),
+  postDrink: newDrinkObj => ({ type: types.POST_DRINKS, payload: newDrinkObj }),
+  deleteDrink: drinkObj => ({ type: types.DEL_DRINKS, payload: drinkObj }),
 }
