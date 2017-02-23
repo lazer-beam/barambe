@@ -38,6 +38,7 @@ class Dashboard extends Component {
     const menuItems = [['home', 'Home', 22], ['beer', 'Bartender', 18], ['edit', 'Edit Drinks', 4]]
     return (
       <div className="allBody">
+        <a href="http://localhost:1337/bars/connect">Connect with Stripe</a>
         <Sidebar.Pushable as={Segment}>
           <Grid>
             <Grid.Row>

@@ -16,17 +16,17 @@ const bars = {
       url: 'https://connect.stripe.com/oauth/token',
       form: {
         grant_type: 'authorization_code',
-        client_id: process.env.devClientId,
         code: queryCode,
         client_secret: process.env.testKey,
       },
     }, (err, resp, body) => {
-      res.send('Bar created')
-      if (false) {
-        console.log('body', body)
-      }
-      // store the response bar obj in database
+      console.log('body: ', body)
+      console.log('resp: ', resp)
+      console.log('err: ', err)
+      console.log('stripeID: ', JSON.parse(body).stripe_user_id)
+      // store JSON.parse(body).stripe_user_id in database
     })
+    res.redirect('http://localhost:1337/dashboard')
   },
 }
 
