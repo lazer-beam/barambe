@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Menu, Button } from 'semantic-ui-react'
+import { Menu, Button, Image } from 'semantic-ui-react'
+import Signup from './Signup'
 import '../App.css'
 
 class LoginSplash extends Component {
@@ -22,6 +23,8 @@ class LoginSplash extends Component {
             </div>
           </Menu.Menu>
         </Menu>
+        <Signup auth={auth} />
+        <Image src="http://i.imgur.com/aV3IGJ1.png?2" centered size="medium" />
       </div>
     )
   }

@@ -17,6 +17,7 @@
     "specialStartApp": "nodemon ./server/server.js | ./node_modules/.bin/webpack -d --watch"
   },
   "dependencies": {
+    "auth0-js": "^8.2.0",
     "auth0-lock": "^10.11.0",
     "axios": "^0.15.3",
     "bluebird": "^3.4.7",
