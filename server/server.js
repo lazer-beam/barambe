@@ -5,12 +5,10 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const chalk = require('chalk')
 
-const socketHub = require('./sockets')
 const initDb = require('../db/config')
 
-const app = express()
-const http = require('http').Server(app)
-const io = require('socket.io')(http)
+const app = require('./appInstance')
+const http = require('./httpServer')
 
 app.use(express.static(path.join(__dirname, '/../app/build')))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -25,8 +23,6 @@ app.get('/test', (req, res) => {
 app.get('*', (request, response) => {
   response.sendFile(path.join(__dirname, '/../app/public/index.html'))
 })
-
-io.on('connection', socket => socketHub(socket))
 
 const port = 1337
 initDb(false).then(() => {

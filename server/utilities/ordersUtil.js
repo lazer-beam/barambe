@@ -1,3 +1,13 @@
+const http = require('../httpServer')
+const io = require('socket.io')(http)
+const socketHub = require('../sockets')
+
+let socketRef
+io.on('connection', socket => {
+  socketRef = socket
+  return socketHub(socket)
+})
+
 const Order = require('../../db/models/orderModel')
 const Tab = require('../../db/models/tabModel')
 const drinksUtil = require('./drinksUtil')
@@ -85,6 +95,10 @@ const createOrder = (drinkName, tabId) => {
     .then(() => this.order)
 }
 
+const sendBartenderNewOrder = order => {
+  socketRef.emit('neworder', order)
+}
+
 module.exports = {
   getAllPendingOrders,
   getAllOrdersWithStatusOpen,
@@ -95,4 +109,5 @@ module.exports = {
   closeOrder,
   createOrder,
   addCustomerNumToOrders,
+  sendBartenderNewOrder,
 }
