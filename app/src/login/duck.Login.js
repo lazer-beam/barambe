@@ -1,38 +1,54 @@
-// ========================================
-//            ACTIONS
-// ========================================
+import { createReducer, createActions } from 'reduxsauce'
+import Immutable from 'seamless-immutable'
 
-export const types = {
-  APP_MOUNTED: 'LOGIN/LOGIN_MOUNTED',
-  LOG_IN: 'LOGIN/LOGIN_SUCCESS',
-}
+/* ------------- Types and Action Creators ------------- */
 
-// ========================================
-//            REDUCERS
-// ========================================
+const { Types, Creators } = createActions({
+  closeModal: null,
+  openModal: null,
+  signupRequest: ['email', 'password', 'auth'],
+  authFailure: ['error'],
+  signupSuccess: ['userData'],
 
-const defaultProps = {
-  mounted: false,
-  loggedIn: false,
-}
+})
 
-export default (state = defaultProps, action) => {
-  switch (action.type) {
-    case types.APP_MOUNTED:
-      return { ...state, mounted: true }
-    case types.LOG_IN:
-      return { ...state, loggedIn: true }
+export const LoginTypes = Types
+export default Creators
 
-    default:
-      return state
-  }
-}
+/* ------------- Initial State ------------- */
 
-// ========================================
-//           ACTION CREATORS
-// ========================================
+export const INITIAL_STATE = Immutable({
+  modalOpen: false,
+  fetching: false,
+  error: null,
+  userData: null,
+})
 
-export const actions = {
-  mount: () => ({ type: types.APP_MOUNTED }),
-  logIn: () => ({ type: types.LOG_IN }),
-}
+/* ------------- Reducers ------------- */
+
+const closeModal = (state = INITIAL_STATE) => state.merge({ modalOpen: false })
+
+const openModal = (state = INITIAL_STATE) => state.merge({ modalOpen: true })
+
+const request = (state = INITIAL_STATE) => state.merge({ fetching: true })
+
+const success = (state = INITIAL_STATE, { userData }) =>
+  state.merge({ fetching: false, error: null, userData })
+
+const failure = (state = INITIAL_STATE, { error }) =>
+  state.merge({ fetching: false, error })
+
+/* ------------- Hookup Reducers To Types ------------- */
+
+export const reducer = createReducer(INITIAL_STATE, {
+  [Types.CLOSE_MODAL]: closeModal,
+  [Types.OPEN_MODAL]: openModal,
+  [Types.SIGNUP_REQUEST]: request,
+  [Types.SIGNUP_SUCCESS]: success,
+  [Types.SIGNUP_FAILURE]: failure,
+})
+
+/* ------------- Sagas ------------- */
+
+/* ------------- Selectors ------------- */
+
