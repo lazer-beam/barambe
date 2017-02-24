@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Modal, Header, Form, Button, Divider } from 'semantic-ui-react'
-import { browserHistory } from 'react-router'
+// import { browserHistory } from 'react-router'
+
+import LoginActions from './duck.Login'
 
 @connect(store => ({
   modalOpen: store.login.modalOpen,
@@ -16,9 +18,10 @@ class Signup extends Component {
     }
   }
 
-  onSubmit() {
-    this.setState({ isOpen: false })
-    browserHistory.replace('/')
+  onSubmitSignUp(email, password) {
+    this.props.dispatch(LoginActions.signupRequest(email, password, this.props.auth))
+    // this.setState({ isOpen: false })
+    // browserHistory.replace('/')
   }
 
   render() {
@@ -52,7 +55,11 @@ class Signup extends Component {
               />
             </Form.Field>
           </Form>
-          <Button onClick={() => this.onSubmit()}>Submit</Button>
+          <Button
+            onClick={() => this.onSubmitSignUp('booboo@1.com', '123', this.props.auth)}
+          >
+            Submit
+          </Button>
         </Modal.Content>
       </Modal>
     )

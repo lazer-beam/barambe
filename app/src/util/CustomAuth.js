@@ -34,9 +34,7 @@ export default class CustomAuth extends EventEmitter {
 
   signup(email, password) {
     const creds = { email, password, connection: 'Username-Password-Authentication' }
-    this.auth0.redirect.signupAndLogin(creds).then(() => {
-      console.log('signup success!')
-    }).catch(err => console.log(JSON.stringify(err)))
+    return this.auth0.redirect.signupAndLogin(creds)
   }
 
   parseHash(hash) {
@@ -49,22 +47,6 @@ export default class CustomAuth extends EventEmitter {
     }).catch(err => {
       console.log(err)
     })
-
-    // this.auth0.parseHash({ hash }, (err, authResult) => {
-    //   if (authResult && authResult.accessToken && authResult.idToken) {
-    //     this.setToken(authResult.accessToken, authResult.idToken)
-    //     browserHistory.replace('/home')
-    //     this.auth0.client.userInfo(authResult.accessToken, (error, profile) => {
-    //       if (error) {
-    //         console.log('Error loading the Profile', error)
-    //       } else {
-    //         this.setProfile(profile)
-    //       }
-    //     })
-    //   } else if (authResult && authResult.error) {
-    //     alert('Error: ' + authResult.error)
-    //   }
-    // })
   }
 
   loggedIn() {
