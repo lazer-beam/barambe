@@ -47,7 +47,7 @@ class LoginSplash extends Component {
           </Menu.Menu>
         </Menu>
         <Signup auth={auth} />
-        <Image src="http://i.imgur.com/aV3IGJ1.png?2" centered size="medium" />
+        <Image src="http://i.imgur.com/mvywlbT.png" centered size="large" />
       </div>
     )
 

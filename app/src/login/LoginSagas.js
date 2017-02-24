@@ -7,7 +7,8 @@ export function* signUp({ email, password, auth }) {
     yield delay(3000)
     yield put(LoginActions.signupSuccess('WRONG'))
   } catch (err) {
-    yield put(LoginActions.authFailure(err))
+    console.log(err)
+    yield put(LoginActions.signupFailure(err))
   }
 }
 

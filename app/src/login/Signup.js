@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import { Modal, Header, Form, Button, Divider } from 'semantic-ui-react'
 // import { browserHistory } from 'react-router'
 
+import LoginMessages from './LoginMessages'
 import LoginActions from './duck.Login'
 
 @connect(store => ({
   modalOpen: store.login.modalOpen,
+  signupError: store.login.error,
 }))
 class Signup extends Component {
   constructor(props) {
@@ -18,8 +20,8 @@ class Signup extends Component {
     }
   }
 
-  onSubmitSignUp(email, password) {
-    this.props.dispatch(LoginActions.signupRequest(email, password, this.props.auth))
+  onSubmitSignUp() {
+    this.props.dispatch(LoginActions.signupRequest(this.state.email, this.state.password, this.props.auth))
   }
 
   handleClose(e, data) {
@@ -34,6 +36,7 @@ class Signup extends Component {
   }
 
   render() {
+    const msg = 'emailTaken'
     return (
       <Modal basic open={this.props.modalOpen} onClose={::this.handleClose} closeOnDimmerClick size={'small'}>
         <Modal.Content>
@@ -63,13 +66,14 @@ class Signup extends Component {
                 onChange={(a, b) => this.handleInputChange(a, b.value, 'password')}
               />
             </Form.Field>
+            <Form.Field>
+              <Button basic color="yellow" onClick={() => this.onSubmitSignUp()}>
+                Submit
+              </Button>
+            </Form.Field>
           </Form>
-          <Button
-            basic color="yellow"
-            onClick={() => this.onSubmitSignUp(this.state.email, this.state.password, this.props.auth)}
-          >
-            Submit
-          </Button>
+          <Divider hidden />
+          {(this.props.signupError) ? <LoginMessages msg={msg} /> : null}
         </Modal.Content>
       </Modal>
     )

@@ -7,8 +7,8 @@ const { Types, Creators } = createActions({
   closeModal: null,
   openModal: null,
   signupRequest: ['email', 'password', 'auth'],
-  authFailure: ['error'],
   signupSuccess: ['userData'],
+  signupFailure: ['error'],
 
 })
 
@@ -32,11 +32,9 @@ const openModal = (state = INITIAL_STATE) => state.merge({ modalOpen: true })
 
 const request = (state = INITIAL_STATE) => state.merge({ fetching: true })
 
-const success = (state = INITIAL_STATE, { userData }) =>
-  state.merge({ fetching: false, error: null, userData })
+const success = (state = INITIAL_STATE, { userData }) => state.merge({ fetching: false, error: null, userData })
 
-const failure = (state = INITIAL_STATE, { error }) =>
-  state.merge({ fetching: false, error })
+const failure = (state = INITIAL_STATE, { error }) => state.merge({ fetching: false, error })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
