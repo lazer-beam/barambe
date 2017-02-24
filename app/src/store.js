@@ -1,14 +1,37 @@
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore, compose } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
-import reducers from './reducers'
 
-const plugins = [
-  thunk,
-  logger(),
-]
+export default (rootReducer, rootSaga) => {
+   /* ------------- Redux Configuration ------------- */
 
-const middleware = applyMiddleware(...plugins)
-const store = createStore(reducers, middleware)
+  const plugins = [
+    logger(),
+    thunk,
+  ]
 
-export default store
+    /* ------------- Logger Middleware ------------- */
+
+
+    /* ------------- Assemble Middleware ------------- */
+
+
+  const middleware = applyMiddleware(...plugins)
+
+  /* ------------- AutoRehydrate Enhancer ------------- */
+
+
+  const store = createStore(rootReducer, middleware)
+
+  return store
+}
+
+// const plugins = [
+//   logger(),
+//   thunk,
+// ]
+
+// const middleware = applyMiddleware(...plugins)
+// const store = createStore(reducers, middleware)
+
+// export default store

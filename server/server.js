@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 app.use(morgan('dev'))
 require('./routes')(app)
 
-app.get('/login', (req, res) => {
+app.get('/test', (req, res) => {
   res.status(200).send('Hello World!')
 })
 

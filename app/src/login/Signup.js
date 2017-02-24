@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Modal, Header, Form, Button, Divider } from 'semantic-ui-react'
+import { browserHistory } from 'react-router'
 
+@connect(store => ({
+  modalOpen: store.login.modalOpen,
+}))
 class Signup extends Component {
   constructor(props) {
     super(props)
@@ -11,13 +16,14 @@ class Signup extends Component {
     }
   }
 
-  onSubmit(username, password) {
-    this.props.auth.signup('e123@g.com', '123')
+  onSubmit() {
+    this.setState({ isOpen: false })
+    browserHistory.replace('/')
   }
 
   render() {
     return (
-      <Modal open size={'small'}>
+      <Modal open={this.props.modalOpen} size={'small'}>
         <Modal.Content>
           <Modal.Description>
             <Header>Sign up your bar today!</Header>
@@ -45,8 +51,8 @@ class Signup extends Component {
                 onChange={() => console.log('YEAH BOIII')}
               />
             </Form.Field>
-            <Button onClick={() => this.onSubmit()}>Submit</Button>
           </Form>
+          <Button onClick={() => this.onSubmit()}>Submit</Button>
         </Modal.Content>
       </Modal>
     )

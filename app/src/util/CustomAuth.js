@@ -13,12 +13,12 @@ export default class CustomAuth extends EventEmitter {
       clientID: '4sTpMtCBPcYY4UACaf1XjiSCzn7q97XK',
       domain: 'barambe.auth0.com',
       responseType: 'token id_token',
-      redirectUri: 'http://localhost:1337/login',
+      redirectUri: `${window.location.origin}/login`,
     })
     this.auth0.client.login = Promise.promisify(this.auth0.client.login)
     this.auth0.client.userInfo = Promise.promisify(this.auth0.client.userInfo)
     this.auth0.redirect.signupAndLogin = Promise.promisify(this.auth0.redirect.signupAndLogin)
-    this.auth0.parseHash = Promise.promisify(this.auth0.parseHash)
+   // this.auth0.parseHash = Promise.promisify(this.auth0.parseHash)
 
     this.login = this.login.bind(this)
     this.signup = this.signup.bind(this)
@@ -27,10 +27,8 @@ export default class CustomAuth extends EventEmitter {
   login(username, password) {
     const creds = { username, password, realm: 'Username-Password-Authentication' }
     this.auth0.client.login(creds).then(authResult => {
-      if (authResult && authResult.idToken && authResult.accessToken) {
-        this.setToken(authResult.accessToken, authResult.idToken)
-        browserHistory.replace('/home')
-      }
+      this.setToken(authResult.accessToken, authResult.idToken)
+      browserHistory.replace('/home')
     }).catch(err => console.log(err.description))
   }
 
@@ -38,18 +36,7 @@ export default class CustomAuth extends EventEmitter {
     const creds = { email, password, connection: 'Username-Password-Authentication' }
     this.auth0.redirect.signupAndLogin(creds).then(() => {
       console.log('signup success!')
-    }).catch(err => {
-      console.log(err)
-    })
-    // this.auth0.redirect.signupAndLogin({
-    //   email,
-    //   password,
-    //   connection: 'Username-Password-Authentication',
-    // }, (err) => {
-    //   if (err) {
-    //     alert('Error: ' + err.description)
-    //   }
-    // })
+    }).catch(err => console.log(JSON.stringify(err)))
   }
 
   parseHash(hash) {
@@ -81,26 +68,21 @@ export default class CustomAuth extends EventEmitter {
   }
 
   loggedIn() {
-    // Checks if there is a saved token and it's still valid
     const token = this.getToken()
     return !!token && !isTokenExpired(token)
   }
 
   setToken(accessToken, idToken) {
-    // Saves user access token and ID token into local storage
     localStorage.setItem('access_token', accessToken)
     localStorage.setItem('id_token', idToken)
   }
 
   setProfile(profile) {
-    // Saves profile data to localStorage
     localStorage.setItem('profile', JSON.stringify(profile))
-    // Triggers profile_updated event to update the UI
     this.emit('profile_updated', profile)
   }
 
   getProfile() {
-    // Retrieves the profile data from localStorage
     const profile = localStorage.getItem('profile')
     return profile ? JSON.parse(localStorage.profile) : {}
   }

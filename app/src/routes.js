@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, IndexRedirect } from 'react-router'
-import AuthService from './util/AuthService'
+// import AuthService from './util/AuthService'
 
 import App from './App'
 import LoginSplash from './login/LoginSplash'

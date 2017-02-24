@@ -22,7 +22,6 @@ const defaultProps = {
 }
 
 export default (state = defaultProps, action) => {
-  console.log('action in reducer: ', JSON.stringify(action))
   switch (action.type) {
     case types.TOGGLE_MENU:
       return { ...state, currentAddView: action.payload }
