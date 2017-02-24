@@ -98,11 +98,8 @@ const createOrder = (drinkName, tabId) => {
 
 const formatOrder = (order, drink) => {
   const formattedOrder = Object.assign(order, { drink })
-  console.log('order', order)
-  console.log('drink', drink)
   return Tab.findOne({ where: { id: order.tabId } })
     .then(tab => {
-      console.log('tab.dataValues', tab.dataValues)
       const finalOrder = Object.assign(formattedOrder, {
         tableNum: tab.dataValues.tableNum,
         customerNum: tab.dataValues.id,

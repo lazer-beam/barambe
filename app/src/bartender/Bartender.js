@@ -43,7 +43,7 @@ class Bartender extends Component {
     }
 
     socket.on('neworder', order => {
-      console.log('new order', order)
+      this.props.dispatch(actions.addOrder(order))
     })
   }
 
