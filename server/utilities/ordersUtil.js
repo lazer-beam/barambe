@@ -10,6 +10,7 @@ io.on('connection', socket => {
 
 const Order = require('../../db/models/orderModel')
 const Tab = require('../../db/models/tabModel')
+const Drink = require('../../db/models/drinkModel')
 const drinksUtil = require('./drinksUtil')
 const liquorsUtil = require('./liquorsUtil')
 const addInsUtil = require('./addInsUtil')
@@ -95,8 +96,33 @@ const createOrder = (drinkName, tabId) => {
     .then(() => this.order)
 }
 
+const formatOrder = (order, drink) => {
+  const formattedOrder = Object.assign(order, { drink })
+  console.log('order', order)
+  console.log('drink', drink)
+  return Tab.findOne({ where: { id: order.tabId } })
+    .then(tab => {
+      console.log('tab.dataValues', tab.dataValues)
+      const finalOrder = Object.assign(formattedOrder, {
+        tableNum: tab.dataValues.tableNum,
+        customerNum: tab.dataValues.id,
+      })
+
+      delete finalOrder.drinkId
+      delete finalOrder.status
+
+      return finalOrder
+    })
+}
+
 const sendBartenderNewOrder = order => {
-  socketRef.emit('neworder', order)
+  Drink.findOne({ where: { id: order.drinkId } })
+    .then(drink => formatOrder(order.dataValues, drink.dataValues))
+    .then(formattedOrder => {
+      socketRef.emit('neworder', formattedOrder)
+    }).catch(err => {
+      console.log('err', err)
+    })
 }
 
 module.exports = {
