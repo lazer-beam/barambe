@@ -44,32 +44,37 @@ const customer = {
   saveCard: (req, res) => {
     console.log(`Serving request for ${req.method} where url is ${req.url}`)
     console.log(`Req.body: ${req.body}`)
-    stripe.customers.create({
-      description: 'Customer for alexander.martinez@example.com',
-      source: req.body.token,
-    }, (customerErr, newCustomer) => {
-      if (customerErr) res.send(customerErr)
-      console.log(`New customer object with id: ${newCustomer.id}`)
-      // save newCustomer.id in Mongoose
-      stripe.customers.createSource(
-        newCustomer.id,
-        { source: req.body.token },
-        (cardErr, card) => {
-          if (cardErr) res.send(cardErr)
-          const cardObj = {
-            id: card.id,
-            brand: card.brand,
-            customerID: card.customer,
-            last4: card.last4,
-            exp_month: card.exp_month,
-            exp_year: card.exp_year,
-          }
-          console.log(`New cardObj created: ${cardObj}`)
-          // save cardObj in mongo
-          res.send(cardObj)
-        },
-      )
-    })
+    stripe.customers.create(
+      { source: req.body.token },
+      (customerErr, newCustomer) => {
+        if (customerErr) {
+          res.send(customerErr)
+        } else {
+          console.log(`New customer object with id: ${newCustomer.id}`)
+          send(newCustomer.id)
+        // save newCustomer.id in Mongoose
+          // stripe.customers.createSource(
+          // newCustomer.id,
+          // { source: req.body.token },
+          // (cardErr, card) => {
+          //   if (cardErr) {
+          //     res.send(cardErr)
+          //   } else {
+          //     const cardObj = {
+          //       id: card.id,
+          //       brand: card.brand,
+          //       customerID: card.customer,
+          //       last4: card.last4,
+          //       exp_month: card.exp_month,
+          //       exp_year: card.exp_year,
+          //     }
+          //     console.log(`New cardObj created: ${cardObj}`)
+          //     // save cardObj in mongo
+          //     res.send(cardObj)
+          //   }
+          // })
+        }
+      })
   },
 }
 
