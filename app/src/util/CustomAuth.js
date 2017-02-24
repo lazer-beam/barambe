@@ -10,8 +10,8 @@ export default class CustomAuth extends EventEmitter {
     super()
     // Configure Auth0
     this.auth0 = new auth0.WebAuth({
-      clientID: '4sTpMtCBPcYY4UACaf1XjiSCzn7q97XK',
-      domain: 'barambe.auth0.com',
+      clientID,
+      domain,
       responseType: 'token id_token',
       redirectUri: `${window.location.origin}/login`,
     })

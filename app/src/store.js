@@ -1,8 +1,8 @@
-import { applyMiddleware, createStore, compose } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 
-export default (rootReducer, rootSaga) => {
+export default rootReducer /* rootSaga */ => {
    /* ------------- Redux Configuration ------------- */
 
   const plugins = [
