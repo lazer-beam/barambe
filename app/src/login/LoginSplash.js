@@ -14,13 +14,11 @@ class LoginSplash extends Component {
     super(props)
     this.state = {
       temp: 'splash',
-      modalIsOpen: false,
     }
   }
 
   toggIt() {
-    console.log(LoginActions.toggleModal())
-    this.props.dispatch(LoginActions.toggleModal(true))
+    this.props.dispatch(LoginActions.openModal(true))
   }
 
   render() {
