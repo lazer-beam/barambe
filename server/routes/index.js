@@ -8,4 +8,5 @@ module.exports = app => {
   app.use('/drinks', drinksRoutes)
   app.use('/tabs', tabRoutes)
   app.use('/bars', barRoutes)
+  app.use('/customer', customerRoutes)
 }
