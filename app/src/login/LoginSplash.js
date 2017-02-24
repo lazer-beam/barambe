@@ -12,25 +12,24 @@ import '../App.css'
   fetching: store.login.fetching,
 }))
 class LoginSplash extends Component {
+
+  static routeToLogin() {
+    browserHistory.push('/login')
+  }
+
   constructor(props) {
     super(props)
-    this.state = {
-      temp: 'splash',
-    }
+    this.state = { temp: 'splash' }
   }
 
   toggIt() {
     this.props.dispatch(LoginActions.openModal(true))
   }
 
-  static routeToLogin() {
-    browserHistory.push('/login')
-  }
-
   render() {
     const { auth } = this.props
     const loading = (
-      <Modal open basic size="massive" >
+      <Modal open basic size="fullscreen" >
         <Dimmer active>
           <Loader />
         </Dimmer>

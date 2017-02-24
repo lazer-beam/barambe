@@ -35,7 +35,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <Modal open={this.props.modalOpen} onClose={::this.handleClose} closeOnDimmerClick size={'small'}>
+      <Modal basic open={this.props.modalOpen} onClose={::this.handleClose} closeOnDimmerClick size={'small'}>
         <Modal.Content>
           <Modal.Description>
             <Header>Sign up your bar today!</Header>
@@ -65,6 +65,7 @@ class Signup extends Component {
             </Form.Field>
           </Form>
           <Button
+            basic color="yellow"
             onClick={() => this.onSubmitSignUp(this.state.email, this.state.password, this.props.auth)}
           >
             Submit
