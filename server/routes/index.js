@@ -1,6 +1,7 @@
 const ordersRoutes = require('./ordersRoutes')
 const drinksRoutes = require('./drinksRoutes')
 const tabRoutes = require('./tabRoutes')
+const customerRoutes = require('./customerRoutes')
 const barRoutes = require('./barRoutes')
 
 module.exports = app => {
