@@ -8,7 +8,6 @@ import { isTokenExpired } from './jwtHelper'
 export default class CustomAuth extends EventEmitter {
   constructor(clientID, domain) {
     super()
-    // Configure Auth0
     this.auth0 = new auth0.WebAuth({
       clientID,
       domain,
@@ -18,7 +17,7 @@ export default class CustomAuth extends EventEmitter {
     this.auth0.client.login = Promise.promisify(this.auth0.client.login)
     this.auth0.client.userInfo = Promise.promisify(this.auth0.client.userInfo)
     this.auth0.redirect.signupAndLogin = Promise.promisify(this.auth0.redirect.signupAndLogin)
-   // this.auth0.parseHash = Promise.promisify(this.auth0.parseHash)
+    this.auth0.parseHash = Promise.promisify(this.auth0.parseHash)
 
     this.login = this.login.bind(this)
     this.signup = this.signup.bind(this)

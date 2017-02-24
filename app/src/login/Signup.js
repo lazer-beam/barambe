@@ -20,13 +20,22 @@ class Signup extends Component {
 
   onSubmitSignUp(email, password) {
     this.props.dispatch(LoginActions.signupRequest(email, password, this.props.auth))
-    // this.setState({ isOpen: false })
-    // browserHistory.replace('/')
+  }
+
+  handleClose(e, data) {
+    console.log(data)
+    this.props.dispatch(LoginActions.closeModal())
+  }
+
+  handleInputChange(e, value, key) {
+    const obj = { ...this.state }
+    obj[key] = value
+    this.setState(obj)
   }
 
   render() {
     return (
-      <Modal open={this.props.modalOpen} size={'small'}>
+      <Modal open={this.props.modalOpen} onClose={::this.handleClose} closeOnDimmerClick size={'small'}>
         <Modal.Content>
           <Modal.Description>
             <Header>Sign up your bar today!</Header>
@@ -37,26 +46,26 @@ class Signup extends Component {
               <Form.Input
                 label="Bar username"
                 placeholder="bar-name"
-                onChange={() => console.log('YEAH BOIII')}
+                onChange={(a, b) => this.handleInputChange(a, b.value, 'barName')}
               />
             </Form.Field>
             <Form.Field>
               <Form.Input
                 label="Email"
                 placeholder="barambe@email.com"
-                onChange={() => console.log('YEAH BOIII')}
+                onChange={(a, b) => this.handleInputChange(a, b.value, 'email')}
               />
             </Form.Field>
             <Form.Field>
               <Form.Input
                 label="Password"
                 placeholder="secret"
-                onChange={() => console.log('YEAH BOIII')}
+                onChange={(a, b) => this.handleInputChange(a, b.value, 'password')}
               />
             </Form.Field>
           </Form>
           <Button
-            onClick={() => this.onSubmitSignUp('booboo@1.com', '123', this.props.auth)}
+            onClick={() => this.onSubmitSignUp(this.state.email, this.state.password, this.props.auth)}
           >
             Submit
           </Button>
