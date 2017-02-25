@@ -1,5 +1,16 @@
+const http = require('../httpServer')
+const io = require('socket.io')(http)
+const socketHub = require('../sockets')
+
+let socketRef
+io.on('connection', socket => {
+  socketRef = socket
+  return socketHub(socket)
+})
+
 const Order = require('../../db/models/orderModel')
 const Tab = require('../../db/models/tabModel')
+const Drink = require('../../db/models/drinkModel')
 const drinksUtil = require('./drinksUtil')
 const liquorsUtil = require('./liquorsUtil')
 const addInsUtil = require('./addInsUtil')
@@ -85,6 +96,32 @@ const createOrder = (drinkName, tabId) => {
     .then(() => this.order)
 }
 
+const formatOrder = (order, drink) => {
+  const formattedOrder = Object.assign(order, { drink })
+  return Tab.findOne({ where: { id: order.tabId } })
+    .then(tab => {
+      const finalOrder = Object.assign(formattedOrder, {
+        tableNum: tab.dataValues.tableNum,
+        customerNum: tab.dataValues.id,
+      })
+
+      delete finalOrder.drinkId
+      delete finalOrder.status
+
+      return finalOrder
+    })
+}
+
+const sendBartenderNewOrder = order => {
+  Drink.findOne({ where: { id: order.drinkId } })
+    .then(drink => formatOrder(order.dataValues, drink.dataValues))
+    .then(formattedOrder => {
+      socketRef.emit('neworder', formattedOrder)
+    }).catch(err => {
+      console.log('err', err)
+    })
+}
+
 module.exports = {
   getAllPendingOrders,
   getAllOrdersWithStatusOpen,
@@ -95,4 +132,5 @@ module.exports = {
   closeOrder,
   createOrder,
   addCustomerNumToOrders,
+  sendBartenderNewOrder,
 }

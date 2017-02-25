@@ -11,5 +11,5 @@ export function* signUp({ email, password, auth }) {
 }
 
 export default {
-  signup,
+  // signup,
 }
