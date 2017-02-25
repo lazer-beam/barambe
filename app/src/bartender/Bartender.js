@@ -2,11 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Label, Divider, Header } from 'semantic-ui-react'
 import axios from 'axios'
+import io from 'socket.io-client'
 
 import '../App.css'
 import { actions } from './duck.Bartender'
 import DrinkGroup from './BartenderDrinkGroup'
 import CompletedDrinks from './BartenderCompletedDrinks'
+
+const initSocket = () => {
+  const socket = io('http://localhost:1337')
+  return socket
+}
+
+const socket = initSocket()
 
 @connect(store => ({
   visible: store.dash.visible,
@@ -32,6 +40,10 @@ class Bartender extends Component {
     if (!this.props.fetchedOrders) {
       this.props.dispatch(actions.fetchOrders())
     }
+
+    socket.on('neworder', order => {
+      this.props.dispatch(actions.addOrder(order))
+    })
   }
 
   componentDidUpdate() {
