@@ -1,4 +1,5 @@
 const stripe = require('stripe')(process.env.testKey)
+// const Customer = require('../../dbGlobal/Customer')
 
 const customer = {
   pay: (req, res) => {
@@ -27,27 +28,13 @@ const customer = {
           res.send(customerErr)
         } else {
           console.log(`New customer object with id: ${newCustomer.id}`)
-          send(newCustomer.id)
-        // save newCustomer.id in Mongoose
-          // stripe.customers.createSource(
-          // newCustomer.id,
-          // { source: req.body.token },
-          // (cardErr, card) => {
-          //   if (cardErr) {
-          //     res.send(cardErr)
-          //   } else {
-          //     const cardObj = {
-          //       id: card.id,
-          //       brand: card.brand,
-          //       customerID: card.customer,
-          //       last4: card.last4,
-          //       exp_month: card.exp_month,
-          //       exp_year: card.exp_year,
-          //     }
-          //     console.log(`New cardObj created: ${cardObj}`)
-          //     // save cardObj in mongo
-          //     res.send(cardObj)
-          //   }
+          console.log(`Card brand is ${req.body.cardBrand}, last4 is ${req.body.last4}`)
+    // add req.body.cardBrand, req.body.last4, and the newCustomer.id to the JWT
+          // Customer.create({
+          //   authId: req.authId,
+          //   stripe: newCustomer.id,
+          // }, (err, newCustomerDocument) => {
+          //   res.send(`New customer created, ID: ${newCustomerDocument.id}`)
           // })
         }
       })
