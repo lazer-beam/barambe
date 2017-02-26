@@ -16,17 +16,21 @@ export const types = {
 //            SELECTORS
 // ========================================
 
+const findExistingTab = (formattedTabs, tabId) => formattedTabs.findIndex(formattedTab => formattedTab[0].tabId === tabId)
+
 const groupOrdersWithTab = orders => {
   const formattedTabs = []
   while (orders.length) {
     formattedTabs.push([orders.shift()])
     let i = 0
     while (i < orders.length) {
-      if (formattedTabs[formattedTabs.length - 1][0].tabId === orders[i].tabId) {
-        formattedTabs[formattedTabs.length - 1].push(orders[i])
+      const foundIdx = findExistingTab(formattedTabs, orders[i].tabId)
+      if (foundIdx !== -1) {
+        formattedTabs[foundIdx].push(orders[i])
         orders = orders.slice(0, i).concat(orders.slice(i + 1))
+      } else {
+        i++
       }
-      i++
     }
   }
 
