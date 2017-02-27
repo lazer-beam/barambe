@@ -1,8 +1,6 @@
 const qs = require('querystring')
 const request = require('request')
-const BarSchema = require('../../dbGlobal/Bar')
-
-const Bar = mongoose.model('Bar', BarSchema)
+const Bar = require('../../dbGlobal/Bar')
 
 const bars = {
   connect: (req, res) => {

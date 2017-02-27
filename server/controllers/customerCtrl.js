@@ -3,7 +3,6 @@ const stripe = require('stripe')(process.env.testKey)
 
 const customer = {
   pay: (req, res) => {
-    console.log(`Serving request for ${req.method} where url is ${req.url}`)
     stripe.charges.create({
       amount: req.body.amount,
       currency: req.body.currency,
@@ -11,8 +10,10 @@ const customer = {
       destination: req.body.barID,
     }, (err, charge) => {
       if (err) {
+        console.log(`Pay error: ${err}`)
         res.send(err)
       } else {
+        console.log('Pay success')
         res.send(charge)
       }
     })
