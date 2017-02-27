@@ -24,6 +24,8 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   modalOpen: false,
   loginModalOpen: false,
+  progressModalOpen: false,
+  progressModalPercent: 0,
   fetching: false,
   loginFetching: false,
   error: null,
@@ -32,13 +34,13 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-const closeModal = (state = INITIAL_STATE) => state.merge({ modalOpen: false })
+const closeModal = (state = INITIAL_STATE) => Immutable.merge(state, { modalOpen: false, progressModalOpen: true })
 const openModal = (state = INITIAL_STATE) => state.merge({ modalOpen: true })
 
 const closeLoginModal = (state = INITIAL_STATE) => state.merge({ loginModalOpen: false })
 const openLoginModal = (state = INITIAL_STATE) => state.merge({ loginModalOpen: true })
 
-const request = (state = INITIAL_STATE) => state.merge({ fetching: true })
+const request = (state = INITIAL_STATE) => state.merge({ fetching: true, signup })
 const loginRequest = (state = INITIAL_STATE) => state.merge({ loginFetching: true })
 
 const signupSuccess = (state = INITIAL_STATE, { userData }) => state.merge({ fetching: false, error: null, userData })

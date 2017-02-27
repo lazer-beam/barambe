@@ -6,6 +6,7 @@ import { browserHistory } from 'react-router'
 import LoginActions from './duck.Login'
 import Signup from './Signup'
 import Login from './Login'
+import ProgressModal from './ProgressModal'
 import '../App.css'
 
 @connect(store => ({
@@ -35,11 +36,7 @@ class Home extends Component {
   render() {
     const { auth } = this.props
     const loading = (
-      <Modal open basic size="fullscreen" >
-        <Dimmer active>
-          <Loader />
-        </Dimmer>
-      </Modal>
+      <ProgressModal />
     )
 
     const page = (

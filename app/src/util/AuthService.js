@@ -12,7 +12,6 @@ export default class CustomAuth extends EventEmitter {
       clientID,
       domain,
       responseType: 'token id_token',
-      redirectUri: `${window.location.origin}/dashboard`,
     })
 
     this.conn = 'Username-Password-Authentication'
@@ -27,9 +26,6 @@ export default class CustomAuth extends EventEmitter {
     // this.auth0.client.userInfo = Promise.promisify(this.auth0.client.userInfo)
     // this.auth0.redirect.signupAndLogin = Promise.promisify(this.auth0.redirect.signupAndLogin)
     // this.auth0.parseHash = Promise.promisify(this.auth0.parseHash)
-
-    // this.login = this.login.bind(this)
-    // this.signup = this.signup.bind(this)
   }
 
   signup(email, password, connection = this.conn) {
