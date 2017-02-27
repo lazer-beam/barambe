@@ -37,6 +37,25 @@
 
 #bar_queue_container {
   margin: 35px 0px 35px 7%;
+  /*overflow: hidden;*/
+  /*border: 1px solid red;*/
+}
+
+.drink_group_container {
+  overflow: scroll;
+  height: 90%;
+  /*border: 1px solid blue;*/
+}
+
+#bar_queue_container .header_container {
+  height: 10%;
+  overflow: hidden;
+  /*border: 1px solid green;*/
+  margin-bottom: 0;
+}
+
+.header_content_container {
+  margin-top: 10%;
 }
 
 #teal {
@@ -74,4 +93,8 @@
 
 .ui.inverted.menu .unselectedNav {
   background: transparent;
+}
+
+#height100 {
+  height: 100%;
 }

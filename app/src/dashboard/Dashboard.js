@@ -39,7 +39,7 @@ class Dashboard extends Component {
     return (
       <div className="allBody">
         <Sidebar.Pushable as={Segment}>
-          <Grid>
+          <Grid id="height100">
             <Grid.Row>
               <Grid.Column width={2}>
                 <Sidebar as={Menu} animation="overlay" width="thin" visible={this.props.visible} icon="labeled" vertical inverted>
@@ -57,8 +57,8 @@ class Dashboard extends Component {
                 </Sidebar>
               </Grid.Column>
               <Grid.Column width={14}>
-                <Sidebar.Pusher>
-                  <div>
+                <Sidebar.Pusher id="height100">
+                  <div id="height100">
                     {this.props.currentNav === 'beer' ? <Bartender /> : null}
                     {this.props.currentNav === 'edit' ? <Drinks /> : null}
                   </div>
