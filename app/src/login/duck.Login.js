@@ -6,10 +6,14 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   closeModal: null,
   openModal: null,
+  closeLoginModal: null,
+  openLoginModal: null,
   signupRequest: ['email', 'password', 'auth'],
+  loginRequest: ['email', 'password', 'auth'],
   signupSuccess: ['userData'],
-  signupFailure: ['error'],
-
+  loginSuccess: ['userData'],
+  authFailure: ['error'],
+  logout: null,
 })
 
 export const LoginTypes = Types
@@ -19,7 +23,9 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   modalOpen: false,
+  loginModalOpen: false,
   fetching: false,
+  loginFetching: false,
   error: null,
   userData: null,
 })
@@ -27,23 +33,35 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 const closeModal = (state = INITIAL_STATE) => state.merge({ modalOpen: false })
-
 const openModal = (state = INITIAL_STATE) => state.merge({ modalOpen: true })
 
-const request = (state = INITIAL_STATE) => state.merge({ fetching: true })
+const closeLoginModal = (state = INITIAL_STATE) => state.merge({ loginModalOpen: false })
+const openLoginModal = (state = INITIAL_STATE) => state.merge({ loginModalOpen: true })
 
-const success = (state = INITIAL_STATE, { userData }) => state.merge({ fetching: false, error: null, userData })
+const request = (state = INITIAL_STATE) => state.merge({ fetching: true })
+const loginRequest = (state = INITIAL_STATE) => state.merge({ loginFetching: true })
+
+const signupSuccess = (state = INITIAL_STATE, { userData }) => state.merge({ fetching: false, error: null, userData })
+const loginSuccess = (state = INITIAL_STATE) => state.merge({ fetching: false, error: null })
 
 const failure = (state = INITIAL_STATE, { error }) => state.merge({ fetching: false, error })
+
+const logout = () => INITIAL_STATE
+
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CLOSE_MODAL]: closeModal,
   [Types.OPEN_MODAL]: openModal,
+  [Types.CLOSE_LOGIN_MODAL]: closeLoginModal,
+  [Types.OPEN_LOGIN_MODAL]: openLoginModal,
   [Types.SIGNUP_REQUEST]: request,
-  [Types.SIGNUP_SUCCESS]: success,
-  [Types.SIGNUP_FAILURE]: failure,
+  [Types.LOGIN_REQUEST]: loginRequest,
+  [Types.SIGNUP_SUCCESS]: signupSuccess,
+  [Types.LOGIN_SUCCESS]: loginSuccess,
+  [Types.AUTH_FAILURE]: failure,
+  [Types.LOGOUT]: logout,
 })
 
 /* ------------- Sagas ------------- */

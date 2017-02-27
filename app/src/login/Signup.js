@@ -25,7 +25,6 @@ class Signup extends Component {
   }
 
   handleClose(e, data) {
-    console.log(data)
     this.props.dispatch(LoginActions.closeModal())
   }
 
@@ -38,7 +37,13 @@ class Signup extends Component {
   render() {
     const msg = 'emailTaken'
     return (
-      <Modal basic open={this.props.modalOpen} onClose={::this.handleClose} closeOnDimmerClick size={'small'}>
+      <Modal
+        basic
+        open={this.props.modalOpen}
+        onClose={::this.handleClose}
+        closeOnDimmerClick
+        size={'small'}
+      >
         <Modal.Content>
           <Modal.Description>
             <Header>Sign up your bar today!</Header>
@@ -67,11 +72,11 @@ class Signup extends Component {
               />
             </Form.Field>
             <Form.Field>
-              <Button basic color="yellow" onClick={() => this.onSubmitSignUp()}>
-                Submit
-              </Button>
             </Form.Field>
           </Form>
+          <Button basic color="yellow" onClick={() => this.onSubmitSignUp()}>
+            Submit
+          </Button>
           <Divider hidden />
           {(this.props.signupError) ? <LoginMessages msg={msg} /> : null}
         </Modal.Content>

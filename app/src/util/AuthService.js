@@ -1,67 +1,82 @@
-// import Auth0Lock from 'auth0-lock'
-// import { browserHistory } from 'react-router'
-// import Promise from 'bluebird'
+import auth0 from 'auth0-js'
+import Promise from 'bluebird'
+import { EventEmitter } from 'events'
+import { browserHistory } from 'react-router'
 
-// import { isTokenExpired } from './jwtHelper'
+import { isTokenExpired } from './jwtHelper'
 
-// export default class AuthService {
-//   constructor(clientId, domain) {
-//     this.lock = new Auth0Lock(clientId, domain, {
-//       auth: {
-//         redirectUrl: 'http://localhost:1337/login',
-//         responseType: 'token',
-//       },
-//     })
-//     this.lock.on('authenticated', ::this._doAuthentication)
-//     this.lock.on('authorization_error', ::AuthService.authorizationError)
+export default class CustomAuth extends EventEmitter {
+  constructor(clientID, domain) {
+    super()
+    this.auth0 = new auth0.WebAuth({
+      clientID,
+      domain,
+      responseType: 'token id_token',
+      redirectUri: `${window.location.origin}/dashboard`,
+    })
 
-//     this.login = ::this.login
-//     this.logout = ::AuthService.logout
-//     this.loggedIn = ::AuthService.loggedIn
+    this.conn = 'Username-Password-Authentication'
 
-//     this.getProfile = Promise.promisify(this.lock.getProfile)
-//   }
+    this.signup = this.signup.bind(this)
+    this.login = this.login.bind(this)
+    this.doUserInfo = this.doUserInfo.bind(this)
 
-//   _doAuthentication(authResult) {
-//     AuthService.setToken(authResult.idToken)
-//     browserHistory.replace('/dashboard')
-//     this.getProfile(authResult.idToken).then(profile => {
-//       this.setProfile(profile)
-//     }).catch(err => console.log('Error loading the Profile: ', err))
-//   }
+    this.auth0.signup = Promise.promisify(this.auth0.signup)
+    this.auth0.client.login = Promise.promisify(this.auth0.client.login)
+    this.auth0.client.userInfo = Promise.promisify(this.auth0.client.userInfo)
+    // this.auth0.client.userInfo = Promise.promisify(this.auth0.client.userInfo)
+    // this.auth0.redirect.signupAndLogin = Promise.promisify(this.auth0.redirect.signupAndLogin)
+    // this.auth0.parseHash = Promise.promisify(this.auth0.parseHash)
 
-//   static authorizationError(error) {
-//     console.log('Authentication Error', error)
-//   }
+    // this.login = this.login.bind(this)
+    // this.signup = this.signup.bind(this)
+  }
 
-//   login() { this.lock.show() }
+  signup(email, password, connection = this.conn) {
+    return this.auth0.signup({ connection, email, password })
+  }
 
-//   setProfile(profile) {
-//     localStorage.setItem('profile', JSON.stringify(profile))
-//     this.emit('profile_updated', profile)
-//   }
+  login(username, password) {
+    return this.auth0.client.login({
+      realm: 'Username-Password-Authentication',
+      username,
+      password,
+    })
+  }
 
-//   static loggedIn() {
-//     const token = AuthService.getToken()
-//     return !!token && !isTokenExpired(token)
-//   }
+  doUserInfo (accessToken) {
+    return this.auth0.client.userInfo(accessToken)
+  }
 
-//   static setToken(idToken) {
-//     localStorage.setItem('id_token', idToken)
-//   }
 
-//   static getProfile() {
-//     const profile = localStorage.getItem('profile')
-//     return profile ? JSON.parse(localStorage.profile) : {}
-//   }
+  loggedIn() {
+    const token = this.getToken()
+    return !!token && !isTokenExpired(token)
+  }
 
-//   static getToken() {
-//     return localStorage.getItem('id_token')
-//   }
+  setToken(accessToken, idToken) {
+    localStorage.setItem('access_token', accessToken)
+    localStorage.setItem('id_token', idToken)
+  }
 
-//   static logout() {
-//     localStorage.removeItem('id_token')
-//     localStorage.removeItem('profile')
-//     browserHistory.replace('/home')
-//   }
-// }
+  setProfile(profile) {
+    localStorage.setItem('profile', JSON.stringify(profile))
+    this.emit('profile_updated', profile)
+  }
+
+  getProfile() {
+    const profile = localStorage.getItem('profile')
+    return profile ? JSON.parse(localStorage.profile) : {}
+  }
+
+  getToken() {
+    // Retrieves the user token from localStorage
+    return localStorage.getItem('id_token')
+  }
+
+  logout() {
+    // Clear user token and profile data from localStorage
+    localStorage.removeItem('id_token')
+    localStorage.removeItem('profile')
+  }
+}

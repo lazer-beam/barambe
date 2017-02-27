@@ -5,13 +5,15 @@ import { browserHistory } from 'react-router'
 
 import LoginActions from './duck.Login'
 import Signup from './Signup'
+import Login from './Login'
 import '../App.css'
 
 @connect(store => ({
   modalOpen: store.login.modalOpen,
+  loginModalOpen: store.login.loginModalOpen,
   fetching: store.login.fetching,
 }))
-class LoginSplash extends Component {
+class Home extends Component {
 
   static routeToLogin() {
     browserHistory.push('/login')
@@ -23,7 +25,11 @@ class LoginSplash extends Component {
   }
 
   toggIt() {
-    this.props.dispatch(LoginActions.openModal(true))
+    this.props.dispatch(LoginActions.openModal())
+  }
+
+  toggleLogin() {
+    this.props.dispatch(LoginActions.openLoginModal())
   }
 
   render() {
@@ -42,10 +48,11 @@ class LoginSplash extends Component {
           <Menu.Menu position="right">
             <div className="splashButton">
               <Button color="teal" size="large" onClick={() => this.toggIt()}>Sign up</Button>
-              <Button color="teal" size="large" onClick={() => LoginSplash.routeToLogin()}>Login</Button>
+              <Button color="teal" size="large" onClick={() => this.toggleLogin()}>Login</Button>
             </div>
           </Menu.Menu>
         </Menu>
+        <Login auth={auth} />
         <Signup auth={auth} />
         <Image src="http://i.imgur.com/mvywlbT.png" centered size="large" />
       </div>
@@ -59,4 +66,4 @@ class LoginSplash extends Component {
   }
 }
 
-export default LoginSplash
+export default Home

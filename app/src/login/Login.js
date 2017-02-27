@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
-import { Modal, Form, Button } from 'semantic-ui-react'
+import { Modal, Form, Button, Dimmer, Loader } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import '../App.css'
 
+import LoginActions from './duck.Login'
+
 @connect(store => ({
-  fetching: store.login.fetching,
+  loginModalOpen: store.login.loginModalOpen,
 }))
 class Login extends Component {
-
-  static returnToSplash() {
-    browserHistory.push('/home')
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -22,7 +19,11 @@ class Login extends Component {
   }
 
   onSubmitLogin(email, password) {
-    this.props.dispatch(LoginActions.signupRequest(email, password, this.props.auth))
+    this.props.dispatch(LoginActions.loginRequest(email, password, this.props.auth))
+  }
+
+  handleClose() {
+    this.props.dispatch(LoginActions.closeLoginModal())
   }
 
   handleInputChange(e, value, key) {
@@ -31,11 +32,15 @@ class Login extends Component {
     this.setState(obj)
   }
 
-
   render() {
     return (
       <div>
-        <Modal basic open closeOnDimmerClick onClose={() => Login.returnToSplash()}>
+        <Modal
+          basic
+          open={this.props.loginModalOpen}
+          closeOnDimmerClick
+          onClose={::this.handleClose}
+        >
           <Modal.Header>Login</Modal.Header>
           <Modal.Content>
             <Form>
@@ -51,11 +56,11 @@ class Login extends Component {
                   placeholder="password"
                 />
               </Form.Field>
-              <Button
-                onClick={() => this.onSubmitLogin(this.state.email, this.state.password, this.props.auth)}
-                basic color="yellow"
-              >Submit</Button>
             </Form>
+            <Button
+              onClick={() => this.onSubmitLogin(this.state.email, this.state.password, this.props.auth)}
+              basic color="yellow"
+            >Submit</Button>
           </Modal.Content>
         </Modal>
       </div>

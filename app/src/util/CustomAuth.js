@@ -12,7 +12,7 @@ export default class CustomAuth extends EventEmitter {
       clientID,
       domain,
       responseType: 'token id_token',
-      redirectUri: `${window.location.origin}/login`,
+      redirectUri: `${window.location.origin}/dashboard`,
     })
     this.auth0.client.login = Promise.promisify(this.auth0.client.login)
     this.auth0.client.userInfo = Promise.promisify(this.auth0.client.userInfo)
@@ -26,20 +26,30 @@ export default class CustomAuth extends EventEmitter {
   login(username, password) {
     const creds = { username, password, realm: 'Username-Password-Authentication' }
     this.auth0.client.login(creds).then(authResult => {
+      console.log(authResult.accessToken)
       this.setToken(authResult.accessToken, authResult.idToken)
-      browserHistory.replace('/home')
+      browserHistory.push('/dashboard')
     }).catch(err => console.log(err.description))
   }
 
   signup(email, password) {
+    console.log('HERE WE ARE!')
     const creds = { email, password, connection: 'Username-Password-Authentication' }
-    return this.auth0.redirect.signupAndLogin(creds)
+    this.auth0.redirect.signupAndLogin(creds).then(() => {
+      this.login(email, password)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  signup(email, password) {
+    
   }
 
   parseHash(hash) {
     this.auth0.parseHash({ hash }).then(authResult => {
       this.setToken(authResult.accessToken, authResult.idToken)
-      browserHistory.replace('/dashboard')
+      browserHistory.push('/dashboard')
       return this.auth0.client.userInfo(authResult.accessToken)
     }).then(profile => {
       this.setProfile(profile)
