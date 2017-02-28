@@ -94,3 +94,33 @@
 #height100 {
   height: 100%;
 }
+/*
+============ Login ================
+*/
+
+.center {
+    width: 100px;
+    height: 100px;
+
+    position: absolute !important;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: 200px auto !important;
+}
+
+/*
+============ Add Drink Views ================
+*/
+.dropdownContainer {
+  width: 450px;
+}
+.bold {
+  font-weight: bold;
+}
+.overflowTable {
+  overflow: scroll;
+  height: 650px;
+}
