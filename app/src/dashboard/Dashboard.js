@@ -8,6 +8,7 @@ import { actions } from './duck.Dashboard'
 import MenuItem from './DashboardComponents'
 import Bartender from '../bartender/Bartender'
 import Drinks from '../drinks/Drinks'
+import Settings from '../settings/Settings'
 
 @connect(store => ({
   visible: store.dash.visible,
@@ -36,8 +37,11 @@ class Dashboard extends Component {
   }
 
   render() {
-    this.handleMenuClick = ::this.handleMenuClick
-    const menuItems = [['home', 'Home', 22], ['beer', 'Bartender', 18], ['edit', 'Edit Drinks', 4]]
+    const menuItems = [
+      ['home', 'Home', 22],
+      ['beer', 'Bartender', 18],
+      ['edit', 'Edit Drinks', 4],
+      ['user', 'Settings', 56]]
     return (
       <div className="allBody">
         <Sidebar.Pushable as={Segment}>
@@ -45,13 +49,15 @@ class Dashboard extends Component {
             <Grid.Row>
               <Grid.Column width={2}>
                 <Sidebar as={Menu} animation="overlay" width="thin" visible={this.props.visible} icon="labeled" vertical inverted>
+
                   {menuItems.map(mnuItm => <MenuItem
                     navClass={this.props.currentNav === mnuItm[0] ? 'selectedNav' : 'unselectedNav'}
                     icon={mnuItm[0]}
                     label={mnuItm[1]}
                     key={mnuItm[2]}
-                    nav={this.handleMenuClick}
+                    nav={::this.handleMenuClick}
                   />)}
+
                   <Menu.Item onClick={() => this.handleLogout.call(this)}>
                     <Icon name="sign out" />
                     Sign Out
@@ -63,6 +69,7 @@ class Dashboard extends Component {
                   <div>
                     {this.props.currentNav === 'beer' ? <Bartender /> : null}
                     {this.props.currentNav === 'edit' ? <Drinks /> : null}
+                    {this.props.currentNav === 'user' ? <Settings /> : null}
                   </div>
                 </Sidebar.Pusher>
               </Grid.Column>
