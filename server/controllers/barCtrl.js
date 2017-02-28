@@ -28,7 +28,7 @@ const bars = {
       if (stripeErr) {
         res.send(stripeErr)
       } else {
-        res.send(`New bar created, with id: ${JSON.parse(body).stripe_user_id}`)
+        res.send(`New bar created, with id: ${JSON.parse(body.stripe_user_id)}`)
       }
       // store JSON.parse(body).stripe_user_id in database
       // Bar.create({

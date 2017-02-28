@@ -10,6 +10,10 @@ export const types = {
   POST_COCKTAIL: 'POST_COCKTAIL',
   POST_LIQUOR: 'POST_LIQUOR',
   POST_ADDIN: 'POST_ADDIN',
+  DEL_BEER: 'DEL_BEER',
+  DEL_COCKTAIL: 'DEL_COCKTAIL',
+  DEL_LIQUOR: 'DEL_LIQUOR',
+  DEL_ADDIN: 'DEL_ADDIN',
 }
 
 // ========================================
@@ -28,30 +32,40 @@ export default (state = defaultProps, action) => {
     case types.TOGGLE_MENU:
       return { ...state, currentAddView: action.payload }
     case types.GET_DRINKS:
-      return {
-        ...state,
+      return { ...state,
         menuLiquors: action.payload.liquors || state.menuLiquors,
         menuAddIns: action.payload.addIns || state.menuAddIns,
         menuBeers: action.payload.beers || state.menuBeers,
         menuCocktails: action.payload.cocktails || state.menuCocktails,
       }
-    case types.DEL_DRINKS:
-      if (action.payload.type === 'shot') {
-        return { ...state,
-          menuLiquors: state.menuLiquors.filter(item => item.name !== action.payload.name),
-        }
-      } else if (action.payload.type === 'beer') {
-        return { ...state,
-          menuBeers: state.menuBeers.filter(item => item.name !== action.payload.name),
-        }
-      } else if (action.payload.type === 'cocktail') {
-        return { ...state,
-          menuCocktails: state.menuCocktails.filter(item => item.name !== action.payload.name),
-        }
-      }
+    case (types.DEL_BEER): {
       return { ...state,
-        menuAddIns: state.menuAddIns.filter(item => item.name !== action.payload.name),
+        menuBeers: state.menuBeers.filter(item => {
+          return item.name !== action.payload.name
+        }),
       }
+    }
+    case (types.DEL_COCKTAIL): {
+      return { ...state,
+        menuCocktails: state.menuCocktails.filter(item => {
+          return item.name !== action.payload.name
+        }),
+      }
+    }
+    case (types.DEL_LIQUOR): {
+      return { ...state,
+        menuLiquors: state.menuLiquors.filter(item => {
+          return item.name !== action.payload.name
+        }),
+      }
+    }
+    case (types.DEL_ADDIN): {
+      return { ...state,
+        menuAddIns: state.menuAddIns.filter(item => {
+          return item.name !== action.payload.name
+        }),
+      }
+    }
     case (types.POST_BEER): {
       const temp = state.menuBeers.slice()
       temp.unshift(action.payload)
@@ -83,7 +97,19 @@ export default (state = defaultProps, action) => {
 export const actions = {
   toggleMenu: menuName => ({ type: types.TOGGLE_MENU, payload: menuName }),
   getDrinks: drinksObj => ({ type: types.GET_DRINKS, payload: drinksObj }),
-  deleteDrink: drinkObj => ({ type: types.DEL_DRINKS, payload: drinkObj }),
+  deleteDrink: drinkObj => {
+    let actionType = ''
+    if (drinkObj.type === 'beer') {
+      actionType = 'DEL_BEER'
+    } else if (drinkObj.type === 'cocktail') {
+      actionType = 'DEL_COCKTAIL'
+    } else if (drinkObj.type === 'shot') {
+      actionType = 'DEL_LIQUOR'
+    } else {
+      actionType = 'DEL_ADDIN'
+    }
+    return { type: types[actionType], payload: drinkObj }
+  },
   postDrink: newDrinkObj => {
     newDrinkObj.price = newDrinkObj.textPrice
     let actionType = ''

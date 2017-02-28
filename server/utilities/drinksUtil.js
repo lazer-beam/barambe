@@ -68,8 +68,9 @@ const deleteItem = itemObj => {
     .then(foundItem => {
       console.log('Found drink to be deleted')
       return foundItem.destroy().then(() => 'Item deleted')
-    })
-  } else if (!itemObj.type) {
+    }).catch(err => err)
+  } else if (!itemObj.type || itemObj.type === 'addIn') {
+    console.log('This item has no type so it looks like an addIn: ', itemObj)
     return AddIn.findOne({ where: { name: itemObj.name } })
     .then(foundItem => {
       return foundItem.destroy()
