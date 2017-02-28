@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Menu, Button, Image, Modal, Dimmer, Loader } from 'semantic-ui-react'
+import { Menu, Button, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
 
 import LoginActions from './duck.Login'
 import Signup from './Signup'
@@ -16,10 +15,6 @@ import '../App.css'
   progressModalPercent: store.login.progressModalPercent,
 }))
 class Home extends Component {
-
-  static routeToLogin() {
-    browserHistory.push('/login')
-  }
 
   constructor(props) {
     super(props)

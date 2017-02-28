@@ -49,8 +49,8 @@ const loginRequestR = (state = INITIAL_STATE) => Immutable.merge(state, { fetchi
 const signupSuccessR = (state = INITIAL_STATE) => Immutable.merge(state, { error: null, progressModalPercent: 40 })
 const loginSuccessR = (state = INITIAL_STATE) => Immutable.merge(state, { error: null, progressModalPercent: 80 })
 
-const tokenSetR = (state = INITIAL_STATE) => Immutable.merge(state, { error: null, progressModalPercent: 100 })
-const profileSetR = (state = INITIAL_STATE, userData) => Immutable.merge(state, { error: null, userData })
+const tokenSetR = (state = INITIAL_STATE) => Immutable.merge(state, { error: null, progressModalPercent: 90 })
+const profileSetR = (state = INITIAL_STATE, userData) => Immutable.merge(state, { error: null, progressModalPercent: 100, userData })
 const loadingCompleteR = (state = INITIAL_STATE) => Immutable.merge(state, { fetching: false })
 
 const failureR = (state = INITIAL_STATE, { error }) => state.merge({ fetching: false, error })

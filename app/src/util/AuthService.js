@@ -1,7 +1,6 @@
 import auth0 from 'auth0-js'
 import Promise from 'bluebird'
 import { EventEmitter } from 'events'
-import { browserHistory } from 'react-router'
 
 import { isTokenExpired } from './jwtHelper'
 
@@ -20,6 +19,7 @@ export default class CustomAuth extends EventEmitter {
     this.login = this.login.bind(this)
     this.storeTokens = CustomAuth.storeTokens.bind(this)
     this.getProfileInfo = this.getProfileInfo.bind(this)
+    this.logout = this.logout.bind(this)
 
     this.auth0.signup = Promise.promisify(this.auth0.signup)
     this.auth0.client.login = Promise.promisify(this.auth0.client.login)
@@ -43,7 +43,7 @@ export default class CustomAuth extends EventEmitter {
   }
 
   static storeTokens({ accessToken, idToken }) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       localStorage.setItem('access_token', accessToken)
       localStorage.setItem('id_token', idToken)
       resolve(localStorage.getItem('access_token'))
@@ -80,5 +80,6 @@ export default class CustomAuth extends EventEmitter {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
+    this.auth0.logout({ returnTo: `${window.location.origin}/` })
   }
 }

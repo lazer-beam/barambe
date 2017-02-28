@@ -18,19 +18,12 @@ const requireAuth = (nextState, replace) => {
   }
 }
 
-const parseAuthHash = nextState => {
-  if (/access_token|id_token|error/.test(nextState.location.hash)) {
-    auth.parseHash(nextState.location.hash)
-  }
-}
-
 export default (
   <Route path="/" component={App} auth={auth}>
     <IndexRedirect to="/dashboard" />
-    <Route path="dashboard" component={Dashboard} />
+    <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
     <Route path="home" component={Home} />
-    <Route path="login" component={Login} onEnter={parseAuthHash} />
-
+    <Route path="login" component={Login} />
     <Route path="*" component={NotFound} />
   </Route>
 )
