@@ -28,15 +28,21 @@ const customer = {
         if (customerErr) {
           res.send(customerErr)
         } else {
+          console.log('newCustomer object is: ', newCustomer)
           console.log(`New customer object with id: ${newCustomer.id}`)
-          console.log(`Card brand is ${req.body.cardBrand}, last4 is ${req.body.last4}`)
-    // add req.body.cardBrand, req.body.last4, and the newCustomer.id to the JWT
-          // Customer.create({
-          //   authId: req.authId,
-          //   stripe: newCustomer.id,
-          // }, (err, newCustomerDocument) => {
-          //   res.send(`New customer created, ID: ${newCustomerDocument.id}`)
-          // })
+          console.log(`Card brand is ${newCustomer.cardBrand}, last4 is ${newCustomer.last4}`)
+          console.log(`Stripe cardObject ID is ${newCustomer.default_source}`)
+          stripe.customers.retrieveCard(
+            newCustomer.id,
+            newCustomer.default_source,
+            (err, obj) => {
+              if (err) {
+                res.send(err)
+                return
+              }
+              res.send(`Card brand is ${obj.brand} and last4 is ${obj.last4} and customer stripe is ${newCustomer.id}`)
+              // save the above info in a JWT
+            })
         }
       })
   },
