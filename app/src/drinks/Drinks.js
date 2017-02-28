@@ -18,8 +18,7 @@ import { actions } from './duck.Drinks'
 
 class Drinks extends Component {
   componentWillMount() {
-    axios
-      .get('/drinks/getAll')
+    axios.get('/drinks/getAll')
       .then(response => {
         const arrOfDrinkTypes = Object.values(response.data)
         arrOfDrinkTypes.forEach(drinkArr => {
