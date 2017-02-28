@@ -1,5 +1,6 @@
 const qs = require('querystring')
 const request = require('request')
+// const Bar = require('../../dbGlobal/Bar')
 
 const bars = {
   connect: (req, res) => {
@@ -16,17 +17,32 @@ const bars = {
       url: 'https://connect.stripe.com/oauth/token',
       form: {
         grant_type: 'authorization_code',
-        client_id: process.env.devClientId,
         code: queryCode,
         client_secret: process.env.testKey,
       },
-    }, (err, resp, body) => {
-      res.send('Bar created')
-      if (false) {
-        console.log('body', body)
+    }, (stripeErr, resp, body) => {
+      console.log('body: ', body)
+      console.log('resp: ', resp)
+      console.log('err: ', stripeErr)
+      console.log('stripeID: ', JSON.parse(body).stripe_user_id)
+      if (stripeErr) {
+        res.send(stripeErr)
+      } else {
+        res.send(`New bar created, with id: ${JSON.parse(body).stripe_user_id}`)
       }
-      // store the response bar obj in database
+      // store JSON.parse(body).stripe_user_id in database
+      // Bar.create({
+      //   subdomain: String,
+      //   authId: String,
+      //   stripe: JSON.parse(body).stripe_user_id,
+      //   picture: String,
+      //   location: String,
+      // }, (barErr, result) => {
+      //   if (barErr) res.send(err)
+      //   if (result) res.send(`New bar created, ID: ${JSON.parse(body).stripe_user_id}`)
+      // })
     })
+    res.redirect('http://localhost:1337/dashboard')
   },
 }
 

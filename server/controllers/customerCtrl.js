@@ -1,45 +1,51 @@
-const cusHelper = require('../utilities/cusUtil')
 const stripe = require('stripe')(process.env.testKey)
+// const Customer = require('../../dbGlobal/Customer')
 
 const customer = {
-  // add SDK interaction later for existing stripe users, change creation logic also
-  create: (req, res) => {
+  pay: (req, res) => {
     console.log(`Serving request for ${req.method} where url is ${req.url}`)
-    const authID = req.body.authID
-    const token = req.body.token
-    stripe.customers.create({
-      email: null,
-      source: token,
-    }).then(newCustomer => {
-      // save customerID in database, corresponding to authID
-      res.send({ result: 'User created' })
-    }).catch(err => {
-      res.send(err)
+    stripe.charges.create({
+      amount: req.body.amount,
+      currency: req.body.currency,
+      customer: req.body.stripeID,
+      destination: req.body.barID,
+    }, (err, charge) => {
+      if (err) {
+        console.log(`Pay error: ${err}`)
+        res.send(err)
+      } else {
+        console.log(`Pay success: ${charge}`)
+        res.send(charge)
+      }
     })
   },
 
-  pay: (req, res) => {
+  saveInfo: (req, res) => {
     console.log(`Serving request for ${req.method} where url is ${req.url}`)
-    const authID = req.body.authID
-    const currency = req.body.currency
-    const amount = req.body.amount
-    const barID = req.body.barID
-    // get the barStripeID using the barAuthID, and use it in the charge creation
-    cusHelper.getCusID(authID)
-    .then(cusID => {
-      stripe.charges.create({
-        amount,
-        currency,
-        customer: cusID,
-        // destination: { account: barStripeID }
+    console.log(`Req.body: ${req.body}`)
+    stripe.customers.create(
+      { source: req.body.token },
+      (customerErr, newCustomer) => {
+        if (customerErr) {
+          res.send(customerErr)
+        } else {
+          console.log('newCustomer object is: ', newCustomer)
+          console.log(`New customer object with id: ${newCustomer.id}`)
+          console.log(`Card brand is ${newCustomer.cardBrand}, last4 is ${newCustomer.last4}`)
+          console.log(`Stripe cardObject ID is ${newCustomer.default_source}`)
+          stripe.customers.retrieveCard(
+            newCustomer.id,
+            newCustomer.default_source,
+            (err, obj) => {
+              if (err) {
+                res.send(err)
+                return
+              }
+              res.send(`Card brand is ${obj.brand} and last4 is ${obj.last4} and customer stripe is ${newCustomer.id}`)
+              // save the above info in a JWT
+            })
+        }
       })
-    })
-    .then(chargeRes => {
-      res.send(chargeRes)
-    })
-    .catch(err => {
-      res.send(err)
-    })
   },
 }
 
