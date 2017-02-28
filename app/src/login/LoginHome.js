@@ -13,6 +13,7 @@ import '../App.css'
   modalOpen: store.login.modalOpen,
   loginModalOpen: store.login.loginModalOpen,
   fetching: store.login.fetching,
+  progressModalPercent: store.login.progressModalPercent,
 }))
 class Home extends Component {
 
@@ -34,9 +35,10 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.props.progressModalPercent)
     const { auth } = this.props
     const loading = (
-      <ProgressModal />
+      <ProgressModal percent={this.props.progressModalPercent} label={this.props.progressModalPercent} />
     )
 
     const page = (

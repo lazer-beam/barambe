@@ -25,7 +25,7 @@ export const INITIAL_STATE = Immutable({
   modalOpen: false,
   loginModalOpen: false,
   progressModalOpen: false,
-  progressModalPercent: 0,
+  progressModalPercent: 1,
   fetching: false,
   loginFetching: false,
   error: null,
@@ -34,36 +34,36 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-const closeModal = (state = INITIAL_STATE) => Immutable.merge(state, { modalOpen: false, progressModalOpen: true })
-const openModal = (state = INITIAL_STATE) => state.merge({ modalOpen: true })
+const closeModalR = (state = INITIAL_STATE) => Immutable.merge(state, { modalOpen: false, progressModalOpen: true })
+const openModalR = (state = INITIAL_STATE) => state.merge({ modalOpen: true })
 
-const closeLoginModal = (state = INITIAL_STATE) => state.merge({ loginModalOpen: false })
-const openLoginModal = (state = INITIAL_STATE) => state.merge({ loginModalOpen: true })
+const closeLoginModalR = (state = INITIAL_STATE) => state.merge({ loginModalOpen: false })
+const openLoginModalR = (state = INITIAL_STATE) => state.merge({ loginModalOpen: true })
 
-const request = (state = INITIAL_STATE) => state.merge({ fetching: true, signup })
-const loginRequest = (state = INITIAL_STATE) => state.merge({ loginFetching: true })
+const signupRequestR = (state = INITIAL_STATE) => Immutable.merge(state, { fetching: true, progressModalPercent: 20 })
+const loginRequestR = (state = INITIAL_STATE) => Immutable.merge(state, { fetching: true, progressModalPercent: 60 })
 
-const signupSuccess = (state = INITIAL_STATE, { userData }) => state.merge({ fetching: false, error: null, userData })
-const loginSuccess = (state = INITIAL_STATE) => state.merge({ fetching: false, error: null })
+const signupSuccessR = (state = INITIAL_STATE) => Immutable.merge(state, { error: null, progressModalPercent: 40 })
+const loginSuccessR = (state = INITIAL_STATE) => Immutable.merge(state, { error: null, progressModalPercent: 80, fetching: false })
 
-const failure = (state = INITIAL_STATE, { error }) => state.merge({ fetching: false, error })
+const failureR = (state = INITIAL_STATE, { error }) => state.merge({ fetching: false, error })
 
-const logout = () => INITIAL_STATE
+const logoutR = () => INITIAL_STATE
 
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.CLOSE_MODAL]: closeModal,
-  [Types.OPEN_MODAL]: openModal,
-  [Types.CLOSE_LOGIN_MODAL]: closeLoginModal,
-  [Types.OPEN_LOGIN_MODAL]: openLoginModal,
-  [Types.SIGNUP_REQUEST]: request,
-  [Types.LOGIN_REQUEST]: loginRequest,
-  [Types.SIGNUP_SUCCESS]: signupSuccess,
-  [Types.LOGIN_SUCCESS]: loginSuccess,
-  [Types.AUTH_FAILURE]: failure,
-  [Types.LOGOUT]: logout,
+  [Types.CLOSE_MODAL]: closeModalR,
+  [Types.OPEN_MODAL]: openModalR,
+  [Types.CLOSE_LOGIN_MODAL]: closeLoginModalR,
+  [Types.OPEN_LOGIN_MODAL]: openLoginModalR,
+  [Types.SIGNUP_REQUEST]: signupRequestR,
+  [Types.LOGIN_REQUEST]: loginRequestR,
+  [Types.SIGNUP_SUCCESS]: signupSuccessR,
+  [Types.LOGIN_SUCCESS]: loginSuccessR,
+  [Types.AUTH_FAILURE]: failureR,
+  [Types.LOGOUT]: logoutR,
 })
 
 /* ------------- Sagas ------------- */

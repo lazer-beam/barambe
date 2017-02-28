@@ -1,43 +1,54 @@
 import React, { Component } from 'react'
 import { Modal, Progress } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
 import '../App.css'
 
-import LoginActions from './duck.Login'
-
 @connect(store => ({
-  progressModalPercent: store.progressModalPercent,
+  progressModalPercent: store.login.progressModalPercent,
 }))
 class ProgressModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      progress: 50,
+      progress: 0,
+      currentProg: 0,
     }
   }
 
-  handleClose() {
-    this.props.dispatch(LoginActions.closeLoginModal())
+  componentDidMount() { this.increment() }
+
+  componentDidUpdate() {
+    console.log('Progress: ', this.state.progress)
+    console.log('Current: ', this.state.currentProg)
+    console.log('----------------------------------')
+    this.increment()
+  }
+
+  increment() {
+    if (this.state.currentProg !== this.props.progressModalPercent) {
+      this.setState({ ...this.state, currentProg: this.props.progressModalPercent })
+    }
+    if (this.state.progress < this.state.currentProg) {
+      setTimeout(() => {
+        const newProgress = this.state.progress + 1
+        this.setState({ ...this.state, progress: newProgress })
+      }, 100)
+    }
   }
 
   render() {
     return (
       <div>
-        <Modal
-          basic
-          dimmer="blurring"
-          open
-        >
+        <Modal basic dimmer="blurring" open>
           <Modal.Content>
             <Progress
-              percent={this.state.percent}
+              percent={this.state.progress}
               size="large"
               inverted
               color="teal"
               indicating
             >
-            Doing Stuff
+              {this.props.label}
             </Progress>
           </Modal.Content>
         </Modal>

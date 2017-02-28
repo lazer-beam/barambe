@@ -5,7 +5,9 @@ import LoginActions from './duck.Login'
 export function* logIn({ email, password, auth }) {
   try {
     const token = yield call(auth.login, email, password)
+    yield call(delay, 3000)
     yield put(LoginActions.loginSuccess())
+    yield call(delay, 3000)
     console.log(token)
   } catch (err) {
     console.log(err)
@@ -15,18 +17,12 @@ export function* logIn({ email, password, auth }) {
 
 export function* signUp({ email, password, auth }) {
   try {
+    // attempt to add user to database
     yield call(auth.signup, email, password, 'Username-Password-Authentication')
-    yield put(LoginActions.loginSuccess(auth.getProfile()))
-
-    const item = yield call(auth.login, email, password)
-    yield put(LoginActions.loginSuccess())
-    const info = yield call(auth.doUserInfo, item.accessToken)
-    yield put(LoginActions.closeModal())
-    console.log(info)
-    // yield call(delay, 3000)
-    // yield* login({ email, password, auth2 })
-    // yield* call(auth.login, email, password)
-    // yield put(LoginActions.loginSuccess(auth.getProfile()))
+    yield call(delay, 3000)
+    yield put(LoginActions.signupSuccess())
+    yield call(delay, 3000)
+    yield put(LoginActions.loginRequest(email, password, auth))
   } catch (err) {
     console.log(err)
     yield put(LoginActions.authFailure(err))
