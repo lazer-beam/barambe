@@ -36,8 +36,6 @@ class Drinks extends Component {
         const addIns = response.data.addInArr
 
         const drinksObj = { beers, cocktails, liquors, addIns }
-        console.log('drinksObj: ', drinksObj)
-
         this.props.dispatch(actions.getDrinks(drinksObj))
       })
       .catch(err => {
