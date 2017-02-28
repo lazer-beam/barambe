@@ -80,38 +80,38 @@ class AddLiquorAddIns extends Component {
       <div>
         <Grid columns="equal">
           <Grid.Column>
-            <Segment.Group>
+            <Segment.Group className="overflowTable">
               <Segment inverted color="grey">
               Liquors
               </Segment>
               <Segment>
                 <Input value={this.state.liquorName} onChange={this.handleLiquorChange} label="Add a liquor" placeholder="Liquor Name" />
-                <Input value={this.state.liquorPrice} onChange={this.handleLiquorPriceChange} label="Single-shot Price" placeholder='e.g. "3.95"' />
-                <Button type="submit" onClick={this.handleLiquorSubmit}>Submit</Button>
+                <Input value={this.state.liquorPrice} onChange={this.handleLiquorPriceChange} label="Price as shot" placeholder='e.g. "3.95"' />
+                <Button color="black" floated="right" type="submit" onClick={this.handleLiquorSubmit}>Submit</Button>
               </Segment>
               {this.props.liquors.map(liquor =>
                 <Segment key={Math.random() * 100}>
-                  {liquor.name}: {liquor.price}
-                  <Button onClick={this.handleDelete.bind(this, liquor)}>Remove</Button>
+                  <span className="bold">{liquor.name}</span>: {liquor.price}
+                  <Button floated="right" onClick={this.handleDelete.bind(this, liquor)}>Remove</Button>
                 </Segment>,
             )}
             </Segment.Group>
           </Grid.Column>
 
           <Grid.Column>
-            <Segment.Group>
+            <Segment.Group className="overflowTable">
               <Segment inverted color="grey">
               Add-Ins
             </Segment>
               <Segment>
                 <Input value={this.state.addInName} onChange={this.handleAddInChange} label="Add an add-in" placeholder="Add-In Name" />
-                <Input value={this.state.addInPrice} onChange={this.handleAddInPriceChange} label="Add price" placeholder='e.g. "3.95"' />
-                <Button type="submit" onClick={this.handleAddInSubmit}>Submit</Button>
+                <Input value={this.state.addInPrice} onChange={this.handleAddInPriceChange} label="Price as add-in" placeholder='e.g. "3.95"' />
+                <Button color="black" floated="right" type="submit" onClick={this.handleAddInSubmit}>Submit</Button>
               </Segment>
               {this.props.addIns.map(addIn =>
                 <Segment key={Math.random() * 100}>
-                  {addIn.name}: {addIn.price}
-                  <Button onClick={this.handleDelete.bind(this, addIn)}>Remove</Button>
+                  <span className="bold">{addIn.name}</span>: {addIn.price}
+                  <Button floated="right" onClick={this.handleDelete.bind(this, addIn)}>Remove</Button>
                 </Segment>,
             )}
             </Segment.Group>

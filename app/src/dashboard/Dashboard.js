@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { browserHistory } from 'react-router'
-import { Sidebar, Segment, Menu, Icon, Grid } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu, Icon, Grid, Header } from 'semantic-ui-react'
 import '../App.css'
 
 import LoginActions from '../login/duck.Login'
@@ -62,7 +62,12 @@ class Dashboard extends Component {
       ['user', 'Settings', 56]]
     return (
       <div className="allBody">
-        <a href="http://localhost:1337/bars/connect">Connect with Stripe</a>
+        <Header as="h2">
+          <Icon name="plug" />
+          <Header.Content>
+            <a href="http://localhost:1337/bars/connect">Connect with Stripe</a>
+          </Header.Content>
+        </Header>
         <Sidebar.Pushable as={Segment}>
           <Grid>
             <Grid.Row>
