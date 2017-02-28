@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Sidebar, Segment, Menu, Icon, Grid } from 'semantic-ui-react'
 import '../App.css'
 
+import LoginActions from '../login/duck.Login'
 import { actions } from './duck.Dashboard'
 import MenuItem from './DashboardComponents'
 import Bartender from '../bartender/Bartender'
@@ -31,6 +32,7 @@ class Dashboard extends Component {
   handleLogout() {
     console.log('LOGGING OUT!!!')
     this.props.auth.logout()
+    this.props.dispatch(LoginActions.logout())
   }
 
   render() {
