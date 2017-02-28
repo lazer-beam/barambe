@@ -18,9 +18,9 @@ class ProgressModal extends Component {
   componentDidMount() { this.increment() }
 
   componentDidUpdate() {
-    console.log('Progress: ', this.state.progress)
-    console.log('Current: ', this.state.currentProg)
-    console.log('----------------------------------')
+    // console.log('Progress: ', this.state.progress)
+    // console.log('Current: ', this.state.currentProg)
+    // console.log('----------------------------------')
     this.increment()
   }
 
@@ -45,8 +45,9 @@ class ProgressModal extends Component {
               percent={this.state.progress}
               size="large"
               inverted
-              color="teal"
+              color="blue"
               indicating
+              autoSuccess
             >
               {this.props.label}
             </Progress>

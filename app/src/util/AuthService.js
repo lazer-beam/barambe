@@ -18,14 +18,12 @@ export default class CustomAuth extends EventEmitter {
 
     this.signup = this.signup.bind(this)
     this.login = this.login.bind(this)
-    this.doUserInfo = this.doUserInfo.bind(this)
+    this.storeTokens = CustomAuth.storeTokens.bind(this)
+    this.getProfileInfo = this.getProfileInfo.bind(this)
 
     this.auth0.signup = Promise.promisify(this.auth0.signup)
     this.auth0.client.login = Promise.promisify(this.auth0.client.login)
     this.auth0.client.userInfo = Promise.promisify(this.auth0.client.userInfo)
-    // this.auth0.client.userInfo = Promise.promisify(this.auth0.client.userInfo)
-    // this.auth0.redirect.signupAndLogin = Promise.promisify(this.auth0.redirect.signupAndLogin)
-    // this.auth0.parseHash = Promise.promisify(this.auth0.parseHash)
   }
 
   signup(email, password, connection = this.conn) {
@@ -40,15 +38,23 @@ export default class CustomAuth extends EventEmitter {
     })
   }
 
-  doUserInfo (accessToken) {
+  getProfileInfo(accessToken) {
     return this.auth0.client.userInfo(accessToken)
   }
 
+  static storeTokens({ accessToken, idToken }) {
+    return new Promise((resolve, reject) => {
+      localStorage.setItem('access_token', accessToken)
+      localStorage.setItem('id_token', idToken)
+      resolve(localStorage.getItem('access_token'))
+    })
+  }
 
   loggedIn() {
     const token = this.getToken()
     return !!token && !isTokenExpired(token)
   }
+
 
   setToken(accessToken, idToken) {
     localStorage.setItem('access_token', accessToken)

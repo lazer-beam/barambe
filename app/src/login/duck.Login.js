@@ -12,6 +12,9 @@ const { Types, Creators } = createActions({
   loginRequest: ['email', 'password', 'auth'],
   signupSuccess: ['userData'],
   loginSuccess: ['userData'],
+  tokenSet: ['accessToken', 'idToken'],
+  profileSet: ['userProfile'],
+  loadingComplete: null,
   authFailure: ['error'],
   logout: null,
 })
@@ -44,7 +47,11 @@ const signupRequestR = (state = INITIAL_STATE) => Immutable.merge(state, { fetch
 const loginRequestR = (state = INITIAL_STATE) => Immutable.merge(state, { fetching: true, progressModalPercent: 60 })
 
 const signupSuccessR = (state = INITIAL_STATE) => Immutable.merge(state, { error: null, progressModalPercent: 40 })
-const loginSuccessR = (state = INITIAL_STATE) => Immutable.merge(state, { error: null, progressModalPercent: 80, fetching: false })
+const loginSuccessR = (state = INITIAL_STATE) => Immutable.merge(state, { error: null, progressModalPercent: 80 })
+
+const tokenSetR = (state = INITIAL_STATE) => Immutable.merge(state, { error: null, progressModalPercent: 100 })
+const profileSetR = (state = INITIAL_STATE, userData) => Immutable.merge(state, { error: null, userData })
+const loadingCompleteR = (state = INITIAL_STATE) => Immutable.merge(state, { fetching: false })
 
 const failureR = (state = INITIAL_STATE, { error }) => state.merge({ fetching: false, error })
 
@@ -62,6 +69,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_REQUEST]: loginRequestR,
   [Types.SIGNUP_SUCCESS]: signupSuccessR,
   [Types.LOGIN_SUCCESS]: loginSuccessR,
+  [Types.TOKEN_SET]: tokenSetR,
+  [Types.PROFILE_SET]: profileSetR,
+  [Types.LOADING_COMPLETE]: loadingCompleteR,
   [Types.AUTH_FAILURE]: failureR,
   [Types.LOGOUT]: logoutR,
 })
