@@ -1,4 +1,5 @@
 const stripe = require('stripe')(process.env.testKey)
+// const Customer = require('../../dbGlobal/Customer')
 
 const customer = {
   pay: (req, res) => {
@@ -10,8 +11,10 @@ const customer = {
       destination: req.body.barID,
     }, (err, charge) => {
       if (err) {
+        console.log(`Pay error: ${err}`)
         res.send(err)
       } else {
+        console.log(`Pay success: ${charge}`)
         res.send(charge)
       }
     })
@@ -26,29 +29,21 @@ const customer = {
         if (customerErr) {
           res.send(customerErr)
         } else {
+          console.log('newCustomer object is: ', newCustomer)
           console.log(`New customer object with id: ${newCustomer.id}`)
-          send(newCustomer.id)
-        // save newCustomer.id in Mongoose
-          // stripe.customers.createSource(
-          // newCustomer.id,
-          // { source: req.body.token },
-          // (cardErr, card) => {
-          //   if (cardErr) {
-          //     res.send(cardErr)
-          //   } else {
-          //     const cardObj = {
-          //       id: card.id,
-          //       brand: card.brand,
-          //       customerID: card.customer,
-          //       last4: card.last4,
-          //       exp_month: card.exp_month,
-          //       exp_year: card.exp_year,
-          //     }
-          //     console.log(`New cardObj created: ${cardObj}`)
-          //     // save cardObj in mongo
-          //     res.send(cardObj)
-          //   }
-          // })
+          console.log(`Card brand is ${newCustomer.cardBrand}, last4 is ${newCustomer.last4}`)
+          console.log(`Stripe cardObject ID is ${newCustomer.default_source}`)
+          stripe.customers.retrieveCard(
+            newCustomer.id,
+            newCustomer.default_source,
+            (err, obj) => {
+              if (err) {
+                res.send(err)
+                return
+              }
+              res.send(`Card brand is ${obj.brand} and last4 is ${obj.last4} and customer stripe is ${newCustomer.id}`)
+              // save the above info in a JWT
+            })
         }
       })
   },
