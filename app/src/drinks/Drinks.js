@@ -100,7 +100,7 @@ class Drinks extends Component {
 
     return (
       <Grid>
-        <Grid.Column width={4}>
+        <Grid.Column width={2}>
           <Menu fluid vertical tabular>
             <Menu.Item name="beers" active={addView === 'beers'} onClick={() => this.toggleMenu('beers')} />
             <Menu.Item name="liquorAddIns" active={addView === 'liquorAddIns'} onClick={() => this.toggleMenu('liquorAddIns')} />

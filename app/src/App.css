@@ -92,3 +92,17 @@
 
     margin: 200px auto !important;
 }
+
+/*
+============ Add Drink Views ================
+*/
+.dropdownContainer {
+  width: 450px;
+}
+.bold {
+  font-weight: bold;
+}
+.overflowTable {
+  overflow: scroll;
+  height: 650px;
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Sidebar, Segment, Menu, Icon, Grid } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu, Icon, Grid, Header } from 'semantic-ui-react'
 import '../App.css'
 
 import LoginActions from '../login/duck.Login'
@@ -40,7 +40,12 @@ class Dashboard extends Component {
     const menuItems = [['home', 'Home', 22], ['beer', 'Bartender', 18], ['edit', 'Edit Drinks', 4]]
     return (
       <div className="allBody">
-        <a href="http://localhost:1337/bars/connect">Connect with Stripe</a>
+        <Header as="h2">
+          <Icon name="plug" />
+          <Header.Content>
+            <a href="http://localhost:1337/bars/connect">Connect with Stripe</a>
+          </Header.Content>
+        </Header>
         <Sidebar.Pushable as={Segment}>
           <Grid>
             <Grid.Row>
