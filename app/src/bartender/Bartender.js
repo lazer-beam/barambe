@@ -24,6 +24,7 @@ const socket = initSocket()
   donePickupOrders: store.bar.donePickupOrders,
   doneTableOrders: store.bar.doneTableOrders,
 }))
+
 class Bartender extends Component {
   static sendServerClosedTab(tab) {
     axios.put('/orders/closeorders/', tab)
