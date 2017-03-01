@@ -5,9 +5,10 @@ const rp = require('request-promise')
 const co = require('co')
 
 const barUtil = require('../utilities/barUtil')
-const authUtil = require('../utilities/authUtil') 
+const authUtil = require('../utilities/authUtil')
 
 const cryptr = new Cryptr(process.env.STRIPE_SECRET)
+const onError = err => console.log(err)
 
 const bars = {
   connect: (req, res) => {
@@ -21,35 +22,20 @@ const bars = {
   getBarStripeData: (req, res) => {
     const queryCode = req.query.code
     res.redirect(`/dashboard?query=${queryCode}`)
-    // co(function* () {
-    //   const stripe = yield barUtil.barStripeData(queryCode)
-
-    //   const bars = yield authUtil.checkBars(barname)
-    //   if (bars !== '[]') {
-    //     res.status(422).send('Name Already Taken')
-    //   } else {
-    //     const name = yield authUtil.addBarUniqueName(id, barname)
-    //     res.status(200).send(name)
-    //   }
-    // }).catch(onError)
-
-    // request.post({
-    //   url: 'https://connect.stripe.com/oauth/token',
-    //   form: {
-    //     grant_type: 'authorization_code',
-    //    //  client_id: process.env.devClientId,
-    //     code: queryCode,
-    //     client_secret: process.env.testKey,
-    //   },
-    // }, (err, resp, body) => {
-    //   console.log('body: ', body.stripe_user_id)
-
-    // })
   },
+
   finalizeBarStripeData: (req, res) => {
-    console.log("==========================================")
-    console.log(req.params)
-    res.status(200).send(req.query)
+    const token = req.params.token
+    const id = req.user.sub.slice(req.user.sub.indexOf('|') + 1)
+
+    co(function* () {
+      const stripe = yield barUtil.barStripeData(token)
+      const stripe2 = JSON.parse(stripe)
+      console.log(stripe2)
+      const encrypt = cryptr.encrypt(stripe2.stripe_user_id)
+      const result = yield authUtil.addBartenderStripe(id, encrypt)
+      res.status(200).send(result)
+    }).catch(onError)
   },
 }
 
