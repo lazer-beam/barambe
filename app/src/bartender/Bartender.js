@@ -32,16 +32,13 @@ class Bartender extends Component {
 
   constructor(props) {
     super(props)
+
     this.checkIfAllOrdersDone = ::this.checkIfAllOrdersDone
     this.completeTab = ::this.completeTab
     this.getNonCompletedOrders = ::this.getNonCompletedOrders
   }
 
   componentDidMount() {
-    if (!this.props.fetchedOrders) {
-      this.props.dispatch(actions.fetchOrders())
-    }
-
     socket.on('neworder', order => {
       this.props.dispatch(actions.addOrder(order))
     })

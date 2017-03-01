@@ -7,6 +7,7 @@ import '../App.css'
 
 import LoginActions from '../login/duck.Login'
 import { actions } from './duck.Dashboard'
+import { actions as BarActions } from '../bartender/duck.Bartender'
 import MenuItem from './DashboardComponents'
 import Bartender from '../bartender/Bartender'
 import Drinks from '../drinks/Drinks'
@@ -15,16 +16,19 @@ import Settings from '../settings/Settings'
 @connect(store => ({
   visible: store.dash.visible,
   currentNav: store.dash.currentNav,
+  fetchedOrders: store.bar.fetchedOrders,
 }))
 
 class Dashboard extends Component {
   componentDidMount() {
-    console.log('HERE ARE THE PROPS!')
-    console.log(this.props)
     if (this.props.currentNav === 'home' && !this.props.visible) {
       setTimeout(() => {
         this.props.dispatch(actions.toggleSidebarOut())
       }, 1000)
+    }
+
+    if (!this.props.fetchedOrders) {
+      this.props.dispatch(BarActions.fetchOrders())
     }
   }
 
