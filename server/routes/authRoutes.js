@@ -1,4 +1,5 @@
 const router = require('express').Router()
+
 const jwtCheck = require('../utilities/authUtil').jwtCheck
 const authCtrl = require('../controllers/authCtrl')
 const authUtil = require('../utilities/authUtil')

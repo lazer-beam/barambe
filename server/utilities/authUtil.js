@@ -45,6 +45,22 @@ module.exports.addBarUniqueName = (userId, barname) => {
   return rp(opts)
 }
 
+module.exports.addBartenderStripe = (userId, stripe) => {
+  const opts = {
+    method: 'PATCH',
+    uri: `${process.env.AUTH_MANAGMENT_AUDIENCE}users/auth0%7C${userId}`,
+    headers: {
+      authorization: `Bearer ${process.env.AUTH_MANAGMENT_TOKEN}`,
+      contentType: 'application/json',
+    },
+    body: {
+      app_metadata: { stripe },
+    },
+    json: true,
+  }
+  return rp(opts)
+}
+
 
 module.exports.createNewToken = next => {
   console.log(chalk.blue('CREATING NEW AUTH TOKEN, DOESNT EXIST...'))

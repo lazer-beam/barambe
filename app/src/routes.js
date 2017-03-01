@@ -23,7 +23,6 @@ export default (
     <IndexRedirect to="/dashboard" />
     <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
     <Route path="home" component={Home} />
-    <Route path="login" component={Login} />
     <Route path="*" component={NotFound} />
   </Route>
 )

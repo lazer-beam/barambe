@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
+import { browserHistory } from 'react-router'
 import { Sidebar, Segment, Menu, Icon, Grid } from 'semantic-ui-react'
 import '../App.css'
 
@@ -26,14 +28,30 @@ class Dashboard extends Component {
     }
   }
 
+  componentDidUpdate() {
+    console.log(this.props.location.query.query)
+    if (this.props.location.query.query !== undefined) {
+      console.log('xxxxxxxxxxxxx')
+      this.stripe(this.props.location.query.query)
+    }
+  }
+
   handleMenuClick(e, data, load) {
     this.props.dispatch(actions.navSelection(load))
   }
 
   handleLogout() {
-    console.log('LOGGING OUT!!!')
     this.props.auth.logout()
     this.props.dispatch(LoginActions.logout())
+  }
+
+  stripe(token) {
+    axios.get(`/bars/stripe/${token}`, {
+      headers: { Authorization: `Bearer ${this.props.auth.getToken()}` },
+    }).then(obj => {
+      console.log(obj)
+      // browserHistory.push('/')
+    })
   }
 
   render() {
