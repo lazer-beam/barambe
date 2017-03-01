@@ -51,7 +51,7 @@ class AddLiquorAddIns extends Component {
       price: parseFloat(this.state.addInPrice) * 100,
       type: 'addIn',
     }
-    this.props.submitAction(temp, 'addIn')
+    this.props.submitAction(temp)
     this.setState({
       addInName: '',
       addInPrice: '',
