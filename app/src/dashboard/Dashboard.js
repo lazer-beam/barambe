@@ -50,7 +50,7 @@ class Dashboard extends Component {
       headers: { Authorization: `Bearer ${this.props.auth.getToken()}` },
     }).then(obj => {
       console.log(obj)
-      // browserHistory.push('/')
+      browserHistory.push('/')
     })
   }
 

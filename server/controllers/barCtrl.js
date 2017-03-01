@@ -1,7 +1,5 @@
 const qs = require('querystring')
-const request = require('request')
 const Cryptr = require('cryptr')
-const rp = require('request-promise')
 const co = require('co')
 
 const barUtil = require('../utilities/barUtil')
@@ -31,7 +29,6 @@ const bars = {
     co(function* () {
       const stripe = yield barUtil.barStripeData(token)
       const stripe2 = JSON.parse(stripe)
-      console.log(stripe2)
       const encrypt = cryptr.encrypt(stripe2.stripe_user_id)
       const result = yield authUtil.addBartenderStripe(id, encrypt)
       res.status(200).send(result)

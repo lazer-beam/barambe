@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
-import { Button, Dropdown, Header, Form, Container, Input, Segment, Icon } from 'semantic-ui-react'
+import { Button, Header, Form, Container, Input, Segment, Icon } from 'semantic-ui-react'
 
 import states from '../util/usaStates'
 
