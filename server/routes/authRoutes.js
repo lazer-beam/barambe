@@ -1,7 +1,8 @@
 const router = require('express').Router()
 
+const jwtCheck = require('../utilities/authUtil').jwtCheck
+const authCtrl = require('../controllers/authCtrl')
 const authUtil = require('../utilities/authUtil')
-const barCtrl = require('../controllers/barCtrl')
 
 // ----------------- Middleware ----------------- //
 const checkToken = (req, res, next) => {
@@ -10,8 +11,8 @@ const checkToken = (req, res, next) => {
   } else { next() }
 }
 
-router.get('/connect', barCtrl.bars.connect)
-router.get('/connect/callback', barCtrl.bars.getBarStripeData)
-router.get('/stripe/:token', authUtil.jwtCheck, checkToken, barCtrl.bars.finalizeBarStripeData)
+// ----------------- Routes ----------------- //
+router.post('/test', jwtCheck, authCtrl.default)
+router.post('/setBarUsername', jwtCheck, checkToken, authCtrl.setBarUsername)
 
 module.exports = router

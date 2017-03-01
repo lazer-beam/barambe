@@ -71,13 +71,9 @@ export default class CustomAuth extends EventEmitter {
     return profile ? JSON.parse(localStorage.profile) : {}
   }
 
-  getToken() {
-    // Retrieves the user token from localStorage
-    return localStorage.getItem('id_token')
-  }
+  getToken() { return localStorage.getItem('id_token') }
 
   logout() {
-    // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
     this.auth0.logout({ returnTo: `${window.location.origin}/` })

@@ -4,7 +4,6 @@ import AuthService from './util/AuthService'
 
 import App from './App'
 import Home from './login/LoginHome'
-import Login from './login/Login'
 import Dashboard from './dashboard/Dashboard'
 // import CustomAuth from './util/CustomAuth'
 
@@ -23,7 +22,6 @@ export default (
     <IndexRedirect to="/dashboard" />
     <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
     <Route path="home" component={Home} />
-    <Route path="login" component={Login} />
     <Route path="*" component={NotFound} />
   </Route>
 )
