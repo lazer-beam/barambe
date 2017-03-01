@@ -76,7 +76,7 @@ class Settings extends Component {
               </Form.Group>
               <Form.Group>
                 <Form.Input label="City" placeholder="" width={10} />
-                <Form.Dropdown 
+                <Form.Dropdown
                   label="State"
                   fluid
                   selection
