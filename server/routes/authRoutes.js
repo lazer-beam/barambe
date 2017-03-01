@@ -1,11 +1,9 @@
 const router = require('express').Router()
 
+const jwtCheck = require('../utilities/authUtil').jwtCheck
+const authCtrl = require('../controllers/authCtrl')
 const authUtil = require('../utilities/authUtil')
-const barCtrl = require('../controllers/barCtrl')
 
-<<<<<<< HEAD
-// router.get('/getbar/:name', barCtrl.bars.get)
-=======
 // ----------------- Middleware ----------------- //
 const checkToken = (req, res, next) => {
   if (process.env.AUTH_MANAGMENT_TOKEN === '' || process.env.AUTH_MANAGMENT_EXP > Date.now()) {
@@ -13,9 +11,8 @@ const checkToken = (req, res, next) => {
   } else { next() }
 }
 
->>>>>>> origin/feat/multiTenant
-router.get('/connect', barCtrl.bars.connect)
-router.get('/connect/callback', barCtrl.bars.getBarStripeData)
-router.get('/stripe/:token', authUtil.jwtCheck, checkToken, barCtrl.bars.finalizeBarStripeData)
+// ----------------- Routes ----------------- //
+router.post('/test', jwtCheck, authCtrl.default)
+router.post('/setBarUsername', jwtCheck, checkToken, authCtrl.setBarUsername)
 
 module.exports = router
