@@ -66,7 +66,6 @@ class Dashboard extends Component {
       ['user', 'Settings', 56]]
     return (
       <div className="allBody">
-        <a href="http://localhost:1337/bars/connect">Connect with Stripe</a>
         <Sidebar.Pushable as={Segment}>
           <Grid id="height100">
             <Grid.Row>
