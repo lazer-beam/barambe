@@ -15,5 +15,5 @@ export default () => {
     bar,
     drinks,
   })
-  return configureStore(rootReducer, rootSaga) // needs sagas eventually
+  return configureStore(rootReducer, rootSaga)
 }

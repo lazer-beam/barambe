@@ -10,4 +10,6 @@ const BarSchema = new Schema({
   location: String,
 })
 
-module.exports = BarSchema
+const BarModel = mongoose.model('Bar', BarSchema)
+
+module.exports = BarModel

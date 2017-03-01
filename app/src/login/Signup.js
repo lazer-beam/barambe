@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import { Modal, Header, Form, Button, Divider } from 'semantic-ui-react'
 // import { browserHistory } from 'react-router'
 
+import LoginMessages from './LoginMessages'
 import LoginActions from './duck.Login'
 
 @connect(store => ({
   modalOpen: store.login.modalOpen,
+  signupError: store.login.error,
 }))
 class Signup extends Component {
   constructor(props) {
@@ -18,15 +20,30 @@ class Signup extends Component {
     }
   }
 
-  onSubmitSignUp(email, password) {
-    this.props.dispatch(LoginActions.signupRequest(email, password, this.props.auth))
-    // this.setState({ isOpen: false })
-    // browserHistory.replace('/')
+  onSubmitSignUp() {
+    this.props.dispatch(LoginActions.signupRequest(this.state.email, this.state.password, this.props.auth))
+  }
+
+  handleClose() {
+    this.props.dispatch(LoginActions.closeModal())
+  }
+
+  handleInputChange(e, value, key) {
+    const obj = { ...this.state }
+    obj[key] = value
+    this.setState(obj)
   }
 
   render() {
+    const msg = 'emailTaken'
     return (
-      <Modal open={this.props.modalOpen} size={'small'}>
+      <Modal
+        basic
+        open={this.props.modalOpen}
+        onClose={::this.handleClose}
+        closeOnDimmerClick
+        size={'small'}
+      >
         <Modal.Content>
           <Modal.Description>
             <Header>Sign up your bar today!</Header>
@@ -37,29 +54,29 @@ class Signup extends Component {
               <Form.Input
                 label="Bar username"
                 placeholder="bar-name"
-                onChange={() => console.log('YEAH BOIII')}
+                onChange={(a, b) => this.handleInputChange(a, b.value, 'barName')}
               />
             </Form.Field>
             <Form.Field>
               <Form.Input
                 label="Email"
                 placeholder="barambe@email.com"
-                onChange={() => console.log('YEAH BOIII')}
+                onChange={(a, b) => this.handleInputChange(a, b.value, 'email')}
               />
             </Form.Field>
             <Form.Field>
               <Form.Input
                 label="Password"
                 placeholder="secret"
-                onChange={() => console.log('YEAH BOIII')}
+                onChange={(a, b) => this.handleInputChange(a, b.value, 'password')}
               />
             </Form.Field>
           </Form>
-          <Button
-            onClick={() => this.onSubmitSignUp('booboo@1.com', '123', this.props.auth)}
-          >
+          <Button basic color="yellow" onClick={() => this.onSubmitSignUp()}>
             Submit
           </Button>
+          <Divider hidden />
+          {(this.props.signupError) ? <LoginMessages msg={msg} /> : null}
         </Modal.Content>
       </Modal>
     )

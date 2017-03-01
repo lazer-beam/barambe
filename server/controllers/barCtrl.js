@@ -1,5 +1,12 @@
 const qs = require('querystring')
-const request = require('request')
+const Cryptr = require('cryptr')
+const co = require('co')
+
+const barUtil = require('../utilities/barUtil')
+const authUtil = require('../utilities/authUtil')
+
+const cryptr = new Cryptr(process.env.STRIPE_SECRET)
+const onError = err => console.log(err)
 
 const bars = {
   connect: (req, res) => {
@@ -12,24 +19,21 @@ const bars = {
   },
   getBarStripeData: (req, res) => {
     const queryCode = req.query.code
-    request.post({
-      url: 'https://connect.stripe.com/oauth/token',
-      form: {
-        grant_type: 'authorization_code',
-        client_id: process.env.devClientId,
-        code: queryCode,
-        client_secret: process.env.testKey,
-      },
-    }, (err, resp, body) => {
-      res.send('Bar created')
-      if (false) {
-        console.log('body', body)
-      }
-      // store the response bar obj in database
-    })
+    res.redirect(`/dashboard?query=${queryCode}`)
+  },
+
+  finalizeBarStripeData: (req, res) => {
+    const token = req.params.token
+    const id = req.user.sub.slice(req.user.sub.indexOf('|') + 1)
+
+    co(function* () {
+      const stripe = yield barUtil.barStripeData(token)
+      const stripe2 = JSON.parse(stripe)
+      const encrypt = cryptr.encrypt(stripe2.stripe_user_id)
+      const result = yield authUtil.addBartenderStripe(id, encrypt)
+      res.status(200).send(result)
+    }).catch(onError)
   },
 }
 
-module.exports = {
-  bars,
-}
+module.exports = { bars }
