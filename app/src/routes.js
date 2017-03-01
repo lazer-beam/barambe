@@ -4,7 +4,6 @@ import AuthService from './util/AuthService'
 
 import App from './App'
 import Home from './login/LoginHome'
-import Login from './login/Login'
 import Dashboard from './dashboard/Dashboard'
 // import CustomAuth from './util/CustomAuth'
 
