@@ -4,6 +4,7 @@ const tabRoutes = require('./tabRoutes')
 const customerRoutes = require('./customerRoutes')
 const authRoutes = require('./authRoutes')
 const barRoutes = require('./barRoutes')
+const privacyRoutes = require('./privacyRoutes')
 
 module.exports = app => {
   app.use('/auth', authRoutes)
@@ -12,4 +13,5 @@ module.exports = app => {
   app.use('/tabs', tabRoutes)
   app.use('/bars', barRoutes)
   app.use('/customer', customerRoutes)
+  app.use('/privacy', privacyRoutes)
 }

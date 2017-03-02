@@ -10,10 +10,11 @@ import DrinkGroup from './BartenderDrinkGroup'
 import CompletedDrinks from './BartenderCompletedDrinks'
 
 const initSocket = () => {
-  const socket = io('http://localhost:1337')
+  const socket = io('http://barambe-2.appspot.com')
   return socket
 }
 
+console.log('process.env', process.env)
 const socket = initSocket()
 
 @connect(store => ({
@@ -39,8 +40,17 @@ class Bartender extends Component {
   }
 
   componentDidMount() {
+    console.log('socket is', socket)
     socket.on('neworder', order => {
       this.props.dispatch(actions.addOrder(order))
+    })
+
+    socket.on('connect', () => {
+      console.log('socket has connected')
+    })
+
+    socket.on('disconnect', reason => {
+      console.log('socket has disconnected because', reason)
     })
   }
 

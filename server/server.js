@@ -30,7 +30,7 @@ app.get('*', (request, response) => {
 const dbStr = process.env.DB_TESTING === 'true' ? 'USING TESTING DATABASE' : 'USING DEVELOPMENT DATABASE'
 const port = 1337
 Promise.all([initDb(false), mongoose()]).then(() => {
-  http.listen(port, () => {
+  http.listen(process.env.PORT || port, () => {
     console.log(chalk.bgGreen.black(dbStr))
     console.log(chalk.bgGreen.black(`listening on port ${port}`))
   })
