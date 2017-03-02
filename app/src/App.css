@@ -39,6 +39,21 @@
   margin: 35px 0px 35px 7%;
 }
 
+.drink_group_container {
+  overflow: scroll;
+  height: 90%;
+}
+
+#bar_queue_container .header_container {
+  height: 10%;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.header_content_container {
+  margin-top: 10%;
+}
+
 #teal {
   background-color: #00B5AD
 }
@@ -76,19 +91,6 @@
   background: transparent;
 }
 
-/*
-============ Login ================
-*/
-
-.center {
-    width: 100px;
-    height: 100px;
-
-    position: absolute !important;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    margin: 200px auto !important;
+#height100 {
+  height: 100%;
 }

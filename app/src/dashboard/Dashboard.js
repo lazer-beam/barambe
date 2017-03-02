@@ -7,6 +7,7 @@ import '../App.css'
 
 import LoginActions from '../login/duck.Login'
 import { actions } from './duck.Dashboard'
+import { actions as BarActions } from '../bartender/duck.Bartender'
 import MenuItem from './DashboardComponents'
 import Bartender from '../bartender/Bartender'
 import Drinks from '../drinks/Drinks'
@@ -15,16 +16,19 @@ import Settings from '../settings/Settings'
 @connect(store => ({
   visible: store.dash.visible,
   currentNav: store.dash.currentNav,
+  fetchedOrders: store.bar.fetchedOrders,
 }))
 
 class Dashboard extends Component {
   componentDidMount() {
-    console.log('HERE ARE THE PROPS!')
-    console.log(this.props)
     if (this.props.currentNav === 'home' && !this.props.visible) {
       setTimeout(() => {
         this.props.dispatch(actions.toggleSidebarOut())
       }, 1000)
+    }
+
+    if (!this.props.fetchedOrders) {
+      this.props.dispatch(BarActions.fetchOrders())
     }
   }
 
@@ -62,9 +66,8 @@ class Dashboard extends Component {
       ['user', 'Settings', 56]]
     return (
       <div className="allBody">
-        <a href="http://localhost:1337/bars/connect">Connect with Stripe</a>
         <Sidebar.Pushable as={Segment}>
-          <Grid>
+          <Grid id="height100">
             <Grid.Row>
               <Grid.Column width={2}>
                 <Sidebar as={Menu} animation="overlay" width="thin" visible={this.props.visible} icon="labeled" vertical inverted>
@@ -84,8 +87,8 @@ class Dashboard extends Component {
                 </Sidebar>
               </Grid.Column>
               <Grid.Column width={14}>
-                <Sidebar.Pusher>
-                  <div>
+                <Sidebar.Pusher id="height100">
+                  <div id="height100">
                     {this.props.currentNav === 'beer' ? <Bartender /> : null}
                     {this.props.currentNav === 'edit' ? <Drinks /> : null}
                     {this.props.currentNav === 'user' ? <Settings /> : null}

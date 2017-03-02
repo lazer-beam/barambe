@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Label, Divider, Header } from 'semantic-ui-react'
+import { Grid, Label, Header } from 'semantic-ui-react'
 import axios from 'axios'
 import io from 'socket.io-client'
 
@@ -24,6 +24,7 @@ const socket = initSocket()
   donePickupOrders: store.bar.donePickupOrders,
   doneTableOrders: store.bar.doneTableOrders,
 }))
+
 class Bartender extends Component {
   static sendServerClosedTab(tab) {
     axios.put('/orders/closeorders/', tab)
@@ -31,16 +32,13 @@ class Bartender extends Component {
 
   constructor(props) {
     super(props)
+
     this.checkIfAllOrdersDone = ::this.checkIfAllOrdersDone
     this.completeTab = ::this.completeTab
     this.getNonCompletedOrders = ::this.getNonCompletedOrders
   }
 
   componentDidMount() {
-    if (!this.props.fetchedOrders) {
-      this.props.dispatch(actions.fetchOrders())
-    }
-
     socket.on('neworder', order => {
       this.props.dispatch(actions.addOrder(order))
     })
@@ -93,18 +91,21 @@ class Bartender extends Component {
     }
 
     return (
-      <Grid>
+      <Grid id="height100">
         <Grid.Row>
           <CompletedDrinks completedTables={this.props.doneTableOrders} completedPickups={this.props.donePickupOrders} />
           <Grid.Column width={4} id="bar_queue_container" className="revealer">
-            <Header as="h2">
-              <Header.Content>
-                Bar Queue
-              </Header.Content>
-              <Label id="order-cnt" circular size="large" color="red">{props.numOfOrders()}</Label>
+            <Header as="h2" className="header_container">
+              <div className="header_content_container">
+                <Header.Content>
+                  Bar Queue
+                </Header.Content>
+                <Label id="order-cnt" circular size="large" color="red">{props.numOfOrders()}</Label>
+              </div>
             </Header>
-            <Divider />
-            {this.props.unfufilledOrders.map(tab => <DrinkGroup {...props} key={tab[0].id} tab={tab} />)}
+            <div className="drink_group_container">
+              {this.props.unfufilledOrders.map(tab => <DrinkGroup {...props} key={tab[0].id} tab={tab} />)}
+            </div>
           </Grid.Column>
         </Grid.Row>
       </Grid>
