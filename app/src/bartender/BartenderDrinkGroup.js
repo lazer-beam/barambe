@@ -22,7 +22,7 @@ class DrinkGroup extends Component {
   render() {
     const firstOrder = this.props.tab[0]
     const color = firstOrder.tableNum ? 'teal' : 'blue'
-    const labelTxt = firstOrder.tableNum ? `Table ${firstOrder.tableNum}` : `Pickup #${firstOrder.customerNum}`
+    const labelTxt = firstOrder.tableNum ? `Table ${firstOrder.tableNum}` : `Pickup #${firstOrder.customerName}`
 
     return (
       <Button.Group className="revealer" fluid attached="top" vertical>

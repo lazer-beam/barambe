@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const sequelize = require('../conn')
 
 const schema = {
-  customerNum: Sequelize.INTEGER,
+  customerName: Sequelize.STRING,
   isOpen: { type: Sequelize.BOOLEAN, defaultValue: true },
   tableNum: Sequelize.INTEGER,
   subtotal: Sequelize.INTEGER,

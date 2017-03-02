@@ -2,10 +2,13 @@ const tabsUtil = require('../utilities/tabsUtil')
 
 const tabs = {
   open: (req, res) => {
-    tabsUtil.openTab(req.body.customerNum, req.body.tableNum)
+    console.log('req.body is:', req.body)
+    tabsUtil.openTab(req.body.customerName, req.body.tableNum)
       .then(tab => {
+        console.log('new tab: ', tab.dataValues.id)
         res.send(`Created tab ${tab.dataValues.id}`)
       }).catch(err => {
+        console.log('err: ', err)
         res.status(500).send(err)
       })
   },
