@@ -10,6 +10,7 @@ const checkToken = (req, res, next) => {
   } else { next() }
 }
 
+router.post('/submitinfo', barCtrl.bars.submitInfo)
 router.get('/connect', barCtrl.bars.connect)
 router.get('/connect/callback', barCtrl.bars.getBarStripeData)
 router.get('/stripe/:token', authUtil.jwtCheck, checkToken, barCtrl.bars.finalizeBarStripeData)
