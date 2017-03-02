@@ -1,7 +1,6 @@
 const Tab = require('../../db/models/tabModel')
 
 const openTab = (customerName, tableNum) => {
-  console.log(`customername: ${customerName}, tableNum: ${tableNum}`)
   return tableNum ? Tab.create({ customerName, tableNum }) : Tab.create({ customerName })
 }
 

@@ -51,7 +51,7 @@ class AddBeers extends Component {
           <div className="overflowTable">
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell inverted width={3}>Beer</Table.HeaderCell>
+                <Table.HeaderCell width={3}>Beer</Table.HeaderCell>
                 <Table.HeaderCell width={2}>Price</Table.HeaderCell>
                 <Table.HeaderCell width={2}>Click to delete</Table.HeaderCell>
               </Table.Row>

@@ -6,7 +6,7 @@ const authUtil = require('../utilities/authUtil')
 
 // ----------------- Middleware ----------------- //
 const checkToken = (req, res, next) => {
-  if (process.env.AUTH_MANAGMENT_TOKEN === '' || process.env.AUTH_MANAGMENT_EXP > Date.now()) {
+  if (process.env.AUTH_MANAGMENT_TOKEN === 'WHATEVER' || process.env.AUTH_MANAGMENT_EXP > Date.now()) {
     authUtil.createNewToken(next.bind(this))
   } else { next() }
 }

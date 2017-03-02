@@ -1,6 +1,7 @@
 const qs = require('querystring')
 const Cryptr = require('cryptr')
 const co = require('co')
+const NodeGeocoder = require('node-geocoder')
 
 const barUtil = require('../utilities/barUtil')
 const authUtil = require('../utilities/authUtil')
@@ -33,6 +34,36 @@ const bars = {
       const result = yield authUtil.addBartenderStripe(id, encrypt)
       res.status(200).send(result)
     }).catch(onError)
+  },
+
+  submitInfo: (req, res) => {
+    // req.body has: businessName, address, city, state, and imgUrl
+    const options = {
+      provider: 'google',
+      httpAdapter: 'https',
+      apiKey: process.env.GOOGLE_API,
+      formatter: null,
+    }
+
+    const geocoder = NodeGeocoder(options)
+    geocoder.geocode(`${req.body.address} ${req.body.city}`)
+      .then(geoRes => {
+        // we'll store the lat/long so app can calc distance,
+        // formatted address to maybe list on nearbyBars beside the bar name,
+        // and the imgUrl?
+        console.log('geoRes ', geoRes)
+        if (geoRes.length === 0) {
+          res.status(400).send('Formatting error')
+          return
+        }
+        const latLong = [geoRes[0].latitude, geoRes[0].longitude]
+        const address = geoRes[0].formattedAddress
+        res.send({ latLong, address })
+      })
+      .catch(err => {
+        console.log(err)
+        res.send(err)
+      })
   },
 }
 
