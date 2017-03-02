@@ -15,7 +15,7 @@ describe('Adding an Order: ', () => {
   let mockTabId;
 
   beforeEach(() => {
-    return Tab.create({ customerNum: 3 })
+    return Tab.create({ customerName: 'TestMan' })
       .then(tab => {
         createdLines.push(tab)
         mockTabId = tab.dataValues.id

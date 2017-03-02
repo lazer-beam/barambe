@@ -19,9 +19,9 @@ const scotches = ['Johnnie Walker', 'Chivas Regal']
 const bourbons = ['Old Crow', 'Eagle Rare']
 const shots = vodkas.concat(rums).concat(gins).concat(brandys).concat(scotches).concat(bourbons)
 const prices = [650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250]
-const tabs = [{ tableNum: 1, customerNum: 18 }, { tableNum: 2, customerNum: 19 }, { tableNum: 3, customerNum: 20 },
-  { tableNum: 4, customerNum: 21 }, { tableNum: 5, customerNum: 22 }, { tableNum: 6, customerNum: 23 },
-  { customerNum: 24 }, { customerNum: 25 }, { customerNum: 26 }]
+const tabs = [{ tableNum: 1, customerName: 'John' }, { tableName: 2, customerName: 'Jan' }, { tableName: 3, customerName: 'Joe' },
+  { tableName: 4, customerName: 'Jack' }, { tableName: 5, customerName: 'Joanna' }, { tableName: 6, customerName: 'Josephine' },
+  { customerName: 'Jorge' }, { customerName: 'Joaquin' }, { customerName: 'Jessica' }]
 
 module.exports = cocktails => {
   return initDb(true)
@@ -79,8 +79,8 @@ module.exports = cocktails => {
     }).then(() => {
       console.log(chalk.bgYellow.black('Created tab models'))
       return Promise.all(tabs.map(tab => {
-        return tab.tableNum ? Tab.create({ customerNum: tab.customerNum, tableNum: tab.tableNum })
-                            : Tab.create({ customerNum: tab.customerNum, tableNum: 0 })
+        return tab.tableNum ? Tab.create({ customerName: tab.customerName, tableNum: tab.tableNum })
+                            : Tab.create({ customerName: tab.customerName, tableNum: 0 })
       }))
     }).then(tabsCreated => {
       console.log(chalk.bgYellow.black('Creating order models'))
