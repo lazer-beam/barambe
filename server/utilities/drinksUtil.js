@@ -63,13 +63,14 @@ const addToMenu = drinkObj => {
 
 const deleteItem = itemObj => {
   if (itemObj.type === 'beer' || itemObj.type === 'cocktail') {
-    console.log('Beer in Util: ', itemObj)
+    console.log('Beer or Cocktail to delete: ', itemObj)
     return Drink.findOne({ where: { name: itemObj.name } })
     .then(foundItem => {
-      console.log('found a beer')
+      console.log('Found drink to be deleted')
       return foundItem.destroy().then(() => 'Item deleted')
-    })
-  } else if (!itemObj.type) {
+    }).catch(err => err)
+  } else if (!itemObj.type || itemObj.type === 'addIn') {
+    console.log('This item has no type so it looks like an addIn: ', itemObj)
     return AddIn.findOne({ where: { name: itemObj.name } })
     .then(foundItem => {
       return foundItem.destroy()

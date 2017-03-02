@@ -46,31 +46,33 @@ class AddBeers extends Component {
       <div>
         <Input value={this.state.beerName} onChange={this.handleBeerChange} label="Add a Beer" placeholder="Beer Name" />
         <Input value={this.state.beerPrice} onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
-        <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell width={3}>Beer</Table.HeaderCell>
-              <Table.HeaderCell width={2}>Price</Table.HeaderCell>
-              <Table.HeaderCell width={2}>Click to delete</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
+        <Button color="black" type="submit" onClick={this.handleSubmit}>Submit</Button>
+        <Table celled striped>
+          <div className="overflowTable">
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell inverted width={3}>Beer</Table.HeaderCell>
+                <Table.HeaderCell width={2}>Price</Table.HeaderCell>
+                <Table.HeaderCell width={2}>Click to delete</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
 
-          <Table.Body>
-            {this.props.beers.map(beer =>
-              <Table.Row key={Math.random() * 100}>
-                <Table.Cell>
-                  {beer.name}
-                </Table.Cell>
-                <Table.Cell>
-                  {beer.price}
-                </Table.Cell>
-                <Table.Cell>
-                  <Button onClick={this.handleDelete.bind(this, beer)}>Remove</Button>
-                </Table.Cell>
-              </Table.Row>,
-            )}
-          </Table.Body>
+            <Table.Body className="overflowTable">
+              {this.props.beers.map(beer =>
+                <Table.Row key={Math.random() * 100}>
+                  <Table.Cell>
+                    {beer.name}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {beer.price}
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Button onClick={this.handleDelete.bind(this, beer)}>Remove</Button>
+                  </Table.Cell>
+                </Table.Row>,
+              )}
+            </Table.Body>
+          </div>
         </Table>
       </div>
     )

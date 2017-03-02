@@ -18,8 +18,7 @@ import { actions } from './duck.Drinks'
 
 class Drinks extends Component {
   componentWillMount() {
-    axios
-      .get('/drinks/getAll')
+    axios.get('/drinks/getAll')
       .then(response => {
         const arrOfDrinkTypes = Object.values(response.data)
         arrOfDrinkTypes.forEach(drinkArr => {
@@ -36,8 +35,6 @@ class Drinks extends Component {
         const addIns = response.data.addInArr
 
         const drinksObj = { beers, cocktails, liquors, addIns }
-        console.log('drinksObj: ', drinksObj)
-
         this.props.dispatch(actions.getDrinks(drinksObj))
       })
       .catch(err => {
@@ -100,7 +97,7 @@ class Drinks extends Component {
 
     return (
       <Grid>
-        <Grid.Column width={4}>
+        <Grid.Column width={2}>
           <Menu fluid vertical tabular>
             <Menu.Item name="beers" active={addView === 'beers'} onClick={() => this.toggleMenu('beers')} />
             <Menu.Item name="liquorAddIns" active={addView === 'liquorAddIns'} onClick={() => this.toggleMenu('liquorAddIns')} />

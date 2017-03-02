@@ -74,41 +74,45 @@ class AddCocktails extends Component {
       <div>
         <Input value={this.state.cocktailName} onChange={this.handleCocktailChange} label="Add a cocktail" placeholder="Cocktail Name" />
         <Input value={this.state.cocktailPrice} onChange={this.handlePriceChange} label="Add price" placeholder="e.g. '3.95'" />
-        <Dropdown placeholder="Select Liquors" onChange={this.handleLiquorChange} fluid multiple search selection options={liquorOptions} />
-        <Dropdown placeholder="Select Add-Ins" onChange={this.handleAddInsChange} fluid multiple search selection options={addInOptions} />
-        <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell width={2}>Cocktail</Table.HeaderCell>
-              <Table.HeaderCell width={3}>Liquors</Table.HeaderCell>
-              <Table.HeaderCell width={3}>Add-Ins</Table.HeaderCell>
-              <Table.HeaderCell width={2}>Price</Table.HeaderCell>
-              <Table.HeaderCell width={2}>Click to delete</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
+        <div className="dropdownContainer">
+          <Dropdown placeholder="Select Liquors" onChange={this.handleLiquorChange} fluid multiple search selection options={liquorOptions} />
+          <Dropdown placeholder="Select Add-Ins" onChange={this.handleAddInsChange} fluid multiple search selection options={addInOptions} />
+        </div>
+        <Button color="black" type="submit" onClick={this.handleSubmit}>Submit</Button>
+        <Table celled striped>
+          <div className="overflowTable">
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell width={2}>Cocktail</Table.HeaderCell>
+                <Table.HeaderCell width={3}>Liquors</Table.HeaderCell>
+                <Table.HeaderCell width={3}>Add-Ins</Table.HeaderCell>
+                <Table.HeaderCell width={2}>Price</Table.HeaderCell>
+                <Table.HeaderCell width={2}>Click to delete</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
 
-          <Table.Body>
-            {this.props.cocktails.map(cocktail =>
-              <Table.Row key={Math.random() * 100}>
-                <Table.Cell>
-                  {cocktail.name}
-                </Table.Cell>
-                <Table.Cell>
-                  {cocktail.liquors === 1 ? cocktail.liquors : cocktail.liquors.join(', ')}
-                </Table.Cell>
-                <Table.Cell>
-                  {cocktail.addIns.length === 1 ? cocktail.addIns : cocktail.addIns.join(', ')}
-                </Table.Cell>
-                <Table.Cell>
-                  {cocktail.price}
-                </Table.Cell>
-                <Table.Cell>
-                  <Button onClick={this.handleDelete.bind(this, cocktail)}>Remove</Button>
-                </Table.Cell>
-              </Table.Row>,
-            )}
-          </Table.Body>
+            <Table.Body >
+              {this.props.cocktails.map(cocktail =>
+                <Table.Row key={Math.random() * 100}>
+                  <Table.Cell>
+                    {cocktail.name}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {cocktail.liquors === 1 ? cocktail.liquors : cocktail.liquors.join(', ')}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {cocktail.addIns.length === 1 ? cocktail.addIns : cocktail.addIns.join(', ')}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {cocktail.price}
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Button onClick={this.handleDelete.bind(this, cocktail)}>Remove</Button>
+                  </Table.Cell>
+                </Table.Row>,
+              )}
+            </Table.Body>
+          </div>
         </Table>
       </div>
     )

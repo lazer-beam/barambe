@@ -62,10 +62,10 @@ const mapDrinksWithinOrderObj = (orders, drinks) => {
   })
 }
 
-const addCustomerNumToOrders = orders => {
+const addCustomerNameToOrders = orders => {
   return Promise.all(orders.map(order => {
     return Tab.findOne({ where: { id: order.tabId } })
-      .then(tab => Object.assign({ customerNum: tab.dataValues.customerNum }, order))
+      .then(tab => Object.assign({ customerName: tab.dataValues.customerName }, order))
   }))
 }
 
@@ -78,7 +78,7 @@ const getAllPendingOrders = () => {
       return drinksUtil.getAllDrinks(orders)
     }).then(drinks => formatDrinksWithLiquorsAndAddIns(drinks))
     .then(drinks => mapDrinksWithinOrderObj(this.orders, drinks))
-    .then(orders => addCustomerNumToOrders(orders))
+    .then(orders => addCustomerNameToOrders(orders))
 }
 
 const closeOrder = orderId => Order.findOne({ where: { id: orderId } })
@@ -97,12 +97,13 @@ const createOrder = (drinkName, tabId) => {
 }
 
 const formatOrder = (order, drink) => {
+  console.log(order)
   const formattedOrder = Object.assign(order, { drink })
   return Tab.findOne({ where: { id: order.tabId } })
     .then(tab => {
       const finalOrder = Object.assign(formattedOrder, {
         tableNum: tab.dataValues.tableNum,
-        customerNum: tab.dataValues.id,
+        customerName: tab.dataValues.customerName,
       })
 
       delete finalOrder.drinkId
@@ -131,6 +132,6 @@ module.exports = {
   mapDrinksWithinOrderObj,
   closeOrder,
   createOrder,
-  addCustomerNumToOrders,
+  addCustomerNameToOrders,
   sendBartenderNewOrder,
 }

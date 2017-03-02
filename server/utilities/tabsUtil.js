@@ -1,7 +1,8 @@
 const Tab = require('../../db/models/tabModel')
 
-const openTab = (customerNum, tableNum = null) => {
-  return tableNum ? Tab.create({ customerNum, tableNum }) : Tab.create({ customerNum })
+const openTab = (customerName, tableNum) => {
+  console.log(`customername: ${customerName}, tableNum: ${tableNum}`)
+  return tableNum ? Tab.create({ customerName, tableNum }) : Tab.create({ customerName })
 }
 
 const closeTab = tabId => Tab.findOne({ where: { id: tabId } })
