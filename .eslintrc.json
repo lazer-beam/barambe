@@ -1,0 +1,62 @@
+{   "globals": {
+        "document": true,
+        "window": true,
+        "localStorage": true
+    },
+    "parser": "babel-eslint",
+    "ecmaFeatures": {
+        "arrowFunctions": true,
+        "binaryLiterals": false,
+        "blockBindings": true,
+        "classes": true,
+        "defaultParams": true,
+        "destructuring": true,
+        "forOf": true,
+        "generators": true,
+        "modules": false,
+        "objectLiteralComputedProperties": true,
+        "objectLiteralDuplicateProperties": false,
+        "objectLiteralShorthandMethods": true,
+        "objectLiteralShorthandProperties": true,
+        "octalLiterals": false,
+        "regexUFlag": false,
+        "regexYFlag": false,
+        "restParams": true,
+        "spread": true,
+        "superInFunctions": true,
+        "templateStrings": true,
+        "unicodePointEscapes": true,
+        "globalReturn": false
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/prop-types": 0,
+        "semi": ["error", "never"],
+        "no-console": "off",
+        "arrow-parens": [2, "as-needed", { "requireForBlockBody": false }],
+        "max-len": ["error", 10000],
+        "no-param-reassign": "off",
+        "no-undef": "off",
+        "arrow-body-style": "off",
+        "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
+        "linebreak-style": "off",
+        "newline-per-chained-call": "off",
+        "prefer-stateless-function": [0, { "ignorePureComponents": true }],
+        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "no-unneeded-ternary": "off",
+        "no-plusplus": "off",
+        "react/jsx-no-bind": [0, {"allowBind": true}],
+        "class-methods-use-this": ["error", { "exceptMethods": ["setToken", "getProfile", "getToken", "logout"] }] 
+    },
+    "extends": "airbnb",
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import"
+    ]
+}

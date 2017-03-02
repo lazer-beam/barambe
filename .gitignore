@@ -1,0 +1,19 @@
+** Node Modules **
+node_modules
+
+** Build folders **
+app/build
+app/dist
+
+** Config stuff **
+.env
+
+** misc **
+.vscode
+.DS_Store
+
+** testing **
+mochawesome-reports/*
+
+** deployment **
+app.yaml

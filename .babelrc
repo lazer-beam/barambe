@@ -1,0 +1,12 @@
+{
+  "presets": [["es2015", { "modules": false }],  "stage-0", "react"],
+  "plugins": ["transform-decorators-legacy", "transform-class-properties"],
+  "env": {
+    "test": {
+      "presets": ["react-optimize"]
+    },
+    "production": {
+      "presets": ["react-optimize"]
+    }
+  }
+}

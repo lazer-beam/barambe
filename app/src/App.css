@@ -1,0 +1,110 @@
+/*
+============ LoginSplash ================
+*/
+.splashButton {
+  padding-top: 5px;
+}
+
+/*
+============ Dashboard ================
+*/
+.allBody {
+  height: 100%;
+  width: 100%;
+}
+
+/*
+============ Bartender ================
+*/
+.outliner {
+  border-style: solid;
+  border-color: black;
+}
+
+.revealer {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.myLabel {
+  margin-right: 10px;
+}
+
+#order-cnt {
+  margin: 0 10px 0 0;
+  float: left;
+}
+
+#bar_queue_container {
+  margin: 35px 0px 35px 7%;
+}
+
+.drink_group_container {
+  overflow: scroll;
+  height: 90%;
+}
+
+#bar_queue_container .header_container {
+  height: 10%;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.header_content_container {
+  margin-top: 10%;
+}
+
+#teal {
+  background-color: #00B5AD
+}
+
+#blue {
+  background-color: #2185D0
+}
+
+#complete {
+  background-color: #BABBBC
+}
+
+/*
+============ Done Orders ================
+*/
+
+#done-orders {
+  margin: 75px 0px 0px 2%;
+}
+
+#completed-table {
+  height: 0px;
+}
+
+/*
+============ Bartenders Nav ================
+*/
+
+.ui.inverted.menu .selectedNav {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid white;
+}
+
+.ui.inverted.menu .unselectedNav {
+  background: transparent;
+}
+
+#height100 {
+  height: 100%;
+}
+
+/*
+============ Add Drink Views ================
+*/
+.dropdownContainer {
+  width: 450px;
+}
+.bold {
+  font-weight: bold;
+}
+.overflowTable {
+  overflow: scroll;
+  height: 650px;
+}
