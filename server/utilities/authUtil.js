@@ -139,6 +139,7 @@ module.exports.isTokenExpired = token => {
   return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)))
 }
 
+
 /**
  * -----To Find query strings-----
  * qs.parse('fields=app_metadata.barname&include_fields=true&q=app_metadata.barname%3AmyCoolBar')

@@ -1,6 +1,6 @@
 import auth0 from 'auth0-js'
 
-const authManager = auth0.Management({
+const authManager = auth0.Managment({
   domain: process.env.AUTH_DOMAIN,
   clientID: process.env.AUTH_CLIENT_ID,
 })

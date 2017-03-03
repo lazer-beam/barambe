@@ -8,7 +8,7 @@ const geoOptions = {
 }
 const geocoder = NodeGeocoder(geoOptions)
 
-const setOptionUri = (authId, { name, last4, brand, stripe_tok }) => {
+const setOptionUri = (authId, { name, last4, brand, cust_tok }) => {
   return {
     method: 'PATCH',
     uri: `${process.env.AUTH_MOBILE_M_AUDIENCE}users/${authId}`,
@@ -19,7 +19,7 @@ const setOptionUri = (authId, { name, last4, brand, stripe_tok }) => {
     body: {
       app_metadata: {
         card: {
-          name, last4, brand, stripe_tok,
+          name, last4, brand, cust_tok,
         },
       },
     },
@@ -29,13 +29,17 @@ const setOptionUri = (authId, { name, last4, brand, stripe_tok }) => {
 
 const authMetadata = (authId, card) => rp(setOptionUri(authId, card))
 
-const stripeCreateCard = card => stripe.tokens.create({ card })
+const stripeCreateCustomer = card => stripe.customers.create({ card })
 
 // { number, exp_month, exp_year, cvc }
 module.exports.addCard = (authId, { name, number, exp_month, exp_year, cvc }) => {
   return new Promise((resolve, reject) => {
-    stripeCreateCard({ number, exp_month, exp_year, cvc }).then(strp => {
-      const card = { name, stripe_tok: strp.id, last4: strp.card.last4, brand: strp.card.brand }
+    stripeCreateCustomer({ number, exp_month, exp_year, cvc, object: 'card' }).then(strp => {
+      this.strp_id = strp.id
+      console.log(this.strp_id)
+      return stripe.customers.retrieveCard(strp.id, strp.default_source)
+    }).then(stripeCard => {
+      const card = { name, cust_tok: this.strp_id, last4: stripeCard.last4, brand: stripeCard.brand }
       return authMetadata(authId, card)
     }).then(tokenInfo => {
       resolve(tokenInfo.app_metadata.card)
