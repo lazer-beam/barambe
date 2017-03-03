@@ -23,23 +23,25 @@ class Settings extends Component {
       businessName: '',
       address: '',
       city: '',
-      state: '',
+      selectedState: '',
       latitude: '',
       longitude: '',
       imageUrl: '',
       displaySuccessMsg: false,
-      successMessage: 'Thank you for adding your business to Barambe. Drinks out!',
+      successMessage: 'Thank you for joining Barambe. Drinks out!',
     }
 
     this.renderMsg = this.renderMsg.bind(this)
+    this.resetForm = this.resetForm.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
   handleSelectStateChange(e, { value }) {
-    this.setState({ ...this.state, state: value })
+    this.setState({ ...this.state, selectedState: value })
   }
 
-  handleStateSearchChange(e, state) {
-    this.setState({ state })
+  handleStateSearchChange(e, selectedState) {
+    this.setState({ selectedState })
   }
 
   changeFullName(e) {
@@ -70,6 +72,17 @@ class Settings extends Component {
     }, 5000)
   }
 
+  resetForm() {
+    this.setState({
+      fullName: '',
+      businessName: '',
+      address: '',
+      imageUrl: '',
+      city: '',
+      selectedState: '',
+    })
+  }
+
   handleInputChange(event) {
     const target = event.target
     const value = target.value
@@ -82,10 +95,17 @@ class Settings extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault()
+
     this.changeStatesOfMsgs()
+
     axios.get(`/customer/getLocation?address=${this.state.address}`)
       .then(res => {
-        console.log('res', res)
+        this.setState({
+          latitude: res.data.latitude,
+          longitude: res.data.longitude,
+        })
+
+        this.resetForm()
       }).catch(err => {
         console.log('err', err)
       })
@@ -150,17 +170,17 @@ class Settings extends Component {
           <Segment attached>
             <Form>
               <Form.Group widths="equal">
-                <Form.Input onChange={e => { this.changeFullName.call(this, e) }} label="Full Name" placeholder="Full Name" />
-                <Form.Input onChange={::this.changeBusinessName} label="Business Name" placeholder="Business Name" />
+                <Form.Input onChange={e => { this.changeFullName.call(this, e) }} label="Full Name" value={this.state.fullName} placeholder="Full Name" />
+                <Form.Input onChange={::this.changeBusinessName} label="Business Name" value={this.state.businessName} placeholder="Business Name" />
               </Form.Group>
               <Form.Group widths="equal">
-                <Form.Input onChange={::this.changeAddress} label="Address" placeholder="Address" />
+                <Form.Input onChange={::this.changeAddress} label="Address" value={this.state.address} placeholder="Address" />
               </Form.Group>
               <Form.Group widths="equal">
-                <Form.Input onChange={::this.changeImageUrl} label="Image Url" placeholder="http://www.pathtoimg.jpg" />
+                <Form.Input onChange={::this.changeImageUrl} label="Image Url" value={this.state.imageUrl} placeholder="http://www.pathtoimg.jpg" />
               </Form.Group>
               <Form.Group>
-                <Form.Input onChange={::this.changeCity} label="City" placeholder="City" width={10} />
+                <Form.Input onChange={::this.changeCity} label="City" value={this.state.city} placeholder="City" width={10} />
                 <Form.Dropdown
                   label="State"
                   fluid
@@ -174,7 +194,7 @@ class Settings extends Component {
                   width={3}
                 />
               </Form.Group>
-              <Form.Button primary onClick={e => { this.handleFormSubmit.call(this, e) }} >Submit </Form.Button>
+              <Form.Button primary onClick={e => { this.handleFormSubmit(e) }} >Submit </Form.Button>
             </Form>
           </Segment>
         </Container>
