@@ -13,6 +13,7 @@ const checkToken = (req, res, next) => {
 // ----------------- Routes ----------------- //
 router.post('/test', jwtCheck, authCtrl.default)
 router.post('/setBarUsername', jwtCheck, checkToken, authCtrl.setBarUsername)
+router.post('/setUserMetadata', jwtCheck, checkToken, authCtrl.setUserMetadata)
 // router.post('/addBusiness', authCtrl.addBusiness)
 
 module.exports = router

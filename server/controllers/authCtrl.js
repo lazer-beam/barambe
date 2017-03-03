@@ -20,3 +20,27 @@ module.exports.setBarUsername = (req, res) => {
     }
   }).catch(onError)
 }
+
+module.exports.setUserMetadata = (req, res) => {
+  const id = req.user.sub.slice(req.user.sub.indexOf('|') + 1)
+  console.log(req.body)
+  const metadata = req.body
+
+  authUtil.editUserMetadata(id, metadata).then(mData => {
+    res.status(200).send(mData)
+  }).catch(err => {
+    res.status(404).send(err)
+  })
+}
+
+module.exports.setAppMetadata = (req, res) => {
+  const id = req.user.sub.slice(req.user.sub.indexOf('|') + 1)
+  console.log(req.body)
+  const metadata = req.body
+
+  authUtil.editUserMetadata(id, metadata).then(mData => {
+    res.status(200).send(mData)
+  }).catch(err => {
+    res.status(404).send(err)
+  })
+}

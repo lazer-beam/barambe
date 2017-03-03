@@ -139,6 +139,22 @@ module.exports.isTokenExpired = token => {
   return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)))
 }
 
+module.exports.editUserMetadata = (userId, metadata) => {
+  console.log(metadata)
+  const opts = {
+    method: 'PATCH',
+    uri: `${process.env.AUTH_MANAGMENT_AUDIENCE}users/auth0%7C${userId}`,
+    headers: {
+      authorization: `Bearer ${process.env.AUTH_MANAGMENT_TOKEN}`,
+      contentType: 'application/json',
+    },
+    body: {
+      user_metadata: metadata,
+    },
+    json: true,
+  }
+  return rp(opts)
+}
 
 /**
  * -----To Find query strings-----
