@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, Header, Form, Container, Input, Segment, Icon, Message } from 'semantic-ui-react'
+import axios from 'axios'
 
 import states from '../util/usaStates'
+
 // import { patchBartenderMetadata } from '../util/AuthHelpers'
 
 @connect(store => ({
@@ -81,15 +83,12 @@ class Settings extends Component {
   handleFormSubmit(e) {
     e.preventDefault()
     this.changeStatesOfMsgs()
-    // axios.post('/auth/addBusiness', {
-    //   fullName: this.state.fullName,
-    //   businessName: this.state.businessName,
-    //   address: this.state.address,
-    //   city: this.state.city,
-    //   state: this.state.state,
-    //   longitude: this.state.longitude,
-    //   latitude: this.state.latitude,
-    // })
+    axios.get(`/customer/getLocation?address=${this.state.address}`)
+      .then(res => {
+        console.log('res', res)
+      }).catch(err => {
+        console.log('err', err)
+      })
   }
 
   renderMsg() {
@@ -175,7 +174,7 @@ class Settings extends Component {
                   width={3}
                 />
               </Form.Group>
-              <Form.Button onClick={e => { this.handleFormSubmit.call(this, e) }} >Submit </Form.Button>
+              <Form.Button primary onClick={e => { this.handleFormSubmit.call(this, e) }} >Submit </Form.Button>
             </Form>
           </Segment>
         </Container>

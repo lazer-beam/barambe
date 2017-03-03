@@ -54,6 +54,16 @@ const customer = {
         }
       })
   },
+
+  getGeo: (req, res) => {
+    customerUtil.getGeo(req.query)
+      .then(geo => {
+        console.log('geo', geo)
+        res.send(geo)
+      }).catch(err => {
+        res.status(500).send(err)
+      })
+  },
 }
 
 module.exports = {

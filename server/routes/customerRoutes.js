@@ -13,6 +13,7 @@ const checkManagmentMobileToken = (req, res, next) => {
 
 router.post('/pay', customerCtrl.customer.pay)
 router.post('/saveInfo', customerCtrl.customer.saveInfo)
+router.get('/getLocation', customerCtrl.customer.getGeo)
 router.post('/addCard', jwtCheck, checkManagmentMobileToken, customerCtrl.customer.addCard)
 
 module.exports = router
