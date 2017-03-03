@@ -2,20 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Label, Header } from 'semantic-ui-react'
 import axios from 'axios'
-import io from 'socket.io-client'
 
 import '../App.css'
 import { actions } from './duck.Bartender'
 import DrinkGroup from './BartenderDrinkGroup'
 import CompletedDrinks from './BartenderCompletedDrinks'
-
-const initSocket = () => {
-  const socket = io('http://barambe-2.appspot.com')
-  return socket
-}
-
-console.log('process.env', process.env)
-const socket = initSocket()
 
 @connect(store => ({
   visible: store.dash.visible,
@@ -40,18 +31,24 @@ class Bartender extends Component {
   }
 
   componentDidMount() {
-    console.log('socket is', socket)
-    socket.on('neworder', order => {
-      this.props.dispatch(actions.addOrder(order))
-    })
+    axios.get('/meta/')
+      .then(res => {
+        console.log('res.data', res.data)
 
-    socket.on('connect', () => {
-      console.log('socket has connected')
-    })
+        const externalIp = res.data
+        const webSocketUri = `ws://${externalIp}:3000`
 
-    socket.on('disconnect', reason => {
-      console.log('socket has disconnected because', reason)
-    })
+        const socket = io(webSocketUri)
+
+        console.log('socket is', socket)
+
+        socket.on('neworder', order => {
+          console.log('socket message emitted', order)
+          this.props.dispatch(actions.addOrder(order))
+        })
+      }).catch(err => {
+        console.log('err in axios request', err)
+      })
   }
 
   componentDidUpdate() {
