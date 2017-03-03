@@ -1,7 +1,17 @@
-const stripe = require('stripe')(process.env.testKey)
-// const Customer = require('../../dbGlobal/Customer')
+const customerUtil = require('../utilities/customerUtil')
 
 const customer = {
+  addCard: (req, res) => {
+    const authId = req.user.sub
+    const card = req.body
+    customerUtil.addCard(authId, card).then(cardMetadata => {
+      res.status(200).send(cardMetadata)
+    }).catch(err => {
+      console.log(err.message)
+      res.status(400).send(err)
+    })
+  },
+
   pay: (req, res) => {
     console.log(`Serving request for ${req.method} where url is ${req.url}`)
     stripe.charges.create({
