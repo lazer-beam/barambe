@@ -1,20 +1,13 @@
-const WebSocketServer = require('ws').Server
+const appChat = require('../appInstance')
+const server1 = require('http').Server(appChat)
+const io = require('socket.io')(server1)
 
-const wss = new WebSocketServer({ host: '0.0.0.0', port: 3000 })
+server1.listen(3000)
 
-let wsRef
-wss.on('connection', ws => {
-  console.log('ws connected')
-  wsRef = ws
-
-  ws.on('error', err => {
-    console.log('ws closed by error: ', err)
-    ws.terminate()
-  })
-})
-
-wss.on('error', err => {
-  console.log('wws had error: ', err)
+let socketRef
+io.on('connection', socket => {
+  console.log(`Socket connected to user ${socket.id}`)
+  socketRef = socket
 })
 
 const Order = require('../../db/models/orderModel')
@@ -126,7 +119,9 @@ const sendBartenderNewOrder = order => {
   Drink.findOne({ where: { id: order.drinkId } })
     .then(drink => formatOrder(order.dataValues, drink.dataValues))
     .then(formattedOrder => {
-      wsRef.send(JSON.stringify(formattedOrder))
+      console.log('emitting formattedOrder', formattedOrder)
+      console.log('typeof socketRef', typeof socketRef)
+      socketRef.emit('neworder', formattedOrder)
     }).catch(err => {
       console.log('err', err)
     })

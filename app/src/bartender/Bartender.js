@@ -31,14 +31,24 @@ class Bartender extends Component {
   }
 
   componentDidMount() {
-    const socket = new WebSocket('ws://barambe-2.appspot.com:3000')
+    axios.get('/meta/')
+      .then(res => {
+        console.log('res.data', res.data)
 
-    console.log('socket is', socket)
+        const externalIp = res.data
+        const webSocketUri = `ws://${externalIp}:3000`
 
-    socket.addEventListener('message', event => {
-      console.log('JSON.parse(event.data)', JSON.parse(event.data))
-      this.props.dispatch(actions.addOrder(JSON.parse(event.data)))
-    })
+        const socket = io(webSocketUri)
+
+        console.log('socket is', socket)
+
+        socket.on('neworder', order => {
+          console.log('socket message emitted', order)
+          this.props.dispatch(actions.addOrder(order))
+        })
+      }).catch(err => {
+        console.log('err in axios request', err)
+      })
   }
 
   componentDidUpdate() {
