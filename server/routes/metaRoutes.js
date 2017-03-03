@@ -13,7 +13,9 @@ router.get('/', (req, res) => {
   rp(options)
     .then(ipRes => {
       console.log('ipRes', ipRes)
-      res.send(ipRes)
+      const ipAsAString = `${ipRes}`
+      console.log('ipAsAString', ipAsAString)
+      res.send(ipAsAString)
     }).catch(err => {
       res.status(500).send(err)
     })
