@@ -84,6 +84,42 @@ class Settings extends Component {
     }, 3000)
   }
 
+  handleInputChange(event) {
+    const target = event.target
+    const value = target.value
+    const name = target.name
+
+    this.setState({
+      [name]: value,
+    })
+  }
+
+  handleFormSubmit(e) {
+    e.preventDefault()
+    const infoObj = {
+      selectedState: this.state.selectedState,
+      businessName: this.state.businessName,
+      address: this.state.address,
+      city: this.state.city,
+      imgUrl: this.state.imgUrl,
+    }
+    console.log(`Name: ${this.state.businessName}, address: ${this.state.address}, city: ${this.state.city}, state: ${this.state.selectedState}`)
+    axios.post('/bars/submitinfo', infoObj)
+    .then(res => {
+      console.log(res)
+      if (this.state.submitError) {
+        this.setState({
+          submitError: false,
+          submittedAddress: res.data.formattedAddress,
+        })
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      if (!this.state.submitError) this.setState({ submitError: true })
+    })
+  }
+
   renderMsg() {
     return (
       <Message success>
@@ -98,6 +134,13 @@ class Settings extends Component {
   }
 
   render() {
+    // let errorMsg = null
+    if (this.state.submitError === true) {
+      errorMsg = <div className="error">Formatting error -- please re-submit your information</div>
+    } else if (this.state.submitError === false) {
+      errorMsg = <div className="success">Data received!</div>
+    }
+
     return (
       <div>
         {this.state.displaySuccessMsg && this.renderMsg()}
@@ -153,10 +196,10 @@ class Settings extends Component {
                   selection
                   search
                   options={this.state.options}
-                  value={this.state.value}
+                  value={this.state.selectedState}
                   placeholder="State"
-                  onChange={::this.handleChange}
-                  onSearchChange={::this.handleSearchChange}
+                  onChange={::this.handleSelectStateChange}
+                  onSearchChange={::this.handleStateSearchChange}
                   width={3}
                 />
               </Form.Group>

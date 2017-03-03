@@ -108,3 +108,12 @@
   overflow: scroll;
   height: 650px;
 }
+/*
+============ Add Drink Views ================
+*/
+.error {
+  color: red
+}
+.success {
+  color: lightslategrey
+}
