@@ -158,7 +158,7 @@ class Settings extends Component {
             Setup Stripe Merchant Account
           </Header>
           <Segment attached>
-            <Button color="linkedin" href="http://localhost:1337/bars/connect">
+            <Button color="linkedin" href="/bars/connect">
               <Icon name="stripe" /> Connect Stripe Account
             </Button>
           </Segment>
