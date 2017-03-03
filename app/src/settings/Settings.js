@@ -17,17 +17,22 @@ class Settings extends Component {
     this.state = {
       multiple: false,
       options: states,
-      searchQuery: '',
-      value: '',
+      businessName: '',
+      businessInfo: '',
+      address: '',
+      city: '',
+      state: '',
     }
   }
 
   handleChange(e, { value }) {
-    this.setState({ ...this.state, value })
+    console.log('handleChange')
+    this.setState({ ...this.state, state: value })
   }
 
-  handleSearchChange(e, value) {
-    this.setState({ searchQuery: value })
+  handleSearchChange(e, state) {
+    console.log('handleSearchChange')
+    this.setState({ state })
   }
 
   render() {
