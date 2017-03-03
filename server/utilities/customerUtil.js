@@ -1,6 +1,12 @@
 const rp = require('request-promise')
 const stripe = require('stripe')('sk_test_GrfMBadtYtC5VQ5oZUWPRx3r')
 const Promise = require('bluebird')
+const NodeGeocoder = require('node-geocoder')
+
+const geoOptions = {
+  provider: 'google',
+}
+const geocoder = NodeGeocoder(geoOptions)
 
 const setOptionUri = (authId, { name, last4, brand, stripe_tok }) => {
   return {
@@ -38,3 +44,11 @@ module.exports.addCard = (authId, { name, number, exp_month, exp_year, cvc }) =>
     })
   })
 }
+
+module.exports.getGeo = address => geocoder.geocode(address)
+  .then(geoArr => {
+    return {
+      latitude: geoArr[0].latitude,
+      longitude: geoArr[0].longitude,
+    }
+  })

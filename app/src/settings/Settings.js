@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, Header, Form, Container, Input, Segment, Icon } from 'semantic-ui-react'
+import { Button, Header, Form, Container, Input, Segment, Icon, Message } from 'semantic-ui-react'
 import axios from 'axios'
+
 import states from '../util/usaStates'
+
+// import { patchBartenderMetadata } from '../util/AuthHelpers'
 
 @connect(store => ({
   currentAddView: store.drinks.currentAddView,
@@ -15,25 +18,71 @@ class Settings extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      multiple: false,
       options: states,
-      searchQuery: '',
-      selectedState: '',
+      fullName: '',
       businessName: '',
       address: '',
       city: '',
-      imgUrl: '',
-      submitError: null,
-      submittedAddress: '',
+      selectedState: '',
+      latitude: '',
+      longitude: '',
+      imageUrl: '',
+      displaySuccessMsg: false,
+      successMessage: 'Thank you for joining Barambe. Drinks out!',
     }
+
+    this.renderMsg = this.renderMsg.bind(this)
+    this.resetForm = this.resetForm.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
   handleSelectStateChange(e, { value }) {
     this.setState({ ...this.state, selectedState: value })
   }
-  handleStateSearchChange(e, value) {
-    this.setState({ searchQuery: value })
+
+  handleStateSearchChange(e, selectedState) {
+    this.setState({ selectedState })
   }
+
+  changeFullName(e) {
+    this.setState({ fullName: e.target.value })
+  }
+
+  changeBusinessName(e) {
+    this.setState({ businessName: e.target.value })
+  }
+
+  changeAddress(e) {
+    this.setState({ address: e.target.value })
+  }
+
+  changeImageUrl(e) {
+    this.setState({ imageUrl: e.target.value })
+  }
+
+  changeCity(e) {
+    this.setState({ city: e.target.value })
+  }
+
+  changeStatesOfMsgs() {
+    this.setState({ displaySuccessMsg: true })
+
+    setTimeout(() => {
+      this.setState({ displaySuccessMsg: false })
+    }, 5000)
+  }
+
+  resetForm() {
+    this.setState({
+      fullName: '',
+      businessName: '',
+      address: '',
+      imageUrl: '',
+      city: '',
+      selectedState: '',
+    })
+  }
+
   handleInputChange(event) {
     const target = event.target
     const value = target.value
@@ -43,34 +92,40 @@ class Settings extends Component {
       [name]: value,
     })
   }
+
   handleFormSubmit(e) {
     e.preventDefault()
-    const infoObj = {
-      selectedState: this.state.selectedState,
-      businessName: this.state.businessName,
-      address: this.state.address,
-      city: this.state.city,
-      imgUrl: this.state.imgUrl,
-    }
-    console.log(`Name: ${this.state.businessName}, address: ${this.state.address}, city: ${this.state.city}, state: ${this.state.selectedState}`)
-    axios.post('/bars/submitinfo', infoObj)
-    .then(res => {
-      console.log(res)
-      if (this.state.submitError) {
+
+    this.changeStatesOfMsgs()
+
+    axios.get(`/customer/getLocation?address=${this.state.address}`)
+      .then(res => {
         this.setState({
-          submitError: false,
-          submittedAddress: res.data.formattedAddress,
+          latitude: res.data.latitude,
+          longitude: res.data.longitude,
         })
-      }
-    })
-    .catch(err => {
-      console.log(err)
-      if (!this.state.submitError) this.setState({ submitError: true })
-    })
+
+        this.resetForm()
+      }).catch(err => {
+        console.log('err', err)
+      })
+  }
+
+  renderMsg() {
+    return (
+      <Message success>
+        <Message.Header>
+          Changes in Service
+        </Message.Header>
+        <p>
+          {this.state.successMessage}
+        </p>
+      </Message>
+    )
   }
 
   render() {
-    let errorMsg = null
+    // let errorMsg = null
     if (this.state.submitError === true) {
       errorMsg = <div className="error">Formatting error -- please re-submit your information</div>
     } else if (this.state.submitError === false) {
@@ -79,6 +134,7 @@ class Settings extends Component {
 
     return (
       <div>
+        {this.state.displaySuccessMsg && this.renderMsg()}
         <Container>
           <Header as="h2">
             <Icon name="settings" />
@@ -114,35 +170,17 @@ class Settings extends Component {
           <Segment attached>
             <Form>
               <Form.Group widths="equal">
-                <Form.Input
-                  name="businessName"
-                  label="Business Name"
-                  onChange={::this.handleInputChange}
-                  value={this.state.businessName}
-                />
-                <Form.Input
-                  name="imgUrl"
-                  label="Url of Banner Image"
-                  onChange={::this.handleInputChange}
-                  value={this.state.imgUrl}
-                />
+                <Form.Input onChange={e => { this.changeFullName.call(this, e) }} label="Full Name" value={this.state.fullName} placeholder="Full Name" />
+                <Form.Input onChange={::this.changeBusinessName} label="Business Name" value={this.state.businessName} placeholder="Business Name" />
               </Form.Group>
               <Form.Group widths="equal">
-                <Form.Input
-                  name="address"
-                  label="Address"
-                  onChange={::this.handleInputChange}
-                  value={this.state.address}
-                />
+                <Form.Input onChange={::this.changeAddress} label="Address" value={this.state.address} placeholder="Address" />
+              </Form.Group>
+              <Form.Group widths="equal">
+                <Form.Input onChange={::this.changeImageUrl} label="Image Url" value={this.state.imageUrl} placeholder="http://www.pathtoimg.jpg" />
               </Form.Group>
               <Form.Group>
-                <Form.Input
-                  name="city"
-                  label="City"
-                  onChange={::this.handleInputChange}
-                  value={this.state.city}
-                  width={10}
-                />
+                <Form.Input onChange={::this.changeCity} label="City" value={this.state.city} placeholder="City" width={10} />
                 <Form.Dropdown
                   label="State"
                   fluid
@@ -156,8 +194,7 @@ class Settings extends Component {
                   width={3}
                 />
               </Form.Group>
-              <Form.Button onClick={::this.handleFormSubmit}>Submit</Form.Button>
-              {errorMsg}
+              <Form.Button primary onClick={e => { this.handleFormSubmit(e) }} >Submit </Form.Button>
             </Form>
           </Segment>
         </Container>
