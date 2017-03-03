@@ -1,11 +1,20 @@
-const http = require('../httpServer')
-const io = require('socket.io')(http)
-const socketHub = require('../sockets')
+const WebSocketServer = require('ws').Server
 
-let socketRef
-io.on('connection', socket => {
-  socketRef = socket
-  return socketHub(socket)
+const wss = new WebSocketServer({ host: '0.0.0.0', port: 3000 })
+
+let wsRef
+wss.on('connection', ws => {
+  console.log('ws connected')
+  wsRef = ws
+
+  ws.on('error', err => {
+    console.log('ws closed by error: ', err)
+    ws.terminate()
+  })
+})
+
+wss.on('error', err => {
+  console.log('wws had error: ', err)
 })
 
 const Order = require('../../db/models/orderModel')
@@ -117,7 +126,7 @@ const sendBartenderNewOrder = order => {
   Drink.findOne({ where: { id: order.drinkId } })
     .then(drink => formatOrder(order.dataValues, drink.dataValues))
     .then(formattedOrder => {
-      socketRef.emit('neworder', formattedOrder)
+      wsRef.send(JSON.stringify(formattedOrder))
     }).catch(err => {
       console.log('err', err)
     })

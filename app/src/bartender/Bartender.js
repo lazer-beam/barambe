@@ -2,20 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Label, Header } from 'semantic-ui-react'
 import axios from 'axios'
-import io from 'socket.io-client'
 
 import '../App.css'
 import { actions } from './duck.Bartender'
 import DrinkGroup from './BartenderDrinkGroup'
 import CompletedDrinks from './BartenderCompletedDrinks'
-
-const initSocket = () => {
-  const socket = io('http://barambe-2.appspot.com')
-  return socket
-}
-
-console.log('process.env', process.env)
-const socket = initSocket()
 
 @connect(store => ({
   visible: store.dash.visible,
@@ -40,17 +31,13 @@ class Bartender extends Component {
   }
 
   componentDidMount() {
+    const socket = new WebSocket('ws://barambe-2.appspot.com:3000')
+
     console.log('socket is', socket)
-    socket.on('neworder', order => {
-      this.props.dispatch(actions.addOrder(order))
-    })
 
-    socket.on('connect', () => {
-      console.log('socket has connected')
-    })
-
-    socket.on('disconnect', reason => {
-      console.log('socket has disconnected because', reason)
+    socket.addEventListener('message', event => {
+      console.log('JSON.parse(event.data)', JSON.parse(event.data))
+      this.props.dispatch(actions.addOrder(JSON.parse(event.data)))
     })
   }
 
