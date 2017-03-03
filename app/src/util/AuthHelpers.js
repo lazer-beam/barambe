@@ -1,6 +1,5 @@
 import auth0 from 'auth0-js'
 
-console.log('process.env', process.env)
 const authManager = auth0.Management({
   domain: process.env.AUTH_DOMAIN,
   clientID: process.env.AUTH_CLIENT_ID,

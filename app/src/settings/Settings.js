@@ -16,7 +16,6 @@ class Settings extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      multiple: false,
       options: states,
       fullName: '',
       businessName: '',
@@ -27,53 +26,38 @@ class Settings extends Component {
       longitude: '',
       imageUrl: '',
       displaySuccessMsg: false,
-      msg: 'We updated our privacy policy here to better service our customers. We recommend reviewing the changes.',
+      successMessage: 'Thank you for adding your business to Barambe. Drinks out!',
     }
 
     this.renderMsg = this.renderMsg.bind(this)
   }
 
-  handleChange(e, { value }) {
+  handleSelectStateChange(e, { value }) {
     this.setState({ ...this.state, state: value })
   }
 
-  handleSearchChange(e, state) {
+  handleStateSearchChange(e, state) {
     this.setState({ state })
   }
 
-  changeFirstName(fullName) {
-    this.setState({ fullName })
+  changeFullName(e) {
+    this.setState({ fullName: e.target.value })
   }
 
-  changeLastName(barName) {
-    this.setState({ barName })
+  changeBusinessName(e) {
+    this.setState({ businessName: e.target.value })
   }
 
-  changeAddress(address) {
-    this.setState({ address })
+  changeAddress(e) {
+    this.setState({ address: e.target.value })
   }
 
-  changeImageUrl(imageUrl) {
-    this.setState({ imageUrl })
+  changeImageUrl(e) {
+    this.setState({ imageUrl: e.target.value })
   }
 
-  changeCity(city) {
-    this.setState({ city })
-  }
-
-
-  submit(e) {
-    e.preventDefault()
-    this.changeStatesOfMsgs()
-    // axios.post('/auth/addBusiness', {
-    //   fullName: this.state.fullName,
-    //   businessName: this.state.businessName,
-    //   address: this.state.address,
-    //   city: this.state.city,
-    //   state: this.state.state,
-    //   longitude: this.state.longitude,
-    //   latitude: this.state.latitude,
-    // })
+  changeCity(e) {
+    this.setState({ city: e.target.value })
   }
 
   changeStatesOfMsgs() {
@@ -81,7 +65,7 @@ class Settings extends Component {
 
     setTimeout(() => {
       this.setState({ displaySuccessMsg: false })
-    }, 3000)
+    }, 5000)
   }
 
   handleInputChange(event) {
@@ -96,28 +80,16 @@ class Settings extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault()
-    const infoObj = {
-      selectedState: this.state.selectedState,
-      businessName: this.state.businessName,
-      address: this.state.address,
-      city: this.state.city,
-      imgUrl: this.state.imgUrl,
-    }
-    console.log(`Name: ${this.state.businessName}, address: ${this.state.address}, city: ${this.state.city}, state: ${this.state.selectedState}`)
-    axios.post('/bars/submitinfo', infoObj)
-    .then(res => {
-      console.log(res)
-      if (this.state.submitError) {
-        this.setState({
-          submitError: false,
-          submittedAddress: res.data.formattedAddress,
-        })
-      }
-    })
-    .catch(err => {
-      console.log(err)
-      if (!this.state.submitError) this.setState({ submitError: true })
-    })
+    this.changeStatesOfMsgs()
+    // axios.post('/auth/addBusiness', {
+    //   fullName: this.state.fullName,
+    //   businessName: this.state.businessName,
+    //   address: this.state.address,
+    //   city: this.state.city,
+    //   state: this.state.state,
+    //   longitude: this.state.longitude,
+    //   latitude: this.state.latitude,
+    // })
   }
 
   renderMsg() {
@@ -127,7 +99,7 @@ class Settings extends Component {
           Changes in Service
         </Message.Header>
         <p>
-          {this.state.msg}
+          {this.state.successMessage}
         </p>
       </Message>
     )
@@ -179,8 +151,8 @@ class Settings extends Component {
           <Segment attached>
             <Form>
               <Form.Group widths="equal">
-                <Form.Input onChange={::this.changeFirstName} label="Full Name" placeholder="Full Name" />
-                <Form.Input onChange={::this.changeLastName} label="Business Name" placeholder="Business Name" />
+                <Form.Input onChange={e => { this.changeFullName.call(this, e) }} label="Full Name" placeholder="Full Name" />
+                <Form.Input onChange={::this.changeBusinessName} label="Business Name" placeholder="Business Name" />
               </Form.Group>
               <Form.Group widths="equal">
                 <Form.Input onChange={::this.changeAddress} label="Address" placeholder="Address" />
@@ -203,7 +175,7 @@ class Settings extends Component {
                   width={3}
                 />
               </Form.Group>
-              <Form.Button onClick={e => { this.submit.call(this, e) }} >Submit </Form.Button>
+              <Form.Button onClick={e => { this.handleFormSubmit.call(this, e) }} >Submit </Form.Button>
             </Form>
           </Segment>
         </Container>
