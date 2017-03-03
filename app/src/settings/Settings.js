@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, Header, Form, Container, Input, Segment, Icon } from 'semantic-ui-react'
-import axios from 'axios'
+import { Button, Header, Form, Container, Input, Segment, Icon, Message } from 'semantic-ui-react'
 
 import states from '../util/usaStates'
+// import { patchBartenderMetadata } from '../util/AuthHelpers'
 
 @connect(store => ({
   currentAddView: store.drinks.currentAddView,
@@ -18,15 +18,19 @@ class Settings extends Component {
     this.state = {
       multiple: false,
       options: states,
-      firstName: '',
-      lastName: '',
+      fullName: '',
+      businessName: '',
       address: '',
       city: '',
       state: '',
       latitude: '',
       longitude: '',
-      barName: '',
+      imageUrl: '',
+      displaySuccessMsg: false,
+      msg: 'We updated our privacy policy here to better service our customers. We recommend reviewing the changes.',
     }
+
+    this.renderMsg = this.renderMsg.bind(this)
   }
 
   handleChange(e, { value }) {
@@ -37,32 +41,66 @@ class Settings extends Component {
     this.setState({ state })
   }
 
-  changeFirstName(firstName) {
-    console.log('changeFirstName')
-    this.setState({ firstName })
+  changeFirstName(fullName) {
+    this.setState({ fullName })
   }
 
-  changeLastName(lastName) {
-    console.log('changeLastName')
-    this.setState({ lastName })
+  changeLastName(barName) {
+    this.setState({ barName })
   }
 
-  submit() {
-    axios.post('/settings/addBusiness', {
-      barName: this.state.barName,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      address: this.state.address,
-      city: this.state.city,
-      state: this.state.state,
-      longitude: this.state.longitude,
-      latitude: this.state.latitude,
-    })
+  changeAddress(address) {
+    this.setState({ address })
+  }
+
+  changeImageUrl(imageUrl) {
+    this.setState({ imageUrl })
+  }
+
+  changeCity(city) {
+    this.setState({ city })
+  }
+
+
+  submit(e) {
+    e.preventDefault()
+    this.changeStatesOfMsgs()
+    // axios.post('/auth/addBusiness', {
+    //   fullName: this.state.fullName,
+    //   businessName: this.state.businessName,
+    //   address: this.state.address,
+    //   city: this.state.city,
+    //   state: this.state.state,
+    //   longitude: this.state.longitude,
+    //   latitude: this.state.latitude,
+    // })
+  }
+
+  changeStatesOfMsgs() {
+    this.setState({ displaySuccessMsg: true })
+
+    setTimeout(() => {
+      this.setState({ displaySuccessMsg: false })
+    }, 3000)
+  }
+
+  renderMsg() {
+    return (
+      <Message success>
+        <Message.Header>
+          Changes in Service
+        </Message.Header>
+        <p>
+          {this.state.msg}
+        </p>
+      </Message>
+    )
   }
 
   render() {
     return (
       <div>
+        {this.state.displaySuccessMsg && this.renderMsg()}
         <Container>
           <Header as="h2">
             <Icon name="settings" />
@@ -98,14 +136,17 @@ class Settings extends Component {
           <Segment attached>
             <Form>
               <Form.Group widths="equal">
-                <Form.Input onChange={::this.changeFirstName} label="First Name" placeholder="First name" />
-                <Form.Input onChange={::this.changeLastName} label="Last Name" placeholder="Last name" />
+                <Form.Input onChange={::this.changeFirstName} label="Full Name" placeholder="Full Name" />
+                <Form.Input onChange={::this.changeLastName} label="Business Name" placeholder="Business Name" />
               </Form.Group>
               <Form.Group widths="equal">
-                <Form.Input label="Address" placeholder="" />
+                <Form.Input onChange={::this.changeAddress} label="Address" placeholder="Address" />
+              </Form.Group>
+              <Form.Group widths="equal">
+                <Form.Input onChange={::this.changeImageUrl} label="Image Url" placeholder="http://www.pathtoimg.jpg" />
               </Form.Group>
               <Form.Group>
-                <Form.Input label="City" placeholder="" width={10} />
+                <Form.Input onChange={::this.changeCity} label="City" placeholder="City" width={10} />
                 <Form.Dropdown
                   label="State"
                   fluid
@@ -119,7 +160,7 @@ class Settings extends Component {
                   width={3}
                 />
               </Form.Group>
-              <Form.Button onClick={::this.submit}>Submit</Form.Button>
+              <Form.Button onClick={e => { this.submit.call(this, e) }} >Submit </Form.Button>
             </Form>
           </Segment>
         </Container>
