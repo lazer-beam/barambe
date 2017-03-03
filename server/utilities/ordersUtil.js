@@ -100,7 +100,7 @@ const createOrder = (drinkName, tabId) => {
 }
 
 const formatOrder = (order, drink) => {
-  console.log(order)
+  console.log('in format order', order)
   const formattedOrder = Object.assign(order, { drink })
   return Tab.findOne({ where: { id: order.tabId } })
     .then(tab => {

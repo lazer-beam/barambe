@@ -2,9 +2,9 @@ require('dotenv').config()
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
-const morgan = require('morgan')
 const chalk = require('chalk')
 const cors = require('cors')
+const morgan = require('morgan')
 
 const initDb = require('../db/config')
 const mongoose = require('../dbGlobal/config')
@@ -16,7 +16,8 @@ app.use(express.static(path.join(__dirname, '/../app/build')))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
-app.use(morgan('dev'))
+app.use(morgan('short'))
+
 require('./routes')(app)
 
 app.get('/test', (req, res) => {

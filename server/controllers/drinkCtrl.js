@@ -3,7 +3,6 @@ const util = require('../utilities/drinksUtil')
 const drinks = {
   addToMenu: (req, res) => {
     console.log('ctrlr body: ', req.body)
-    console.log(`Serving request for ${req.method} where url is ${req.url}`)
     util.addToMenu(req.body)
     .then(newItem => res.send(newItem))
     .catch(err => res.status(500).send(err))
@@ -17,7 +16,6 @@ const drinks = {
   },
 
   getAllDrinks: (req, res) => {
-    console.log(`Serving request for ${req.method} where url is ${req.url}`)
     let beerArr = []
     let liquorArr = []
     let cocktailArr = []
