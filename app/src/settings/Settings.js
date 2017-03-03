@@ -157,7 +157,6 @@ class Settings extends Component {
 
     return (
       <div>
-        {this.state.displaySuccessMsg && this.renderMsg()}
         <Container>
           <Header as="h2">
             <Icon name="settings" />
@@ -221,6 +220,7 @@ class Settings extends Component {
             </Form>
           </Segment>
         </Container>
+        {this.state.displaySuccessMsg && this.renderMsg()}
       </div>
     )
   }

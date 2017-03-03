@@ -51,7 +51,7 @@ export default class CustomAuth extends EventEmitter {
   }
 
   loggedIn() {
-    this.emit('logged_in', profile)
+    this.emit('logged_in', 'done')
     const token = CustomAuth.getToken()
     return !!token && !isTokenExpired(token)
   }
