@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, Header, Form, Container, Input, Segment, Icon } from 'semantic-ui-react'
+import axios from 'axios'
 
 import states from '../util/usaStates'
 
@@ -17,22 +18,46 @@ class Settings extends Component {
     this.state = {
       multiple: false,
       options: states,
-      businessName: '',
-      businessInfo: '',
+      firstName: '',
+      lastName: '',
       address: '',
       city: '',
       state: '',
+      latitude: '',
+      longitude: '',
+      barName: '',
     }
   }
 
   handleChange(e, { value }) {
-    console.log('handleChange')
     this.setState({ ...this.state, state: value })
   }
 
   handleSearchChange(e, state) {
-    console.log('handleSearchChange')
     this.setState({ state })
+  }
+
+  changeFirstName(firstName) {
+    console.log('changeFirstName')
+    this.setState({ firstName })
+  }
+
+  changeLastName(lastName) {
+    console.log('changeLastName')
+    this.setState({ lastName })
+  }
+
+  submit() {
+    axios.post('/settings/addBusiness', {
+      barName: this.state.barName,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      address: this.state.address,
+      city: this.state.city,
+      state: this.state.state,
+      longitude: this.state.longitude,
+      latitude: this.state.latitude,
+    })
   }
 
   render() {
@@ -73,8 +98,8 @@ class Settings extends Component {
           <Segment attached>
             <Form>
               <Form.Group widths="equal">
-                <Form.Input label="Business Name" placeholder="First name" />
-                <Form.Input label="Business Info" placeholder="Last name" />
+                <Form.Input onChange={::this.changeFirstName} label="First Name" placeholder="First name" />
+                <Form.Input onChange={::this.changeLastName} label="Last Name" placeholder="Last name" />
               </Form.Group>
               <Form.Group widths="equal">
                 <Form.Input label="Address" placeholder="" />
@@ -94,7 +119,7 @@ class Settings extends Component {
                   width={3}
                 />
               </Form.Group>
-              <Form.Button>Submit</Form.Button>
+              <Form.Button onClick={::this.submit}>Submit</Form.Button>
             </Form>
           </Segment>
         </Container>
