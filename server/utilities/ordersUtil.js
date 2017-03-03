@@ -8,7 +8,7 @@ let socketRef
 io.on('connection', socket => {
   console.log(`Socket connected to user ${socket.id}`)
   socketRef = socket
-  console.log('socketRef now is', socketRef)
+  console.log('socketRef.handshake now is', socketRef.handshake)
 })
 
 const Order = require('../../db/models/orderModel')
