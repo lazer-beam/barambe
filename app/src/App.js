@@ -7,7 +7,9 @@ import './App.css'
   currentNav: store.dash.currentNav,
 }))
 class App extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    this.a = 'apple'
+  }
 
   render() {
     const auth = this.props.route.auth
