@@ -66,7 +66,6 @@ module.exports.addBartenderStripe = (userId, stripe) => {
   return rp(opts)
 }
 
-
 module.exports.createNewToken = next => {
   console.log(chalk.blue('CREATING NEW AUTH TOKEN, DOESNT EXIST...'))
   const opts = {
@@ -93,7 +92,6 @@ module.exports.createNewToken = next => {
 
 /**
  * This is the middleware helper function that generates managment tokens
- *
  */
 module.exports.mobileManagmentToken = next => {
   console.log(chalk.blue('CREATING NEW MOBILE AUTH TOKEN, DOESNT EXIST...'))

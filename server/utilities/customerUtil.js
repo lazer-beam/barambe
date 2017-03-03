@@ -29,31 +29,12 @@ const stripeCreateCard = card => stripe.tokens.create({ card })
 module.exports.addCard = (authId, { name, number, exp_month, exp_year, cvc }) => {
   return new Promise((resolve, reject) => {
     stripeCreateCard({ number, exp_month, exp_year, cvc }).then(strp => {
-      const card = {
-        name,
-        stripe_tok: strp.id,
-        last4: strp.card.last4,
-        brand: strp.card.brand,
-      }
-      console.log(authId)
-      // resolve(card)
-
+      const card = { name, stripe_tok: strp.id, last4: strp.card.last4, brand: strp.card.brand }
       return authMetadata(authId, card)
     }).then(tokenInfo => {
-      console.log(tokenInfo)
       resolve(tokenInfo.app_metadata.card)
     }).catch(err => {
       reject(err)
     })
   })
 }
-
-
-  // const obj = {
-  //   card: {
-      // "number": '4242424242424242',
-      // "exp_month": 12,
-      // "exp_year": 2018,
-      // "cvc": '123'
-  //   }
-  // }

@@ -13,7 +13,6 @@ const customer = {
   },
 
   pay: (req, res) => {
-    console.log(`Serving request for ${req.method} where url is ${req.url}`)
     stripe.charges.create({
       amount: req.body.amount,
       currency: req.body.currency,
@@ -31,8 +30,6 @@ const customer = {
   },
 
   saveInfo: (req, res) => {
-    console.log(`Serving request for ${req.method} where url is ${req.url}`)
-    console.log(`Req.body: ${req.body}`)
     stripe.customers.create(
       { source: req.body.token },
       (customerErr, newCustomer) => {
