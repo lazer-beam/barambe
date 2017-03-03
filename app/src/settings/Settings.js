@@ -4,8 +4,7 @@ import { Button, Header, Form, Container, Input, Segment, Icon, Message } from '
 import axios from 'axios'
 
 import states from '../util/usaStates'
-
-// import { patchBartenderMetadata } from '../util/AuthHelpers'
+import CustomAuth from '../util/AuthService'
 
 @connect(store => ({
   currentAddView: store.drinks.currentAddView,
@@ -13,27 +12,47 @@ import states from '../util/usaStates'
   cocktails: store.drinks.menuCocktails,
   liquors: store.drinks.menuLiquors,
   addIns: store.drinks.menuAddIns,
+  userData: store.login.userData,
 }))
 class Settings extends Component {
   constructor(props) {
     super(props)
+
+    this.axiosP = axios.create({
+      baseURL: process.env.CLIENT_MODE === 'PRODUCTION' ? process.env.CLIENT_DEFAULT_DOMAIN : 'http://localhost:1337',
+      headers: { authorization: `Bearer ${CustomAuth.getToken()}` },
+    })
+
     this.state = {
       options: states,
-      fullName: '',
-      businessName: '',
-      address: '',
-      city: '',
-      selectedState: '',
-      latitude: '',
-      longitude: '',
+      fullName: 'Bob Jones',
+      businessName: 'The Best bar',
+      address: '18921 Clearview Ln',
+      city: 'Huntington beach',
+      selectedState: 'CA',
+      latitude: '33.687492',
+      longitude: '118.017919',
       imageUrl: '',
       displaySuccessMsg: false,
       successMessage: 'Thank you for joining Barambe. Drinks out!',
     }
-
+    console.log('userData: ', this.props.userData)
     this.renderMsg = this.renderMsg.bind(this)
     this.resetForm = this.resetForm.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+  }
+
+  getBarDataFromState() {
+    return {
+      fullName: this.state.fullName,
+      businessName: this.state.businessName,
+      address: this.state.address,
+      city: this.state.city,
+      longitude: this.state.longitude,
+      latitude: this.state.latitude,
+      selectedState: this.state.selectedState,
+      imageUrl: this.state.imageUrl,
+    }
   }
 
   handleSelectStateChange(e, { value }) {
@@ -105,6 +124,10 @@ class Settings extends Component {
           longitude: res.data.longitude,
         })
 
+        // do thing here:
+        const metadata = this.getBarDataFromState()
+        this.axiosP.post('/auth/setUserMetadata', { BarInfo: metadata }).then(obj => console.log(obj))
+
         this.resetForm()
       }).catch(err => {
         console.log('err', err)
@@ -134,7 +157,6 @@ class Settings extends Component {
 
     return (
       <div>
-        {this.state.displaySuccessMsg && this.renderMsg()}
         <Container>
           <Header as="h2">
             <Icon name="settings" />
@@ -198,6 +220,7 @@ class Settings extends Component {
             </Form>
           </Segment>
         </Container>
+        {this.state.displaySuccessMsg && this.renderMsg()}
       </div>
     )
   }

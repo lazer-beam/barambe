@@ -51,7 +51,8 @@ export default class CustomAuth extends EventEmitter {
   }
 
   loggedIn() {
-    const token = this.getToken()
+    this.emit('logged_in', 'done')
+    const token = CustomAuth.getToken()
     return !!token && !isTokenExpired(token)
   }
 
@@ -71,11 +72,17 @@ export default class CustomAuth extends EventEmitter {
     return profile ? JSON.parse(localStorage.profile) : {}
   }
 
-  getToken() { return localStorage.getItem('id_token') }
+  static getToken() { return localStorage.getItem('id_token') }
 
   logout() {
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
     this.auth0.logout({ returnTo: `${window.location.origin}/` })
   }
+
+  // ================================================
+  //                  Managmeent
+  // ================================================
+
+
 }
